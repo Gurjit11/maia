@@ -1,0 +1,82 @@
+import Image from "next/image";
+import logo from "../public/logo.png";
+import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
+import { FaRegCopyright } from "react-icons/fa6";
+
+const Footer = () => {
+  return (
+    <div className="bg-slate-700 w-full flex-col p-10 gap-2 flex">
+      <div className="  w-full flex">
+        <div className="flex-col justify-start items-start gap-4 flex">
+          <div className=" justify-start items-center flex">
+            <Image src={logo} />
+            <div className=" text-white text-3xl font-medium font-['Poppins'] leading-9">
+              MAIA.CARE
+            </div>
+          </div>
+          <div className="flex-col justify-start items-start gap-4 flex">
+            <div className="text-white text-nowrap text-base font-semibold font-['Inter']">
+              Discover your fertility journey
+            </div>
+          </div>
+        </div>
+        <div className=" w-full justify-around  flex">
+          <div className="flex-col justify-start items-start gap-4 inline-flex">
+            <div className="text-white text-base font-semibold font-['Poppins']">
+              How it Works
+            </div>
+            <div className="text-white text-base font-semibold font-['Poppins']">
+              Find Doctors
+            </div>
+            <div className="text-white text-base font-semibold font-['Poppins']">
+              Find Clinics
+            </div>
+            <div className="text-white text-base font-semibold font-['Poppins']">
+              Blogs
+            </div>
+          </div>
+          <div className="flex-col justify-start items-start gap-4 inline-flex">
+            <div className="text-white text-base font-semibold font-['Poppins']">
+              Services
+            </div>
+            <div className="text-white text-base font-normal font-['Poppins']">
+              Fertility Support
+            </div>
+            <div className="text-white text-base font-normal font-['Poppins']">
+              IVF & IUI
+            </div>
+            <div className="text-white text-base font-normal font-['Poppins']">
+              Egg & Sperm Freezing
+            </div>
+            <div className="text-white text-base font-normal font-['Poppins']">
+              Consultation
+            </div>
+          </div>
+          <div className="flex-col justify-start items-start gap-4 inline-flex">
+            <div className="text-white text-base font-semibold font-['Poppins']">
+              About Us
+            </div>
+            <div className="text-white text-base font-semibold font-['Poppins']">
+              Contact Us
+            </div>
+          </div>
+        </div>
+        <div className="flex-col justify-start items-start gap-4 inline-flex">
+          <FaTwitter className="text-white text-2xl" />
+          <FaInstagram className="text-white text-2xl" />
+          <FaFacebook className="text-white text-2xl" />
+          <FaLinkedin className="text-white text-2xl" />
+        </div>
+      </div>
+      <div className="w-80 h-6 px-24 justify-start items-center gap-0.5 inline-flex">
+        <FaRegCopyright className="text-white text-sm mb-1" />
+
+        <div className="text-white text-sm font-normal font-['Poppins']">
+          Maiacare2023
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Footer;
