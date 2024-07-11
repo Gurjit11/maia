@@ -5,7 +5,7 @@ import Explore from "@/components/Explore";
 import Findclinics from "@/components/Findclinics";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
-import Howmaia from "@/components/howmaia";
+import Howmaia from "@/components/Howmaia";
 import Learn from "@/components/Learn";
 import Image from "next/image";
 
