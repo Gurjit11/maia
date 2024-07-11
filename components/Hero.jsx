@@ -65,12 +65,12 @@ const Hero = () => {
                 <div className="justify-start items-start gap-4 flex">
                   <Image src={quotation} w={60} alt="Priyanka Chopra" />
 
-                  <div className=" text-slate-700  font-normal font-['FONTSPRING DEMO - Argent CF'] leading-normal">
+                  {/* <div className=" text-slate-700  font-normal font-['FONTSPRING DEMO - Argent CF'] leading-normal">
                     It's the best thing you'll give yourself because you're
                     taking the power from your biological clock, and you can
                     work until however long you want. Your eggs will still be
                     the same age as when you froze them.
-                  </div>
+                  </div> */}
                 </div>
                 <div className="flex-col text-sm font-semibold justify-start items-start gap-2 flex">
                   <div>
