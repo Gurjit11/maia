@@ -78,7 +78,7 @@ const Hero = () => {
                       -{" "}
                     </span>
                     <span className="text-slate-700  font-['Poppins'] underline leading-tight">
-                      Priyanka Chopra, Dax Shephard's Armchair Expert Podcast
+                      Priyanka Chopra, Dax Shephard Armchair Expert Podcast
                     </span>
                   </div>
                 </div>
