@@ -286,7 +286,7 @@ function Login() {
     alert(`User: ${user.name}, email: ${user.email}`);
     handleNext();
     // Perform final verification or next steps
-    // closeModal();
+    closeModal();
   };
 
   return (
