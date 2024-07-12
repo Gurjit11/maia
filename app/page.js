@@ -7,11 +7,12 @@ import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import Howmaia from "@/components/Howmaia";
 import Learn from "@/components/Learn";
+import Login from "@/components/Login";
 import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="bg-white">
+    <div id="main" className="bg-white">
       <Hero />
       <Howmaia />
       <Explore />

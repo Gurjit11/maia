@@ -2,6 +2,7 @@ import icon from "../public/icon.png";
 import clinic from "../public/clinic.png";
 import doctor from "../public/doctor.png";
 import Image from "next/image";
+import Login from "./Login";
 
 const Navbar = () => {
   return (
@@ -34,11 +35,7 @@ const Navbar = () => {
               </div>
             </div>
           </div>
-          <div className=" bg-slate-700 rounded-lg justify-center items-center gap-2 flex">
-            <div className="p-3 px-6 text-center text-white text-base font-medium font-['Poppins'] leading-tight">
-              Sign In
-            </div>
-          </div>
+          <Login />
         </div>
       </div>
       <div className=" justify-around items-center flex px-10">

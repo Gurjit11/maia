@@ -2,8 +2,32 @@
 import Image from "next/image";
 import priyanka from "../public/priyanka.png";
 import quotation from "../public/quotation.png";
+import axios from "axios";
 
 const Hero = () => {
+  let data = JSON.stringify({
+    id: "6689527988d8fd65f1a3934b",
+  });
+
+  let config = {
+    method: "post",
+    maxBodyLength: Infinity,
+    url: "https://maia-2.onrender.com/doctor/getDoctor/",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    data: data,
+  };
+
+  // axios
+  //   .request(config)
+  //   .then((response) => {
+  //     console.log(JSON.stringify(response.data));
+  //   })
+  //   .catch((error) => {
+  //     console.log(error);
+  //   });
+
   return (
     <div className="pt-20 bg-white justify-start items-center flex">
       <div className="">
