@@ -49,7 +49,7 @@ const Learn = () => {
     prevArrow: <PrevArrow />,
   };
   return (
-    <div className="flex-col bg-orange-100 justify-center items-center sm:p-20 p-5">
+    <div className="flex-col bg-orange-100 justify-center items-center sm:p-20 py-10 p-5">
       <div className="flex-col justify-center items-center ">
         <div className="text-[#2B4360] flex justify-center items-center font-bold text-2xl sm:text-3xl">
           Learn about Fertility

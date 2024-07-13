@@ -29,7 +29,7 @@ const carddata = [
 
 const Howmaia = () => {
   return (
-    <div className="flex-col justify-center items-center p-5 sm:p-20 ">
+    <div className="flex-col justify-center items-center p-5 sm:p-20 py-10">
       <div className="flex-col justify-center items-center ">
         <div className="text-[#2B4360] flex justify-center items-center font-bold text-2xl sm:text-3xl">
           How Maia Care Works ?

@@ -3,7 +3,7 @@ import contact from "../public/contact.png";
 
 const Contactus = () => {
   return (
-    <div className="sm:p-20 p-5">
+    <div className="sm:p-20 py-10 p-5">
       <div className=" justify-between items-center flex">
         <Image className="hidden sm:block w-[50%]" src={contact} />
         <div className="sm:w-[40%] flex-col justify-start items-start sm:gap-8 inline-flex">
