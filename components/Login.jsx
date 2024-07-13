@@ -253,7 +253,7 @@ const CreateProfile = ({ user, setUser, onCreateProfile }) => {
   );
 };
 
-function Login() {
+function Login({ setSidebar }) {
   const [step, setStep] = useState(1);
   const [mobileNumber, setMobileNumber] = useState("");
   const [otp, setOtp] = useState("");
@@ -265,6 +265,7 @@ function Login() {
   const [modalIsOpen, setIsOpen] = useState(false);
 
   function openModal() {
+    setSidebar(false);
     setIsOpen(true);
   }
 

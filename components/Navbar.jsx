@@ -32,7 +32,7 @@ const Navbar = () => {
         }
       >
         <div className="w-full flex-col justify-start items-start gap-8 inline-flex">
-          <Login />
+          <Login setSidebar={setSidebar} />
           <div className="flex-col justify-start items-start gap-4 flex">
             <div className="justify-start items-start gap-14 inline-flex">
               <div className="justify-start items-center gap-2 flex">
@@ -126,7 +126,7 @@ const Navbar = () => {
                 </div>
               </div>
             </div>
-            <Login />
+            <Login setSidebar={setSidebar} />
           </div>
         </div>
         <div className=" justify-around items-center flex px-10">
