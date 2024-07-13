@@ -15,7 +15,7 @@ const Navbar = () => {
       <div className="flex sm:hidden items-center w-full bg-white">
         <div
           onClick={() => setSidebar(!sidebar)}
-          className="text-xl text-black  bg-white p-2 cursor-pointer md:hidden"
+          className="text-xl text-black ml-2 bg-white p-2 cursor-pointer md:hidden"
         >
           {sidebar ? <AiOutlineClose /> : <AiOutlineMenu />}
         </div>

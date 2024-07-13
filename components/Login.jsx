@@ -22,7 +22,7 @@ const customStyles = {
 // Login Modal Component
 const LoginModal = ({ mobileNumber, setMobileNumber, onNext }) => {
   return (
-    <div className="text-black sm:w-[60%] w-[80%] sm:flex rounded-3xl bg-white">
+    <div className="text-black sm:w-[60%] z-20 w-[80%] sm:flex rounded-3xl bg-white">
       <div className="sm:w-[450px] sm:p-10 p-5 bg-orange-100 sm:rounded-l-3xl rounded-3xl">
         <Learnslider />
       </div>
@@ -302,7 +302,7 @@ function Login() {
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         // style={customStyles}
-        className="justify-center items-center flex bg-black/70 w-full h-full text-black"
+        className="justify-center items-center flex bg-opacity-5 bg-black/70 w-full h-full z-20 text-black"
         contentLabel="Example Modal"
       >
         {step === 1 && (
