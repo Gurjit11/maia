@@ -3,20 +3,20 @@ import contact from "../public/contact.png";
 
 const Contactus = () => {
   return (
-    <div className="p-20">
+    <div className="sm:p-20 p-5">
       <div className=" justify-between items-center flex">
-        <Image className="w-[50%]" src={contact} />
-        <div className="w-[40%] flex-col justify-start items-start gap-8 inline-flex">
-          <div className="flex-col justify-start items-start gap-8 flex">
+        <Image className="hidden sm:block w-[50%]" src={contact} />
+        <div className="sm:w-[40%] flex-col justify-start items-start sm:gap-8 inline-flex">
+          <div className="flex-col justify-start items-start sm:gap-8 gap-4 flex">
             <div className="flex-col justify-start mb-4 items-start gap-2 flex">
-              <div className=" text-slate-700 text-5xl mb-2 font-normal font-['FONTSPRING DEMO - Argent CF'] leading-10">
+              <div className=" text-slate-700 sm:text-5xl text-2xl mb-2 font-bold font-['FONTSPRING DEMO - Argent CF'] leading-10">
                 Begin Your Fertility Journey with Maia Care
               </div>
-              <div className="text-zinc-600 text-2xl font-normal font-['Poppins'] leading-7 tracking-widest">
+              <div className="text-zinc-600 sm:text-2xl font-normal font-['Poppins'] leading-7 tracking-widest">
                 CONNECT WITH US
               </div>
             </div>
-            <div className="flex-col justify-start  w-[70%]  items-start gap-6 flex">
+            <div className="flex-col justify-start  sm:w-[70%]  items-start sm:gap-6 gap-3 flex">
               <div className="text-slate-700 text-base font-medium font-['DM Sans']">
                 Name
               </div>

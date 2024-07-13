@@ -5,9 +5,9 @@ import { FaRegCopyright } from "react-icons/fa6";
 
 const Footer = () => {
   return (
-    <div className="bg-slate-700 w-full flex-col p-10 gap-2 flex">
-      <div className="  w-full flex">
-        <div className="flex-col justify-start items-start gap-4 flex">
+    <div className="bg-slate-700 w-full flex-col justify-center items-center p-10 gap-2 flex">
+      <div className="  w-full sm:flex flex-col justify-center items-center">
+        <div className="flex-col justify-center items-center gap-4 flex">
           <div className=" justify-start items-center flex">
             <Image src={logo} />
             <div className=" text-white text-3xl font-medium font-['Poppins'] leading-9">
@@ -20,8 +20,8 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div className=" w-full justify-around  flex">
-          <div className="flex-col justify-start items-start gap-4 inline-flex">
+        <div className=" w-full sm:justify-around justify-center items-center sm:flex flex-col ">
+          <div className="flex-col justify-center items-center gap-4 mt-3 flex">
             <div className="text-white text-base font-semibold font-['Poppins']">
               How it Works
             </div>
@@ -35,7 +35,7 @@ const Footer = () => {
               Blogs
             </div>
           </div>
-          <div className="flex-col justify-start items-start gap-4 inline-flex">
+          <div className="flex-col justify-center mt-3 items-center gap-4 flex">
             <div className="text-white text-base font-semibold font-['Poppins']">
               Services
             </div>
@@ -52,7 +52,7 @@ const Footer = () => {
               Consultation
             </div>
           </div>
-          <div className="flex-col justify-start items-start gap-4 inline-flex">
+          <div className="flex-col justify-center items-center gap-4 mt-3 flex">
             <div className="text-white text-base font-semibold font-['Poppins']">
               About Us
             </div>
@@ -61,7 +61,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div className="flex-col justify-start items-start gap-4 inline-flex">
+        <div className="sm:flex-col flex justify-center items-center my-3 gap-4 ">
           <FaTwitter className="text-white text-2xl" />
           <FaInstagram className="text-white text-2xl" />
           <FaFacebook className="text-white text-2xl" />

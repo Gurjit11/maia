@@ -4,6 +4,7 @@ import learn from "../public/learn.png";
 import care from "../public/care.png";
 import community from "../public/community.png";
 import Image from "next/image";
+import Learnslider from "./loginmodals/Learnslider";
 
 const carddata = [
   {
@@ -28,9 +29,9 @@ const carddata = [
 
 const Howmaia = () => {
   return (
-    <div className="flex-col justify-center items-center p-20 ">
+    <div className="flex-col justify-center items-center p-5 sm:p-20 ">
       <div className="flex-col justify-center items-center ">
-        <div className="text-[#2B4360] flex justify-center items-center font-bold text-3xl">
+        <div className="text-[#2B4360] flex justify-center items-center font-bold text-2xl sm:text-3xl">
           How Maia Care Works ?
         </div>
         <div className="text-gray-500 flex justify-center items-center">
@@ -38,7 +39,7 @@ const Howmaia = () => {
         </div>
       </div>
       <div className="flex justify-center w-full items-center gap-10">
-        <div className="grid grid-cols-3 w-[80%] gap-3">
+        <div className="hidden sm:grid grid-cols-3 w-[80%] gap-3">
           {carddata.map((card, index) => (
             <div key={index} className="col-span-1 mt-3 flex-col ">
               <div className="flex justify-center items-center">
@@ -52,6 +53,9 @@ const Howmaia = () => {
               </div>
             </div>
           ))}
+        </div>
+        <div className="sm:hidden w-[90%]">
+          <Learnslider />
         </div>
       </div>
     </div>

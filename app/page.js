@@ -12,7 +12,7 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div id="main" className="bg-white">
+    <div id="main" className=" bg-white">
       <Hero />
       <Howmaia />
       <Explore />

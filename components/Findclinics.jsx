@@ -15,6 +15,7 @@ import {
   IoIosArrowDropleftCircle,
   IoIosArrowDroprightCircle,
 } from "react-icons/io";
+import useWindowSize from "@/hooks/UseWindowSize";
 
 const carddata = [
   {
@@ -38,20 +39,21 @@ const carddata = [
 ];
 
 const Findclinics = () => {
+  const { width } = useWindowSize();
   const settings = {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow: width > 400 ? 3 : 1,
     slidesToScroll: 1,
     autoplay: true,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
   };
   return (
-    <div className="flex-col justify-center items-center p-20 ">
+    <div className="flex-col justify-center items-center sm:p-20 p-5 ">
       <div className="flex-col justify-center items-center ">
-        <div className="text-[#2B4360] flex justify-center items-center font-bold text-3xl">
+        <div className="text-[#2B4360] flex justify-center items-center font-bold text-2xl sm:text-3xl">
           Explore best clinics nearby
         </div>
         <div className="text-gray-500 flex justify-center items-center">
@@ -59,37 +61,37 @@ const Findclinics = () => {
         </div>
       </div>
       <div className="flex justify-center w-full items-center gap-10">
-        <div className="w-[80%] gap-3">
+        <div className="w-[100%] sm:w-[80%] overflow-x-clip gap-3">
           <Slider {...settings}>
             {carddata.map((card, index) => (
-              <div key={index} className="p-3">
+              <div key={index} className="sm:p-3 p-1">
                 <div className=" bg-stone-100 rounded-lg p-3  shadow">
                   <div className="flex">
                     <img
-                      className=" rounded-full w-20 h-20 object-cover"
+                      className=" rounded-full w-10 h-10 sm:w-20 sm:h-20 object-cover"
                       src="https://via.placeholder.com/80x80"
                     />
-                    <div className="flex-col ml-3">
-                      <div className=" text-slate-700 text-xl font-bold font-['FONTSPRING DEMO - Argent CF'] leading-normal">
+                    <div className="flex-col sm:ml-3 ml-1">
+                      <div className=" text-slate-700 sm:text-xl font-bold font-['FONTSPRING DEMO - Argent CF'] leading-normal">
                         Cloudnine Hospital
                       </div>
                       <div className=" justify-start items-center gap-2 flex">
                         <Image src={loc} alt="icon" />
-                        <div className="text-slate-700 text-sm font-normal font-['Metropolis'] leading-none">
+                        <div className="text-slate-700 text-xs sm:text-sm font-normal font-['Metropolis'] leading-none">
                           Malad (W), Mumbai
                         </div>
                       </div>
-                      <div className=" justify-between items-center gap-2 flex">
-                        <div className="justify-center items-center gap-2 flex">
+                      <div className=" justify-between items-center sm:gap-2 mt-1 flex-col sm:flex">
+                        <div className="justify-center items-center gap-2 inline-flex">
                           <Image src={doctor} alt="icon" />
 
-                          <div className="text-slate-700 text-sm font-normal font-['Metropolis'] leading-none">
+                          <div className="text-slate-700 text-xs sm:text-sm font-normal font-['Metropolis'] leading-none">
                             5 Doctors{" "}
                           </div>
                         </div>
                         <div className=" justify-center items-center gap-2 inline-flex">
                           <Image src={bed} alt="icon" />
-                          <div className="text-slate-700 text-sm font-normal font-['Metropolis'] leading-none">
+                          <div className="text-slate-700 text-xs sm:text-sm font-normal font-['Metropolis'] leading-none">
                             32 Beds
                           </div>
                         </div>

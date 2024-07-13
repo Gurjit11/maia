@@ -17,7 +17,7 @@ const customStyles = {
 };
 
 // Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
-Modal.setAppElement("#main");
+// Modal.setAppElement("#main");
 
 // Login Modal Component
 const LoginModal = ({ mobileNumber, setMobileNumber, onNext }) => {

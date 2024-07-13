@@ -29,20 +29,20 @@ const Hero = () => {
   //   });
 
   return (
-    <div className="pt-20 bg-white justify-start items-center flex">
+    <div className="sm:pt-20 bg-white justify-start items-center flex">
       <div className="">
         {/* <img
           className="w-96 h-96 left-0 top-0 absolute"
           src="https://via.placeholder.com/777x690"
         /> */}
-        <div className="grid grid-cols-2">
+        <div className="sm:grid  grid-cols-2">
           <div className="col-span-1 flex-col justify-center gap-6 flex">
-            <div className="flex-col p-20 gap-2 flex">
+            <div className="flex-col sm:p-20 p-5 gap-2 flex">
               <div className="flex-col  gap-4  flex">
-                <div className=" text-slate-700 text-6xl font-normal font-['FONTSPRING DEMO - Argent CF'] ">
+                <div className="text-center text-slate-700 sm:text-6xl text-3xl font-normal font-['FONTSPRING DEMO - Argent CF'] ">
                   Discover Your Fertility Journey
                 </div>
-                <div className=" text-slate-700 text-3xl font-light font-['Poppins'] ">
+                <div className="text-center text-slate-700 sm:text-3xl font-light font-['Poppins'] ">
                   Search with purpose
                 </div>
               </div>
@@ -68,11 +68,11 @@ const Hero = () => {
                   </div>
                 </div>
               </div>
-              <div className="justify-start items-start gap-1 flex">
-                <div className="text-slate-700 text-base font-light font-['Poppins'] ">
+              <div className="justify-start text-xs sm:text-sm items-start gap-1 flex">
+                <div className="text-slate-700 text-xs sm:text-sm  font-light font-['Poppins'] ">
                   Eg.
                 </div>
-                <div className="text-slate-700 text-base font-light font-['Poppins'] ">
+                <div className="text-slate-700 text-xs sm:text-sm font-light font-['Poppins'] ">
                   Is IVF safe?, What is Egg Freezing?
                 </div>
               </div>
@@ -82,21 +82,25 @@ const Hero = () => {
             <div className="justify-center items-center flex-col">
               <Image
                 src={priyanka}
-                className="w-[60%] ml-32"
+                className="w-[60%] sm:ml-32 ml-20"
                 alt="Priyanka Chopra"
               />
               <div className="mx-3 p-2 w-[90%] bg-slate-200 rounded-xl border border-gray-200 backdrop-blur-lg flex-col justify-end items-end gap-2 flex">
                 <div className="justify-start items-start gap-4 flex">
-                  <Image src={quotation} w={60} alt="Priyanka Chopra" />
-                  <div className="text-slate-700 font-normal leading-normal">
+                  <Image
+                    src={quotation}
+                    className="w-10"
+                    alt="Priyanka Chopra"
+                  />
+                  <div className="text-slate-700 text-sm font-normal leading-normal">
                     It&apos;s the best thing you&apos;ll give yourself because
                     you&apos;re taking the power from your biological clock, and
                     you can work until however long you want. Your eggs will
                     still be the same age as when you froze them.
                   </div>
                 </div>
-                <div className="flex-col text-sm font-semibold justify-start items-start gap-2 flex">
-                  <div>
+                <div className="flex-col text-xs sm:text-sm font-semibold justify-start items-start gap-2 flex">
+                  <div className="text-center flex">
                     <span className="text-slate-700  font-['Poppins'] leading-tight">
                       -{" "}
                     </span>

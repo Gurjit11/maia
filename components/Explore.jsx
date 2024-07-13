@@ -15,9 +15,9 @@ import ellipse from "../public/Ellipse.png";
 const Explore = () => {
   return (
     <div>
-      <div className="grid grid-cols-2">
+      <div className="sm:grid grid-cols-2 p-3 sm:p-0">
         <div className="col-span-1 flex justify-center items-center">
-          <div className=" flex-col justify-start items-start gap-6 inline-flex">
+          <div className=" flex-col justify-start items-start sm:gap-6 inline-flex">
             <div className="justify-start items-center gap-4 inline-flex">
               <div className="text-slate-700 text-base font-medium ">
                 Doctors nearby{" "}
@@ -29,13 +29,13 @@ const Explore = () => {
                 <Image src={location} width={20} alt="icon" />
               </div>
             </div>
-            <div className="flex-col justify-start items-start gap-10 flex">
-              <div className="flex-col justify-end items-start gap-10 flex">
+            <div className="flex-col justify-start items-start sm:gap-10 flex">
+              <div className="flex-col justify-end items-start sm:gap-10 flex">
                 <div className="flex-col justify-start items-start gap-6 flex">
-                  <div className="w-96 text-slate-700 text-5xl font-normal font-['FONTSPRING DEMO - Argent CF'] leading-10">
+                  <div className=" text-slate-700 sm:text-5xl text-2xl font-bold font-['FONTSPRING DEMO - Argent CF'] leading-10">
                     Explore doctors you can count on
                   </div>
-                  <div className="text-zinc-600 text-2xl font-normal font-['Poppins'] leading-7 tracking-widest">
+                  <div className="text-zinc-600 sm:text-2xl font-normal font-['Poppins'] leading-7 tracking-widest">
                     FIND SPECIALISTS
                   </div>
                 </div>
@@ -48,9 +48,9 @@ const Explore = () => {
             </div>
           </div>
         </div>
-        <div className="col-span-1 flex-col">
-          <div className="w-[70%] my-5  px-6 py-4 bg-stone-100 rounded-lg shadow justify-start items-start gap-24 flex">
-            <div className="justify-start items-center gap-4 w-full flex">
+        <div className="col-span-1 sm:flex-col flex overflow-x-scroll gap-10">
+          <div className="sm:w-[70%] my-5  px-6 py-4 bg-stone-100 rounded-lg shadow justify-start items-start gap-24 flex">
+            <div className="justify-start items-center gap-4 w-full flex-col sm:flex">
               <Image src={ellipse} alt={"icon"} />
 
               <div className="w-full flex-col justify-start items-start gap-2 flex">
@@ -121,8 +121,8 @@ const Explore = () => {
               </div>
             </div>
           </div>
-          <div className="w-[70%] my-5  px-6 py-4 bg-stone-100 rounded-lg shadow justify-start items-start gap-24 flex">
-            <div className="justify-start items-center gap-4 w-full flex">
+          <div className="sm:w-[70%] my-5  px-6 py-4 bg-stone-100 rounded-lg shadow justify-start items-start gap-24 flex">
+            <div className="justify-start items-center gap-4 w-full flex-col sm:flex">
               <Image src={ellipse} alt={"icon"} />
 
               <div className="w-full flex-col justify-start items-start gap-2 flex">
@@ -193,8 +193,8 @@ const Explore = () => {
               </div>
             </div>
           </div>
-          <div className="w-[70%] my-5  px-6 py-4 bg-stone-100 rounded-lg shadow justify-start items-start gap-24 flex">
-            <div className="justify-start items-center gap-4 w-full flex">
+          <div className="sm:w-[70%] my-5  px-6 py-4 bg-stone-100 rounded-lg shadow justify-start items-start gap-24 flex">
+            <div className="justify-start items-center gap-4 w-full flex-col sm:flex">
               <Image src={ellipse} alt={"icon"} />
 
               <div className="w-full flex-col justify-start items-start gap-2 flex">

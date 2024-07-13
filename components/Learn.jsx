@@ -10,6 +10,7 @@ import {
   IoIosArrowDropleftCircle,
   IoIosArrowDroprightCircle,
 } from "react-icons/io";
+import useWindowSize from "@/hooks/UseWindowSize";
 
 const carddata = [
   {
@@ -36,20 +37,21 @@ const carddata = [
 ];
 
 const Learn = () => {
+  const { width } = useWindowSize();
   const settings = {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow: width > 400 ? 3 : 1,
     slidesToScroll: 1,
     autoplay: true,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
   };
   return (
-    <div className="flex-col bg-orange-100 justify-center items-center p-20 ">
+    <div className="flex-col bg-orange-100 justify-center items-center sm:p-20 p-5">
       <div className="flex-col justify-center items-center ">
-        <div className="text-[#2B4360] flex justify-center items-center font-bold text-3xl">
+        <div className="text-[#2B4360] flex justify-center items-center font-bold text-2xl sm:text-3xl">
           Learn about Fertility
         </div>
         <div className="text-gray-500 flex justify-center items-center">
@@ -57,16 +59,16 @@ const Learn = () => {
         </div>
       </div>
       <div className="flex justify-center w-full items-center gap-10">
-        <div className=" w-[80%] gap-10">
+        <div className="w-[100%] sm:w-[80%] gap-10 overflow-x-clip">
           <Slider {...settings}>
             {carddata.map((card, index) => (
-              <div key={index} className="p-3">
+              <div key={index} className="sm:p-3 p-1">
                 <div className="col-span-1 h-[420px]  rounded-md bg-white mt-3 flex-col justify-between items-end ">
                   <div className="flex justify-center items-center">
                     <Image src={card.image} alt="icon" />
                   </div>
                   <div className="flex-col h-full justify-center items-center">
-                    <div className="text-[#2B4360]  flex mt-3 justify-center items-center font-bold text-xl">
+                    <div className="text-[#2B4360]  flex mt-3 justify-center items-center text-center font-bold text-xl">
                       {card.title}
                     </div>
                     <div className="text-gray-500 text-center text-sm px-3 my-2 flex mt-1 justify-center items-center">
