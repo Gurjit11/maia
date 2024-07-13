@@ -10,7 +10,7 @@ import {
   IoIosArrowDropleftCircle,
   IoIosArrowDroprightCircle,
 } from "react-icons/io";
-import useWindowSize from "@/hooks/UseWindowSize";
+import useWindowSize from "@/hooks/useWindowSize";
 
 const carddata = [
   {
