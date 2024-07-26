@@ -23,7 +23,7 @@ const customStyles = {
 const LoginModal = ({ mobileNumber, setMobileNumber, onNext }) => {
   return (
     <div className="text-black sm:w-[60%] z-20 w-[80%] sm:flex rounded-3xl bg-white">
-      <div className="sm:w-[450px] sm:p-10 p-5 bg-orange-100 sm:rounded-l-3xl rounded-3xl">
+      <div className="sm:w-[450px] h-[200px] overflow-clip sm:p-10 p-5 bg-orange-100 sm:rounded-l-3xl rounded-3xl">
         <Learnslider />
       </div>
       <div className="sm:p-10 p-5 sm:w-[50%]">
@@ -253,8 +253,80 @@ const CreateProfile = ({ user, setUser, onCreateProfile }) => {
   );
 };
 
+const options = [
+  "Egg Freezing",
+  "IVF",
+  "IUI",
+  "Natural Conception",
+  "Fertility Support",
+  "Donor Eggs",
+  "Embryo Freezing (Not TTC)",
+  "Donor Sperm",
+  "Surrogacy",
+  "Sperm Freezing",
+  "I don't know",
+];
+
+function ConsultationForm() {
+  const [selectedOptions, setSelectedOptions] = useState([]);
+
+  const handleSelectOption = (option) => {
+    setSelectedOptions((prevSelectedOptions) =>
+      prevSelectedOptions.includes(option)
+        ? prevSelectedOptions.filter((prevOption) => prevOption !== option)
+        : [...prevSelectedOptions, option]
+    );
+    console.log(selectedOptions);
+  };
+
+  return (
+    <div className="text-black sm:w-[50%] w-[80%] sm:flex rounded-3xl p-5 sm:p-10 bg-white">
+      <div className="bg-white sm:p-4 ">
+        <div className="sm:flex items-center">
+          <h2 className="text-xl font-bold mr-3">Schedule Your Consultation</h2>
+          <div className="m-1 w-max text-green-600 text-sm justify-center items-center bg-green-200 p-1 rounded-md font-medium font-['Poppins'] leading-none">
+            Get your first consultation free
+          </div>
+        </div>
+        <div className="my-4">
+          <div className="text-gray-600 text-sm">30% Complete</div>
+          <div className="w-full bg-gray-200 h-1 mb-4">
+            <div className="bg-blue-600 h-1" style={{ width: `30%` }}></div>
+          </div>
+        </div>
+        <div className="text-[#E29578] mb-3  text-xl sm:text-2xl">
+          Which of these fertility paths are you interested in?
+        </div>
+
+        {options.map((option) => (
+          <button
+            key={option}
+            onClick={() => handleSelectOption(option)}
+            className={`${
+              selectedOptions.includes(option)
+                ? "bg-blue-600 text-white"
+                : "bg-gray-200 text-gray-600"
+            } px-2 py-1 rounded-md m-1`}
+          >
+            {option}
+          </button>
+        ))}
+
+        <div className="flex justify-between mt-4">
+          <button className="text-blue-600 border border-blue-600 px-5 py-2 rounded-lg">
+            Previous
+          </button>
+          <button className="bg-blue-600 text-white px-5 py-2 rounded-lg">
+            Next
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function Login({ setSidebar }) {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(3);
   const [mobileNumber, setMobileNumber] = useState("");
   const [otp, setOtp] = useState("");
   const [user, setUser] = useState({
@@ -287,7 +359,7 @@ function Login({ setSidebar }) {
     alert(`User: ${user.name}, email: ${user.email}`);
     handleNext();
     // Perform final verification or next steps
-    closeModal();
+    // closeModal();
   };
 
   return (
@@ -323,6 +395,7 @@ function Login({ setSidebar }) {
             onCreateProfile={handleCreateProfile}
           />
         )}
+        {step === 4 && <ConsultationForm />}
       </Modal>
     </div>
   );
