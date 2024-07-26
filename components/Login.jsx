@@ -326,7 +326,7 @@ function ConsultationForm() {
 }
 
 function Login({ setSidebar }) {
-  const [step, setStep] = useState(3);
+  const [step, setStep] = useState(1);
   const [mobileNumber, setMobileNumber] = useState("");
   const [otp, setOtp] = useState("");
   const [user, setUser] = useState({

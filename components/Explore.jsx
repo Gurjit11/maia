@@ -15,7 +15,7 @@ import ellipse from "../public/Ellipse.png";
 const Explore = () => {
   return (
     <div>
-      <div className="sm:grid grid-cols-2 p-3 sm:p-0">
+      <div className="sm:grid grid-cols-2 p-3 md:p-20">
         <div className="col-span-1 flex justify-center items-center">
           <div className=" flex-col justify-start items-start sm:gap-6 inline-flex">
             <div className="justify-start items-center gap-4 inline-flex">
@@ -48,9 +48,9 @@ const Explore = () => {
             </div>
           </div>
         </div>
-        <div className="col-span-1 sm:flex-col flex overflow-x-scroll gap-10">
+        <div className="col-span-1 sm:flex-col flex overflow-x-auto sm:gap-0 gap-10">
           <div className="sm:w-[70%] my-5  px-6 py-4 bg-stone-100 rounded-lg shadow justify-start items-start gap-24 flex">
-            <div className="justify-start items-center gap-4 w-full flex-col sm:flex">
+            <div className="justify-start items-center gap-4 w-full md:flex flex-co">
               <Image src={ellipse} alt={"icon"} />
 
               <div className="w-full flex-col justify-start items-start gap-2 flex">
@@ -122,7 +122,7 @@ const Explore = () => {
             </div>
           </div>
           <div className="sm:w-[70%] my-5  px-6 py-4 bg-stone-100 rounded-lg shadow justify-start items-start gap-24 flex">
-            <div className="justify-start items-center gap-4 w-full flex-col sm:flex">
+            <div className="justify-start items-center gap-4 w-full sm:flex flex-co">
               <Image src={ellipse} alt={"icon"} />
 
               <div className="w-full flex-col justify-start items-start gap-2 flex">
@@ -194,7 +194,7 @@ const Explore = () => {
             </div>
           </div>
           <div className="sm:w-[70%] my-5  px-6 py-4 bg-stone-100 rounded-lg shadow justify-start items-start gap-24 flex">
-            <div className="justify-start items-center gap-4 w-full flex-col sm:flex">
+            <div className="justify-start items-center gap-4 w-full sm:flex flex-co">
               <Image src={ellipse} alt={"icon"} />
 
               <div className="w-full flex-col justify-start items-start gap-2 flex">

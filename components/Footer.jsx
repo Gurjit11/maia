@@ -6,7 +6,7 @@ import { FaRegCopyright } from "react-icons/fa6";
 const Footer = () => {
   return (
     <div className="bg-slate-700 w-full flex-col justify-center items-center p-10 gap-2 flex">
-      <div className="  w-full sm:flex flex-col justify-center items-center">
+      <div className="  w-full sm:flex flex-co justify-center items-center">
         <div className="flex-col justify-center items-center gap-4 flex">
           <div className=" justify-start items-center flex">
             <Image src={logo} />
@@ -20,7 +20,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div className=" w-full sm:justify-around justify-center items-center sm:flex flex-col ">
+        <div className=" w-full sm:justify-around justify-center items-center sm:flex flex-co ">
           <div className="flex-col justify-center items-center gap-4 mt-3 flex">
             <div className="text-white text-base font-semibold font-['Poppins']">
               How it Works
