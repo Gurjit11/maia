@@ -7,7 +7,7 @@ const Footer = () => {
   return (
     <div className="bg-slate-700 w-full flex-col justify-center items-center p-10 gap-2 flex">
       <div className="  w-full sm:flex flex-co justify-start items-start">
-        <div className="flex-col justify-start items-start gap-4 flex">
+        <div className="flex-col justify-start md:items-start items-center gap-4 flex">
           <div className=" justify-start items-start flex">
             <Image src={logo} />
             <div className=" text-white text-3xl font-medium font-['Poppins'] leading-9">
