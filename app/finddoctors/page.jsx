@@ -21,6 +21,9 @@ import axios from "axios";
 
 const FindDoctors = () => {
   const [doctors, setDoctors] = useState([]);
+  const [searchText, setSearchText] = useState("");
+  const [filteredDoctors, setFilteredDoctors] = useState([]);
+
   const getDoctors = () => {
     let data = JSON.stringify({
       role: "DOCTOR",
@@ -40,6 +43,7 @@ const FindDoctors = () => {
       .request(config)
       .then((response) => {
         setDoctors(response.data.data);
+        setFilteredDoctors(response.data.data); // Initially show all doctors
         console.log(response.data);
       })
       .catch((error) => {
@@ -51,6 +55,21 @@ const FindDoctors = () => {
     getDoctors();
   }, []);
 
+  const handleSearchChange = (e) => {
+    const query = e.target.value.toLowerCase();
+    setSearchText(query);
+    const filtered = doctors.filter((doctor) => {
+      return (
+        doctor.name.toLowerCase().includes(query) ||
+        doctor.specialization.some((spec) =>
+          spec.toLowerCase().includes(query)
+        ) ||
+        doctor.services.some((service) => service.toLowerCase().includes(query))
+      );
+    });
+    setFilteredDoctors(filtered);
+  };
+
   return (
     <div className="bg-[#F7F7F7] sm:p-20 p-3 pt-10">
       <div className=" md:flex flex-co justify-between mb-6">
@@ -59,8 +78,8 @@ const FindDoctors = () => {
             <input
               type="text"
               placeholder="Search doctors, specialization , service etc"
-              //   value={searchText}
-              //   onChange={handleSearchChange}
+              value={searchText}
+              onChange={handleSearchChange}
               required
               className="search_input w-full peer focus:outline-none p-3"
             />
@@ -86,7 +105,7 @@ const FindDoctors = () => {
         Discover {doctors.length} IVF doctors in Mumbai.
       </div>
       <div className="flex-col justify-start items-start gap-7 ">
-        {doctors.map((doctor, index) => (
+        {filteredDoctors.map((doctor, index) => (
           <div
             key={index}
             className="sm:p-8 p-3 my-3 bg-white w-full rounded-2xl shadow justify-start items-center gap-3 sm:gap-10 flex"
