@@ -53,7 +53,7 @@ const FindDoctors = () => {
 
   return (
     <div className="bg-[#F7F7F7] sm:p-20 p-3 pt-10">
-      <div className=" md:flex flex-col justify-between mb-6">
+      <div className=" md:flex flex-co justify-between mb-6">
         <div className=" w-full">
           <div className="sm:w-[70%] w-full h-14 px-4 py-3 bg-white text-black rounded-lg border border-[#dedede] justify-start items-center inline-flex">
             <input
