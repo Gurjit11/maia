@@ -55,7 +55,7 @@ const FindDoctors = () => {
     <div className="bg-[#F7F7F7] sm:p-20 p-3 pt-10">
       <div className=" md:flex flex-col justify-between mb-6">
         <div className=" w-full">
-          <div className="w-[70%] h-14 px-4 py-3 bg-white text-black rounded-lg border border-[#dedede] justify-start items-center inline-flex">
+          <div className="sm:w-[70%] w-full h-14 px-4 py-3 bg-white text-black rounded-lg border border-[#dedede] justify-start items-center inline-flex">
             <input
               type="text"
               placeholder="Search doctors, specialization , service etc"
@@ -67,7 +67,7 @@ const FindDoctors = () => {
             <AiOutlineSearch className="w-6 h-6 text-[#ED8081] px-0.5 py-0.5 justify-center items-center flex" />
           </div>
         </div>
-        <div className="flex gap-5">
+        <div className="flex sm:mt-0 mt-2 gap-5">
           <div className="h-14 p-4 bg-white rounded-lg border border-[#dedede] justify-start items-start gap-1 inline-flex">
             <AiFillFilter className="text-[#154B6D] w-6 h-6  justify-center items-center flex" />
             <div className="text-[#2b4360] text-lg font-normal font-['Metropolis'] leading-relaxed">
@@ -83,7 +83,7 @@ const FindDoctors = () => {
         </div>
       </div>
       <div className="text-[#2b4360] text-xl font-medium font-['Poppins'] leading-relaxed">
-        Discover 19 IVF doctors in Mumbai.
+        Discover {doctors.length} IVF doctors in Mumbai.
       </div>
       <div className="flex-col justify-start items-start gap-7 ">
         {doctors.map((doctor, index) => (
@@ -91,9 +91,9 @@ const FindDoctors = () => {
             key={index}
             className="sm:p-8 p-3 my-3 bg-white w-full rounded-2xl shadow justify-start items-center gap-3 sm:gap-10 flex"
           >
-            <div className="w-24 h-24 ">
+            <div className="w-32 h-full flex justify-start items-start">
               <img
-                className="w-24 h-24 left-0 top-0  rounded-full"
+                className="w-24 h-24 rounded-full"
                 src={
                   "https://i.pinimg.com/736x/13/e5/85/13e585664a1df5f548812b47a11f0889.jpg"
                 }
