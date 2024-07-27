@@ -6,9 +6,9 @@ import { FaRegCopyright } from "react-icons/fa6";
 const Footer = () => {
   return (
     <div className="bg-slate-700 w-full flex-col justify-center items-center p-10 gap-2 flex">
-      <div className="  w-full sm:flex flex-co justify-center items-center">
-        <div className="flex-col justify-center items-center gap-4 flex">
-          <div className=" justify-start items-center flex">
+      <div className="  w-full sm:flex flex-co justify-start items-start">
+        <div className="flex-col justify-start items-start gap-4 flex">
+          <div className=" justify-start items-start flex">
             <Image src={logo} />
             <div className=" text-white text-3xl font-medium font-['Poppins'] leading-9">
               MAIA.CARE
@@ -20,7 +20,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div className=" w-full sm:justify-around justify-center items-center sm:flex flex-co ">
+        <div className=" w-full sm:justify-around justify-start items-start sm:flex flex-co ">
           <div className="flex-col justify-center items-center gap-4 mt-3 flex">
             <div className="text-white text-base font-semibold font-['Poppins']">
               How it Works
@@ -35,7 +35,7 @@ const Footer = () => {
               Blogs
             </div>
           </div>
-          <div className="flex-col justify-center mt-3 items-center gap-4 flex">
+          <div className="flex-col justify-center sm:mt-1 mt-3 items-center gap-4 flex">
             <div className="text-white text-base font-semibold font-['Poppins']">
               Services
             </div>
@@ -68,7 +68,7 @@ const Footer = () => {
           <FaLinkedin className="text-white text-2xl" />
         </div>
       </div>
-      <div className="w-80 h-6 px-24 justify-start items-center gap-0.5 inline-flex">
+      <div className="w-full h-6 px-24 justify-start sm:items-start items-center gap-0.5 flex">
         <FaRegCopyright className="text-white text-sm mb-1" />
 
         <div className="text-white text-sm font-normal font-['Poppins']">

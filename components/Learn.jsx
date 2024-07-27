@@ -59,7 +59,7 @@ const Learn = () => {
         </div>
       </div>
       <div className="flex justify-center w-full items-center gap-10">
-        <div className="w-[100%] sm:w-[80%] gap-10 overflow-x-clip">
+        <div className="w-[100%] sm:w-[80%] gap-10 sm:overflow-x-visible overflow-x-clip">
           <Slider {...settings}>
             {carddata.map((card, index) => (
               <div key={index} className="sm:p-3 p-1">

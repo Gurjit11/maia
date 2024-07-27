@@ -39,10 +39,10 @@ const Hero = () => {
           <div className="col-span-1 flex-col justify-center gap-6 flex">
             <div className="flex-col sm:p-20 p-5 gap-2 flex">
               <div className="flex-col  gap-4  flex">
-                <div className="text-center text-slate-700 sm:text-6xl text-3xl font-normal font-['FONTSPRING DEMO - Argent CF'] ">
+                <div className="sm:text-start text-center text-slate-700 sm:text-6xl text-3xl font-normal font-['FONTSPRING DEMO - Argent CF'] ">
                   Discover Your Fertility Journey
                 </div>
-                <div className="text-center text-slate-700 sm:text-3xl font-light font-['Poppins'] ">
+                <div className="sm:text-start text-center text-slate-700 sm:text-3xl font-light font-['Poppins'] ">
                   Search with purpose
                 </div>
               </div>
