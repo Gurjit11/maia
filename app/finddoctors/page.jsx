@@ -1,5 +1,6 @@
+"use client";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   AiFillFilter,
   AiOutlineSearch,
@@ -11,11 +12,48 @@ import money from "../../public/money.png";
 import star from "../../public/star.png";
 import bag from "../../public/bag.png";
 import clinic from "../../public/clinic.png";
+import ivf from "../../public/ivf.png";
+import eggsperm from "../../public/eggsperm.png";
+import fertilitysupport from "../../public/fertilitysupport.png";
+import iuitreatment from "../../public/iuitreatment.png";
+import eggfreezing from "../../public/eggfreezing.png";
+import axios from "axios";
 
 const FindDoctors = () => {
+  const [doctors, setDoctors] = useState([]);
+  const getDoctors = () => {
+    let data = JSON.stringify({
+      role: "DOCTOR",
+    });
+
+    let config = {
+      method: "post",
+      maxBodyLength: Infinity,
+      url: "https://maia-2.onrender.com/getAll",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: data,
+    };
+
+    axios
+      .request(config)
+      .then((response) => {
+        setDoctors(response.data.data);
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    getDoctors();
+  }, []);
+
   return (
-    <div className="bg-white p-20">
-      <div className="flex justify-between">
+    <div className="bg-[#F7F7F7] sm:p-20 p-3 pt-10">
+      <div className=" md:flex flex-col justify-between mb-6">
         <div className=" w-full">
           <div className="w-[70%] h-14 px-4 py-3 bg-white text-black rounded-lg border border-[#dedede] justify-start items-center inline-flex">
             <input
@@ -48,257 +86,133 @@ const FindDoctors = () => {
         Discover 19 IVF doctors in Mumbai.
       </div>
       <div className="flex-col justify-start items-start gap-7 ">
-        <div className="p-8 bg-white rounded-2xl shadow justify-start items-center gap-10 inline-flex">
-          <div className="w-24 h-24 relative">
-            <img
-              className="w-24 h-24 left-0 top-0 absolute rounded-full"
-              src="https://via.placeholder.com/100x100"
-            />
-            <div className="w-8 h-8 px-0.5 py-0.5 left-[71px] top-[68px] absolute justify-center items-center inline-flex">
-              <div className="w-7 h-7 relative"></div>
+        {doctors.map((doctor, index) => (
+          <div
+            key={index}
+            className="sm:p-8 p-3 my-3 bg-white w-full rounded-2xl shadow justify-start items-center gap-3 sm:gap-10 flex"
+          >
+            <div className="w-24 h-24 ">
+              <img
+                className="w-24 h-24 left-0 top-0  rounded-full"
+                src={
+                  "https://i.pinimg.com/736x/13/e5/85/13e585664a1df5f548812b47a11f0889.jpg"
+                }
+                alt={`${doctor.name} photo`}
+              />
             </div>
-          </div>
-          <div className=" justify-between items-end flex">
-            <div className=" flex-col justify-start items-start gap-4 inline-flex">
-              <div className="text-[#2b4360] text-2xl font-bold font-['FONTSPRING DEMO - Argent CF'] leading-7">
-                Dr. Jake Wilson
-              </div>
-              <div className="flex-col justify-start items-start gap-2 flex">
+            <div className=" justify-between w-full flex-co sm:flex">
+              <div className=" flex-col justify-start items-start sm:gap-4 inline-flex">
+                <div className="text-[#2b4360] text-2xl font-bold font-['FONTSPRING DEMO - Argent CF'] leading-7">
+                  {doctor.name}
+                </div>
                 <div className="flex-col justify-start items-start gap-2 flex">
-                  <div className="justify-start items-center gap-2 inline-flex">
-                    <Image src={about} alt="icon" />
-                    <div className="text-[#2b4360] text-base font-normal font-['Poppins'] leading-tight">
-                      Gynecologist/Obstetrician
-                    </div>
-                  </div>
-                  <div className="justify-start items-start gap-4 inline-flex">
-                    <div className="justify-start items-center gap-2 flex">
-                      <Image src={review} alt="icon" />
-
+                  <div className="flex-col justify-start items-start gap-2 flex">
+                    <div className="justify-start items-center gap-2 inline-flex">
+                      <Image src={about} alt="icon" />
                       <div className="text-[#2b4360] text-base font-normal font-['Poppins'] leading-tight">
-                        512 Reviews
+                        {doctor.specialization.join(", ")}
                       </div>
                     </div>
-                    <div className="justify-start items-center gap-2 flex">
-                      <Image src={star} alt="icon" />
-
-                      <div className="text-[#2b4360] text-base font-normal font-['Poppins'] leading-tight">
-                        4.5
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="w-80 justify-start items-start gap-2 inline-flex">
-                  <div className="rounded-lg justify-center items-center gap-1 flex">
-                    <div className="w-8 h-8 relative">
-                      <div className="w-8 h-8 left-0 top-0 absolute bg-[#e6f3f2] rounded-full" />
-                      <div className="w-6 h-6 left-[4px] top-[5px] absolute" />
-                    </div>
-                  </div>
-                  <div className="rounded-lg justify-center items-center gap-1 flex">
-                    <div className="w-8 h-8 relative">
-                      <div className="w-8 h-8 left-0 top-0 absolute bg-[#ffebc6] rounded-full" />
-                      <div className="w-5 h-5 left-[6.40px] top-[6.40px] absolute">
-                        <div className="w-1 h-1 left-[10.80px] top-[7.20px] absolute"></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="rounded-lg justify-center items-center gap-1 flex">
-                    <div className="w-8 h-8 relative">
-                      <div className="w-8 h-8 left-0 top-0 absolute bg-[#ffe1d7] rounded-full" />
-                      <div className="w-5 h-4 left-[7.20px] top-[8px] absolute" />
-                    </div>
-                  </div>
-                  <div className="rounded-lg justify-center items-center gap-1 flex">
-                    <div className="w-8 h-8 relative">
-                      <div className="w-8 h-8 left-0 top-0 absolute bg-[#e4f3e8] rounded-full" />
-                      <div className="w-5 h-5 left-[6.40px] top-[6.40px] absolute">
-                        <div className="w-1 h-0.5 left-[12.20px] top-[5.59px] absolute"></div>
-                        <div className="w-1.5 h-3 left-[6.75px] top-[2.77px] absolute"></div>
-                        <div className="w-1 h-1.5 left-[7.59px] top-[3.86px] absolute"></div>
-                        <div className="w-0.5 h-2 left-[8.52px] top-[7.54px] absolute"></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="rounded-lg justify-center items-center gap-1 flex">
-                    <div className="w-8 h-8 relative">
-                      <div className="w-8 h-8 left-0 top-0 absolute bg-[#ffecdd] rounded-full" />
-                      <div className="w-6 h-6 left-[4px] top-[4px] absolute">
-                        <div className="w-1.5 h-1.5 left-[11.63px] top-[4.35px] absolute"></div>
-                        <div className="w-1 h-4 left-[3.87px] top-[3.33px] absolute">
-                          <div className="w-1 h-0.5 left-[0.27px] top-[2.71px] absolute"></div>
-                          <div className="w-1 h-1 left-0 top-0 absolute"></div>
+                    <div className="justify-start items-start gap-4 inline-flex">
+                      <div className="justify-start items-center gap-2 flex">
+                        <Image src={review} alt="icon" />
+                        <div className="text-[#2b4360] text-base font-normal font-['Poppins'] leading-tight">
+                          512 Reviews
                         </div>
-                        <div className="w-0.5 h-1.5 left-[10.26px] top-[11.29px] absolute"></div>
-                        <div className="w-0.5 h-1.5 left-[15.54px] top-[11.52px] absolute"></div>
-                        <div className="w-0.5 h-1.5 left-[12.59px] top-[13.33px] absolute"></div>
                       </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="w-64 h-20 flex-col justify-start items-start gap-2 inline-flex">
-              <div className="justify-start items-center gap-2 inline-flex">
-                <div className="w-6 h-6 px-px py-1.5 justify-center items-center flex" />
-                <div className="w-56">
-                  <span className="text-[#2b4360] text-base font-normal font-['Poppins'] leading-tight">
-                    Fees:{" "}
-                  </span>
-                  <span className="text-[#00b15c] text-base font-semibold font-['Poppins'] leading-tight">
-                    ₹₹₹
-                  </span>
-                  <span className="text-[#ababab] text-base font-semibold font-['Poppins'] leading-tight">
-                    ₹₹
-                  </span>
-                </div>
-              </div>
-              <div className="justify-start items-center gap-2 inline-flex">
-                <div className="w-6 h-6 justify-center items-center flex">
-                  <div className="w-6 h-6 p-0.5 bg-white/0 justify-center items-center inline-flex">
-                    <div className="w-5 h-5 relative"></div>
-                  </div>
-                </div>
-                <div className="text-[#2b4360] text-base font-normal font-['Poppins'] leading-tight">
-                  Starline Hospital
-                </div>
-                <div className="text-[#e29578] text-base font-semibold font-['Poppins'] underline leading-tight">
-                  +2 More
-                </div>
-              </div>
-              <div className="justify-start items-center gap-2 inline-flex">
-                <div className="w-6 h-6 px-0.5 pt-0.5 pb-1 justify-center items-center flex" />
-                <div className="text-[#2b4360] text-base font-normal font-['Poppins'] leading-tight">
-                  23 Years
-                </div>
-              </div>
-            </div>
-            <div className="w-48 h-32 flex-col justify-start items-start gap-4 inline-flex">
-              <div className="h-14 px-6 py-4 bg-[#2b4360] rounded-lg justify-center items-center gap-2 inline-flex">
-                <div className="grow shrink basis-0 text-center text-white text-base font-medium font-['Poppins'] leading-tight">
-                  Book Appointment
-                </div>
-              </div>
-              <div className="w-48 h-14 px-6 py-4 rounded-lg border border-[#2b4360] justify-center items-center gap-2 inline-flex">
-                <div className="grow shrink basis-0 text-center text-[#2b4360] text-base font-medium font-['Poppins'] leading-tight">
-                  View Profile
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="p-8 bg-white rounded-2xl shadow justify-start items-center gap-10 inline-flex">
-          <div className="w-24 h-24 relative">
-            <img
-              className="w-24 h-24 left-0 top-0 absolute rounded-full"
-              src="https://via.placeholder.com/100x100"
-            />
-            <div className="w-8 h-8 px-0.5 py-0.5 left-[71px] top-[68px] absolute justify-center items-center inline-flex">
-              <div className="w-7 h-7 relative"></div>
-            </div>
-          </div>
-          <div className="h-36 justify-between items-end flex">
-            <div className="h-36 flex-col justify-start items-start gap-4 inline-flex">
-              <div className="text-[#2b4360] text-2xl font-bold font-['FONTSPRING DEMO - Argent CF'] leading-7">
-                Dr. Jake Wilson
-              </div>
-              <div className="flex-col justify-start items-start gap-2 flex">
-                <div className="flex-col justify-start items-start gap-2 flex">
-                  <div className="justify-start items-center gap-2 inline-flex">
-                    <div className="w-6 h-6 pl-0.5 pr-px pt-1 pb-0.5 justify-center items-center flex" />
-                    <div className="text-[#2b4360] text-base font-normal font-['Poppins'] leading-tight">
-                      Gynecologist/Obstetrician
-                    </div>
-                  </div>
-                  <div className="justify-start items-start gap-4 inline-flex">
-                    <div className="justify-start items-center gap-2 flex">
-                      <div className="w-6 h-6 px-px py-1 justify-center items-center flex" />
-                      <div className="text-[#2b4360] text-base font-normal font-['Poppins'] leading-tight">
-                        512 Reviews
-                      </div>
-                    </div>
-                    <div className="justify-start items-center gap-2 flex">
-                      <div className="w-6 h-6 px-px pt-px pb-0.5 justify-center items-center flex" />
-                      <div className="text-[#2b4360] text-base font-normal font-['Poppins'] leading-tight">
-                        4.5
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="w-80 justify-start items-start gap-2 inline-flex">
-                  <div className="rounded-lg justify-center items-center gap-1 flex">
-                    <div className="w-8 h-8 relative">
-                      <div className="w-8 h-8 left-0 top-0 absolute bg-[#ffe1d7] rounded-full" />
-                      <div className="w-5 h-4 left-[7.20px] top-[8px] absolute" />
-                    </div>
-                  </div>
-                  <div className="rounded-lg justify-center items-center gap-1 flex">
-                    <div className="w-8 h-8 relative">
-                      <div className="w-8 h-8 left-0 top-0 absolute bg-[#ffecdd] rounded-full" />
-                      <div className="w-6 h-6 left-[4px] top-[4px] absolute">
-                        <div className="w-1.5 h-1.5 left-[11.63px] top-[4.35px] absolute"></div>
-                        <div className="w-1 h-4 left-[3.87px] top-[3.33px] absolute">
-                          <div className="w-1 h-0.5 left-[0.27px] top-[2.71px] absolute"></div>
-                          <div className="w-1 h-1 left-0 top-0 absolute"></div>
+                      <div className="justify-start items-center gap-2 flex">
+                        <Image src={star} alt="icon" />
+                        <div className="text-[#2b4360] text-base font-normal font-['Poppins'] leading-tight">
+                          4.5
                         </div>
-                        <div className="w-0.5 h-1.5 left-[10.26px] top-[11.29px] absolute"></div>
-                        <div className="w-0.5 h-1.5 left-[15.54px] top-[11.52px] absolute"></div>
-                        <div className="w-0.5 h-1.5 left-[12.59px] top-[13.33px] absolute"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="w-64 justify-start items-start gap-2 inline-flex">
+                    <div className="rounded-lg justify-center items-center gap-1 flex">
+                      <div className="w-8 h-8 relative">
+                        <div className="w-8 h-8  bg-slate-200 rounded-full">
+                          <Image src={fertilitysupport} alt={"icon"} />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="rounded-lg justify-center items-center gap-1 flex">
+                      <div className="w-8 h-8 relative">
+                        <div className="w-8 h-8  bg-amber-100 rounded-full">
+                          <Image src={eggfreezing} alt={"icon"} />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="rounded-lg justify-center items-center gap-1 flex">
+                      <div className="w-8 h-8 relative">
+                        <div className="w-8 h-8  bg-red-100 rounded-full">
+                          <Image src={ivf} alt={"icon"} />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="rounded-lg justify-center items-center gap-1 flex">
+                      <div className="w-8 h-8 relative">
+                        <div className="w-8 h-8  bg-green-100 rounded-full">
+                          <Image src={iuitreatment} alt={"icon"} />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="rounded-lg justify-center items-center gap-1 flex">
+                      <div className="w-8 h-8 relative">
+                        <div className="w-8 h-8  bg-orange-100 rounded-full">
+                          <Image src={eggsperm} alt={"icon"} />
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="w-64 h-20 flex-col justify-start items-start gap-2 inline-flex">
-              <div className="justify-start items-center gap-2 inline-flex">
-                <div className="w-6 h-6 px-px py-1.5 justify-center items-center flex" />
-                <div className="w-56">
-                  <span className="text-[#2b4360] text-base font-normal font-['Poppins'] leading-tight">
-                    Fees:{" "}
-                  </span>
-                  <span className="text-[#00b15c] text-base font-semibold font-['Poppins'] leading-tight">
-                    ₹₹₹
-                  </span>
-                  <span className="text-[#ababab] text-base font-semibold font-['Poppins'] leading-tight">
-                    ₹₹
-                  </span>
-                </div>
-              </div>
-              <div className="justify-start items-center gap-2 inline-flex">
-                <div className="w-6 h-6 justify-center items-center flex">
-                  <div className="w-6 h-6 p-0.5 bg-white/0 justify-center items-center inline-flex">
-                    <div className="w-5 h-5 relative"></div>
+              <div className="w-64 sm:mt-10 flex-col justify-start items-start gap-2 inline-flex">
+                <div className="justify-start items-center gap-2 inline-flex">
+                  <Image src={money} alt="icon" />
+                  <div className="w-56">
+                    <span className="text-[#2b4360] text-base font-normal font-['Poppins'] leading-tight">
+                      Fees:{" "}
+                    </span>
+                    <span className="text-[#00b15c] text-base font-semibold font-['Poppins'] leading-tight">
+                      ₹₹₹
+                    </span>
+                    <span className="text-[#ababab] text-base font-semibold font-['Poppins'] leading-tight">
+                      ₹₹
+                    </span>
                   </div>
                 </div>
-                <div className="text-[#2b4360] text-base font-normal font-['Poppins'] leading-tight">
-                  Starline Hospital
+                <div className="justify-start items-center gap-2 inline-flex">
+                  <Image src={clinic} alt="icon" />
+                  <div className="text-[#2b4360] text-base font-normal font-['Poppins'] leading-tight">
+                    Starline Hospital
+                  </div>
+                  <div className="text-[#e29578] text-base font-semibold font-['Poppins'] underline leading-tight">
+                    +2 More
+                  </div>
                 </div>
-                <div className="text-[#e29578] text-base font-semibold font-['Poppins'] underline leading-tight">
-                  +2 More
-                </div>
-              </div>
-              <div className="justify-start items-center gap-2 inline-flex">
-                <div className="w-6 h-6 px-0.5 pt-0.5 pb-1 justify-center items-center flex" />
-                <div className="text-[#2b4360] text-base font-normal font-['Poppins'] leading-tight">
-                  23 Years
-                </div>
-              </div>
-            </div>
-            <div className="w-48 h-32 flex-col justify-start items-start gap-4 inline-flex">
-              <div className="h-14 px-6 py-4 bg-[#2b4360] rounded-lg justify-center items-center gap-2 inline-flex">
-                <div className="grow shrink basis-0 text-center text-white text-base font-medium font-['Poppins'] leading-tight">
-                  Book Appointment
+                <div className="justify-start items-center gap-2 inline-flex">
+                  <Image src={bag} alt="icon" />
+                  <div className="text-[#2b4360] text-base font-normal font-['Poppins'] leading-tight">
+                    {doctor.experience_years} Years
+                  </div>
                 </div>
               </div>
-              <div className="w-48 h-14 px-6 py-4 rounded-lg border border-[#2b4360] justify-center items-center gap-2 inline-flex">
-                <div className="grow shrink basis-0 text-center text-[#2b4360] text-base font-medium font-['Poppins'] leading-tight">
-                  View Profile
-                </div>
+              <div className="w-48 mt-2 sm:flex-col  justify-start items-start gap-4 inline-flex">
+                <button className="h-14 px-6 py-4 bg-[#2b4360] rounded-lg justify-center items-center gap-2 inline-flex">
+                  <div className="grow shrink basis-0 text-center text-white text-base font-medium font-['Poppins'] leading-tight">
+                    Book Appointment
+                  </div>
+                </button>
+                <button className="w-48 h-14 px-6 py-4 rounded-lg border border-[#2b4360] justify-center items-center gap-2 inline-flex">
+                  <div className="grow shrink basis-0 text-center text-[#2b4360] text-base font-medium font-['Poppins'] leading-tight">
+                    View Profile
+                  </div>
+                </button>
               </div>
             </div>
           </div>
-        </div>
+        ))}
       </div>
     </div>
   );

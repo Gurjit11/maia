@@ -34,7 +34,10 @@ const Navbar = () => {
         <div className="w-full flex-col justify-start items-start gap-8 inline-flex">
           <Login setSidebar={setSidebar} />
           <div className="flex-col justify-start items-start gap-4 flex">
-            <div className="justify-start items-start gap-14 inline-flex">
+            <Link
+              href={"/finddoctors"}
+              className="justify-start cursor-pointer items-start gap-14 inline-flex"
+            >
               <div className="justify-start items-center gap-2 flex">
                 <Image src={doctor} />
 
@@ -42,7 +45,7 @@ const Navbar = () => {
                   Find Doctor{" "}
                 </div>
               </div>
-            </div>
+            </Link>
             <div className="justify-start items-center gap-2 inline-flex">
               <Image src={clinic} />
 
@@ -112,12 +115,15 @@ const Navbar = () => {
           </div>
           <div className=" justify-start items-center gap-14 flex">
             <div className="justify-start items-start gap-14 flex">
-              <div className="justify-start items-center gap-2 flex">
+              <Link
+                href={"/finddoctors"}
+                className="justify-start items-center gap-2 flex"
+              >
                 <Image src={doctor} />
                 <div className="text-stone-950 text-base font-normal font-['Poppins'] leading-tight">
                   Find Doctor{" "}
                 </div>
-              </div>
+              </Link>
               <div className="justify-start items-center gap-2 flex">
                 <Image src={clinic} />
 
