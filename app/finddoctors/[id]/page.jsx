@@ -392,13 +392,14 @@ const DoctorPage = ({ params }) => {
             </div>
           </div>
         </div>
-        <div className=" p-8 bg-white rounded-2xl shadow flex-col justify-start items-start gap-4 inline-flex">
+        <div className="p-5 sm:p-8 bg-white rounded-2xl shadow flex-col justify-start items-start gap-4 inline-flex">
           <div className="justify-start items-center gap-2 inline-flex">
             <Image src={review} alt="icon" />{" "}
             <div className=" text-[#2b4360] text-lg font-medium font-['Poppins'] leading-snug">
               Reviews
             </div>
           </div>
+
           <div className="flex-col justify-start items-start gap-4 flex">
             <div className=" justify-between items-center inline-flex">
               <div className="justify-start items-center gap-2 flex">
@@ -407,7 +408,7 @@ const DoctorPage = ({ params }) => {
                     className="w-8 h-8 rounded-full"
                     src="https://via.placeholder.com/32x32"
                   />
-                  <div className="text-[#2b4360] text-lg font-semibold font-['Poppins'] leading-snug">
+                  <div className="text-[#2b4360]  sm:text-lg font-semibold font-['Poppins'] leading-snug">
                     Samriddhi Singh{" "}
                   </div>
                 </div>
@@ -415,7 +416,7 @@ const DoctorPage = ({ params }) => {
                   <div className="w-5 h-5 relative"></div>
                 </div>
               </div>
-              <div className="text-[#2b4360] text-sm font-normal font-['Poppins'] leading-normal">
+              <div className="text-[#2b4360] text-xs sm:text-sm font-normal font-['Poppins'] leading-normal">
                 9 months ago
               </div>
             </div>
@@ -450,6 +451,8 @@ const DoctorPage = ({ params }) => {
               </div>
             </div>
           </div>
+          <div className="h-[0.1px] bg-gray-300 w-full"></div>
+
           <div className="flex-col justify-start items-start gap-4 flex">
             <div className=" justify-between items-center inline-flex">
               <div className="justify-start items-center gap-2 flex">
@@ -458,7 +461,7 @@ const DoctorPage = ({ params }) => {
                     className="w-8 h-8 rounded-full"
                     src="https://via.placeholder.com/32x32"
                   />
-                  <div className="text-[#2b4360] text-lg font-semibold font-['Poppins'] leading-snug">
+                  <div className="text-[#2b4360]  sm:text-lg font-semibold font-['Poppins'] leading-snug">
                     Samriddhi Singh{" "}
                   </div>
                 </div>
@@ -466,7 +469,7 @@ const DoctorPage = ({ params }) => {
                   <div className="w-5 h-5 relative"></div>
                 </div>
               </div>
-              <div className="text-[#2b4360] text-sm font-normal font-['Poppins'] leading-normal">
+              <div className="text-[#2b4360] text-xs sm:text-sm font-normal font-['Poppins'] leading-normal">
                 9 months ago
               </div>
             </div>
