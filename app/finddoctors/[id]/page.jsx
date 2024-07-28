@@ -14,7 +14,7 @@ import fertilitysupport from "../../../public/fertilitysupport.png";
 import iuitreatment from "../../../public/iuitreatment.png";
 import eggfreezing from "../../../public/eggfreezing.png";
 import clinic from "../../../public/clinic.png";
-import ellipse from "../../../public/ellipse.png";
+import ellipse from "../../../public/Ellipse.png";
 import arrow from "../../../public/arrow.png";
 import loc from "../../../public/loc.png";
 import { AiOutlineCalendar, AiOutlineWhatsApp } from "react-icons/ai";
