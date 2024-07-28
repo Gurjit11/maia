@@ -441,12 +441,12 @@ const DoctorPage = ({ params }) => {
                 </div>
               </div>
               <div className=" text-[#5f5f5f] text-xs font-normal font-['Poppins'] leading-none">
-                Dr. Kort practices the exact opposite of a "one size fits all"
-                approach to medicine. He took my fears seriously - primarily
-                about the hormone injections - and worked with me to create a
-                schedule that I was comfortable with, but that also got great
-                results. He's one of the kindest and most knowledgeable doctors
-                I've ever had.
+                Dr. Kort practices the exact opposite of a &quot;one size fits
+                all&quot; approach to medicine. He took my fears seriously -
+                primarily about the hormone injections - and worked with me to
+                create a schedule that I was comfortable with, but that also got
+                great results. He&apos;s one of the kindest and most
+                knowledgeable doctors I&apos;ve ever had.
               </div>
             </div>
           </div>
@@ -492,12 +492,12 @@ const DoctorPage = ({ params }) => {
                 </div>
               </div>
               <div className=" text-[#5f5f5f] text-xs font-normal font-['Poppins'] leading-none">
-                Dr. Kort practices the exact opposite of a "one size fits all"
-                approach to medicine. He took my fears seriously - primarily
-                about the hormone injections - and worked with me to create a
-                schedule that I was comfortable with, but that also got great
-                results. He's one of the kindest and most knowledgeable doctors
-                I've ever had.
+                Dr. Kort practices the exact opposite of a &quot;one size fits
+                all&quot; approach to medicine. He took my fears seriously -
+                primarily about the hormone injections - and worked with me to
+                create a schedule that I was comfortable with, but that also got
+                great results. He&apos;s one of the kindest and most
+                knowledgeable doctors I&apos;ve ever had.
               </div>
             </div>
           </div>
