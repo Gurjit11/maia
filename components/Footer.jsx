@@ -68,7 +68,7 @@ const Footer = () => {
           <FaLinkedin className="text-white text-2xl" />
         </div>
       </div>
-      <div className="w-full h-6 px-24 justify-start sm:items-start items-center gap-0.5 flex">
+      <div className="w-full h-6 px-24 sm:justify-start justify-center  items-center gap-0.5 flex">
         <FaRegCopyright className="text-white text-sm mb-1" />
 
         <div className="text-white text-sm font-normal font-['Poppins']">
