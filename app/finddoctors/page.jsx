@@ -18,6 +18,7 @@ import fertilitysupport from "../../public/fertilitysupport.png";
 import iuitreatment from "../../public/iuitreatment.png";
 import eggfreezing from "../../public/eggfreezing.png";
 import axios from "axios";
+import Link from "next/link";
 
 const FindDoctors = () => {
   const [doctors, setDoctors] = useState([]);
@@ -104,7 +105,7 @@ const FindDoctors = () => {
       <div className="text-[#2b4360] text-xl font-medium font-['Poppins'] leading-relaxed">
         Discover {doctors.length} IVF doctors in Mumbai.
       </div>
-      <div className="flex-col justify-start items-start gap-7 ">
+      <div className="flex-col min-h-[600px] justify-start items-start gap-7 ">
         {filteredDoctors.map((doctor, index) => (
           <div
             key={index}
@@ -113,9 +114,7 @@ const FindDoctors = () => {
             <div className="w-32 h-full flex justify-start items-start">
               <img
                 className="w-24 h-24 rounded-full"
-                src={
-                  "https://i.pinimg.com/736x/13/e5/85/13e585664a1df5f548812b47a11f0889.jpg"
-                }
+                src={doctor.photo}
                 alt={`${doctor.name} photo`}
               />
             </div>
@@ -223,11 +222,14 @@ const FindDoctors = () => {
                     Book Appointment
                   </div>
                 </button>
-                <button className="w-48 h-14 px-6 py-4 rounded-lg border border-[#2b4360] justify-center items-center gap-2 inline-flex">
+                <Link
+                  href={`/finddoctors/${doctor._id}`}
+                  className="w-48 h-14 px-6 py-4 rounded-lg border border-[#2b4360] justify-center items-center gap-2 inline-flex"
+                >
                   <div className="grow shrink basis-0 text-center text-[#2b4360] text-base font-medium font-['Poppins'] leading-tight">
                     View Profile
                   </div>
-                </button>
+                </Link>
               </div>
             </div>
           </div>
