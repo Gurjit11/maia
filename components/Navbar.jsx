@@ -12,7 +12,7 @@ const Navbar = () => {
   const [sidebar, setSidebar] = useState(false);
   return (
     <>
-      <div className="flex sm:hidden items-center w-full bg-white">
+      <div className="flex top-0 sticky z-10 sm:hidden items-center w-full bg-white">
         <div
           onClick={() => setSidebar(!sidebar)}
           className="text-xl text-black ml-2 bg-white p-2 cursor-pointer md:hidden"
@@ -103,7 +103,7 @@ const Navbar = () => {
         </div>
       </div>
       {/* sidebar end */}
-      <div className="hidden sm:block w-full p-2 bg-white shadow">
+      <div className="hidden sm:block w-full z-10 p-2 bg-white top-0 sm:sticky shadow">
         <div className=" justify-between px-6 items-center flex">
           <div className=" justify-start items-center gap-8 flex">
             <Link
