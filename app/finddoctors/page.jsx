@@ -119,9 +119,9 @@ const FindDoctors = () => {
             key={index}
             className="sm:p-8 p-3 my-3 bg-white w-full rounded-2xl shadow justify-start items-center gap-3 sm:gap-10 flex"
           >
-            <div className="w-32 h-full flex justify-start items-start">
+            <div className="sm:w-32 h-full flex justify-start items-start">
               <img
-                className="w-24 h-24 rounded-full"
+                className="sm:w-24 sm:h-24 w-14 h-14 rounded-full"
                 src={doctor.photo}
                 alt={`${doctor.name} photo`}
               />
