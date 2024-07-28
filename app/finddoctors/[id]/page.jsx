@@ -731,7 +731,9 @@ const DoctorPage = ({ params }) => {
         <div className="text-[#2b4360] mt-3 ml-3 font-semibold text-xl">
           Learn from Popular Topics
         </div>
-        <Learnslider />
+        <div className="px-10">
+          <Learnslider />
+        </div>
       </div>
     </div>
   );

@@ -81,7 +81,7 @@ const Findclinics = () => {
                           Malad (W), Mumbai
                         </div>
                       </div>
-                      <div className=" justify-between items-center sm:gap-2 mt-1 flex-col sm:flex">
+                      <div className=" justify-between items-start  mt-1 flex-col sm:flex">
                         <div className="justify-center items-center gap-2 inline-flex">
                           <Image src={doctor} alt="icon" />
 
@@ -89,7 +89,7 @@ const Findclinics = () => {
                             5 Doctors{" "}
                           </div>
                         </div>
-                        <div className=" justify-center items-center gap-2 inline-flex">
+                        <div className="ml-2 sm:ml-0 justify-center items-center gap-2 inline-flex">
                           <Image src={bed} alt="icon" />
                           <div className="text-slate-700 text-xs sm:text-sm font-normal font-['Metropolis'] leading-none">
                             32 Beds
