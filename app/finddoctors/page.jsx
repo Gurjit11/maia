@@ -24,6 +24,7 @@ const FindDoctors = () => {
   const [doctors, setDoctors] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [filteredDoctors, setFilteredDoctors] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const getDoctors = () => {
     let data = JSON.stringify({
@@ -45,6 +46,7 @@ const FindDoctors = () => {
       .then((response) => {
         setDoctors(response.data.data);
         setFilteredDoctors(response.data.data); // Initially show all doctors
+        setLoading(false);
         console.log(response.data);
       })
       .catch((error) => {
@@ -102,9 +104,15 @@ const FindDoctors = () => {
           </div>
         </div>
       </div>
-      <div className="text-[#2b4360] text-xl font-medium font-['Poppins'] leading-relaxed">
-        Discover {doctors.length} IVF doctors in Mumbai.
-      </div>
+      {loading ? (
+        <div className="text-[#2b4360] text-xl font-medium font-['Poppins'] leading-relaxed">
+          Loading...
+        </div>
+      ) : (
+        <div className="text-[#2b4360] text-xl font-medium font-['Poppins'] leading-relaxed">
+          Discover {doctors.length} IVF doctors in Mumbai.
+        </div>
+      )}
       <div className="flex-col min-h-[600px] justify-start items-start gap-7 ">
         {filteredDoctors.map((doctor, index) => (
           <div
