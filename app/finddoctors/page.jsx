@@ -224,7 +224,7 @@ const FindDoctors = () => {
                   </div>
                 </div>
               </div>
-              <div className="w-48 mt-2 sm:flex-col  justify-start items-start gap-4 inline-flex">
+              <div className=" mt-2 sm:flex-col  justify-start items-start gap-4 inline-flex">
                 <button className="h-14 px-6 py-4 bg-[#2b4360] rounded-lg justify-center items-center gap-2 inline-flex">
                   <div className="grow shrink basis-0 text-center text-white text-base font-medium font-['Poppins'] leading-tight">
                     Book Appointment
@@ -232,7 +232,7 @@ const FindDoctors = () => {
                 </button>
                 <Link
                   href={`/finddoctors/${doctor._id}`}
-                  className="w-48 h-14 px-6 py-4 rounded-lg border border-[#2b4360] justify-center items-center gap-2 inline-flex"
+                  className="sm:w-full h-14 px-6 py-4 rounded-lg border border-[#2b4360] justify-center items-center gap-2 inline-flex"
                 >
                   <div className="grow shrink basis-0 text-center text-[#2b4360] text-base font-medium font-['Poppins'] leading-tight">
                     View Profile
