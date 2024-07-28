@@ -506,7 +506,7 @@ const DoctorPage = ({ params }) => {
           </div>
         </div>
       </div>
-      <div className="col-span-1 sm:pt-20 pb-10 sm:pr-10">
+      <div className="col-span-1 sm:pt-20 p-3 pb-10  sm:pr-10">
         <div className="text-[#2b4360] ml-3 font-semibold text-xl">
           Top Verified Doctors
         </div>
