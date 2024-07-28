@@ -60,11 +60,11 @@ const DoctorPage = ({ params }) => {
     <div className="sm:grid grid-cols-3 bg-gray-50">
       <div className="col-span-2 flex-col p-3 sm:py-20 sm:pl-20">
         <div className=" flex-col bg-gray-100 p-5 rounded-2xl justify-start items-start gap-8 flex">
-          <div className="justify-center items-center gap-6 flex-co sm:flex ">
-            <div className=" justify-start items-center gap-6 flex">
-              <div className="sm:w-28 sm:h-28 w-14 h-14 relative">
+          <div className="justify-center items-start gap-6 flex-co sm:flex ">
+            <div className=" justify-start items-start gap-3 sm:gap-6 flex">
+              <div className="sm:w-28 mt-3 sm:h-28 w-16 h-1w-16 relative">
                 <img
-                  className="sm:w-28 sm:h-28 w-14 h-14 left-0 top-0 absolute rounded-full"
+                  className="sm:w-28 sm:h-28 w-16 h-1w-16 left-0 top-0 absolute rounded-full"
                   src={doctor.photo}
                 />
                 <div className="w-8 h-8 px-0.5 py-0.5 left-[88px] top-[88px] absolute justify-center items-center inline-flex">
