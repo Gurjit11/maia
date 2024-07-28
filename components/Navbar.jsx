@@ -19,9 +19,12 @@ const Navbar = () => {
         >
           {sidebar ? <AiOutlineClose /> : <AiOutlineMenu />}
         </div>
-        <div className="ml-3 justify-start overflow-y-clip items-center gap-1 flex">
+        <Link
+          href={"/"}
+          className="ml-3 justify-start overflow-y-clip items-center gap-1 flex"
+        >
           <Image src={icon} alt="logo" className="scale-125 " height={60} />
-        </div>
+        </Link>
       </div>
       {/* sidebar */}
       <div
@@ -103,9 +106,12 @@ const Navbar = () => {
       <div className="hidden sm:block w-full p-2 bg-white shadow">
         <div className=" justify-between px-6 items-center flex">
           <div className=" justify-start items-center gap-8 flex">
-            <div className="justify-start overflow-y-clip items-center gap-1 flex">
+            <Link
+              href={"/"}
+              className="justify-start overflow-y-clip items-center gap-1 flex"
+            >
               <Image src={icon} alt="logo" className="scale-125 " height={60} />
-            </div>
+            </Link>
             {/* <div className=" bg-white rounded-lg border border-orange-200 justify-center items-center gap-2 flex">
             <div className="text-slate-700 text-base font-normal font-['Poppins'] leading-tight">
               Select City
