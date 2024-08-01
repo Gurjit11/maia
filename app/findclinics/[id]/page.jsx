@@ -32,6 +32,17 @@ const ClinicPage = ({ params }) => {
   console.log(id);
   const [doctor, setDoctor] = useState({});
 
+  const images = [
+    "https://via.placeholder.com/60x60",
+    "https://via.placeholder.com/60x60",
+    "https://via.placeholder.com/60x60",
+    "https://via.placeholder.com/60x60",
+    "https://via.placeholder.com/60x60",
+    "https://via.placeholder.com/60x60",
+    "https://via.placeholder.com/60x60",
+    "https://via.placeholder.com/60x60",
+  ];
+
   const getClinic = () => {
     let data = JSON.stringify({
       id: id,
@@ -206,7 +217,7 @@ const ClinicPage = ({ params }) => {
           </div>
         </div>
         <div className="my-5 py-8 bg-white rounded-2xl shadow flex-col justify-center items-start gap-8 flex">
-          <div className=" px-8 flex-col justify-start items-start gap-4 flex">
+          <div className=" px-4 md:px-8 flex-col justify-start items-start gap-4 flex">
             <div className="justify-start items-center gap-1 inline-flex">
               <FaDirections className="text-[#2b4360] text-xl" />
               <div className="text-[#2b4360] underline text-lg font-medium font-['Poppins'] leading-snug">
@@ -223,57 +234,31 @@ const ClinicPage = ({ params }) => {
               </span> */}
             </div>
           </div>
-          <div className=" px-8 flex-col justify-start items-start gap-4 flex">
-            <div className=" justify-start items-start gap-2 inline-flex">
+          <div className="px-4 md:px-8 flex flex-col justify-start items-start gap-4">
+            <div className="flex justify-start items-start gap-2">
               <FaPhotoFilm className="text-[#2b4360] text-xl" />
-
-              <div className="text-[#2b4360] text-lg font-medium font-['Poppins'] leading-snug">
+              <div className="text-[#2b4360] text-lg font-medium leading-snug">
                 Photos
               </div>
             </div>
-            <div className="h-24 flex-col justify-start items-start gap-4 inline-flex">
-              <div className="justify-start items-start gap-6 inline-flex">
+            <div className="flex flex-wrap gap-4">
+              {images.slice(0, 8).map((src, index) => (
+                <img
+                  key={index}
+                  className="w-14 h-14 rounded-lg shadow"
+                  src={src}
+                  alt={`Photo ${index + 1}`}
+                />
+              ))}
+              <div className="w-14 h-14 relative">
                 <img
                   className="w-14 h-14 rounded-lg shadow"
                   src="https://via.placeholder.com/60x60"
+                  alt="More Photos"
                 />
-                <img
-                  className="w-14 h-14 rounded-lg shadow"
-                  src="https://via.placeholder.com/60x60"
-                />
-                <img
-                  className="w-14 h-14 rounded-lg shadow"
-                  src="https://via.placeholder.com/60x60"
-                />
-                <img
-                  className="w-14 h-14 rounded-lg shadow"
-                  src="https://via.placeholder.com/60x60"
-                />
-                <img
-                  className="w-14 h-14 rounded-lg shadow"
-                  src="https://via.placeholder.com/60x60"
-                />
-                <img
-                  className="w-14 h-14 rounded-lg shadow"
-                  src="https://via.placeholder.com/60x60"
-                />
-                <img
-                  className="w-14 h-14 rounded-lg shadow"
-                  src="https://via.placeholder.com/60x60"
-                />
-                <img
-                  className="w-14 h-14 rounded-lg shadow"
-                  src="https://via.placeholder.com/60x60"
-                />
-                <div className="w-14 h-14 relative">
-                  <img
-                    className="w-14 h-14 left-0 top-0 absolute rounded-lg shadow"
-                    src="https://via.placeholder.com/60x60"
-                  />
-                  <div className="w-14 h-14 left-0 top-0 absolute bg-[#120303]/60 rounded-lg" />
-                  <div className="w-7 h-3.5 left-[16px] top-[16px] absolute text-white text-2xl font-medium font-['DM Sans'] leading-normal">
-                    +7
-                  </div>
+                <div className="w-14 h-14 absolute top-0 left-0 bg-[#120303]/60 rounded-lg" />
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-2xl font-medium">
+                  +7
                 </div>
               </div>
             </div>
@@ -399,7 +384,7 @@ const ClinicPage = ({ params }) => {
       </div>
       <div className="col-span-1 sm:pt-20 p-3 pb-10  sm:pr-10">
         <div className="text-[#2b4360] ml-3 font-semibold text-xl">
-          Top Verified Doctors
+          Top Verified Clinics
         </div>
         <div className=" sm:flex-col flex overflow-x-auto sm:gap-0 gap-6">
           <div className=" my-2  px-6 py-4 bg-stone-100 rounded-lg shadow justify-start items-start gap-24 flex">

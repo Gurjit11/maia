@@ -35,7 +35,7 @@ const FAQ = () => {
   ];
 
   return (
-    <div className="w-full  p-8 mx-auto bg-white rounded-2xl mb-5 shadow">
+    <div className="w-full p-4 sm:p-8 mx-auto bg-white rounded-2xl mb-5 shadow">
       <div className=" justify-start items-start gap-2 inline-flex">
         <AiFillQuestionCircle className="text-[#2b4360] text-xl" />
 
