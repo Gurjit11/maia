@@ -67,11 +67,14 @@ const Navbar = () => {
               </div>
             </div>
             <div className="h-32 flex-col justify-start items-start gap-4 flex">
-              <div className="justify-center items-center gap-4 inline-flex">
+              <Link
+                href={"/fertilitysupport"}
+                className="justify-center items-center gap-4 inline-flex"
+              >
                 <div className="text-stone-950 text-base font-normal font-['Poppins'] leading-tight">
                   Fertility Support
                 </div>
-              </div>
+              </Link>
               <div className="justify-center items-center gap-4 inline-flex">
                 <div className="text-stone-950 text-base font-normal font-['Poppins'] leading-tight">
                   IVF & IUI
@@ -148,11 +151,14 @@ const Navbar = () => {
           </div>
         </div>
         <div className=" justify-around items-center flex px-10">
-          <div className="justify-center items-center gap-4 flex">
+          <Link
+            href={"/fertilitysupport"}
+            className="justify-center items-center gap-4 flex"
+          >
             <div className="text-stone-950 text-base font-normal font-['Poppins'] leading-tight">
               Fertility Support
             </div>
-          </div>
+          </Link>
           <div className="justify-center items-center gap-4 flex">
             <div className="text-stone-950 text-base font-normal font-['Poppins'] leading-tight">
               IVF & IUI

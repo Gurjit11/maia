@@ -132,7 +132,7 @@ const FindClinics = () => {
             <div className=" justify-between w-full flex-co sm:flex">
               <div className=" flex-col justify-start items-start sm:gap-4 inline-flex">
                 <div className="text-[#2b4360] text-2xl font-bold font-['FONTSPRING DEMO - Argent CF'] leading-7">
-                  {clinic.name}LifeWave Clinic
+                  {clinic.name}
                 </div>
                 <div className="flex-col justify-start items-start gap-2 flex">
                   <div className="flex-col justify-start items-start gap-2 flex">
