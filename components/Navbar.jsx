@@ -49,13 +49,16 @@ const Navbar = () => {
                 </div>
               </div>
             </Link>
-            <div className="justify-start items-center gap-2 inline-flex">
+            <Link
+              href={"/findclinics"}
+              className="justify-start items-center gap-2 inline-flex"
+            >
               <Image src={clinic} />
 
               <div className="text-stone-950 text-base font-normal font-['Poppins'] leading-tight">
                 Find Clinics{" "}
               </div>
-            </div>
+            </Link>
           </div>
           <div className="flex-col justify-start items-start gap-2 flex">
             <div className="justify-center items-center gap-2 inline-flex">
@@ -130,13 +133,16 @@ const Navbar = () => {
                   Find Doctor{" "}
                 </div>
               </Link>
-              <div className="justify-start items-center gap-2 flex">
+              <Link
+                href={"/findclinics"}
+                className="justify-start items-center gap-2 flex"
+              >
                 <Image src={clinic} />
 
                 <div className="text-stone-950 text-base font-normal font-['Poppins'] leading-tight">
                   Find Clinics{" "}
                 </div>
-              </div>
+              </Link>
             </div>
             <Login setSidebar={setSidebar} />
           </div>
