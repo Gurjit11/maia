@@ -102,9 +102,14 @@ const Navbar = () => {
             <div className="text-stone-950 text-base font-normal font-['Poppins'] leading-tight">
               Blogs
             </div>
-            <div className="text-gray-900 text-base font-normal font-['Poppins'] leading-tight">
-              Contact Us
-            </div>
+            <Link
+              href={"/contactus"}
+              className="justify-center items-center gap-4 flex"
+            >
+              <div className="text-gray-900 text-base font-normal font-['Poppins'] leading-tight">
+                Contact Us
+              </div>
+            </Link>
           </div>
         </div>
       </div>
@@ -182,9 +187,14 @@ const Navbar = () => {
           <div className="text-stone-950 text-base font-normal font-['Poppins'] leading-tight">
             Blogs
           </div>
-          <div className="text-stone-950 text-base font-normal font-['Poppins'] leading-tight">
-            Contact Us
-          </div>
+          <Link
+            href={"/contactus"}
+            className="justify-center items-center gap-4 flex"
+          >
+            <div className="text-stone-950 text-base font-normal font-['Poppins'] leading-tight">
+              Contact Us
+            </div>
+          </Link>
         </div>
       </div>
     </>
