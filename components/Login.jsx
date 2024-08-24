@@ -2,6 +2,9 @@
 import { useState } from "react";
 import Modal from "react-modal";
 import Learnslider from "./loginmodals/Learnslider";
+import Image from "next/image";
+import contactusthanks from "../public/contactusthanks.png";
+import { AiOutlineClose } from "react-icons/ai";
 
 const customStyles = {
   content: {
@@ -267,7 +270,7 @@ const options = [
   "I don't know",
 ];
 
-function ConsultationForm() {
+function ConsultationForm({ onComplete }) {
   const [selectedOptions, setSelectedOptions] = useState([]);
 
   const handleSelectOption = (option) => {
@@ -316,7 +319,10 @@ function ConsultationForm() {
           <button className="text-blue-600 border border-blue-600 px-5 py-2 rounded-lg">
             Previous
           </button>
-          <button className="bg-blue-600 text-white px-5 py-2 rounded-lg">
+          <button
+            onClick={onComplete}
+            className="bg-blue-600 text-white px-5 py-2 rounded-lg"
+          >
             Next
           </button>
         </div>
@@ -324,6 +330,35 @@ function ConsultationForm() {
     </div>
   );
 }
+
+const SuccessModal = ({ closeModal }) => {
+  return (
+    <div className="bg-white p-10 rounded-xl relative flex-col justify-start items-center gap-8 inline-flex">
+      <AiOutlineClose
+        className="absolute top-5 right-5 cursor-pointer text-xl text-[#e29578] "
+        onClick={closeModal}
+      />
+      <div className="flex-col justify-start items-center gap-4 flex">
+        <Image src={contactusthanks} className="w-52 h-60 relative"></Image>
+        <div className="flex-col justify-start items-end flex">
+          <div className="flex-col justify-start items-start gap-6 flex">
+            <div className="flex-col justify-start items-center gap-14 flex">
+              <div className="flex-col justify-start items-center gap-2 flex">
+                <div className="text-[#e29578] md:text-xl text-center font-bold font-['FONTSPRING DEMO - Argent CF'] leading-7">
+                  Profile Created Successfully
+                </div>
+                <div className="text-[#5f5f5f] text-center text-xs sm:text-sm font-normal font-['Poppins'] leading-tight">
+                  Thank you for creating your profile. You can now access all
+                  our services.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 function Login({ setSidebar }) {
   const [step, setStep] = useState(1);
@@ -362,6 +397,11 @@ function Login({ setSidebar }) {
     // closeModal();
   };
 
+  const handleComplete = () => {
+    alert("Consultation form completed");
+    handleNext();
+  };
+
   return (
     <div className="text-black bg-white">
       <button onClick={openModal}>
@@ -395,7 +435,8 @@ function Login({ setSidebar }) {
             onCreateProfile={handleCreateProfile}
           />
         )}
-        {step === 4 && <ConsultationForm />}
+        {step === 4 && <ConsultationForm onComplete={handleComplete} />}
+        {step === 5 && <SuccessModal closeModal={closeModal} />}
       </Modal>
     </div>
   );
