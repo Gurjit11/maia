@@ -30,12 +30,12 @@ const LoginModal = ({ mobileNumber, setMobileNumber, onNext }) => {
         <Learnslider />
       </div>
       <div className="sm:p-10 p-5 sm:w-[50%]">
-        <div className="flex-col  justify-start items-start gap-14 flex w-full">
+        <div className="flex-col  justify-start items-start gap-4 sm:gap-14  flex w-full">
           <div className="flex-col justify-start items-start gap-2 flex">
-            <div className="text-slate-700 text-3xl font-semibold font-['Poppins'] leading-9">
+            <div className="text-slate-700 text-xl sm:text-3xl font-semibold font-['Poppins'] leading-9">
               Login
             </div>
-            <div className="text-zinc-600 text-base font-normal font-['Poppins'] leading-tight">
+            <div className="text-zinc-600 text-xs sm:text-base font-normal font-['Poppins'] leading-tight">
               Maia Care, Powering you with parenthood
             </div>
           </div>
@@ -91,17 +91,17 @@ const LoginModal = ({ mobileNumber, setMobileNumber, onNext }) => {
 // OTP Modal Component
 const OtpModal = ({ otp, setOtp, onVerify }) => {
   return (
-    <div className="text-black sm:w-[60%] w-[80%] sm:flex rounded-3xl bg-white">
-      <div className="sm:w-[450px] sm:p-10 p-5 bg-orange-100 sm:rounded-l-3xl rounded-3xl">
+    <div className="text-black sm:w-[60%] z-20 w-[80%] sm:flex rounded-3xl bg-white">
+      <div className="sm:w-[450px] h-[200px] overflow-clip sm:p-10 p-5 bg-orange-100 sm:rounded-l-3xl rounded-3xl">
         <Learnslider />
       </div>
       <div className="sm:p-10 p-5 sm:w-[50%]">
-        <div className="flex-col  justify-start items-start gap-14 flex w-full">
+        <div className="flex-col  justify-start items-start gap-4 sm:gap-14 flex w-full">
           <div className="flex-col justify-start items-start gap-2 flex">
-            <div className="text-slate-700 text-3xl font-semibold font-['Poppins'] leading-9">
+            <div className="text-slate-700 text-xl sm:text-3xl font-semibold font-['Poppins'] leading-9">
               Verify OTP
             </div>
-            <div className="text-zinc-600 text-base font-normal font-['Poppins'] leading-tight">
+            <div className="text-zinc-600 text-sm sm:text-base font-normal font-['Poppins'] leading-tight">
               Provide the OTP sent to your mobile number
             </div>
           </div>
@@ -157,14 +157,14 @@ const OtpModal = ({ otp, setOtp, onVerify }) => {
 // create profile
 const CreateProfile = ({ user, setUser, onCreateProfile }) => {
   return (
-    <div className="text-black sm:w-[60%] w-[80%] sm:flex rounded-3xl bg-white">
-      <div className="sm:w-[450px]  sm:p-10 p-5 bg-orange-100 sm:rounded-l-3xl rounded-3xl">
+    <div className="text-black sm:w-[60%] z-20 w-[80%] sm:flex rounded-3xl bg-white">
+      <div className="sm:w-[450px] h-[200px] overflow-clip sm:p-10 p-5 bg-orange-100 sm:rounded-l-3xl rounded-3xl">
         <Learnslider />
       </div>
-      <div className="sm:p-10 p-5 sm:w-[70%]">
+      <div className="sm:p-10 p-5 sm:w-[50%]">
         <div className="flex-col  justify-start items-start gap-4 flex w-full">
           <div className="flex-col justify-start items-start gap-2 flex">
-            <div className="text-slate-700 text-3xl font-semibold font-['Poppins'] leading-9">
+            <div className="text-slate-700 text-xl sm:text-3xl font-semibold font-['Poppins'] leading-9">
               Create your Profile
             </div>
             <div className="text-zinc-600 text-base font-normal font-['Poppins'] leading-tight">
