@@ -2,7 +2,6 @@
 import Image from "next/image";
 import priyanka from "../public/priyanka.png";
 import quotation from "../public/quotation.png";
-import intersect from "../public/intersect.png";
 import axios from "axios";
 
 const Hero = () => {
