@@ -31,7 +31,7 @@ const Hero = () => {
   return (
     <div className=" bg-white justify-start items-center flex">
       <div
-        className={`bg-[url('../public/mobileintersect.png')] bg-cover sm:bg-contain sm:bg-[url('../public/intersect.png')] bg-no-repeat `}
+        className={`bg-[url('../public/mobileintersect.png')] bg-cover sm:bg-contain sm:bg-[url('../public/intersects.png')] bg-no-repeat `}
       >
         <div className="sm:grid py-5 sm:py-14 grid-cols-2">
           <div className="sm:hidden col-span-1 pb-1.5 justify-center items-center flex">
