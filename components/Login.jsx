@@ -333,7 +333,7 @@ function ConsultationForm({ onComplete }) {
 
 const SuccessModal = ({ closeModal }) => {
   return (
-    <div className="bg-white p-10 rounded-xl relative flex-col justify-start items-center gap-8 inline-flex">
+    <div className="bg-white p-10 m-5 rounded-xl relative flex-col justify-start items-center gap-8 inline-flex">
       <AiOutlineClose
         className="absolute top-5 right-5 cursor-pointer text-xl text-[#e29578] "
         onClick={closeModal}
