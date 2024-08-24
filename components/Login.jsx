@@ -26,7 +26,7 @@ const customStyles = {
 const LoginModal = ({ mobileNumber, setMobileNumber, onNext }) => {
   return (
     <div className="text-black sm:w-[60%] z-20 w-[80%] sm:flex rounded-3xl bg-white">
-      <div className="sm:w-[450px] h-[200px] sm:h-auto overflow-clip sm:p-10 p-5 bg-orange-100 sm:rounded-l-3xl rounded-3xl">
+      <div className="sm:w-[450px] h-[220px] sm:h-auto overflow-clip sm:p-10 p-5 bg-orange-100 sm:rounded-l-3xl rounded-3xl">
         <Learnslider />
       </div>
       <div className="sm:p-10 p-5 sm:w-[50%]">
@@ -92,7 +92,7 @@ const LoginModal = ({ mobileNumber, setMobileNumber, onNext }) => {
 const OtpModal = ({ otp, setOtp, onVerify }) => {
   return (
     <div className="text-black sm:w-[60%] z-20 w-[80%] sm:flex rounded-3xl bg-white">
-      <div className="sm:w-[450px] h-[200px] sm:h-auto overflow-clip sm:p-10 p-5 bg-orange-100 sm:rounded-l-3xl rounded-3xl">
+      <div className="sm:w-[450px] h-[220px] sm:h-auto overflow-clip sm:p-10 p-5 bg-orange-100 sm:rounded-l-3xl rounded-3xl">
         <Learnslider />
       </div>
       <div className="sm:p-10 p-5 sm:w-[50%]">
@@ -158,7 +158,7 @@ const OtpModal = ({ otp, setOtp, onVerify }) => {
 const CreateProfile = ({ user, setUser, onCreateProfile }) => {
   return (
     <div className="text-black sm:w-[60%] z-20 w-[80%] sm:flex rounded-3xl bg-white">
-      <div className="sm:w-[450px] h-[200px] sm:h-auto overflow-clip sm:p-10 p-5 bg-orange-100 sm:rounded-l-3xl rounded-3xl">
+      <div className="sm:w-[450px] h-[220px] sm:h-auto overflow-clip sm:p-10 p-5 bg-orange-100 sm:rounded-l-3xl rounded-3xl">
         <Learnslider />
       </div>
       <div className="sm:p-10 p-5 sm:w-[50%]">

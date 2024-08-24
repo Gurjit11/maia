@@ -50,7 +50,11 @@ const Learnslider = () => {
       {carddata.map((card, index) => (
         <div key={index} className=" mt-3 flex-col ">
           <div className="flex justify-center items-center">
-            <Image className="w-[50%]" src={card.image} alt="icon" />
+            <Image
+              className="w-[50%] sm:w-[100%]"
+              src={card.image}
+              alt="icon"
+            />
           </div>
           <div className="text-[#2B4360]  flex mt-3 justify-center items-center font-bold ">
             {card.title}
