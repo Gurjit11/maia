@@ -310,12 +310,13 @@ function BookAppointment({ doctor }) {
       </button>
       <Modal
         isOpen={modalIsOpen}
+        preventScroll={true}
         onRequestClose={closeModal}
         // style={customStyles}
-        className="justify-center items-center flex my-12 flex-col bg-opacity-5 bg-black/70 w-full h-full z-20 text-black"
+        className="justify-center  sm:p-0 items-center flex my-12 flex-col bg-opacity-5 bg-black/70 w-full h-full z-20 text-black"
         contentLabel="Appointment Modal"
       >
-        <div className="text-black  sm:w-[30%] z-20 w-[30%] sm:flex-col rounded-3xl bg-white p-6">
+        <div className="text-black sm:w-[70%] md:w-[50%] lg:w-[40%] xl:w-[30%] z-20 w-[100%] sm:flex-col rounded-3xl bg-white p-6">
           {completed ? (
             <Completed setIsOpen={setIsOpen} onNext={()=> {
               setIsOpen(false)
