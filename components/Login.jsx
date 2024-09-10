@@ -2,6 +2,9 @@
 import { useState } from "react";
 import Modal from "react-modal";
 import Learnslider from "./loginmodals/Learnslider";
+import Image from "next/image";
+import contactusthanks from "../public/contactusthanks.png";
+import { AiOutlineClose } from "react-icons/ai";
 
 const customStyles = {
   content: {
@@ -23,16 +26,16 @@ const customStyles = {
 const LoginModal = ({ mobileNumber, setMobileNumber, onNext }) => {
   return (
     <div className="text-black sm:w-[60%] z-20 w-[80%] sm:flex rounded-3xl bg-white">
-      <div className="sm:w-[450px] h-[200px] overflow-clip sm:p-10 p-5 bg-orange-100 sm:rounded-l-3xl rounded-3xl">
+      <div className="sm:w-[450px] h-[220px] sm:h-auto overflow-clip sm:p-10 p-5 bg-orange-100 sm:rounded-l-3xl rounded-3xl">
         <Learnslider />
       </div>
       <div className="sm:p-10 p-5 sm:w-[50%]">
-        <div className="flex-col  justify-start items-start gap-14 flex w-full">
+        <div className="flex-col  justify-start items-start gap-4 sm:gap-14  flex w-full">
           <div className="flex-col justify-start items-start gap-2 flex">
-            <div className="text-slate-700 text-3xl font-semibold font-['Poppins'] leading-9">
+            <div className="text-slate-700 text-xl sm:text-3xl font-semibold font-['Poppins'] leading-9">
               Login
             </div>
-            <div className="text-zinc-600 text-base font-normal font-['Poppins'] leading-tight">
+            <div className="text-zinc-600 text-xs sm:text-base font-normal font-['Poppins'] leading-tight">
               Maia Care, Powering you with parenthood
             </div>
           </div>
@@ -88,17 +91,17 @@ const LoginModal = ({ mobileNumber, setMobileNumber, onNext }) => {
 // OTP Modal Component
 const OtpModal = ({ otp, setOtp, onVerify }) => {
   return (
-    <div className="text-black sm:w-[60%] w-[80%] sm:flex rounded-3xl bg-white">
-      <div className="sm:w-[450px] sm:p-10 p-5 bg-orange-100 sm:rounded-l-3xl rounded-3xl">
+    <div className="text-black sm:w-[60%] z-20 w-[80%] sm:flex rounded-3xl bg-white">
+      <div className="sm:w-[450px] h-[220px] sm:h-auto overflow-clip sm:p-10 p-5 bg-orange-100 sm:rounded-l-3xl rounded-3xl">
         <Learnslider />
       </div>
       <div className="sm:p-10 p-5 sm:w-[50%]">
-        <div className="flex-col  justify-start items-start gap-14 flex w-full">
+        <div className="flex-col  justify-start items-start gap-4 sm:gap-14 flex w-full">
           <div className="flex-col justify-start items-start gap-2 flex">
-            <div className="text-slate-700 text-3xl font-semibold font-['Poppins'] leading-9">
+            <div className="text-slate-700 text-xl sm:text-3xl font-semibold font-['Poppins'] leading-9">
               Verify OTP
             </div>
-            <div className="text-zinc-600 text-base font-normal font-['Poppins'] leading-tight">
+            <div className="text-zinc-600 text-sm sm:text-base font-normal font-['Poppins'] leading-tight">
               Provide the OTP sent to your mobile number
             </div>
           </div>
@@ -154,14 +157,14 @@ const OtpModal = ({ otp, setOtp, onVerify }) => {
 // create profile
 const CreateProfile = ({ user, setUser, onCreateProfile }) => {
   return (
-    <div className="text-black sm:w-[60%] w-[80%] sm:flex rounded-3xl bg-white">
-      <div className="sm:w-[450px]  sm:p-10 p-5 bg-orange-100 sm:rounded-l-3xl rounded-3xl">
+    <div className="text-black sm:w-[60%] z-20 w-[80%] sm:flex rounded-3xl bg-white">
+      <div className="sm:w-[450px] h-[220px] sm:h-auto overflow-clip sm:p-10 p-5 bg-orange-100 sm:rounded-l-3xl rounded-3xl">
         <Learnslider />
       </div>
-      <div className="sm:p-10 p-5 sm:w-[70%]">
+      <div className="sm:p-10 p-5 sm:w-[50%]">
         <div className="flex-col  justify-start items-start gap-4 flex w-full">
           <div className="flex-col justify-start items-start gap-2 flex">
-            <div className="text-slate-700 text-3xl font-semibold font-['Poppins'] leading-9">
+            <div className="text-slate-700 text-xl sm:text-3xl font-semibold font-['Poppins'] leading-9">
               Create your Profile
             </div>
             <div className="text-zinc-600 text-base font-normal font-['Poppins'] leading-tight">
@@ -267,7 +270,7 @@ const options = [
   "I don't know",
 ];
 
-function ConsultationForm() {
+function ConsultationForm({ onComplete }) {
   const [selectedOptions, setSelectedOptions] = useState([]);
 
   const handleSelectOption = (option) => {
@@ -316,7 +319,10 @@ function ConsultationForm() {
           <button className="text-blue-600 border border-blue-600 px-5 py-2 rounded-lg">
             Previous
           </button>
-          <button className="bg-blue-600 text-white px-5 py-2 rounded-lg">
+          <button
+            onClick={onComplete}
+            className="bg-blue-600 text-white px-5 py-2 rounded-lg"
+          >
             Next
           </button>
         </div>
@@ -324,6 +330,35 @@ function ConsultationForm() {
     </div>
   );
 }
+
+const SuccessModal = ({ closeModal }) => {
+  return (
+    <div className="bg-white p-10 m-5 rounded-xl relative flex-col justify-start items-center gap-8 inline-flex">
+      <AiOutlineClose
+        className="absolute top-5 right-5 cursor-pointer text-xl text-[#e29578] "
+        onClick={closeModal}
+      />
+      <div className="flex-col justify-start items-center gap-4 flex">
+        <Image src={contactusthanks} className="w-52 h-60 relative"></Image>
+        <div className="flex-col justify-start items-end flex">
+          <div className="flex-col justify-start items-start gap-6 flex">
+            <div className="flex-col justify-start items-center gap-14 flex">
+              <div className="flex-col justify-start items-center gap-2 flex">
+                <div className="text-[#e29578] md:text-xl text-center font-bold font-['FONTSPRING DEMO - Argent CF'] leading-7">
+                  Profile Created Successfully
+                </div>
+                <div className="text-[#5f5f5f] text-center text-xs sm:text-sm font-normal font-['Poppins'] leading-tight">
+                  Thank you for creating your profile. You can now access all
+                  our services.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 function Login({ setSidebar }) {
   const [step, setStep] = useState(1);
@@ -362,6 +397,11 @@ function Login({ setSidebar }) {
     // closeModal();
   };
 
+  const handleComplete = () => {
+    alert("Consultation form completed");
+    handleNext();
+  };
+
   return (
     <div className="text-black bg-white">
       <button onClick={openModal}>
@@ -395,7 +435,8 @@ function Login({ setSidebar }) {
             onCreateProfile={handleCreateProfile}
           />
         )}
-        {step === 4 && <ConsultationForm />}
+        {step === 4 && <ConsultationForm onComplete={handleComplete} />}
+        {step === 5 && <SuccessModal closeModal={closeModal} />}
       </Modal>
     </div>
   );

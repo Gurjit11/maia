@@ -8,6 +8,7 @@ import Hero from "@/components/Hero";
 import Howmaia from "@/components/Howmaia";
 import Learn from "@/components/Learn";
 import Login from "@/components/Login";
+import TreatmentsAndServices from "@/components/TreatmentsAndServices";
 import Image from "next/image";
 
 export default function Home() {
@@ -17,6 +18,7 @@ export default function Home() {
       <Howmaia />
       <Explore />
       <Findclinics />
+      <TreatmentsAndServices />
       <Learn />
       <Contactus />
       {/* <CardCarousel /> */}

@@ -21,6 +21,7 @@ import { AiOutlineCalendar, AiOutlineWhatsApp } from "react-icons/ai";
 import { FaDirections } from "react-icons/fa";
 import Learn from "@/components/Learn";
 import Learnslider from "@/components/loginmodals/Learnslider";
+import BookAppointment from "@/components/BookAppointment";
 
 const DoctorPage = ({ params }) => {
   const { id } = params;
@@ -115,12 +116,13 @@ const DoctorPage = ({ params }) => {
               </div>
             </div>
             <div className="flex-col sm:mt-0 mt-3 justify-start items-start gap-4 inline-flex">
-              <div className="w-full h-14 px-2 py-4 bg-[#2b4360] rounded-lg justify-center items-center gap-2 inline-flex">
+              {/* <div className="w-full h-14 px-2 py-4 bg-[#2b4360] rounded-lg justify-center items-center gap-2 inline-flex">
                 <AiOutlineCalendar className="text-xl" />{" "}
                 <div className="text-white text-base font-medium font-['Poppins']">
                   Book Appointment
                 </div>
-              </div>
+              </div> */}
+              <BookAppointment doctor={doctor}/>
               <div className=" h-14 px-2 py-4 bg-white rounded-lg border border-[#49c858] justify-center items-center gap-2 inline-flex">
                 <AiOutlineWhatsApp className="text-xl text-[#47c757]" />{" "}
                 <div className="text-[#47c757] text-base font-medium font-['Poppins']">
