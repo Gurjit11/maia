@@ -49,7 +49,7 @@ const Hero = () => {
                     alt="Priyanka Chopra"
                   />
                   <div className="text-slate-700 text-xs sm:text-sm font-normal leading-normal">
-                    It&apos;s the best thing you&apos;ll give yourself because
+                     It&apos;s the best thing you&apos;ll give yourself because
                     you&apos;re taking the power from your biological clock, and
                     you can work until however long you want. Your eggs will
                     still be the same age as when you froze them.

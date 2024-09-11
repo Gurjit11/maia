@@ -26,12 +26,14 @@ import Learn from "@/components/Learn";
 import Learnslider from "@/components/loginmodals/Learnslider";
 import { FaPhotoFilm } from "react-icons/fa6";
 import FAQ from "./FAQ";
+import React, { useState, useEffect } from 'react';
 
 const ClinicPage = ({ params }) => {
   const { id } = params;
   console.log(id);
   const [doctor, setDoctor] = useState({});
 
+  
   const images = [
     "https://via.placeholder.com/60x60",
     "https://via.placeholder.com/60x60",
@@ -42,6 +44,9 @@ const ClinicPage = ({ params }) => {
     "https://via.placeholder.com/60x60",
     "https://via.placeholder.com/60x60",
   ];
+ 
+ 
+
 
   const getClinic = () => {
     let data = JSON.stringify({
@@ -72,6 +77,8 @@ const ClinicPage = ({ params }) => {
   useEffect(() => {
     getClinic();
   }, []);
+
+ 
   return (
     <div className="sm:grid grid-cols-3 bg-gray-50">
       <div className="col-span-2 flex-col p-3 sm:py-20 sm:pl-20">
