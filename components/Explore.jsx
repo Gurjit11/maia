@@ -16,6 +16,7 @@ import { useEffect, useState } from "react";
 const Explore = () => {
   const [homeData, setHomeData] = useState({});
   const [topDoctors, setTopDoctors] = useState([]);
+
   const getHomeData = () => {
     // let data = JSON.stringify({
     //   id: id,
@@ -26,9 +27,9 @@ const Explore = () => {
       maxBodyLength: Infinity,
       url: "https://maia.projectx38.cloud/web-apis/maia/web/home/data",
       headers: {
-        'device-id': '97c2fe5e-0f68-4d72-b277-d5d2d4e628a8',
-        'login-token': 'NA',
-        'city-id': 'NA'
+        "device-id": "97c2fe5e-0f68-4d72-b277-d5d2d4e628a8",
+        "login-token": "NA",
+        "city-id": "NA",
       },
     };
 
@@ -38,14 +39,12 @@ const Explore = () => {
         console.log(response.data);
         setHomeData(response.data);
         setTopDoctors(response.data.data.topDoctors);
-        setTopClinics(response.data.data.topClinics);
+        // setTopClinics(response.data.data.topClinics);
         console.log(topDoctors);
       })
       .catch((error) => {
         console.log(error);
       });
-
-
   };
 
   useEffect(() => {
@@ -87,8 +86,11 @@ const Explore = () => {
           </div>
         </div>
         <div className="col-span-1 sm:flex-col flex overflow-x-auto sm:gap-0 gap-10">
-          {topDoctors.map((doctor) => (
-            <div className="sm:w-[70%] my-5  px-6 py-4 bg-stone-100 rounded-lg shadow justify-start items-start gap-24 flex" key={doctor.doctorId}>
+          {topDoctors.slice(1, 4).map((doctor) => (
+            <div
+              className="sm:w-[70%] my-5  px-6 py-4 bg-stone-100 rounded-lg shadow justify-start items-start gap-24 flex"
+              key={doctor.doctorId}
+            >
               <div className="justify-start items-center gap-4 w-full md:flex flex-co">
                 <Image src={ellipse} alt={"icon"} />
 
@@ -114,7 +116,6 @@ const Explore = () => {
                       </div>
                     </div>
                     <div className="justify-center items-center gap-2 inline-flex">
-
                       {[...Array(Math.round(doctor.rating))].map((_, index) => (
                         <Image key={index} src={star} alt="star icon" />
                       ))}
@@ -162,8 +163,6 @@ const Explore = () => {
               </div>
             </div>
           ))}
-
-
         </div>
       </div>
     </div>

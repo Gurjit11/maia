@@ -12,7 +12,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import axios from "axios";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   IoIosArrowDropleftCircle,
   IoIosArrowDroprightCircle,
@@ -54,7 +54,7 @@ const Findclinics = () => {
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
   };
-  const getTopClinics= () => {
+  const getTopClinics = () => {
     // let data = JSON.stringify({
     //   id: id,
     // });
@@ -63,10 +63,10 @@ const Findclinics = () => {
       method: "post",
       maxBodyLength: Infinity,
       url: "https://maia.projectx38.cloud/web-apis/maia/web/home/data",
-      headers: { 
-        'device-id': '97c2fe5e-0f68-4d72-b277-d5d2d4e628a8', 
-        'login-token': 'NA', 
-        'city-id': 'NA'
+      headers: {
+        "device-id": "97c2fe5e-0f68-4d72-b277-d5d2d4e628a8",
+        "login-token": "NA",
+        "city-id": "NA",
       },
     };
 
@@ -80,9 +80,7 @@ const Findclinics = () => {
       .catch((error) => {
         console.log(error);
       });
-
-
-    }
+  };
 
   useEffect(() => {
     getTopClinics();
@@ -100,13 +98,13 @@ const Findclinics = () => {
       <div className="flex justify-center w-full items-center gap-10">
         <div className="w-[100%] sm:w-[80%] sm:overflow-x-visible overflow-x-clip gap-3">
           <Slider {...settings}>
-            {topClinics.map(( clinic) => (
+            {topClinics.map((clinic) => (
               <div key={clinic.clinicId} className="sm:p-3 p-1">
                 <div className=" bg-stone-100 rounded-lg p-3  shadow">
                   <div className="flex">
                     <img
                       className=" rounded-full w-10 h-10 sm:w-20 sm:h-20 object-cover"
-                      src={clinic.image}
+                      src={clinic.clinicImage}
                     />
                     <div className="flex-col sm:ml-3 ml-1">
                       <div className=" text-slate-700 sm:text-xl font-bold font-['FONTSPRING DEMO - Argent CF'] leading-normal">
@@ -123,7 +121,8 @@ const Findclinics = () => {
                           <Image src={doctor} alt="icon" />
 
                           <div className="text-slate-700 text-xs sm:text-sm font-normal font-['Metropolis'] leading-none">
-                            {clinic.doctors}{" Doctors"}
+                            {clinic.doctors}
+                            {" Doctors"}
                           </div>
                         </div>
                         <div className="ml-2 sm:ml-0 justify-center items-center gap-2 inline-flex">
@@ -134,13 +133,13 @@ const Findclinics = () => {
                         </div>
                       </div>
                       <div className=" items-center gap-2 flex">
-                        
                         <div className="justify-center items-center gap-2 inline-flex">
-
-{[...Array(Math.round(clinic.rating))].map((_, index) => (
-  <Image key={index} src={star} alt="star icon" />
-))}
-</div>
+                          {[...Array(Math.round(clinic.rating))].map(
+                            (_, index) => (
+                              <Image key={index} src={star} alt="star icon" />
+                            )
+                          )}
+                        </div>
                       </div>
                     </div>
                   </div>
