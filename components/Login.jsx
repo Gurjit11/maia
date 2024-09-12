@@ -463,16 +463,30 @@ function Login({ setSidebar }) {
       alert("Failed to create profile. Please try again.");
     }
   };
-
+  // In AuthContext.js
+  const logout = () => {
+    localStorage.removeItem("loginToken");
+    saveToken(null);
+  };
   return (
     <div className="text-black bg-white">
-      <button onClick={openModal}>
-        <div className="bg-slate-700 rounded-lg justify-center items-center gap-2 flex">
-          <div className="p-3 px-6 text-center text-white text-base font-medium font-['Poppins'] leading-tight">
-            Sign In
+      {loginToken ? (
+        <button onClick={logout}>
+          <div className="bg-slate-700 rounded-lg justify-center items-center gap-2 flex">
+            <div className="p-3 px-6 text-center text-white text-base font-medium font-['Poppins'] leading-tight">
+              Sign Out
+            </div>
           </div>
-        </div>
-      </button>
+        </button>
+      ) : (
+        <button onClick={openModal}>
+          <div className="bg-slate-700 rounded-lg justify-center items-center gap-2 flex">
+            <div className="p-3 px-6 text-center text-white text-base font-medium font-['Poppins'] leading-tight">
+              Sign In
+            </div>
+          </div>
+        </button>
+      )}
       <Modal
         isOpen={isModalOpen}
         onRequestClose={closeModal}
