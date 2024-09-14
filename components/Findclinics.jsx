@@ -104,9 +104,9 @@ const Findclinics = () => {
               <div key={clinic.clinicId} className="sm:p-3 p-1">
                 <div className=" bg-stone-100 rounded-lg p-3  shadow">
                   <div className="flex">
-                    <img
+                    <Image
                       className=" rounded-full w-10 h-10 sm:w-20 sm:h-20 object-cover"
-                      src={clinic.image}
+                      src={clinic.clinicImage} alt="clinic image" width={80} height={80}
                     />
                     <div className="flex-col sm:ml-3 ml-1">
                       <div className=" text-slate-700 sm:text-xl font-bold font-['FONTSPRING DEMO - Argent CF'] leading-normal">
