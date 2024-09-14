@@ -123,7 +123,7 @@ const FindClinics = () => {
             className="sm:p-8 p-3 my-3 bg-white w-full h-full rounded-2xl shadow justify-start items-start gap-3 sm:gap-10 flex"
           >
             <div className="sm:w-32 w-20  flex justify-start items-start">
-              <img
+              <Image
                 className="sm:w-24 sm:h-24 w-16 h-16 rounded-full object-fill overflow-clip"
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSk6j5cDMUPKlIbeirb9aslDunJKdtSbBg6sQ&s"
                 alt={`${clinic.name} photo`}
@@ -214,15 +214,15 @@ const FindClinics = () => {
                 </div>
                 <div className="justify-start items-center gap-2 inline-flex">
                   <div className="w-20 h-8 relative">
-                    <img
+                    <Image
                       className="w-8 h-8 left-0 top-0 absolute rounded-full border border-[#2b4360]"
                       src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8k0hViJWVJVa92YPHh41fxa-_1oq4k6eNmA&s"
                     />
-                    <img
+                    <Image
                       className="w-8 h-8 left-[22.67px] top-0 absolute rounded-full border border-[#2b4360]"
                       src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8k0hViJWVJVa92YPHh41fxa-_1oq4k6eNmA&s"
                     />
-                    <img
+                    <Image
                       className="w-8 h-8 left-[45.33px] top-0 absolute rounded-full border border-[#2b4360]"
                       src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8k0hViJWVJVa92YPHh41fxa-_1oq4k6eNmA&s"
                     />

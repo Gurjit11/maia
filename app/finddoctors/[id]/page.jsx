@@ -64,7 +64,7 @@ const DoctorPage = ({ params }) => {
           <div className="justify-center items-start gap-6 flex-co sm:flex ">
             <div className=" justify-start items-start gap-3 sm:gap-6 flex">
               <div className="sm:w-28 mt-3 sm:h-28 w-16 h-1w-16 relative">
-                <img
+                <Image
                   className="sm:w-28 sm:h-28 w-16 h-1w-16 left-0 top-0 absolute rounded-full"
                   src={doctor.photo}
                 />
@@ -222,7 +222,7 @@ const DoctorPage = ({ params }) => {
             <div className="flex-col justify-between items-start gap-4 flex">
               <div className="flex-co justify-between items-center sm:flex">
                 <div className=" justify-start items-start gap-6 flex">
-                  <img
+                  <Image
                     className="w-14 sm:w-28 h-14 sm:h-28 rounded-full border border-[#dedede]"
                     src="https://via.placeholder.com/120x120"
                   />
@@ -309,7 +309,7 @@ const DoctorPage = ({ params }) => {
             <div className="flex-col justify-between items-start gap-4 flex">
               <div className="flex-co justify-between items-center sm:flex">
                 <div className=" justify-start items-start gap-6 flex">
-                  <img
+                  <Image
                     className="w-14 sm:w-28 h-14 sm:h-28 rounded-full border border-[#dedede]"
                     src="https://via.placeholder.com/120x120"
                   />
@@ -406,7 +406,7 @@ const DoctorPage = ({ params }) => {
             <div className=" justify-between items-center inline-flex">
               <div className="justify-start items-center gap-2 flex">
                 <div className="justify-start items-center gap-2 flex">
-                  <img
+                  <Image
                     className="w-8 h-8 rounded-full"
                     src="https://via.placeholder.com/32x32"
                   />
@@ -459,7 +459,7 @@ const DoctorPage = ({ params }) => {
             <div className=" justify-between items-center inline-flex">
               <div className="justify-start items-center gap-2 flex">
                 <div className="justify-start items-center gap-2 flex">
-                  <img
+                  <Image
                     className="w-8 h-8 rounded-full"
                     src="https://via.placeholder.com/32x32"
                   />
@@ -623,14 +623,14 @@ const DoctorPage = ({ params }) => {
                     <div className="rounded-lg justify-center items-center gap-1 flex">
                       <div className="w-8 h-8 relative">
                         <div className="w-8 h-8  bg-slate-200 rounded-full">
-                          <Image src={fertilitysupport} alt={"icon"} />
+                          <Image src={fertilitysupport} alt="icon" />
                         </div>
                       </div>
                     </div>
                     <div className="rounded-lg justify-center items-center gap-1 flex">
                       <div className="w-8 h-8 relative">
                         <div className="w-8 h-8  bg-amber-100 rounded-full">
-                          <Image src={eggfreezing} alt={"icon"} />
+                          <Image src={eggfreezing} alt="icon" />
                         </div>
                       </div>
                     </div>

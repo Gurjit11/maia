@@ -5,6 +5,8 @@ import Learnslider from "./loginmodals/Learnslider";
 import Image from "next/image";
 import contactusthanks from "../public/contactusthanks.png";
 import { AiOutlineClose } from "react-icons/ai";
+import axios from "axios";
+import { useAuth } from "@/contexts/AuthContext";
 
 const customStyles = {
   content: {
@@ -129,7 +131,7 @@ const OtpModal = ({ otp, setOtp, onVerify }) => {
             className="w-full px-3.5 py-4 bg-slate-700 rounded-lg justify-center items-center gap-2 inline-flex"
           >
             <div className="text-white text-base font-semibold font-['Poppins'] leading-tight">
-              Send OTP
+              Verify OTP
             </div>
           </button>
           <div className="flex-col justify-start items-center gap-4 flex">
@@ -154,7 +156,7 @@ const OtpModal = ({ otp, setOtp, onVerify }) => {
   );
 };
 
-// create profile
+// Create Profile Modal Component
 const CreateProfile = ({ user, setUser, onCreateProfile }) => {
   return (
     <div className="text-black sm:w-[60%] z-20 w-[80%] sm:flex rounded-3xl bg-white">
@@ -195,7 +197,7 @@ const CreateProfile = ({ user, setUser, onCreateProfile }) => {
             <div className=" h-14 px-4 py-3 rounded border  w-full border-neutral-200 justify-start items-center inline-flex">
               <div className="text-zinc-600 w-full text-sm font-normal font-['Poppins'] leading-none">
                 <input
-                  type="text"
+                  type="email"
                   placeholder="Enter your email"
                   value={user.email}
                   onChange={(e) => setUser({ ...user, email: e.target.value })}
@@ -247,7 +249,7 @@ const CreateProfile = ({ user, setUser, onCreateProfile }) => {
             className="w-full px-3.5 py-4 bg-slate-700 rounded-lg justify-center items-center gap-2 inline-flex"
           >
             <div className="text-white text-base font-semibold font-['Poppins'] leading-tight">
-              Done
+              Continue
             </div>
           </button>
         </div>
@@ -361,82 +363,159 @@ const SuccessModal = ({ closeModal }) => {
 };
 
 function Login({ setSidebar }) {
-  const [step, setStep] = useState(1);
+  const { loginToken, saveToken } = useAuth();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalState, setModalState] = useState("login"); // States: "login", "otp", "createProfile"
   const [mobileNumber, setMobileNumber] = useState("");
   const [otp, setOtp] = useState("");
-  const [user, setUser] = useState({
-    name: "",
-    email: "",
-    gender: "",
-  });
-  const [modalIsOpen, setIsOpen] = useState(false);
+  const [user, setUser] = useState({ name: "", email: "", gender: "" });
+  const [authtoken, setAuthToken] = useState("");
 
-  function openModal() {
-    setSidebar(false);
-    setIsOpen(true);
-  }
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
 
-  function closeModal() {
-    setIsOpen(false);
-  }
+  const sendOtp = async () => {
+    try {
+      let data = JSON.stringify({
+        mobileNo: mobileNumber,
+      });
 
-  const handleNext = () => {
-    setStep(step + 1);
+      let config = {
+        method: "post",
+        maxBodyLength: Infinity,
+        url: "https://maia.projectx38.cloud/web-apis/maia/web/user/getOtp",
+        headers: {
+          "device-id": "97c2fe5e-0f68-4d72-b277-d5d2d4e628a8",
+          "login-token": "NA",
+          "city-id": "NA",
+          "Content-Type": "application/json",
+        },
+        data: data,
+      };
+      const response = await axios.request(config);
+      setAuthToken(response.data.data.authToken);
+      console.log("OTP sent successfully:", response.data.data);
+      if (response.data.success) setModalState("otp"); // Move to the OTP modal state
+    } catch (error) {
+      console.error("Error sending OTP:", error);
+      alert("Failed to send OTP. Please try again.");
+    }
   };
 
-  const handleVerify = () => {
-    alert(`Mobile Number: ${mobileNumber}, OTP: ${otp}`);
-    handleNext();
-    // Perform final verification or next steps
-    // closeModal();
-  };
-  const handleCreateProfile = () => {
-    alert(`User: ${user.name}, email: ${user.email}`);
-    handleNext();
-    // Perform final verification or next steps
-    // closeModal();
+  const verifyOtp = async () => {
+    try {
+      let data = JSON.stringify({
+        mobileNo: mobileNumber,
+        otp: otp,
+        authToken: authtoken,
+      });
+
+      let config = {
+        method: "post",
+        maxBodyLength: Infinity,
+        url: "https://maia.projectx38.cloud/web-apis/maia/web/user/verifyOtp",
+        headers: {
+          "device-id": "97c2fe5e-0f68-4d72-b277-d5d2d4e628a8",
+          "login-token": "NA",
+          "city-id": "NA",
+          "Content-Type": "application/json",
+        },
+        data: data,
+      };
+
+      const response = await axios.request(config);
+      saveToken(response.data.data.loginToken);
+      console.log("OTP verified successfully:", response.data);
+      if (response.data.success) setModalState("createProfile"); // Move to the Create Profile modal state
+    } catch (error) {
+      console.error("Error verifying OTP:", error);
+      alert("OTP verification failed. Please try again.");
+    }
   };
 
-  const handleComplete = () => {
-    alert("Consultation form completed");
-    handleNext();
-  };
+  const createProfile = async () => {
+    try {
+      let data = JSON.stringify({
+        name: user.name,
+        email: user.email,
+        gender: user.gender,
+      });
 
+      let config = {
+        method: "post",
+        maxBodyLength: Infinity,
+        url: "https://maia.projectx38.cloud/web-apis/maia/web/user/completeRegistration",
+        headers: {
+          "device-id": "97c2fe5e-0f68-4d72-b277-d5d2d4e628a8",
+          "login-token": loginToken,
+          "city-id": "NA",
+          "Content-Type": "application/json",
+        },
+        data: data,
+      };
+
+      const response = await axios.request(config);
+      console.log("Profile created successfully:", response.data);
+      if (response.data.success) setModalState("success");
+      alert("Profile created successfully!");
+    } catch (error) {
+      console.error("Error creating profile:", error);
+      alert("Failed to create profile. Please try again.");
+    }
+  };
+  // In AuthContext.js
+  const logout = () => {
+    localStorage.removeItem("loginToken");
+    saveToken(null);
+  };
   return (
     <div className="text-black bg-white">
-      <button onClick={openModal}>
-        <div className="bg-slate-700 rounded-lg justify-center items-center gap-2 flex">
-          <div className="p-3 px-6 text-center text-white text-base font-medium font-['Poppins'] leading-tight">
-            Sign In
+      {loginToken ? (
+        <button onClick={logout}>
+          <div className="bg-slate-700 rounded-lg justify-center items-center gap-2 flex">
+            <div className="p-3 px-6 text-center text-white text-base font-medium font-['Poppins'] leading-tight">
+              Sign Out
+            </div>
           </div>
-        </div>
-      </button>
+        </button>
+      ) : (
+        <button onClick={openModal}>
+          <div className="bg-slate-700 rounded-lg justify-center items-center gap-2 flex">
+            <div className="p-3 px-6 text-center text-white text-base font-medium font-['Poppins'] leading-tight">
+              Sign In
+            </div>
+          </div>
+        </button>
+      )}
       <Modal
-        isOpen={modalIsOpen}
+        isOpen={isModalOpen}
         onRequestClose={closeModal}
         // style={customStyles}
         className="justify-center items-center flex bg-opacity-5 bg-black/70 w-full h-full z-20 text-black"
         contentLabel="Example Modal"
       >
-        {step === 1 && (
+        <button className="absolute top-2 right-2" onClick={closeModal}>
+          <AiOutlineClose className="text-white" />
+        </button>
+        {modalState === "login" && (
           <LoginModal
             mobileNumber={mobileNumber}
             setMobileNumber={setMobileNumber}
-            onNext={handleNext}
+            onNext={sendOtp}
           />
         )}
-        {step === 2 && (
-          <OtpModal otp={otp} setOtp={setOtp} onVerify={handleVerify} />
+        {modalState === "otp" && (
+          <OtpModal otp={otp} setOtp={setOtp} onVerify={verifyOtp} />
         )}
-        {step === 3 && (
+        {modalState === "createProfile" && (
           <CreateProfile
             user={user}
             setUser={setUser}
-            onCreateProfile={handleCreateProfile}
+            onCreateProfile={createProfile}
           />
         )}
-        {step === 4 && <ConsultationForm onComplete={handleComplete} />}
-        {step === 5 && <SuccessModal closeModal={closeModal} />}
+        {modalState === 4 && <ConsultationForm onComplete={handleComplete} />}
+        {modalState === "success" && <SuccessModal closeModal={closeModal} />}
       </Modal>
     </div>
   );

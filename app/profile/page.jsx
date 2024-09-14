@@ -8,7 +8,7 @@ const Profile = () => {
   const profileData = {
     name: "Archana Mehta",
     photo:
-      "https://i.pinimg.com/736x/13/e5/85/13e585664a1df5f548812b47a11f0889.jpg",
+      "https://i.pinImage.com/736x/13/e5/85/13e585664a1df5f548812b47a11f0889.jpg",
     gender: "Female",
     mobile: "987234234",
     email: "archana123@gmail.com",
@@ -24,7 +24,7 @@ const Profile = () => {
             </p>
             <div className="flex mt-6 md:mt-8 gap-4 md:gap-6 flex-col md:flex-row">
               <div className="h-16 w-16 md:h-20 md:w-20 mx-auto md:mx-0">
-                <img src={profileData.photo} alt="" className="rounded-full" />
+                <Image src={profileData.photo} alt="" className="rounded-full" />
               </div>
               <div className="flex-1">
                 <div className="flex items-center justify-between">
@@ -99,7 +99,7 @@ const Profile = () => {
           <div className="flex items-start mb-3 md:mb-4">
             <div className="flex flex-col items-center">
               <div className="w-10 h-10 md:w-12 md:h-12 lg:w-16 lg:h-16">
-                <img src="/Journey1.png" alt="" className="rounded-full" />
+              <Image src="/Journey1.png" alt="" className="rounded-full" />
               </div>
               <div className="flex flex-col justify-center items-center mt-2 md:mt-3 gap-2">
                 <div className="bg-[#2B4360] w-1 h-1 rounded-full" />
@@ -116,7 +116,7 @@ const Profile = () => {
           <div className="flex items-start mb-3 md:mb-4">
             <div className="flex flex-col items-center">
               <div className="w-10 h-10 md:w-12 md:h-12 lg:w-16 lg:h-16">
-                <img src="/Journey2.png" alt="" className="rounded-full" />
+                <Image src="/Journey2.png" alt="" className="rounded-full" />
               </div>
               <div className="flex flex-col justify-center items-center mt-2 md:mt-3 gap-2">
                 <div className="bg-[#2B4360] w-1 h-1 rounded-full" />
@@ -133,7 +133,7 @@ const Profile = () => {
           <div className="flex items-start mb-3 md:mb-4">
             <div className="flex flex-col items-center">
               <div className="w-10 h-10 md:w-12 md:h-12 lg:w-16 lg:h-16">
-                <img src="/Journey3.png" alt="" className="rounded-full" />
+                <Image src="/Journey3.png" alt="" className="rounded-full" />
               </div>
               <div className="flex flex-col justify-center items-center mt-2 md:mt-3 gap-2">
                 <div className="bg-[#2B4360] w-1 h-1 rounded-full" />
@@ -150,7 +150,7 @@ const Profile = () => {
           <div className="flex items-start">
             <div className="flex flex-col items-center">
               <div className="w-10 h-10 md:w-12 md:h-12 lg:w-16 lg:h-16">
-                <img src="/Journey4.png" alt="" className="rounded-full" />
+                <Image src="/Journey4.png" alt="" className="rounded-full" />
               </div>
             </div>
             <p className="text-[#2B4360] font-semibold text-sm md:text-md lg:text-lg ml-3 md:ml-4 lg:ml-6 mt-2 md:mt-4">
