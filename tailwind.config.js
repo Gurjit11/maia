@@ -15,6 +15,16 @@ module.exports = {
       screens: {
         "2xl": "1400px",
       },
+      extend: {
+        fontFamily: {
+          poppins: ['Poppins', 'sans-serif'],
+          roboto: ['Roboto', 'sans-serif'],
+          montserrat: ['Montserrat', 'sans-serif'],
+          merriweather: ['Merriweather', 'serif'],
+          halant: ['Halant', 'Halant'],  
+          // Add more fonts here
+        },
+      },
     },
     extend: {
       colors: {
