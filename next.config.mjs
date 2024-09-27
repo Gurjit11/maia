@@ -7,6 +7,8 @@ const nextConfig = {
       "in.bmscdn.com",
       "cdn1.coutloot.com",
       "via.placeholder.com",
+      "images.remotePatterns",
+      "static.thenounproject.com"
     ], // Add the domains you need here
   },
 };
