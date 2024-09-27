@@ -19,7 +19,11 @@ import iuitreatment from "../../public/iuitreatment.png";
 import eggfreezing from "../../public/eggfreezing.png";
 import axios from "axios";
 import Link from "next/link";
+
+import DoctorFilters from "@/components/DoctorFilters";
+
 import { useAuth } from "@/contexts/AuthContext";
+
 
 const FindDoctors = () => {
   const { loginToken, saveToken } = useAuth();
@@ -94,7 +98,8 @@ const FindDoctors = () => {
   useEffect(() => {
     getDoctors();
   }, []);
-
+  console.log(doctors);
+  
   const handleSearchChange = (e) => {
     const query = e.target.value.toLowerCase();
     setSearchText(query);
@@ -127,12 +132,7 @@ const FindDoctors = () => {
           </div>
         </div>
         <div className="flex sm:mt-0 mt-2 gap-5">
-          <div className="h-14 p-4 bg-white rounded-lg border border-[#dedede] justify-start items-start gap-1 inline-flex">
-            <AiFillFilter className="text-[#154B6D] w-6 h-6  justify-center items-center flex" />
-            <div className="text-[#2b4360] text-lg font-normal font-['Metropolis'] leading-relaxed">
-              Filter
-            </div>
-          </div>
+         <DoctorFilters />
           <div className="h-14 p-4 bg-white rounded-lg border border-[#dedede] justify-start items-start gap-1 flex">
             <AiOutlineSortAscending className="text-[#154B6D] w-6 h-6  justify-center items-center flex" />
             <div className="text-[#2b4360] text-lg text-nowrap font-normal font-['Metropolis'] leading-relaxed">
