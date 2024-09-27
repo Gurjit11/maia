@@ -72,7 +72,7 @@ const CardCarousel = () => {
         {cards.map((card, index) => (
           <div key={index} className="p-4">
             <div className="bg-white rounded-lg overflow-hidden shadow-md">
-              <img
+              <Image
                 src={card.imageUrl}
                 alt={card.title}
                 className="w-full h-48 object-cover"

@@ -26,12 +26,14 @@ import Learn from "@/components/Learn";
 import Learnslider from "@/components/loginmodals/Learnslider";
 import { FaPhotoFilm } from "react-icons/fa6";
 import FAQ from "./FAQ";
+import React, { useState, useEffect } from 'react';
 
 const ClinicPage = ({ params }) => {
   const { id } = params;
   console.log(id);
   const [doctor, setDoctor] = useState({});
 
+  
   const images = [
     "https://via.placeholder.com/60x60",
     "https://via.placeholder.com/60x60",
@@ -42,6 +44,9 @@ const ClinicPage = ({ params }) => {
     "https://via.placeholder.com/60x60",
     "https://via.placeholder.com/60x60",
   ];
+ 
+ 
+
 
   const getClinic = () => {
     let data = JSON.stringify({
@@ -72,6 +77,8 @@ const ClinicPage = ({ params }) => {
   useEffect(() => {
     getClinic();
   }, []);
+
+ 
   return (
     <div className="sm:grid grid-cols-3 bg-gray-50">
       <div className="col-span-2 flex-col p-3 sm:py-20 sm:pl-20">
@@ -79,7 +86,7 @@ const ClinicPage = ({ params }) => {
           <div className="justify-center items-start gap-6 flex-co sm:flex ">
             <div className=" justify-start items-start gap-3 sm:gap-6 flex">
               <div className="sm:w-28 mt-3 sm:h-28 w-16 h-1w-16 relative">
-                <img
+                <Image
                   className="sm:w-28 sm:h-28 w-16 h-1w-16 left-0 top-0 absolute rounded-full"
                   src={doctor.photo}
                 />
@@ -243,7 +250,7 @@ const ClinicPage = ({ params }) => {
             </div>
             <div className="flex flex-wrap gap-4">
               {images.slice(0, 8).map((src, index) => (
-                <img
+                <Image
                   key={index}
                   className="w-14 h-14 rounded-lg shadow"
                   src={src}
@@ -251,7 +258,7 @@ const ClinicPage = ({ params }) => {
                 />
               ))}
               <div className="w-14 h-14 relative">
-                <img
+                <Image
                   className="w-14 h-14 rounded-lg shadow"
                   src="https://via.placeholder.com/60x60"
                   alt="More Photos"
@@ -277,7 +284,7 @@ const ClinicPage = ({ params }) => {
             <div className=" justify-between items-center inline-flex">
               <div className="justify-start items-center gap-2 flex">
                 <div className="justify-start items-center gap-2 flex">
-                  <img
+                  <Image
                     className="w-8 h-8 rounded-full"
                     src="https://via.placeholder.com/32x32"
                   />
@@ -330,7 +337,7 @@ const ClinicPage = ({ params }) => {
             <div className=" justify-between items-center inline-flex">
               <div className="justify-start items-center gap-2 flex">
                 <div className="justify-start items-center gap-2 flex">
-                  <img
+                  <Image
                     className="w-8 h-8 rounded-full"
                     src="https://via.placeholder.com/32x32"
                   />

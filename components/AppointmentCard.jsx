@@ -6,7 +6,7 @@ const AppointmentCard = ({ photo, name, token, date, clinic, patientName }) => {
         </div>
         <div className="flex items-center gap-2">
             <div className="w-8 h-8 ">
-                <img src={photo} className="rounded-full"/>
+                <Image src={photo} className="rounded-full"/>
             </div>
             <p className="font-semibold text-sm text-[#2B4360]">{name}</p>
         </div>

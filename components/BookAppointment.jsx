@@ -18,7 +18,7 @@ const Step1 = ({ doctor, onNext }) => {
     <div>
       <div className="flex mt-5 gap-5">
         <div className="w-28 h-28">
-          <img src={doctor?.photo} className="rounded-full" alt="doctor" />
+          <Image src={doctor?.photo} className="rounded-full" alt="doctor" />
         </div>
 
         <div className="flex-1 ">
@@ -263,7 +263,7 @@ const Completed = ({ onNext, setIsOpen }) => {
       </div>
 
       <div className="w-52 h-52 text-center ">
-        <img src="/BookingCompleted.png" alt="Booking Completed" />
+        <Image src="/BookingCompleted.png" alt="Booking Completed" />
       </div>
       <div className="w-full mt-12 text-center flex flex-col items-center">
         <p className="text-2xl font-bold break-words text-[#E29578]">Appointment Submitted</p>

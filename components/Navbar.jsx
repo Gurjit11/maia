@@ -5,10 +5,64 @@ import doctor from "../public/doctor.png";
 import Image from "next/image";
 import Login from "./Login";
 import Link from "next/link";
-import { useState } from "react";
+import { useState,useEffect,useRef } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
+import location from "../public/location.png";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Navbar = () => {
+  const { city, saveCity } = useAuth();
+  const [cityData,setCityData] = useState([]);
+  const axios = require('axios');
+  const [showModal, setShowModal] = useState(false);
+  const modalRef = useRef(null); // For detecting clicks outside the modal
+  const [selectedCity, setSelectedCity] = useState(city); // Initially, set to user's city
+
+  useEffect(() => {
+    let config = {
+      method: 'post',
+      maxBodyLength: Infinity,
+      url: 'https://maia.projectx38.cloud/web-apis/maia/web/home/cities',
+      headers: { 
+        'device-id': '97c2fe5e-0f68-4d72-b277-d5d2d4e628a8', 
+        'login-token': 'NA', 
+        'city-id': 'NA'
+      }
+    };
+  
+    axios.request(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data.data));
+        setCityData(response.data.data);
+
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+  
+  const handleOpenModal = () => {
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        setShowModal(false); // Close modal when clicking outside of it
+      }
+    };
+
+    // Add event listener to detect clicks outside modal
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      // Cleanup event listener on component unmount
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [modalRef]);
   const [sidebar, setSidebar] = useState(false);
   return (
     <>
@@ -25,6 +79,50 @@ const Navbar = () => {
         >
           <Image src={icon} alt="logo" className="scale-125 " height={60} />
         </Link>
+        <div className="p-2 rounded border border-red-400 justify-start items-start gap-1 flex">
+          <div className="text-red-400 text-base font-semibold " onClick={handleOpenModal}>
+            Select City 
+          </div>
+          <Image src={location} width={20} alt="icon" />
+        </div>
+
+        {showModal && (
+          <div >
+            <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center">
+          <div ref={modalRef} className="bg-white p-6 rounded-lg">
+          <div className="mb-4">
+              <input
+                type="text"
+                placeholder="Search your cities"
+                className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+              />
+            </div>
+            <div className="grid grid-cols-4 gap-4 mb-4">
+              {cityData.map((city) => (
+                <div
+                  key={city.CityId}
+                  onClick={() => handleCitySelect(city)}
+                  className={`text-center cursor-pointer border-2 p-2 rounded-lg transition-colors ${
+                    selectedCity && selectedCity.id === city.cityId
+                      ? 'bg-orange-200 border-orange-500'
+                      : 'border-gray-200 hover:bg-gray-100'
+                  }`}
+                >
+                  <Image
+                    src={city.cityIcon}
+                    alt={city.cityId}
+                    className="w-24 h-24 mx-auto mb-2"
+                    width={100}
+height={100}/>
+                  <p className="text-lg font-medium">{city.cityId}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+            
+            </div>
+            )}
       </div>
       {/* sidebar */}
       <div
@@ -102,9 +200,14 @@ const Navbar = () => {
             <div className="text-stone-950 text-base font-normal font-['Poppins'] leading-tight">
               Blogs
             </div>
-            <div className="text-gray-900 text-base font-normal font-['Poppins'] leading-tight">
-              Contact Us
-            </div>
+            <Link
+              href={"/contactus"}
+              className="justify-center items-center gap-4 flex"
+            >
+              <div className="text-gray-900 text-base font-normal font-['Poppins'] leading-tight">
+                Contact Us
+              </div>
+            </Link>
           </div>
         </div>
       </div>
@@ -118,12 +221,58 @@ const Navbar = () => {
             >
               <Image src={icon} alt="logo" className="scale-125 " height={60} />
             </Link>
-            {/* <div className=" bg-white rounded-lg border border-orange-200 justify-center items-center gap-2 flex">
-            <div className="text-slate-700 text-base font-normal font-['Poppins'] leading-tight">
-              Select City
+            <div className="p-2 rounded border border-red-400 justify-start items-start gap-1 flex">
+          <div className="text-red-400 text-base font-semibold " onClick={handleOpenModal}>
+            Select City 
+          </div>
+          <Image src={location} width={20} alt="icon" />
+        </div>
+
+        {showModal && (
+          <div >
+            <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center">
+          <div ref={modalRef} className="bg-white p-6 rounded-lg">
+          <div className="mb-4">
+              <input
+                type="text"
+                placeholder="Search your cities"
+                className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+              />
             </div>
-            <div className="w-4 h-4 px-0.5 pt-1.5 pb-1 justify-center items-center flex" />
-          </div> */}
+            <div className="grid grid-cols-4 gap-4 mb-4">
+              {cityData.map((city) => (
+                <div
+                  key={city.CityId}
+                  onClick={() => handleCitySelect(city)}
+                  className={`text-center cursor-pointer border-2 p-2 rounded-lg transition-colors ${
+                    selectedCity && selectedCity.id === city.cityId
+                      ? 'bg-orange-200 border-orange-500'
+                      : 'border-gray-200 hover:bg-gray-100'
+                  }`}
+                >
+                  <Image
+                    src={city.cityIcon}
+                    alt={city.cityId}
+                    className="w-24 h-24 mx-auto mb-2"
+                    width={100}
+height={100}/>
+                  <p className="text-lg font-medium">{city.cityId}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+            
+            </div>
+            )}
+
+
+
+
+
+
+
+
           </div>
           <div className=" justify-start items-center gap-14 flex">
             <div className="justify-start items-start gap-14 flex">
@@ -182,9 +331,14 @@ const Navbar = () => {
           <div className="text-stone-950 text-base font-normal font-['Poppins'] leading-tight">
             Blogs
           </div>
-          <div className="text-stone-950 text-base font-normal font-['Poppins'] leading-tight">
-            Contact Us
-          </div>
+          <Link
+            href={"/contactus"}
+            className="justify-center items-center gap-4 flex"
+          >
+            <div className="text-stone-950 text-base font-normal font-['Poppins'] leading-tight">
+              Contact Us
+            </div>
+          </Link>
         </div>
       </div>
     </>
