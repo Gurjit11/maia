@@ -7,6 +7,7 @@ import {
   AiOutlineFullscreenExit,
 } from "react-icons/ai";
 import { FaDoorOpen } from "react-icons/fa";
+import Link from "next/link";
 
 const AdminLogin = () => {
   return (
@@ -72,9 +73,11 @@ const AdminLogin = () => {
 
           {/* Sign In Button */}
           <div className="self-stretch flex flex-col gap-6">
-            <button className="w-full px-5 py-3 bg-slate-700 rounded-lg text-white text-base font-semibold font-['Poppins']">
-              Sign In <FaDoorOpen className="text-xl inline" />
-            </button>
+            <Link href={"/admin/dashboard"}>
+              <button className="w-full px-5 py-3 bg-slate-700 rounded-lg text-white text-base font-semibold font-['Poppins']">
+                Sign In <FaDoorOpen className="text-xl inline" />
+              </button>
+            </Link>
             <div className="self-stretch text-center text-slate-800 text-sm font-normal font-['Poppins'] leading-tight">
               Don't have an account?{" "}
               <a
