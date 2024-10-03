@@ -30,15 +30,18 @@ const DoctorPage = ({ params }) => {
 
   const getDoctor = () => {
     let data = JSON.stringify({
-      id: id,
+      doctorId: id,
     });
 
     let config = {
       method: "post",
       maxBodyLength: Infinity,
-      url: "https://maia-2.onrender.com/doctor/getDoctor/",
+      url: "https://maia.projectx38.cloud/web-apis/maia/web/doctors/details",
       headers: {
         "Content-Type": "application/json",
+        "device-id": "97c2fe5e-0f68-4d72-b277-d5d2d4e628a8",
+        "login-token": "f48668d4ea1989d14a5692c5c4b7b2964c1cd4333f27869b149f8f5b7db9c37a0731331d8bfdddaee2b39aa2da420282524c49da2bffa8bf95d5b6d4c956d1aea10ebcc18bb59d9fb0b68e8a0701262037f59784c56f5141e9446618ce41e97864da9a3c4729b6469712045d9d379f7e8996734fcfe58bf4029f8bb2c34d3b8831f3f79b575a4fe0b810e569ba76099e6b6e80a08bc2488350d7dc632a9d0feca6588711354f54e52adfebd6828012b69aaa1e903bfa9ac57a8c676e89d2853f30297fbab03b8b45c49af79cd819bd289ba7b7d3e50d799c01e27dcc02b1580a5ac3b6a6cc94dff860916be3340c958c75952faafd90bff74c677b74767d4d5dba21cd8ab57d8c0991e537ddaffb5f3cefea2c7f31e4d2dad2e1af34c8525d6295c8af0a9aefe466e3c4218ecac52d4265860495f0ece6361f315af2c82c97af5bc9e6aa356f19fcab74af5ecd4ba4c55fedeab1876372e9ff6cc8b1ebc0799988be785907c04772a8b96b2706b95151bdcb63ed2752734a64c6ea9691e0c335",
+        "city-id": "NA"
       },
       data: data,
     };
@@ -66,7 +69,7 @@ const DoctorPage = ({ params }) => {
               <div className="sm:w-28 mt-3 sm:h-28 w-16 h-1w-16 relative">
                 <img
                   className="sm:w-28 sm:h-28 w-16 h-1w-16 left-0 top-0 absolute rounded-full"
-                  src={doctor.photo}
+                  src={doctor?.doctorDetails?.profileImage}
                 />
                 <div className="w-8 h-8 px-0.5 py-0.5 left-[88px] top-[88px] absolute justify-center items-center inline-flex">
                   <div className="w-7 h-7 relative"></div>
@@ -74,25 +77,28 @@ const DoctorPage = ({ params }) => {
               </div>
               <div className="sm:w-96 flex-col justify-start items-start gap-2 inline-flex">
                 <div className="text-[#2b4360] text-3xl font-bold font-['FONTSPRING DEMO - Argent CF'] leading-loose">
-                  {doctor.name}
+                  {doctor?.doctorDetails?.doctorName}
                 </div>
                 <div className=" flex-col justify-start items-start gap-1 flex">
                   <div className=" justify-start items-center gap-2 inline-flex">
                     <Image src={about} alt="icon" />{" "}
                     <div className="grow shrink basis-0 text-[#2b4360] text-base font-normal font-['Poppins'] leading-tight">
-                      {doctor?.title?.join(", ")}
+                      {doctor?.doctorDetails?.education}
                     </div>
                   </div>
                   <div className=" justify-start items-center gap-2 inline-flex">
                     <Image src={location} alt="icon" />{" "}
+                      {doctor?.clinics?.map((clinic) => (
                     <div className="text-[#2b4360] text-base font-normal font-['Poppins'] leading-tight">
-                      Andheri, Mumbai
+                      {clinic?.addressName}
                     </div>
+
+                      ))}
                   </div>
                   <div className=" justify-start items-center gap-2 inline-flex">
                     <Image src={bag} alt="icon" />{" "}
                     <div className=" text-[#2b4360] text-base font-normal font-['Poppins'] leading-tight">
-                      {doctor.experience_years} Years
+                      {doctor?.doctorDetails?.experiance} Years
                     </div>
                   </div>
 
@@ -101,13 +107,13 @@ const DoctorPage = ({ params }) => {
                       <div className="justify-start items-center gap-2 flex">
                         <Image src={star} alt="icon" />{" "}
                         <div className="text-[#2b4360] text-base font-normal font-['Poppins'] leading-tight">
-                          4.5
+                          {doctor?.reviewsStat?.avgRating}
                         </div>
                       </div>
                       <div className="justify-start items-center gap-2 flex">
                         <Image src={review} alt="icon" />{" "}
                         <div className="text-[#2b4360] text-base font-normal font-['Poppins'] underline leading-tight">
-                          512 Reviews
+                          {doctor?.reviewsStat?.totalReviews} Reviews
                         </div>
                       </div>
                     </div>
@@ -199,12 +205,12 @@ const DoctorPage = ({ params }) => {
             <div className="justify-start items-center gap-1 inline-flex">
               <Image src={about} alt="icon" />{" "}
               <div className="text-[#2b4360] text-lg font-medium font-['Poppins'] leading-snug">
-                About {doctor.name}
+                About {doctor?.doctorDetails?.doctorName}
               </div>
             </div>
             <div className="">
               <span className="text-[#2b4360] text-sm font-normal font-['Poppins'] leading-none">
-                {doctor?.biography?.slice(0, 300) + "..."}
+                {doctor?.doctorDetails?.about?.slice(0, 300) + "..."}
               </span>
               <span className="text-[#2b4360] text-sm font-bold font-['Poppins'] underline leading-none">
                 Read More
@@ -219,7 +225,7 @@ const DoctorPage = ({ params }) => {
                 Consults At
               </div>
             </div>
-            <div className="flex-col justify-between items-start gap-4 flex">
+            {doctor?.clinics?.map((clinic) =>  <div className="flex-col justify-between items-start gap-4 flex">
               <div className="flex-co justify-between items-center sm:flex">
                 <div className=" justify-start items-start gap-6 flex">
                   <img
@@ -230,11 +236,11 @@ const DoctorPage = ({ params }) => {
                     <div className="flex-col justify-start items-start gap-4 flex">
                       <div className="sm:w-96 flex-col justify-start items-start gap-2 flex">
                         <div className="text-[#2b4360] text-base font-medium font-['Poppins'] leading-tight">
-                          LifeWave Hospital
+                          {clinic.clinicName}
                         </div>
                         <div className=" flex-col justify-start items-start gap-1 flex">
                           <div className="text-[#5f5f5f] text-xs font-normal font-['Poppins'] leading-none">
-                            Andheri (W), Mumbai
+                            {clinic.addressName}
                           </div>
                           <div className=" text-[#5f5f5f] text-xs font-normal font-['Poppins'] leading-none">
                             Siddhachal Arcade, Link Road, Landmark: Near Sathya
@@ -304,94 +310,10 @@ const DoctorPage = ({ params }) => {
                   </div>
                 </div>
               </div>
-            </div>
+            </div>)}
+           
             <div className="h-[0.1px] bg-gray-300 w-full"></div>
-            <div className="flex-col justify-between items-start gap-4 flex">
-              <div className="flex-co justify-between items-center sm:flex">
-                <div className=" justify-start items-start gap-6 flex">
-                  <img
-                    className="w-14 sm:w-28 h-14 sm:h-28 rounded-full border border-[#dedede]"
-                    src="https://via.placeholder.com/120x120"
-                  />
-                  <div className=" flex-col justify-start items-start gap-2 inline-flex">
-                    <div className="flex-col justify-start items-start gap-4 flex">
-                      <div className="sm:w-96 flex-col justify-start items-start gap-2 flex">
-                        <div className="text-[#2b4360] text-base font-medium font-['Poppins'] leading-tight">
-                          LifeWave Hospital
-                        </div>
-                        <div className=" flex-col justify-start items-start gap-1 flex">
-                          <div className="text-[#5f5f5f] text-xs font-normal font-['Poppins'] leading-none">
-                            Andheri (W), Mumbai
-                          </div>
-                          <div className=" text-[#5f5f5f] text-xs font-normal font-['Poppins'] leading-none">
-                            Siddhachal Arcade, Link Road, Landmark: Near Sathya
-                            Sai General Hospital, Mumbai
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="justify-start items-center gap-1 inline-flex">
-                      <FaDirections className="text-[#2b4360] text-xl" />
-                      <div className="text-[#2b4360] text-sm font-medium font-['Poppins'] underline leading-none">
-                        Get Directions
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex-col justify-start items-center gap-2 inline-flex">
-                  <div className="justify-start items-center gap-2 inline-flex">
-                    <div>
-                      <span className="text-[#2b4360] text-base font-normal font-['Poppins'] leading-tight">
-                        ConsultationFees:{" "}
-                      </span>
-                      <span className="text-[#00b15c] text-base font-semibold font-['Poppins'] leading-tight">
-                        ₹₹₹
-                      </span>
-                      <span className="text-[#ababab] text-base font-semibold font-['Poppins'] leading-tight">
-                        ₹₹
-                      </span>
-                    </div>
-                  </div>
-                  <div className="flex-col justify-start items-start gap-4 flex">
-                    <div className="w-full h-12 px-2 py-4 bg-[#2b4360] rounded-lg justify-center items-center gap-2 inline-flex">
-                      <AiOutlineCalendar className="text-xl" />{" "}
-                      <div className="text-white text-base font-medium font-['Poppins']">
-                        Book Appointment
-                      </div>
-                    </div>
-                    <div className=" h-12 px-2 py-4 bg-white rounded-lg border border-[#49c858] justify-center items-center gap-2 inline-flex">
-                      <AiOutlineWhatsApp className="text-xl text-[#47c757]" />{" "}
-                      <div className="text-[#47c757] text-base font-medium font-['Poppins']">
-                        Book Via Whatsapp
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className=" flex-col justify-center items-center gap-2 ">
-                <div className="text-[#2b4360] mb-1 text-base font-medium font-['Poppins'] leading-tight">
-                  Timings
-                </div>
-                <div className=" justify-start items-start gap-1 sm:gap-6 sm:flex">
-                  <div className="h-4 justify-start items-start gap-1 flex">
-                    <div className="text-[#5f5f5f] text-sm font-medium font-['Poppins'] leading-none">
-                      Mon
-                    </div>
-                    <div className="text-[#5f5f5f] text-sm font-normal font-['Poppins'] leading-none">
-                      11:00 AM - 01:00 PM
-                    </div>
-                  </div>
-                  <div className="justify-start items-start gap-1 flex">
-                    <div className="text-[#5f5f5f] text-sm font-medium font-['Poppins'] leading-none">
-                      Wed, Fri{" "}
-                    </div>
-                    <div className="text-[#5f5f5f] text-sm font-normal font-['Poppins'] leading-none">
-                      05:00 AM - 07:00 PM
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+           
           </div>
         </div>
         <div className="p-5 sm:p-8 bg-white rounded-2xl shadow flex-col justify-start items-start gap-4 inline-flex">
