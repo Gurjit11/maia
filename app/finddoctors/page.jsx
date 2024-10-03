@@ -19,7 +19,10 @@ import iuitreatment from "../../public/iuitreatment.png";
 import eggfreezing from "../../public/eggfreezing.png";
 import axios from "axios";
 import Link from "next/link";
+
 import DoctorFilters from "@/components/DoctorFilters";
+
+
 
 const FindDoctors = () => {
   const [doctors, setDoctors] = useState([]);
@@ -28,16 +31,19 @@ const FindDoctors = () => {
   const [loading, setLoading] = useState(true);
 
   const getDoctors = () => {
+  
     let data = JSON.stringify({
       filters:{},
       pageNo:0
   });
 
+  
     let config = {
       method: "post",
       maxBodyLength: Infinity,
       url: "https://maia.projectx38.cloud/web-apis/maia/web/doctors/get",
       headers: {
+       
         "Content-Type": "application/json",
         "device-id": "97c2fe5e-0f68-4d72-b277-d5d2d4e628a8",
         "login-token": "f48668d4ea1989d14a5692c5c4b7b2964c1cd4333f27869b149f8f5b7db9c37a0731331d8bfdddaee2b39aa2da420282524c49da2bffa8bf95d5b6d4c956d1aea10ebcc18bb59d9fb0b68e8a0701262037f59784c56f5141e9446618ce41e97864da9a3c4729b6469712045d9d379f7e8996734fcfe58bf4029f8bb2c34d3b8831f3f79b575a4fe0b810e569ba76099e6b6e80a08bc2488350d7dc632a9d0feca6588711354f54e52adfebd6828012b69aaa1e903bfa9ac57a8c676e89d2853f30297fbab03b8b45c49af79cd819bd289ba7b7d3e50d799c01e27dcc02b1580a5ac3b6a6cc94dff860916be3340c958c75952faafd90bff74c677b74767d4d5dba21cd8ab57d8c0991e537ddaffb5f3cefea2c7f31e4d2dad2e1af34c8525d6295c8af0a9aefe466e3c4218ecac52d4265860495f0ece6361f315af2c82c97af5bc9e6aa356f19fcab74af5ecd4ba4c55fedeab1876372e9ff6cc8b1ebc0799988be785907c04772a8b96b2706b95151bdcb63ed2752734a64c6ea9691e0c335",
@@ -49,12 +55,12 @@ const FindDoctors = () => {
     axios
       .request(config)
       .then((response) => {
+        // console.log(JSON.stringify(response.data.data));
         setDoctors(response.data.data);
-        setFilteredDoctors(response.data.data); // Initially show all doctors
         setLoading(false);
-        console.log(response.data);
       })
       .catch((error) => {
+        setLoading(false);
         console.log(error);
       });
   };
@@ -114,19 +120,21 @@ const FindDoctors = () => {
         </div>
       ) : (
         <div className="text-[#2b4360] text-xl font-medium font-['Poppins'] leading-relaxed">
-          Discover {doctors.length} IVF doctors in Mumbai.
+          Discover {doctors?.length} IVF doctors in Mumbai.
         </div>
       )}
       <div className="flex-col min-h-[600px] justify-start items-start gap-7 ">
-        {filteredDoctors.map((doctor, index) => (
+        {doctors?.map((doctor) => (
           <div
-            key={index}
+            key={doctor.doctorId}
             className="sm:p-8 p-3 my-3 bg-white w-full h-full rounded-2xl shadow justify-start items-start gap-3 sm:gap-10 flex"
           >
             <div className="sm:w-32 w-20  flex justify-start items-start">
-              <img
+              <Image
                 className="sm:w-24 sm:h-24 w-16 h-16 rounded-full object-fill overflow-clip"
                 src={doctor.profileImage}
+                width={80}
+                height={80}
                 alt={`${doctor.doctorName} photo`}
               />
             </div>
@@ -181,7 +189,7 @@ const FindDoctors = () => {
                     <div className="rounded-lg justify-center items-center gap-1 flex">
                       <div className="w-8 h-8 relative">
                         <div className="w-8 h-8  bg-red-100 rounded-full">
-                          <Image src={ivf} alt={"icon"} />
+                          <Image src={ivf} alt="icon" />
                         </div>
                       </div>
                     </div>

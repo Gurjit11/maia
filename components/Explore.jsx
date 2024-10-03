@@ -11,8 +11,45 @@ import star from "../public/star.png";
 import eggfreezing from "../public/eggfreezing.png";
 import arrow from "../public/arrow.png";
 import ellipse from "../public/Ellipse.png";
-
+import axios from "axios";
+import { useEffect, useState } from "react";
 const Explore = () => {
+  const [homeData, setHomeData] = useState({});
+  const [topDoctors, setTopDoctors] = useState([]);
+
+  const getHomeData = () => {
+    // let data = JSON.stringify({
+    //   id: id,
+    // });
+
+    let config = {
+      method: "post",
+      maxBodyLength: Infinity,
+      url: "https://maia.projectx38.cloud/web-apis/maia/web/home/data",
+      headers: {
+        "device-id": "97c2fe5e-0f68-4d72-b277-d5d2d4e628a8",
+        "login-token": "NA",
+        "city-id": "NA",
+      },
+    };
+
+    axios
+      .request(config)
+      .then((response) => {
+        console.log(response.data);
+        setHomeData(response.data);
+        setTopDoctors(response.data.data.topDoctors);
+        // setTopClinics(response.data.data.topClinics);
+        console.log(topDoctors);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    getHomeData();
+  }, []);
   return (
     <div>
       <div className="sm:grid grid-cols-2 p-3 md:p-20">
@@ -49,142 +86,75 @@ const Explore = () => {
           </div>
         </div>
         <div className="col-span-1 sm:flex-col flex overflow-x-auto sm:gap-0 gap-10">
-          <div className="sm:w-[70%] my-5  px-6 py-4 bg-stone-100 rounded-lg shadow justify-start items-start gap-24 flex">
-            <div className="justify-start items-center gap-4 w-full md:flex flex-co">
-              <Image src={ellipse} alt={"icon"} />
+          {topDoctors.slice(1, 4).map((doctor) => (
+            <div
+              className="sm:w-[70%] my-5  px-6 py-4 bg-stone-100 rounded-lg shadow justify-start items-start gap-24 flex"
+              key={doctor.doctorId}
+            >
+              <div className="justify-start items-center gap-4 w-full md:flex flex-co">
+                <Image src={ellipse} alt={"icon"} />
 
-              <div className="w-full flex-col justify-start items-start gap-2 flex">
-                <div className="flex justify-between items-center w-full  text-slate-700 text-xl font-bold font-['FONTSPRING DEMO - Argent CF'] leading-normal">
-                  <div>Dr. Hemlata Agarwal</div>
-                  <div>
-                    <Image src={arrow} alt={"icon"} />
-                  </div>
-                </div>
-                <div className="h-28 flex-col justify-start items-start gap-1 flex">
-                  <div className=" justify-start items-center gap-2 inline-flex">
-                    <Image src={loc} alt={"icon"} />
-                    <div className="text-slate-700 text-sm font-normal font-['Poppins'] leading-none">
-                      Malad (W), Mumbai
+                <div className="w-full flex-col justify-start items-start gap-2 flex">
+                  <div className="flex justify-between items-center w-full  text-slate-700 text-xl font-bold font-['FONTSPRING DEMO - Argent CF'] leading-normal">
+                    <div>{doctor.doctorName}</div>
+                    <div>
+                      <Image src={arrow} alt={"icon"} />
                     </div>
                   </div>
-                  <div className="justify-center items-center gap-2 inline-flex">
-                    <Image src={bag} alt={"icon"} />
+                  <div className="h-28 flex-col justify-start items-start gap-1 flex">
+                    <div className=" justify-start items-center gap-2 inline-flex">
+                      <Image src={loc} alt={"icon"} />
+                      <div className="text-slate-700 text-sm font-normal font-['Poppins'] leading-none">
+                        {doctor.address}
+                      </div>
+                    </div>
+                    <div className="justify-center items-center gap-2 inline-flex">
+                      <Image src={bag} alt={"icon"} />
 
-                    <div className="text-slate-700 text-sm font-normal font-['Poppins'] leading-none">
-                      Experience: 27 Years
-                    </div>
-                  </div>
-                  <div className="justify-center items-center gap-2 inline-flex">
-                    <Image src={star} alt={"icon"} />
-                    <Image src={star} alt={"icon"} />
-                    <Image src={star} alt={"icon"} />
-                    <Image src={star} alt={"icon"} />
-                  </div>
-                  <div className="w-64 justify-start items-start gap-2 inline-flex">
-                    <div className="rounded-lg justify-center items-center gap-1 flex">
-                      <div className="w-8 h-8 relative">
-                        <div className="w-8 h-8  bg-slate-200 rounded-full">
-                          <Image src={fertilitysupport} alt={"icon"} />
-                        </div>
+                      <div className="text-slate-700 text-sm font-normal font-['Poppins'] leading-none">
+                        Experience: 27 Years
                       </div>
                     </div>
-                    <div className="rounded-lg justify-center items-center gap-1 flex">
-                      <div className="w-8 h-8 relative">
-                        <div className="w-8 h-8  bg-amber-100 rounded-full">
-                          <Image src={eggfreezing} alt={"icon"} />
-                        </div>
-                      </div>
+                    <div className="justify-center items-center gap-2 inline-flex">
+                      {[...Array(Math.round(doctor.rating))].map((_, index) => (
+                        <Image key={index} src={star} alt="star icon" />
+                      ))}
                     </div>
-                    <div className="rounded-lg justify-center items-center gap-1 flex">
-                      <div className="w-8 h-8 relative">
-                        <div className="w-8 h-8  bg-red-100 rounded-full">
-                          <Image src={ivf} alt={"icon"} />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="rounded-lg justify-center items-center gap-1 flex">
-                      <div className="w-8 h-8 relative">
-                        <div className="w-8 h-8  bg-green-100 rounded-full">
-                          <Image src={iuitreatment} alt={"icon"} />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="rounded-lg justify-center items-center gap-1 flex">
-                      <div className="w-8 h-8 relative">
-                        <div className="w-8 h-8  bg-orange-100 rounded-full">
-                          <Image src={eggsperm} alt={"icon"} />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="sm:w-[70%] my-5  px-6 py-4 bg-stone-100 rounded-lg shadow justify-start items-start gap-24 flex">
-            <div className="justify-start items-center gap-4 w-full sm:flex flex-co">
-              <Image src={ellipse} alt={"icon"} />
 
-              <div className="w-full flex-col justify-start items-start gap-2 flex">
-                <div className="flex justify-between items-center w-full  text-slate-700 text-xl font-bold font-['FONTSPRING DEMO - Argent CF'] leading-normal">
-                  <div>Dr. Hemlata Agarwal</div>
-                  <div>
-                    <Image src={arrow} alt={"icon"} />
-                  </div>
-                </div>
-                <div className="h-28 flex-col justify-start items-start gap-1 flex">
-                  <div className=" justify-start items-center gap-2 inline-flex">
-                    <Image src={loc} alt={"icon"} />
-                    <div className="text-slate-700 text-sm font-normal font-['Poppins'] leading-none">
-                      Malad (W), Mumbai
-                    </div>
-                  </div>
-                  <div className="justify-center items-center gap-2 inline-flex">
-                    <Image src={bag} alt={"icon"} />
-
-                    <div className="text-slate-700 text-sm font-normal font-['Poppins'] leading-none">
-                      Experience: 27 Years
-                    </div>
-                  </div>
-                  <div className="justify-center items-center gap-2 inline-flex">
-                    <Image src={star} alt={"icon"} />
-                    <Image src={star} alt={"icon"} />
-                    <Image src={star} alt={"icon"} />
-                    <Image src={star} alt={"icon"} />
-                  </div>
-                  <div className="w-64 justify-start items-start gap-2 inline-flex">
-                    <div className="rounded-lg justify-center items-center gap-1 flex">
-                      <div className="w-8 h-8 relative">
-                        <div className="w-8 h-8  bg-slate-200 rounded-full">
-                          <Image src={fertilitysupport} alt={"icon"} />
+                    <div className="w-64 justify-start items-start gap-2 inline-flex">
+                      <div className="rounded-lg justify-center items-center gap-1 flex">
+                        <div className="w-8 h-8 relative">
+                          <div className="w-8 h-8  bg-slate-200 rounded-full">
+                            <Image src={fertilitysupport} alt={"icon"} />
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <div className="rounded-lg justify-center items-center gap-1 flex">
-                      <div className="w-8 h-8 relative">
-                        <div className="w-8 h-8  bg-amber-100 rounded-full">
-                          <Image src={eggfreezing} alt={"icon"} />
+                      <div className="rounded-lg justify-center items-center gap-1 flex">
+                        <div className="w-8 h-8 relative">
+                          <div className="w-8 h-8  bg-amber-100 rounded-full">
+                            <Image src={eggfreezing} alt={"icon"} />
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <div className="rounded-lg justify-center items-center gap-1 flex">
-                      <div className="w-8 h-8 relative">
-                        <div className="w-8 h-8  bg-red-100 rounded-full">
-                          <Image src={ivf} alt={"icon"} />
+                      <div className="rounded-lg justify-center items-center gap-1 flex">
+                        <div className="w-8 h-8 relative">
+                          <div className="w-8 h-8  bg-red-100 rounded-full">
+                            <Image src={ivf} alt={"icon"} />
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <div className="rounded-lg justify-center items-center gap-1 flex">
-                      <div className="w-8 h-8 relative">
-                        <div className="w-8 h-8  bg-green-100 rounded-full">
-                          <Image src={iuitreatment} alt={"icon"} />
+                      <div className="rounded-lg justify-center items-center gap-1 flex">
+                        <div className="w-8 h-8 relative">
+                          <div className="w-8 h-8  bg-green-100 rounded-full">
+                            <Image src={iuitreatment} alt={"icon"} />
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <div className="rounded-lg justify-center items-center gap-1 flex">
-                      <div className="w-8 h-8 relative">
-                        <div className="w-8 h-8  bg-orange-100 rounded-full">
-                          <Image src={eggsperm} alt={"icon"} />
+                      <div className="rounded-lg justify-center items-center gap-1 flex">
+                        <div className="w-8 h-8 relative">
+                          <div className="w-8 h-8  bg-orange-100 rounded-full">
+                            <Image src={eggsperm} alt={"icon"} />
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -192,79 +162,7 @@ const Explore = () => {
                 </div>
               </div>
             </div>
-          </div>
-          <div className="sm:w-[70%] my-5  px-6 py-4 bg-stone-100 rounded-lg shadow justify-start items-start gap-24 flex">
-            <div className="justify-start items-center gap-4 w-full sm:flex flex-co">
-              <Image src={ellipse} alt={"icon"} />
-
-              <div className="w-full flex-col justify-start items-start gap-2 flex">
-                <div className="flex justify-between items-center w-full  text-slate-700 text-xl font-bold font-['FONTSPRING DEMO - Argent CF'] leading-normal">
-                  <div>Dr. Hemlata Agarwal</div>
-                  <div>
-                    <Image src={arrow} alt={"icon"} />
-                  </div>
-                </div>
-                <div className="h-28 flex-col justify-start items-start gap-1 flex">
-                  <div className=" justify-start items-center gap-2 inline-flex">
-                    <Image src={loc} alt={"icon"} />
-                    <div className="text-slate-700 text-sm font-normal font-['Poppins'] leading-none">
-                      Malad (W), Mumbai
-                    </div>
-                  </div>
-                  <div className="justify-center items-center gap-2 inline-flex">
-                    <Image src={bag} alt={"icon"} />
-
-                    <div className="text-slate-700 text-sm font-normal font-['Poppins'] leading-none">
-                      Experience: 27 Years
-                    </div>
-                  </div>
-                  <div className="justify-center items-center gap-2 inline-flex">
-                    <Image src={star} alt={"icon"} />
-                    <Image src={star} alt={"icon"} />
-                    <Image src={star} alt={"icon"} />
-                    <Image src={star} alt={"icon"} />
-                  </div>
-                  <div className="w-64 justify-start items-start gap-2 inline-flex">
-                    <div className="rounded-lg justify-center items-center gap-1 flex">
-                      <div className="w-8 h-8 relative">
-                        <div className="w-8 h-8  bg-slate-200 rounded-full">
-                          <Image src={fertilitysupport} alt={"icon"} />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="rounded-lg justify-center items-center gap-1 flex">
-                      <div className="w-8 h-8 relative">
-                        <div className="w-8 h-8  bg-amber-100 rounded-full">
-                          <Image src={eggfreezing} alt={"icon"} />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="rounded-lg justify-center items-center gap-1 flex">
-                      <div className="w-8 h-8 relative">
-                        <div className="w-8 h-8  bg-red-100 rounded-full">
-                          <Image src={ivf} alt={"icon"} />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="rounded-lg justify-center items-center gap-1 flex">
-                      <div className="w-8 h-8 relative">
-                        <div className="w-8 h-8  bg-green-100 rounded-full">
-                          <Image src={iuitreatment} alt={"icon"} />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="rounded-lg justify-center items-center gap-1 flex">
-                      <div className="w-8 h-8 relative">
-                        <div className="w-8 h-8  bg-orange-100 rounded-full">
-                          <Image src={eggsperm} alt={"icon"} />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </div>

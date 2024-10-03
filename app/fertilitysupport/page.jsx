@@ -18,7 +18,7 @@ const FertilitySupport = () => {
           </div>
           Understanding Fertility Support
         </div>
-        <img
+        <Image
           src="https://via.placeholder.com/1200x400"
           alt="Fertility Support"
           className="object-cover w-full h-full"
