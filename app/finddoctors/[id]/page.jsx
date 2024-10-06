@@ -235,8 +235,11 @@ const DoctorPage = ({ params }) => {
                 Consults At
               </div>
             </div>
-            {doctor?.clinics?.map((clinic) => (
-              <div className="flex-col justify-between items-start gap-4 flex">
+            {doctor?.clinics?.map((clinic, index) => (
+              <div
+                key={index}
+                className="flex-col justify-between items-start gap-4 flex"
+              >
                 <div className="flex-co justify-between items-center sm:flex">
                   <div className=" justify-start items-start gap-6 flex">
                     <Image

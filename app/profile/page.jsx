@@ -3,6 +3,7 @@ import ConsultationCard from "@/components/ConsultationCard";
 import { Edit, Mail, Phone } from "lucide-react";
 import { BsGenderFemale } from "react-icons/bs";
 import EditProfileModal from "@/components/EditProfileModal";
+import Image from "next/image";
 
 const Profile = () => {
   const profileData = {
@@ -24,7 +25,11 @@ const Profile = () => {
             </p>
             <div className="flex mt-6 md:mt-8 gap-4 md:gap-6 flex-col md:flex-row">
               <div className="h-16 w-16 md:h-20 md:w-20 mx-auto md:mx-0">
-                <Image src={profileData.photo} alt="" className="rounded-full" />
+                <Image
+                  src={profileData.photo}
+                  alt=""
+                  className="rounded-full"
+                />
               </div>
               <div className="flex-1">
                 <div className="flex items-center justify-between">
@@ -94,12 +99,14 @@ const Profile = () => {
       </div>
 
       <div className="col-span-2 bg-[#F2EFED] w-full rounded-lg shadow-md p-4 md:p-6 h-min pb-8 md:pb-10">
-        <p className="font-bold text-xl md:text-2xl text-[#154B6D]">My Journey</p>
+        <p className="font-bold text-xl md:text-2xl text-[#154B6D]">
+          My Journey
+        </p>
         <div className="mt-6 md:mt-8 flex flex-col">
           <div className="flex items-start mb-3 md:mb-4">
             <div className="flex flex-col items-center">
               <div className="w-10 h-10 md:w-12 md:h-12 lg:w-16 lg:h-16">
-              <Image src="/Journey1.png" alt="" className="rounded-full" />
+                <Image src="/Journey1.png" alt="" className="rounded-full" />
               </div>
               <div className="flex flex-col justify-center items-center mt-2 md:mt-3 gap-2">
                 <div className="bg-[#2B4360] w-1 h-1 rounded-full" />

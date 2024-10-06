@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { Poppins, Roboto, Montserrat, Halant } from "next/font/google"; // Import Google Fonts
 import { AppProgressBar as ProgressBar } from "next-nprogress-bar";
+import ClientLayout from "./ClientLayout";
 
 const inter = Inter({ subsets: ["latin"] });
 const poppins = Poppins({
@@ -17,13 +18,15 @@ const roboto = Roboto({
   subsets: ["latin"],
   weight: ["400", "500", "700"],
   display: "swap",
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  display: "swap",
 });
 const halant = Halant({
   subsets: ["latin"],
   weight: ["300", "400", "500"], // Regular and Bold weights
   display: "swap",
 });
-
 const montserrat = Montserrat({
   subsets: ["latin"],
   weight: ["400", "500", "700"],
@@ -45,9 +48,8 @@ export default function RootLayout({ children }) {
         />
 
         <AuthProvider>
-          <Navbar />
-          <div>{children}</div>
-          <Footer />
+          {/* Move route logic into the client-side component */}
+          <ClientLayout>{children}</ClientLayout>
         </AuthProvider>
       </body>
     </html>

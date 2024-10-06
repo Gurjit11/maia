@@ -32,6 +32,7 @@ const ClinicPage = ({ params }) => {
   console.log(id);
   const [doctor, setDoctor] = useState({});
 
+
   const images = [
     "https://via.placeholder.com/60x60",
     "https://via.placeholder.com/60x60",
