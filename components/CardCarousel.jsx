@@ -20,7 +20,7 @@ const CardCarousel = () => {
       description:
         "The most complex fertility treatment, this course will help you do it right the first time.",
       tag: "fertility",
-      imageUrl: "your-image-url-1",
+      imageUrl: "/blogs/adv techniques.jpg",
     },
     {
       title: "What causes infertility in Women",
@@ -34,21 +34,21 @@ const CardCarousel = () => {
       description:
         "Breaking down every important topic relating to mental health & fertility. We cover data around anxiety, depression, and stress as they.",
       tag: "mental health, ivf",
-      imageUrl: "your-image-url-3",
+      imageUrl: "/blogs/adv techniques.jpg",
     },
     {
       title: "What causes infertility in Women",
       description:
         "You took sex ed, but now you need to understand fertility. Data to answer your questions about natural conception and diagnosing.",
       tag: "infertility",
-      imageUrl: "your-image-url-2",
+      imageUrl: "/blogs/adv techniques.jpg",
     },
     {
       title: "IVF Process",
       description:
         "Breaking down every important topic relating to mental health & fertility. We cover data around anxiety, depression, and stress as they.",
       tag: "mental health, ivf",
-      imageUrl: "your-image-url-3",
+      imageUrl: "/blogs/adminlogin.png",
     },
     {
       title: "What causes infertility in Women",
@@ -70,9 +70,10 @@ const CardCarousel = () => {
     <div className="w-[90%] bg-black mx-auto">
       <Slider {...settings}>
         {cards.map((card, index) => (
+          console.log(card.imageUrl),
           <div key={index} className="p-4">
             <div className="bg-white rounded-lg overflow-hidden shadow-md">
-              <Image
+              <image
                 src={card.imageUrl}
                 alt={card.title}
                 className="w-full h-48 object-cover"

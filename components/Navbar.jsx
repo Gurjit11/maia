@@ -1,5 +1,7 @@
 "use client";
 import icon from "../public/icon.png";
+import newicon from "../public/logo/newlogo.png";
+
 import clinic from "../public/clinic.png";
 import doctor from "../public/doctor.png";
 import Image from "next/image";
@@ -77,7 +79,7 @@ const Navbar = () => {
           href={"/"}
           className="ml-3 justify-start overflow-y-clip items-center gap-1 flex"
         >
-          <Image src={icon} alt="logo" className="scale-125 " height={60} />
+          <Image src={newicon} alt="logo" className="scale-125 " height={60} />
         </Link>
         <div className="p-2 rounded border border-red-400 justify-start items-start gap-1 flex">
           <div className="text-red-400 text-base font-semibold " onClick={handleOpenModal}>
@@ -157,6 +159,16 @@ height={100}/>
                 Find Clinics{" "}
               </div>
             </Link>
+            <Link
+              href={"/findclinics"}
+              className="justify-start items-center gap-2 inline-flex"
+            >
+              <Image src={clinic} />
+
+              <div className="text-stone-950 text-base font-normal font-['Poppins'] leading-tight">
+                Contact Us{" "}
+              </div>
+            </Link>
           </div>
           <div className="flex-col justify-start items-start gap-2 flex">
             <div className="justify-center items-center gap-2 inline-flex">
@@ -219,7 +231,7 @@ height={100}/>
               href={"/"}
               className="justify-start overflow-y-clip items-center gap-1 flex"
             >
-              <Image src={icon} alt="logo" className="scale-125 " height={60} />
+              <Image src={newicon} alt="logo" className="scale-125 " height={60} />
             </Link>
             <div className="p-2 rounded border border-red-400 justify-start items-start gap-1 flex">
           <div className="text-red-400 text-base font-semibold " onClick={handleOpenModal}>
@@ -295,11 +307,28 @@ height={100}/>
                   Find Clinics{" "}
                 </div>
               </Link>
+              <Link
+                href={"/blogs"}
+                className="justify-start items-center gap-2 flex"
+              >
+
+                <div className="text-stone-950 text-base font-normal font-['Poppins'] leading-tight">
+                  Blogs{" "}
+                </div>
+              </Link><Link
+                href={"/contactus"}
+                className="justify-start items-center gap-2 flex"
+              >
+
+                <div className="text-stone-950 text-base font-normal font-['Poppins'] leading-tight">
+                  Contact Us{" "}
+                </div>
+              </Link>
             </div>
             <Login setSidebar={setSidebar} />
           </div>
         </div>
-        <div className=" justify-around items-center flex px-10">
+        {/* <div className=" justify-around items-center flex px-10">
           <Link
             href={"/fertilitysupport"}
             className="justify-center items-center gap-4 flex"
@@ -339,7 +368,7 @@ height={100}/>
               Contact Us
             </div>
           </Link>
-        </div>
+        </div> */}
       </div>
     </>
   );

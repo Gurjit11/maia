@@ -12,6 +12,52 @@ import ivfservices from "../public/ivfservices.png";
 import Image from "next/image";
 
 const treatments = {
+  naturalFertilitySupport: {
+    image: ivf,
+    image2: ivfservices,
+    title: "What is Natural Fertility Support?",
+    description:
+      "Natural fertility support focuses on enhancing reproductive health through holistic approaches, including dietary changes, lifestyle modifications, and alternative therapies.",
+    faq: [
+      {
+        title: "Nutritional Counseling",
+        description:
+          "Personalized diet plans designed to optimize fertility and overall health.",
+          image: iuitreatment,
+        },
+      {
+        title: "Herbal Supplements",
+        description:
+          "Utilization of specific herbs to balance hormones and support reproductive function.",
+          image: iuitreatment,
+        },
+      {
+        title: "Acupuncture",
+        description:
+          "A therapy that helps improve blood flow to reproductive organs and reduce stress levels.",
+          image: iuitreatment,
+        },
+      {
+        title: "Stress Management",
+        description:
+          "Techniques such as yoga and meditation to alleviate stress that may affect fertility.",
+          image: iuitreatment,
+        },
+      {
+        title: "Fertility Tracking",
+        description:
+          "Monitoring ovulation and menstrual cycles to identify the best times for conception.",
+          image: iuitreatment,
+        },
+      {
+        title: "Lifestyle Coaching",
+        description:
+          "Guidance on exercise, sleep, and minimizing exposure to environmental toxins to improve fertility.",
+          image: iuitreatment,
+        },
+    ],
+},
+
   ivf: {
     image: ivf,
     image2: ivfservices,
@@ -49,6 +95,89 @@ const treatments = {
       },
     ],
   },
+  iui: {
+    image: ivf,
+    image2: ivfservices,
+    title: "What is iui?",
+    description:
+      "A medical process where an egg from a woman and sperm from a man are combined outside the body in a lab to create an embryo. The embryo is then implanted in the uterus to achieve pregnancy.",
+    faq: [
+      {
+        title: "ICSI",
+        description:
+          "Intracytoplasmic Sperm Injection (ICSI) process details...",
+        image: iuitreatment,
+      },
+      {
+        title: "Hysteroscopy",
+        description:
+          "Hysteroscopy is a procedure for checking the inside of the uterus.",
+        image: iuitreatment,
+      },
+      {
+        title: "Laparoscopy",
+        description:
+          "Laparoscopy is a minimally invasive surgery for diagnosing pelvic conditions.",
+        image: iuitreatment,
+      },
+      {
+        title: "Laser Assisted Hatching",
+        description: "Laser-assisted hatching to improve implantation rates.",
+        image: iuitreatment,
+      },
+      {
+        title: "Blastocyst & embryo transfer",
+        description: "Blastocyst and embryo transfer description...",
+        image: iuitreatment,
+      },
+    ],
+  },
+  eggAndSpermFreezing: {
+    image: ivf,
+    image2: ivfservices,
+    title: "What is Egg and Sperm Freezing?",
+    description:
+      "Egg and sperm freezing is a process of cryopreservation that allows individuals to store their eggs or sperm for future use, providing flexibility in family planning.",
+    faq: [
+      {
+        title: "Consultation and Screening",
+        description:
+          "Initial assessment and testing to evaluate health and fertility potential before the freezing process.",
+        image: iuitreatment,
+      },
+      {
+        title: "Ovarian Stimulation (for Egg Freezing)",
+        description:
+          "Hormonal treatment to stimulate the ovaries to produce multiple eggs for retrieval.",
+        image: iuitreatment,
+      },
+      {
+        title: "Egg Retrieval",
+        description:
+          "A minor surgical procedure to collect eggs from the ovaries for freezing.",
+        image: iuitreatment,
+      },
+      {
+        title: "Sperm Collection",
+        description:
+          "Gathering sperm for freezing, either through ejaculation or surgical extraction.",
+        image: iuitreatment,
+      },
+      {
+        title: "Cryopreservation",
+        description:
+          "The process of freezing eggs or sperm using liquid nitrogen for long-term storage.",
+        image: iuitreatment,
+      },
+      {
+        title: "Storage Monitoring",
+        description:
+          "Regular checks on the storage conditions and viability of frozen eggs and sperm.",
+        image: iuitreatment,
+      },
+    ],
+},
+
   // Add other treatment types if needed like IUI, Egg & Sperm Freezing, etc.
 };
 
@@ -75,11 +204,11 @@ const TreatmentsAndServices = () => {
         <div className="flex sm:w-full text-nowrap overflow-x-auto justify-around space-x-8 border-b-2">
           <button
             className={`pb-2 ml-4 text-lg font-semibold ${
-              activeTab === "fertility"
+              activeTab === "naturalFertilitySupport"
                 ? "border-b-2 border-[#2B4360] text-[#2B4360]"
                 : "text-gray-400 "
             }`}
-            onClick={() => setActiveTab("fertility")}
+            onClick={() => setActiveTab("naturalFertilitySupport")}
           >
             Fertility Support
           </button>
@@ -105,11 +234,11 @@ const TreatmentsAndServices = () => {
           </button>
           <button
             className={`pb-2  text-lg font-semibold ${
-              activeTab === "freezing"
+              activeTab === "eggAndSpermFreezing"
                 ? "border-b-2 border-[#2B4360] text-[#2B4360]"
                 : "text-gray-400 "
             }`}
-            onClick={() => setActiveTab("freezing")}
+            onClick={() => setActiveTab("eggAndSpermFreezing")}
           >
             Egg & Sperm Freezing
           </button>

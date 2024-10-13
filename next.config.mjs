@@ -8,7 +8,9 @@ const nextConfig = {
       "cdn1.coutloot.com",
       "via.placeholder.com",
       "images.remotePatterns",
-      "static.thenounproject.com"
+      "static.thenounproject.com",
+      "images.remotePatterns",
+      "encrypted-tbn0.gstatic.com"
     ], // Add the domains you need here
   },
 };

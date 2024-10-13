@@ -125,6 +125,8 @@ const FindClinics = () => {
             <div className="sm:w-32 w-20  flex justify-start items-start">
               <Image
                 className="sm:w-24 sm:h-24 w-16 h-16 rounded-full object-fill overflow-clip"
+                width={100}
+                height={100}
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSk6j5cDMUPKlIbeirb9aslDunJKdtSbBg6sQ&s"
                 alt={`${clinic.name} photo`}
               />
@@ -137,7 +139,8 @@ const FindClinics = () => {
                 <div className="flex-col justify-start items-start gap-2 flex">
                   <div className="flex-col justify-start items-start gap-2 flex">
                     <div className="justify-start items-center gap-2 inline-flex">
-                      <Image src={loc} alt="icon" />
+                      <Image src={loc} width="auto"
+                height="auto" alt="icon" />
                       <div className="text-[#2b4360] text-base font-normal font-['Poppins'] leading-tight">
                         {/* {clinic.specialization.join(", ")} */}
                         Andheri, Mumbai
@@ -145,13 +148,15 @@ const FindClinics = () => {
                     </div>
                     <div className="justify-start items-start gap-4 inline-flex">
                       <div className="justify-start items-center gap-2 flex">
-                        <Image src={review} alt="icon" />
+                        <Image src={review}  width="auto"
+                height="auto"alt="icon" />
                         <div className="text-[#2b4360] text-base font-normal font-['Poppins'] leading-tight">
                           512 Reviews
                         </div>
                       </div>
                       <div className="justify-start items-center gap-2 flex">
-                        <Image src={star} alt="icon" />
+                        <Image src={star} width="auto"
+                height="auto" alt="icon" />
                         <div className="text-[#2b4360] text-base font-normal font-['Poppins'] leading-tight">
                           4.5
                         </div>
@@ -214,15 +219,18 @@ const FindClinics = () => {
                 </div>
                 <div className="justify-start items-center gap-2 inline-flex">
                   <div className="w-20 h-8 relative">
-                    <Image
+                    <Image  width={100}
+                height={100}
                       className="w-8 h-8 left-0 top-0 absolute rounded-full border border-[#2b4360]"
                       src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8k0hViJWVJVa92YPHh41fxa-_1oq4k6eNmA&s"
                     />
-                    <Image
+                    <Image  width={100}
+                height={100}
                       className="w-8 h-8 left-[22.67px] top-0 absolute rounded-full border border-[#2b4360]"
                       src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8k0hViJWVJVa92YPHh41fxa-_1oq4k6eNmA&s"
                     />
-                    <Image
+                    <Image  width={100}
+                height={100}
                       className="w-8 h-8 left-[45.33px] top-0 absolute rounded-full border border-[#2b4360]"
                       src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8k0hViJWVJVa92YPHh41fxa-_1oq4k6eNmA&s"
                     />
