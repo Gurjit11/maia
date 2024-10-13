@@ -22,65 +22,35 @@ import Link from "next/link";
 
 import DoctorFilters from "@/components/DoctorFilters";
 
-import { useAuth } from "@/contexts/AuthContext";
 
 
 const FindDoctors = () => {
-  const { loginToken, saveToken } = useAuth();
   const [doctors, setDoctors] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [filteredDoctors, setFilteredDoctors] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // const getDoctors = () => {
-  //   let data = JSON.stringify({
-  //     role: "DOCTOR",
-  //   });
-
-  //   let config = {
-  //     method: "post",
-  //     maxBodyLength: Infinity,
-  //     url: "https://maia-2.onrender.com/getAll",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     data: data,
-  //   };
-
-  //   axios
-  //     .request(config)
-  //     .then((response) => {
-  //       setDoctors(response.data.data);
-  //       setFilteredDoctors(response.data.data); // Initially show all doctors
-  //       setLoading(false);
-  //       console.log(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
-
   const getDoctors = () => {
-    let logintoken =
-      "f48668d4ea1989d14a5692c5c4b7b2964c1cd4333f27869b149f8f5b7db9c37a0731331d8bfdddaee2b39aa2da420282524c49da2bffa8bf95d5b6d4c956d1aea10ebcc18bb59d9fb0b68e8a0701262037f59784c56f5141e9446618ce41e97864da9a3c4729b6469712045d9d379f7e8996734fcfe58bf4029f8bb2c34d3b8831f3f79b575a4fe0b810e569ba76099e6b6e80a08bc2488350d7dc632a9d0feca6588711354f54e52adfebd6828012b69aaa1e903bfa9ac57a8c676e89d2853f30297fbab03b8b45c49af79cd819bd289ba7b7d3e50d799c01e27dcc02b1580a5ac3b6a6cc94dff860916be3340c958c75952faafd90bff74c677b74767d4d5dba21cd8ab57d8c0991e537ddaffb5f3cefea2c7f31e4d2dad2e1af34c8525d6295c8af0a9aefe466e3c4218ecac52d4265860495f0ece6361f315af2c82c97af5bc9e6aa356f19fcab74af5ecd4ba4c55fedeab1876372e9ff6cc8b1ebc0799988be785907c04772a8b96b2706b95151bdcb63ed2752734a64c6ea9691e0c335";
-
+  
     let data = JSON.stringify({
-      filters: {},
-      pageNo: 0,
-    });
+      filters:{},
+      pageNo:0
+  });
+
+  
     let config = {
       method: "post",
       maxBodyLength: Infinity,
       url: "https://maia.projectx38.cloud/web-apis/maia/web/doctors/get",
       headers: {
-        "device-id": "97c2fe5e-0f68-4d72-b277-d5d2d4e628a8",
-        "login-token": logintoken,
-        "city-id": "NA",
+       
         "Content-Type": "application/json",
+        "device-id": "97c2fe5e-0f68-4d72-b277-d5d2d4e628a8",
+        "login-token": "f48668d4ea1989d14a5692c5c4b7b2964c1cd4333f27869b149f8f5b7db9c37a0731331d8bfdddaee2b39aa2da420282524c49da2bffa8bf95d5b6d4c956d1aea10ebcc18bb59d9fb0b68e8a0701262037f59784c56f5141e9446618ce41e97864da9a3c4729b6469712045d9d379f7e8996734fcfe58bf4029f8bb2c34d3b8831f3f79b575a4fe0b810e569ba76099e6b6e80a08bc2488350d7dc632a9d0feca6588711354f54e52adfebd6828012b69aaa1e903bfa9ac57a8c676e89d2853f30297fbab03b8b45c49af79cd819bd289ba7b7d3e50d799c01e27dcc02b1580a5ac3b6a6cc94dff860916be3340c958c75952faafd90bff74c677b74767d4d5dba21cd8ab57d8c0991e537ddaffb5f3cefea2c7f31e4d2dad2e1af34c8525d6295c8af0a9aefe466e3c4218ecac52d4265860495f0ece6361f315af2c82c97af5bc9e6aa356f19fcab74af5ecd4ba4c55fedeab1876372e9ff6cc8b1ebc0799988be785907c04772a8b96b2706b95151bdcb63ed2752734a64c6ea9691e0c335",
+        "city-id": "NA"
       },
       data: data,
     };
-    console.log(loginToken);
 
     axios
       .request(config)
@@ -114,6 +84,9 @@ const FindDoctors = () => {
     });
     setFilteredDoctors(filtered);
   };
+
+  console.log(filteredDoctors);
+  
 
   return (
     <div className="bg-[#F7F7F7] sm:p-20 p-3 pt-10">
@@ -173,15 +146,15 @@ const FindDoctors = () => {
                 <div className="flex-col justify-start items-start gap-2 flex">
                   <div className="flex-col justify-start items-start gap-2 flex">
                     <div className="justify-start items-center gap-2 inline-flex">
-                      <Image
-                        src={doctor.tags[0].serviceIcon}
-                        alt="icon"
-                        width={30}
-                        height={30}
-                      />
-                      <div className="text-[#2b4360] text-base font-normal font-['Poppins'] leading-tight">
-                        {doctor.tags[0].serviceName}
-                      </div>
+                      <Image src={about} alt="icon" />
+                    
+                      {doctor.tags.map((tag, index) => (
+                        <div
+                          key={index}
+                          className="text-[#2b4360] text-base font-normal font-['Poppins'] leading-tight"
+                        >
+                          {tag.serviceName}
+                          </div>))}
                     </div>
                     <div className="justify-start items-start gap-4 inline-flex">
                       <div className="justify-start items-center gap-2 flex">
@@ -264,7 +237,7 @@ const FindDoctors = () => {
                 <div className="justify-start items-center gap-2 inline-flex">
                   <Image src={bag} alt="icon" />
                   <div className="text-[#2b4360] text-base font-normal font-['Poppins'] leading-tight">
-                    {doctors.experiance} Years
+                    {doctor.experiance} Years
                   </div>
                 </div>
               </div>

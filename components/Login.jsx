@@ -370,6 +370,7 @@ function Login({ setSidebar }) {
   const [otp, setOtp] = useState("");
   const [user, setUser] = useState({ name: "", email: "", gender: "" });
   const [authtoken, setAuthToken] = useState("");
+  const [flow, setFlow] = useState("");
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -394,6 +395,7 @@ function Login({ setSidebar }) {
       };
       const response = await axios.request(config);
       setAuthToken(response.data.data.authToken);
+      setFlow(response.data.data.flow);
       console.log("OTP sent successfully:", response.data.data);
       if (response.data.success) setModalState("otp"); // Move to the OTP modal state
     } catch (error) {
@@ -426,7 +428,13 @@ function Login({ setSidebar }) {
       const response = await axios.request(config);
       saveToken(response.data.data.loginToken);
       console.log("OTP verified successfully:", response.data);
-      if (response.data.success) setModalState("createProfile"); // Move to the Create Profile modal state
+      if (response.data.success) {
+        if (flow == "SIGNUP")
+          setModalState(
+            "createProfile"
+          ); // Move to the Create Profile modal state
+        else if (flow == "SIGNIN") setModalState("success"); // Move to the Create Profile modal state
+      }
     } catch (error) {
       console.error("Error verifying OTP:", error);
       alert("OTP verification failed. Please try again.");

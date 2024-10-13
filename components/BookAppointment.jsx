@@ -12,6 +12,7 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
+import Image from "next/image";
 
 const Step1 = ({ doctor, onNext }) => {
   return (
@@ -266,21 +267,23 @@ const Completed = ({ onNext, setIsOpen }) => {
         <Image src="/BookingCompleted.png" alt="Booking Completed" />
       </div>
       <div className="w-full mt-12 text-center flex flex-col items-center">
-        <p className="text-2xl font-bold break-words text-[#E29578]">Appointment Submitted</p>
-          <p className="text-sm mt-2 text-gray-500">The clinic will contact you shortly to confirm the appointment</p>
-          <div className="flex w-full items-center justify-evenly gap-8 px-12">
+        <p className="text-2xl font-bold break-words text-[#E29578]">
+          Appointment Submitted
+        </p>
+        <p className="text-sm mt-2 text-gray-500">
+          The clinic will contact you shortly to confirm the appointment
+        </p>
+        <div className="flex w-full items-center justify-evenly gap-8 px-12">
+          <button className="font-semibold w-full border border-[#2B4360] text-[#2B4360] mt-5 py-3 px-2 rounded-md">
+            View Details
+          </button>
           <button
-        className="font-semibold w-full border border-[#2B4360] text-[#2B4360] mt-5 py-3 px-2 rounded-md"
-      >
-        View Details
-      </button>
-      <button
-        onClick={onNext}
-        className="font-semibold w-full bg-[#2B4360] text-white mt-5 py-3 px-2 rounded-md"
-      >
-        Okay
-      </button>
-          </div>
+            onClick={onNext}
+            className="font-semibold w-full bg-[#2B4360] text-white mt-5 py-3 px-2 rounded-md"
+          >
+            Okay
+          </button>
+        </div>
       </div>
     </div>
   );
@@ -318,11 +321,14 @@ function BookAppointment({ doctor }) {
       >
         <div className="text-black sm:w-[70%] md:w-[50%] lg:w-[40%] xl:w-[30%] z-20 w-[100%] sm:flex-col rounded-3xl bg-white p-6">
           {completed ? (
-            <Completed setIsOpen={setIsOpen} onNext={()=> {
-              setIsOpen(false)
-              setStep(1)
-              setCompleted(false);
-            }}/>
+            <Completed
+              setIsOpen={setIsOpen}
+              onNext={() => {
+                setIsOpen(false);
+                setStep(1);
+                setCompleted(false);
+              }}
+            />
           ) : (
             <>
               <div className="flex items-center justify-between w-full">

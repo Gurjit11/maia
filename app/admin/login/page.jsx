@@ -79,7 +79,7 @@ const AdminLogin = () => {
               </button>
             </Link>
             <div className="self-stretch text-center text-slate-800 text-sm font-normal font-['Poppins'] leading-tight">
-              Don't have an account?{" "}
+              Don&apos;t have an account?{" "}
               <a
                 href="#"
                 className="text-slate-700 text-sm font-semibold font-['Poppins'] underline"
