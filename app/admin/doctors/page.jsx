@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { useState } from "react";
 
 const DoctorsList = () => {
@@ -32,9 +33,11 @@ const DoctorsList = () => {
           <h1 className="text-2xl font-bold text-gray-800">Doctors</h1>
           <span className="text-gray-500">Users &gt; Doctors</span>
         </div>
+        <Link href="/admin/doctors/addnew">
         <button className="bg-blue-600 text-white px-4 py-2 rounded-md">
           + Add New Doctor
         </button>
+        </Link>
       </div>
 
       {/* Search and Filters */}
