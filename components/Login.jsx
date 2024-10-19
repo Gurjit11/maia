@@ -996,7 +996,7 @@ function Login({ setSidebar }) {
       const response = await axios.request(config);
       console.log("Profile created successfully:", response.data);
       if (response.data.success) setModalState("consultation");
-      alert("Profile created successfully!");
+      // alert("Profile created successfully!");
     } catch (error) {
       console.error("Error creating profile:", error);
       alert("Failed to create profile. Please try again.");
@@ -1036,7 +1036,7 @@ function Login({ setSidebar }) {
       const response = await axios.request(config);
       console.log("Consultation form submitted successfully:", response.data);
       if (response.data.success) setModalState("success");
-      alert("Consultation form submitted successfully!");
+      // alert("Consultation form submitted successfully!");
     } catch (error) {
       console.error("Error submitting consultation form:", error);
       alert("Failed to submit consultation form. Please try again.");
