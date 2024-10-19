@@ -98,8 +98,8 @@ const DoctorPage = ({ params }) => {
                   </div>
                   <div className=" justify-start items-center gap-2 inline-flex">
                     <Image src={location} alt="icon" />{" "}
-                      {doctor?.clinics?.map((clinic) => (
-                    <div className="text-[#2b4360] text-base font-normal font-['Poppins'] leading-tight">
+                      {doctor?.clinics?.map((clinic,index) => (
+                    <div key={index} className="text-[#2b4360] text-base font-normal font-['Poppins'] leading-tight">
                       {clinic?.addressName}
                     </div>
 
