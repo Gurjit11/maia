@@ -264,7 +264,12 @@ const Navbar = () => {
             {showModal && (
               <div>
                 <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center">
-                  <div ref={modalRef} className="bg-white p-6 rounded-lg">
+                  {/* Modal container */}
+                  <div
+                    ref={modalRef}
+                    className="bg-white p-4 sm:p-6 rounded-lg w-[90%] sm:w-[80%] md:w-[60%] lg:w-[40%] max-w-2xl"
+                  >
+                    {/* Search input */}
                     <div className="mb-4">
                       <input
                         type="text"
@@ -272,25 +277,30 @@ const Navbar = () => {
                         className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
                       />
                     </div>
-                    <div className="grid grid-cols-4 gap-4 mb-4">
+
+                    {/* Cities grid */}
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mb-4">
                       {cityData.map((city) => (
                         <div
                           key={city.CityId}
                           onClick={() => handleCitySelect(city)}
                           className={`text-center cursor-pointer border-2 p-2 rounded-lg transition-colors ${
-                            selectedCity && selectedCity.id === city.cityId
+                            selectedCity && selectedCity.CityId === city.CityId
                               ? "bg-orange-200 border-orange-500"
                               : "border-gray-200 hover:bg-gray-100"
                           }`}
                         >
                           <Image
                             src={city.cityIcon}
-                            alt={city.cityId}
-                            className="w-24 h-24 mx-auto mb-2"
-                            width={100}
-                            height={100}
+                            alt={city.CityId}
+                            className="w-20 h-20 mx-auto mb-2" // Adjusted size for mobile
+                            width={80}
+                            height={80} // Adjusted size for mobile
                           />
-                          <p className="text-lg font-medium">{city.cityId}</p>
+                          {/* Ensure city name is visible and responsive */}
+                          <p className="text-sm sm:text-lg font-medium truncate">
+                            {city.cityId}
+                          </p>
                         </div>
                       ))}
                     </div>
@@ -321,7 +331,7 @@ const Navbar = () => {
                 </div>
               </Link>
               <Link
-                href={"/blogs"}
+                href={"https://alphabetasolution.co.in/"}
                 className="justify-start items-center gap-2 flex"
               >
                 <div className="text-stone-950 text-base font-normal font-['Poppins'] leading-tight">
