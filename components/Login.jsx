@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "react-modal";
 import Learnslider from "./loginmodals/Learnslider";
 import Image from "next/image";
@@ -901,7 +901,11 @@ function Login({ setSidebar }) {
   const [authtoken, setAuthToken] = useState("");
   const [flow, setFlow] = useState("");
 
-  const openModal = () => setIsModalOpen(true);
+  const openModal = () => {
+    console.log("Opening modal");
+    setIsModalOpen(true);
+    setSidebar(false);
+  };
   const closeModal = () => setIsModalOpen(false);
 
   const sendOtp = async () => {
