@@ -41,11 +41,14 @@ const Howmaia = () => {
       <div className="flex justify-center w-full items-center gap-10">
         <div className="hidden sm:grid grid-cols-3 w-[80%] gap-3">
           {carddata.map((card, index) => (
-            <div key={index} className="col-span-1 mt-3 flex-col ">
+            <div
+              key={index}
+              className="col-span-1 mt-3 flex-col transition-transform duration-300 ease-in-out transform hover:border p-3 rounded-xl hover:scale-105"
+            >
               <div className="flex justify-center items-center">
                 <Image src={card.image} alt="icon" />
               </div>
-              <div className="text-[#2B4360]  flex mt-3 justify-center items-center font-bold text-xl">
+              <div className="text-[#2B4360] flex mt-3 justify-center items-center font-bold text-xl">
                 {card.title}
               </div>
               <div className="text-gray-500 text-center flex mt-1 justify-center items-center">
