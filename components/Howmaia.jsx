@@ -5,6 +5,9 @@ import care from "../public/care.png";
 import community from "../public/community.png";
 import Image from "next/image";
 import Learnslider from "./loginmodals/Learnslider";
+import { motion } from "framer-motion";
+import { useRef } from "react";
+import { useInView } from "framer-motion";
 
 const carddata = [
   {
@@ -28,22 +31,50 @@ const carddata = [
 ];
 
 const Howmaia = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, threshold: 0.4 });
+
   return (
     <div className="flex-col justify-center items-center p-5 sm:p-20 py-10">
       <div className="flex-col justify-center items-center ">
-        <div className="text-[#2B4360] flex justify-center items-center font-bold text-2xl sm:text-3xl">
+        <motion.div
+          className="text-[#2B4360] flex justify-center items-center font-bold text-2xl sm:text-3xl"
+          initial={{ opacity: 0, y: 50 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8 }}
+        >
           How Maia Care Works ?
-        </div>
-        <div className="text-gray-500 flex justify-center items-center">
+        </motion.div>
+        <motion.div
+          className="text-gray-500 flex justify-center items-center"
+          initial={{ opacity: 0, y: 50 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
           STEPS
-        </div>
+        </motion.div>
       </div>
-      <div className="flex justify-center w-full items-center gap-10">
+
+      <motion.div
+        className="flex justify-center w-full items-center gap-10"
+        ref={ref}
+        initial={{ opacity: 0, y: 50 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.8, delay: 0.3 }}
+      >
         <div className="hidden sm:grid grid-cols-3 w-[80%] gap-3">
           {carddata.map((card, index) => (
-            <div
+            <motion.div
               key={index}
-              className="col-span-1 mt-3 flex-col transition-transform duration-300 ease-in-out transform hover:border p-3 rounded-xl hover:scale-105"
+              className="col-span-1 mt-3 flex-col bg-white p-2 m-2 rounded-lg "
+              initial={{ opacity: 0, y: 50 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, delay: index * 0.2 + 0.3 }}
+              whileHover={{
+                scale: 1.05,
+                boxShadow: "0px 8px 15px rgba(0, 0, 0, 0.1)",
+                transition: { duration: 0.2 },
+              }}
             >
               <div className="flex justify-center items-center">
                 <Image src={card.image} alt="icon" />
@@ -54,13 +85,15 @@ const Howmaia = () => {
               <div className="text-gray-500 text-center flex mt-1 justify-center items-center">
                 {card.description}
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
+
+        {/* For mobile slider */}
         <div className="sm:hidden w-[90%]">
           <Learnslider />
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };

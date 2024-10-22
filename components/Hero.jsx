@@ -9,8 +9,14 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import useWindowSize from "@/hooks/useWindowSize";
+import { motion } from "framer-motion";
+import { useRef } from "react";
+import { useInView } from "framer-motion";
 
 const Hero = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+
   let data = JSON.stringify({
     id: "6689527988d8fd65f1a3934b",
   });
@@ -135,46 +141,67 @@ const Hero = () => {
             </Slider>
           </div>
           <div className="col-span-1 flex-col justify-center gap-6 flex">
-            <div className="flex-col sm:p-20 p-5 gap-2 flex">
-              <div className="flex-col  gap-4  flex">
-                <div className="sm:text-start text-center text-slate-700 sm:text-6xl text-2xl font-normal font-serif">
+            <motion.div
+              className="flex-col sm:p-20 p-5 gap-2 flex"
+              ref={ref}
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
+            >
+              <div className="flex-col gap-4 flex">
+                <motion.div
+                  className="sm:text-start text-center text-slate-700 sm:text-6xl text-2xl font-normal font-serif"
+                  initial={{ opacity: 0, y: 50 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.2 }}
+                >
                   Discover Your Fertility Journey
-                </div>
-                <div className="sm:text-start text-center text-slate-700 sm:text-3xl font-light font-poppins ">
+                </motion.div>
+                <motion.div
+                  className="sm:text-start text-center text-slate-700 sm:text-3xl font-light font-poppins"
+                  initial={{ opacity: 0, y: 50 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.8 }}
+                >
                   Search with purpose
-                </div>
+                </motion.div>
               </div>
-              <div className="justify-start items-center gap-2 flex">
+              <motion.div
+                className="justify-start items-center gap-2 flex"
+                initial={{ opacity: 0, y: 50 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.8, delay: 0.6 }}
+              >
                 <div className="w-[90%]">
-                  <div className=" bg-white text-black  rounded border border-neutral-200 justify-start items-center flex">
+                  <div className="bg-white text-black rounded border border-neutral-200 justify-start items-center flex">
                     <input
                       type="text"
-                      placeholder="  Search your queries"
-                      //   value={searchText}
-                      //   onChange={handleSearchChange}
+                      placeholder="Search your queries"
                       required
                       className="search_input w-full peer p-3"
                     />
-                    {/* <div className="text-zinc-600 text-base font-normal font-['Poppins'] "></div>
-                    <div className="rounded-sm" />
-                    <div className="w-6 h-6 px-0.5 py-0.5 justify-center items-center flex" /> */}
                   </div>
                 </div>
-                <div className=" px-6 py-4 bg-red-400 rounded-lg justify-center items-center gap-2 flex">
-                  <div className=" text-center text-white text-base font-medium font-['Poppins'] ">
+                <div className="px-6 py-4 bg-red-400 rounded-lg justify-center items-center gap-2 flex">
+                  <div className="text-center text-white text-base font-medium font-['Poppins']">
                     Search
                   </div>
                 </div>
-              </div>
-              <div className="justify-start text-xs sm:text-sm items-start gap-1 flex">
-                <div className="text-slate-700 text-xs sm:text-sm  font-light font-poppins ">
+              </motion.div>
+              <motion.div
+                className="justify-start text-xs sm:text-sm items-start gap-1 flex"
+                initial={{ opacity: 0, y: 50 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.8, delay: 0.8 }}
+              >
+                <div className="text-slate-700 text-xs sm:text-sm font-light font-poppins">
                   Eg.
                 </div>
-                <div className="text-slate-700 text-xs sm:text-sm font-light font-poppins ">
+                <div className="text-slate-700 text-xs sm:text-sm font-light font-poppins">
                   Is IVF safe?, What is Egg Freezing?
                 </div>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </div>
           <div className="hidden col-span-1 w-full overflow-clip pb-1.5 justify-center items-center sm:flex">
             <Slider {...settings} className="w-full">

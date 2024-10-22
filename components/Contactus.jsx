@@ -6,23 +6,26 @@ import contact from "../public/contact.png";
 
 const ContactForm = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, threshold: 0.4 });
+  const isInView = useInView(ref, { once: true, threshold: 0.6 });
 
   return (
     <div className="sm:p-20 py-10 p-5 overflow-clip">
       <div className=" justify-between items-center flex">
         <motion.div
-          className="hidden sm:block w-[50%]"
+          className="hidden sm:block overflow-clip rounded-xl w-[50%]"
           initial={{ opacity: 0, x: -100 }}
           animate={isInView ? { opacity: 1, x: 0 } : {}} // Trigger animation when in view
           transition={{ duration: 0.8, delay: 0.2 }}
           ref={ref}
         >
-          <Image src={contact} />
+          <Image
+            src={contact}
+            className="hover:scale-105 transition-all rounded-xl duration-300"
+          />
         </motion.div>
 
         <motion.div
-          className="sm:w-[40%] flex-col justify-start items-start sm:gap-8 inline-flex"
+          className="sm:w-[45%] flex-col justify-start items-start sm:gap-8 inline-flex"
           initial={{ opacity: 0, x: 100 }}
           animate={isInView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.8 }}
