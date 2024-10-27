@@ -88,7 +88,10 @@ const DoctorsList = () => {
                   alt={doctor.name}
                   className="w-8 h-8 rounded-full"
                 />
+                            <Link href={`/admin/doctors/edf64510-d59c-4a55-b61f-6bf9dabce2c1`}>
+
                 <span>{doctor.name}</span>
+                </Link>
               </td>
               <td className="py-2 px-4 border-b">{doctor.date}</td>
               <td className="py-2 px-4 border-b">{doctor.mobile}</td>
@@ -109,6 +112,7 @@ const DoctorsList = () => {
                 <button className="bg-red-200 p-2 rounded-md">🗑️</button>
               </td>
             </tr>
+
           ))}
         </tbody>
       </table>
