@@ -10,7 +10,8 @@ const nextConfig = {
       "images.remotePatterns",
       "static.thenounproject.com",
       "images.remotePatterns",
-      "encrypted-tbn0.gstatic.com"
+      "encrypted-tbn0.gstatic.com",
+      "alphabetasolution.co.in",
     ], // Add the domains you need here
   },
 };
