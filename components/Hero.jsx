@@ -1,10 +1,10 @@
 "use client";
+import React from "react";
 import Image from "next/image";
 import priyanka from "../public/priyanka.png";
 import shahrukh from "../public/shahrukh.png";
 import jennifer from "../public/jennifer.png";
 import quotation from "../public/quotation.png";
-import axios from "axios";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -174,6 +174,7 @@ const Hero = () => {
               >
                 <div className="w-[90%]">
                   <div className="bg-white text-black rounded border border-neutral-200 justify-start items-center flex">
+                  <div className="bg-white text-black rounded border border-neutral-200 justify-start items-center flex">
                     <input
                       type="text"
                       placeholder="Search your queries"
@@ -182,6 +183,8 @@ const Hero = () => {
                     />
                   </div>
                 </div>
+                <div className="px-6 py-4 bg-red-400 rounded-lg justify-center items-center gap-2 flex">
+                  <div className="text-center text-white text-base font-medium font-['Poppins']">
                 <div className="px-6 py-4 bg-red-400 rounded-lg justify-center items-center gap-2 flex">
                   <div className="text-center text-white text-base font-medium font-['Poppins']">
                     Search
@@ -197,6 +200,7 @@ const Hero = () => {
                 <div className="text-slate-700 text-xs sm:text-sm font-light font-poppins">
                   Eg.
                 </div>
+                <div className="text-slate-700 text-xs sm:text-sm font-light font-poppins">
                 <div className="text-slate-700 text-xs sm:text-sm font-light font-poppins">
                   Is IVF safe?, What is Egg Freezing?
                 </div>
