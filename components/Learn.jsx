@@ -18,7 +18,7 @@ const carddata = [
     title:
       "10 Essential Tips to Prepare for a Successful IUI Treatment Subheading",
     description:
-      "The most complex fertility treatment, this course will help you do it right the first time.",
+      "Intrauterine Insemination (IUI) is a fertility treatment that involves placing sperm directly into the uterus to increase the chances of fertilization. ",
     image:
       "https://alphabetasolution.co.in/wp-content/uploads/2024/10/blog-banner_04.jpg",
     tags: ["IUI"],
@@ -27,7 +27,7 @@ const carddata = [
   {
     title: "Advanced Fertility Techniques: Beyond IVF & IUI",
     description:
-      "You took sex ed, but now you need to understand fertility. Data to answer your questions about natural conception and diagnosing.",
+      " Two of the most commonly known methods are in vitro fertilization (IVF) and intrauterine insemination (IUI).  ",
     image:
       "https://alphabetasolution.co.in/wp-content/uploads/2024/10/blog-banner.png",
     tags: ["IUI", "IVF"],
@@ -36,7 +36,7 @@ const carddata = [
   {
     title: "IVF vs IUI: Which Fertility Treatment is Right for You?",
     description:
-      "Breaking down every important topic relating to mental health & fertility. We cover data around anxiety, depression, and stress as they.",
+      "Understanding the differences between these treatments can help you and your partner make an informed decision about the best path forward. ",
     image:
       "https://alphabetasolution.co.in/wp-content/uploads/2024/10/blog-banner_05.jpg",
     tags: ["IUI", "IVF"],
@@ -57,9 +57,9 @@ const Learn = () => {
     prevArrow: <PrevArrow />,
   };
   return (
-    <div className="flex-col bg-orange-100 justify-center items-center sm:p-20 py-10 p-5">
+    <div className="flex-col bg-[#FEF3EA] justify-center items-center sm:p-20 py-10 p-5">
       <div className="flex-col justify-center items-center ">
-        <div className="text-[#2B4360] flex justify-center items-center font-bold text-2xl sm:text-3xl">
+        <div className="text-[#2B4360] abhaya-libre-semibold flex justify-center items-center font-bold text-2xl sm:text-4xl">
           Learn about Fertility
         </div>
         <div className="text-gray-500 flex justify-center items-center">
@@ -70,13 +70,14 @@ const Learn = () => {
         <div className="w-[100%] sm:w-[80%] gap-10 sm:overflow-x-visible overflow-x-clip">
           <Slider {...settings}>
             {carddata.map((card, index) => (
-              <div key={index} className="sm:p-3 p-1 rounded-md overflow-clip">
-                <div className="col-span-1 h-[550px] rounded-md bg-white mt-3 flex-col justify-between items-end relative">
+              <div key={index} className="sm:p-3 p-1  rounded-md overflow-clip">
+                <div className="col-span-1 shadow-md h-[500px] rounded-md bg-white mt-3 flex-col justify-between items-end relative">
                   <div className="flex rounded-t-md overflow-clip justify-center items-center">
                     <Image
                       width={550}
                       height={250}
                       src={card.image}
+                      className="hover:scale-105 transition-transform duration-500 ease-in-out"
                       alt="icon"
                     />
                   </div>
@@ -90,9 +91,12 @@ const Learn = () => {
                       </div>
                     ))}
                   </div>
-                  <div className="flex h-[300px] gap-4 px-5 justify-center items-center">
+                  <div className="flex h-[250px] gap-4 px-5 justify-center items-center">
                     <div className="flex-col justify-center items-center">
-                      <div className="text-[#2B4360] flex justify-center items-center text-center font-bold text-xl">
+                      <div
+                        className="text-[#2B4360] abhaya-libre-semibold 
+                       flex justify-center items-center text-center font-semibold text-xl"
+                      >
                         {card.title}
                       </div>
                       <div className="text-gray-500 text-center text-sm px-3 my-2 flex mt-1 justify-center items-center">
@@ -121,7 +125,7 @@ const NextArrow = (props) => {
   const { className, style, onClick } = props;
   return (
     <div className="absolute right-[-50px] top-[50%] " onClick={onClick}>
-      <IoIosArrowDroprightCircle className="text-slate-700 text-2xl cursor-pointer" />
+      <IoIosArrowDroprightCircle className="text-slate-700 text-3xl cursor-pointer" />
     </div>
   );
 };
@@ -129,7 +133,7 @@ const PrevArrow = (props) => {
   const { className, style, onClick } = props;
   return (
     <div className="absolute left-[-50px] top-[50%] " onClick={onClick}>
-      <IoIosArrowDropleftCircle className="text-slate-700 text-2xl cursor-pointer" />
+      <IoIosArrowDropleftCircle className="text-slate-700 text-3xl cursor-pointer" />
     </div>
   );
 };

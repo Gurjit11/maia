@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+.abhaya-libre-semibold {
+  font-family: "Abhaya Libre", serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
