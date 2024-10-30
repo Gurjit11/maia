@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { useState } from "react";
 
 const DoctorsList = () => {
@@ -32,9 +33,11 @@ const DoctorsList = () => {
           <h1 className="text-2xl font-bold text-gray-800">Doctors</h1>
           <span className="text-gray-500">Users &gt; Doctors</span>
         </div>
+        <Link href="/admin/doctors/addnew">
         <button className="bg-blue-600 text-white px-4 py-2 rounded-md">
           + Add New Doctor
         </button>
+        </Link>
       </div>
 
       {/* Search and Filters */}
@@ -85,7 +88,10 @@ const DoctorsList = () => {
                   alt={doctor.name}
                   className="w-8 h-8 rounded-full"
                 />
+                            <Link href={`/admin/doctors/edf64510-d59c-4a55-b61f-6bf9dabce2c1`}>
+
                 <span>{doctor.name}</span>
+                </Link>
               </td>
               <td className="py-2 px-4 border-b">{doctor.date}</td>
               <td className="py-2 px-4 border-b">{doctor.mobile}</td>
@@ -106,6 +112,7 @@ const DoctorsList = () => {
                 <button className="bg-red-200 p-2 rounded-md">🗑️</button>
               </td>
             </tr>
+
           ))}
         </tbody>
       </table>

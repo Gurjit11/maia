@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "react-modal";
 import Learnslider from "./loginmodals/Learnslider";
 import Image from "next/image";
@@ -258,76 +258,601 @@ const CreateProfile = ({ user, setUser, onCreateProfile }) => {
   );
 };
 
-const options = [
-  "Egg Freezing",
-  "IVF",
-  "IUI",
-  "Natural Conception",
-  "Fertility Support",
-  "Donor Eggs",
-  "Embryo Freezing (Not TTC)",
-  "Donor Sperm",
-  "Surrogacy",
-  "Sperm Freezing",
-  "I don't know",
-];
+// const options = [
+//   "Egg Freezing",
+//   "IVF",
+//   "IUI",
+//   "Natural Conception",
+//   "Fertility Support",
+//   "Donor Eggs",
+//   "Embryo Freezing (Not TTC)",
+//   "Donor Sperm",
+//   "Surrogacy",
+//   "Sperm Freezing",
+//   "I don't know",
+// ];
+
+// function ConsultationForm({ onComplete }) {
+//   const [selectedOptions, setSelectedOptions] = useState([]);
+
+//   const handleSelectOption = (option) => {
+//     setSelectedOptions((prevSelectedOptions) =>
+//       prevSelectedOptions.includes(option)
+//         ? prevSelectedOptions.filter((prevOption) => prevOption !== option)
+//         : [...prevSelectedOptions, option]
+//     );
+//     console.log(selectedOptions);
+//   };
+
+//   return (
+//     <div className="text-black sm:w-[50%] w-[80%] sm:flex rounded-3xl p-5 sm:p-10 bg-white">
+//       <div className="bg-white sm:p-4 ">
+//         <div className="sm:flex items-center">
+//           <h2 className="text-xl font-bold mr-3">Schedule Your Consultation</h2>
+//           <div className="m-1 w-max text-green-600 text-sm justify-center items-center bg-green-200 p-1 rounded-md font-medium font-['Poppins'] leading-none">
+//             Get your first consultation free
+//           </div>
+//         </div>
+//         <div className="my-4">
+//           <div className="text-gray-600 text-sm">30% Complete</div>
+//           <div className="w-full bg-gray-200 h-1 mb-4">
+//             <div className="bg-blue-600 h-1" style={{ width: `30%` }}></div>
+//           </div>
+//         </div>
+//         <div className="text-[#E29578] mb-3  text-xl sm:text-2xl">
+//           Which of these fertility paths are you interested in?
+//         </div>
+
+//         {options.map((option) => (
+//           <button
+//             key={option}
+//             onClick={() => handleSelectOption(option)}
+//             className={`${
+//               selectedOptions.includes(option)
+//                 ? "bg-blue-600 text-white"
+//                 : "bg-gray-200 text-gray-600"
+//             } px-2 py-1 rounded-md m-1`}
+//           >
+//             {option}
+//           </button>
+//         ))}
+
+//         <div className="flex justify-between mt-4">
+//           <button className="text-blue-600 border border-blue-600 px-5 py-2 rounded-lg">
+//             Previous
+//           </button>
+//           <button
+//             onClick={onComplete}
+//             className="bg-blue-600 text-white px-5 py-2 rounded-lg"
+//           >
+//             Next
+//           </button>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
+const options = {
+  cities: [
+    "Mumbai",
+    "Delhi",
+    "Pune",
+    "Jharkhand",
+    "Chattisgarh",
+    "Madhya Pradesh",
+    "Nashik",
+    "Solhapur",
+  ],
+  ages: ["0-18", "19-25", "26-35", "36-45", "46+"],
+  fertilityPaths: [
+    "Egg Freezing",
+    "IVF",
+    "IUI",
+    "Natural Conception",
+    "Fertility Support",
+    "Donor Eggs",
+    "Embryo Freezing",
+    "Donor Sperm",
+    "Surrogacy",
+    "Sperm Freezing",
+    "I don't know",
+  ],
+  supportInterests: [
+    "Getting emotional support",
+    "Supporting colleagues",
+    "Insurance coverage",
+    "Managing work & family building",
+    "Get nutrition help",
+    "Financial support",
+    "Holistic treatment support",
+    "Fitness support",
+    "Not yet decided",
+  ],
+  topicInterests: [
+    "Miscarriage",
+    "Endometriosis",
+    "Fibroids",
+    "PCOS",
+    "Diminished ovarian reserve",
+    "Male factor",
+    "Cancer",
+    "Other",
+  ],
+};
 
 function ConsultationForm({ onComplete }) {
-  const [selectedOptions, setSelectedOptions] = useState([]);
+  const [step, setStep] = useState(1);
+  const [selectedOptions, setSelectedOptions] = useState({
+    city: "",
+    age: "",
+    experience: "",
+    familyBuilding: "",
+    fertilityPaths: "",
+    haveDoctor: "",
+    supportInterest: "",
+    topicInterest: "",
+    otherTopics: "",
+    preferredDate: "",
+    preferredTime: "",
+    phoneNumber: "",
+  });
 
-  const handleSelectOption = (option) => {
-    setSelectedOptions((prevSelectedOptions) =>
-      prevSelectedOptions.includes(option)
-        ? prevSelectedOptions.filter((prevOption) => prevOption !== option)
-        : [...prevSelectedOptions, option]
-    );
-    console.log(selectedOptions);
+  const handleOptionSelect = (field, option) => {
+    setSelectedOptions((prevState) => ({
+      ...prevState,
+      [field]: option,
+    }));
   };
+
+  // const handleMultiSelect = (field, option) => {
+  //   setSelectedOptions((prevState) => ({
+  //     ...prevState,
+  //     [field]: prevState[field].includes(option)
+  //       ? prevState[field].filter((item) => item !== option)
+  //       : [...prevState[field], option],
+  //   }));
+  // };
+
+  const nextStep = () => setStep((prevStep) => prevStep + 1);
+  const previousStep = () => setStep((prevStep) => prevStep - 1);
 
   return (
     <div className="text-black sm:w-[50%] w-[80%] sm:flex rounded-3xl p-5 sm:p-10 bg-white">
-      <div className="bg-white sm:p-4 ">
-        <div className="sm:flex items-center">
-          <h2 className="text-xl font-bold mr-3">Schedule Your Consultation</h2>
-          <div className="m-1 w-max text-green-600 text-sm justify-center items-center bg-green-200 p-1 rounded-md font-medium font-['Poppins'] leading-none">
-            Get your first consultation free
-          </div>
-        </div>
+      <div className="bg-white sm:p-4 w-full">
+        {/* Progress bar */}
         <div className="my-4">
-          <div className="text-gray-600 text-sm">30% Complete</div>
+          <div className="text-gray-600 text-sm">
+            {(step - 1) * 10}% Completed
+          </div>
           <div className="w-full bg-gray-200 h-1 mb-4">
-            <div className="bg-blue-600 h-1" style={{ width: `30%` }}></div>
+            <div
+              className="bg-blue-600 h-1"
+              style={{ width: `${(step - 1) * 10}%` }}
+            ></div>
           </div>
         </div>
-        <div className="text-[#E29578] mb-3  text-xl sm:text-2xl">
-          Which of these fertility paths are you interested in?
-        </div>
 
-        {options.map((option) => (
-          <button
-            key={option}
-            onClick={() => handleSelectOption(option)}
-            className={`${
-              selectedOptions.includes(option)
-                ? "bg-blue-600 text-white"
-                : "bg-gray-200 text-gray-600"
-            } px-2 py-1 rounded-md m-1`}
-          >
-            {option}
-          </button>
-        ))}
+        {/* Step 1: City */}
+        {step === 1 && (
+          <div className="mb-4">
+            <label className="block text-lg mb-2">
+              Which city are you currently living in?
+            </label>
+            <input
+              type="text"
+              placeholder="Search your city"
+              className="border p-2 w-full mb-2"
+              value={selectedOptions.city}
+              onChange={(e) => handleOptionSelect("city", e.target.value)}
+            />
+            <div className="flex flex-wrap gap-2">
+              {options.cities.map((city) => (
+                <button
+                  key={city}
+                  onClick={() => handleOptionSelect("city", city)}
+                  className={`${
+                    selectedOptions.city === city
+                      ? "bg-blue-600 text-white"
+                      : "bg-gray-200 text-gray-600"
+                  } px-2 py-1 rounded-md`}
+                >
+                  {city}
+                </button>
+              ))}
+            </div>
+            <div className="flex justify-between mt-4">
+              <button
+                disabled
+                className="text-gray-400 border border-gray-400 px-5 py-2 rounded-lg"
+              >
+                Previous
+              </button>
+              <button
+                onClick={nextStep}
+                className="bg-blue-600 text-white px-5 py-2 rounded-lg"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        )}
 
-        <div className="flex justify-between mt-4">
-          <button className="text-blue-600 border border-blue-600 px-5 py-2 rounded-lg">
-            Previous
-          </button>
-          <button
-            onClick={onComplete}
-            className="bg-blue-600 text-white px-5 py-2 rounded-lg"
-          >
-            Next
-          </button>
-        </div>
+        {/* Step 2: Age */}
+        {step === 2 && (
+          <div className="mb-4 w-full">
+            <label className="block text-lg mb-2">
+              What is your current age?
+            </label>
+            <div className="flex gap-2">
+              {options.ages.map((age) => (
+                <button
+                  key={age}
+                  onClick={() => handleOptionSelect("age", age)}
+                  className={`${
+                    selectedOptions.age === age
+                      ? "bg-blue-600 text-white"
+                      : "bg-gray-200 text-gray-600"
+                  } px-2 py-1 rounded-md`}
+                >
+                  {age}
+                </button>
+              ))}
+            </div>
+            <div className="flex justify-between mt-4">
+              <button
+                onClick={previousStep}
+                className="text-blue-600 border border-blue-600 px-5 py-2 rounded-lg"
+              >
+                Previous
+              </button>
+              <button
+                onClick={nextStep}
+                className="bg-blue-600 text-white px-5 py-2 rounded-lg"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* Step 3: Experience */}
+        {step === 3 && (
+          <div className="mb-4">
+            <label className="block text-lg mb-2">
+              Are you just starting with fertility or more experienced?
+            </label>
+            <div className="flex gap-2">
+              {["Just Starting", "Experienced"].map((exp) => (
+                <button
+                  key={exp}
+                  onClick={() => handleOptionSelect("experience", exp)}
+                  className={`${
+                    selectedOptions.experience === exp
+                      ? "bg-blue-600 text-white"
+                      : "bg-gray-200 text-gray-600"
+                  } px-2 py-1 rounded-md`}
+                >
+                  {exp}
+                </button>
+              ))}
+            </div>
+            <div className="flex justify-between mt-4">
+              <button
+                onClick={previousStep}
+                className="text-blue-600 border border-blue-600 px-5 py-2 rounded-lg"
+              >
+                Previous
+              </button>
+              <button
+                onClick={nextStep}
+                className="bg-blue-600 text-white px-5 py-2 rounded-lg"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* Step 4: Family Building */}
+        {step === 4 && (
+          <div className="mb-4">
+            <label className="block text-lg mb-2">
+              Are you interested in building a family now or later?
+            </label>
+            <div className="flex gap-2">
+              {["Family building now", "Family building later"].map(
+                (option) => (
+                  <button
+                    key={option}
+                    onClick={() => handleOptionSelect("familyBuilding", option)}
+                    className={`${
+                      selectedOptions.familyBuilding === option
+                        ? "bg-blue-600 text-white"
+                        : "bg-gray-200 text-gray-600"
+                    } px-2 py-1 rounded-md`}
+                  >
+                    {option}
+                  </button>
+                )
+              )}
+            </div>
+            <div className="flex justify-between mt-4">
+              <button
+                onClick={previousStep}
+                className="text-blue-600 border border-blue-600 px-5 py-2 rounded-lg"
+              >
+                Previous
+              </button>
+              <button
+                onClick={nextStep}
+                className="bg-blue-600 text-white px-5 py-2 rounded-lg"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* Step 5: Fertility Paths */}
+        {step === 5 && (
+          <div className="mb-4">
+            <label className="block text-lg mb-2">
+              Which fertility paths are you interested in?
+            </label>
+            <div className="flex flex-wrap gap-2">
+              {options.fertilityPaths.map((path) => (
+                <button
+                  key={path}
+                  onClick={() => handleOptionSelect("fertilityPaths", path)}
+                  className={`${
+                    selectedOptions.fertilityPaths === path
+                      ? "bg-blue-600 text-white"
+                      : "bg-gray-200 text-gray-600"
+                  } px-2 py-1 rounded-md`}
+                >
+                  {path}
+                </button>
+              ))}
+            </div>
+            <div className="flex justify-between mt-4">
+              <button
+                onClick={previousStep}
+                className="text-blue-600 border border-blue-600 px-5 py-2 rounded-lg"
+              >
+                Previous
+              </button>
+              <button
+                onClick={nextStep}
+                className="bg-blue-600 text-white px-5 py-2 rounded-lg"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* Step 6: Doctor */}
+        {step === 6 && (
+          <div className="mb-4">
+            <label className="block text-lg mb-2">
+              Do you currently have a doctor for the same?
+            </label>
+            <div className="flex gap-2">
+              {["Yes", "No"].map((option) => (
+                <button
+                  key={option}
+                  onClick={() => handleOptionSelect("haveDoctor", option)}
+                  className={`${
+                    selectedOptions.haveDoctor === option
+                      ? "bg-blue-600 text-white"
+                      : "bg-gray-200 text-gray-600"
+                  } px-2 py-1 rounded-md`}
+                >
+                  {option}
+                </button>
+              ))}
+            </div>
+            <div className="flex justify-between mt-4">
+              <button
+                onClick={previousStep}
+                className="text-blue-600 border border-blue-600 px-5 py-2 rounded-lg"
+              >
+                Previous
+              </button>
+              <button
+                onClick={nextStep}
+                className="bg-blue-600 text-white px-5 py-2 rounded-lg"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* Step 7: Support Interest */}
+        {step === 7 && (
+          <div className="mb-4">
+            <label className="block text-lg mb-2">
+              What support is of most interest to you?
+            </label>
+            <div className="flex flex-wrap gap-2">
+              {options.supportInterests.map((support) => (
+                <button
+                  key={support}
+                  onClick={() => handleOptionSelect("supportInterest", support)}
+                  className={`${
+                    selectedOptions.supportInterest === support
+                      ? "bg-blue-600 text-white"
+                      : "bg-gray-200 text-gray-600"
+                  } px-2 py-1 rounded-md`}
+                >
+                  {support}
+                </button>
+              ))}
+            </div>
+            <div className="flex justify-between mt-4">
+              <button
+                onClick={previousStep}
+                className="text-blue-600 border border-blue-600 px-5 py-2 rounded-lg"
+              >
+                Previous
+              </button>
+              <button
+                onClick={nextStep}
+                className="bg-blue-600 text-white px-5 py-2 rounded-lg"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* Step 8: Topic Interest */}
+        {step === 8 && (
+          <div className="mb-4">
+            <label className="block text-lg mb-2">
+              Which of the following topics are you interested in?
+            </label>
+            <div className="flex flex-wrap gap-2">
+              {options.topicInterests.map((topic) => (
+                <button
+                  key={topic}
+                  onClick={() => handleOptionSelect("topicInterest", topic)}
+                  className={`${
+                    selectedOptions.topicInterest === topic
+                      ? "bg-blue-600 text-white"
+                      : "bg-gray-200 text-gray-600"
+                  } px-2 py-1 rounded-md`}
+                >
+                  {topic}
+                </button>
+              ))}
+            </div>
+            <div className="flex justify-between mt-4">
+              <button
+                onClick={previousStep}
+                className="text-blue-600 border border-blue-600 px-5 py-2 rounded-lg"
+              >
+                Previous
+              </button>
+              <button
+                onClick={nextStep}
+                className="bg-blue-600 text-white px-5 py-2 rounded-lg"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* Step 9: Other Topics (New Step) */}
+        {step === 9 && (
+          <div className="mb-4 w-full">
+            <label className="block text-lg mb-2">
+              Any other topics you want to talk about?
+            </label>
+            <input
+              type="text"
+              placeholder="Topics that interest you"
+              className="border p-2 w-full"
+              value={selectedOptions.otherTopics}
+              onChange={(e) =>
+                handleOptionSelect("otherTopics", e.target.value)
+              }
+            />
+            <div className="flex justify-between mt-4">
+              <button
+                onClick={previousStep}
+                className="text-blue-600 border border-blue-600 px-5 py-2 rounded-lg w-full sm:w-auto"
+              >
+                Previous
+              </button>
+              <button
+                onClick={nextStep}
+                className="bg-blue-600 text-white px-5 py-2 rounded-lg w-full sm:w-auto"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        )}
+        {step === 10 && (
+          <div className="mb-4">
+            <label className="block text-lg mb-2">
+              Please enter your mobile number
+            </label>
+            <input
+              type="tel"
+              placeholder="Enter your mobile number"
+              className="border p-2 w-full"
+              value={selectedOptions.phoneNumber}
+              onChange={(e) =>
+                handleOptionSelect("phoneNumber", e.target.value)
+              }
+              required
+            />
+            <div className="flex justify-between mt-4">
+              <button
+                onClick={previousStep}
+                className="text-blue-600 border border-blue-600 px-5 py-2 rounded-lg"
+              >
+                Previous
+              </button>
+              <button
+                onClick={nextStep}
+                className="bg-blue-600 text-white px-5 py-2 rounded-lg"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        )}
+        {/* Step 11: Preferred Date and Time */}
+        {step === 11 && (
+          <div>
+            <div className="mb-4">
+              <label className="block text-lg mb-2">
+                What is your preferred date for the consultation?
+              </label>
+              <input
+                type="date"
+                className="border p-2 w-full"
+                value={selectedOptions.preferredDate}
+                onChange={(e) =>
+                  handleOptionSelect("preferredDate", e.target.value)
+                }
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-lg mb-2">
+                What is your preferred time for the consultation?
+              </label>
+              <input
+                type="time"
+                className="border p-2 w-full"
+                value={selectedOptions.preferredTime}
+                onChange={(e) =>
+                  handleOptionSelect("preferredTime", e.target.value)
+                }
+              />
+            </div>
+            <div className="flex justify-between mt-4">
+              <button
+                onClick={previousStep}
+                className="text-blue-600 border border-blue-600 px-5 py-2 rounded-lg"
+              >
+                Previous
+              </button>
+              <button
+                onClick={() => onComplete(selectedOptions)}
+                className="bg-blue-600 text-white px-5 py-2 rounded-lg"
+              >
+                Submit
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -341,7 +866,11 @@ const SuccessModal = ({ closeModal }) => {
         onClick={closeModal}
       />
       <div className="flex-col justify-start items-center gap-4 flex">
-        <Image src={contactusthanks} className="w-52 h-60 relative"></Image>
+        <Image
+          alt="aa"
+          src={contactusthanks}
+          className="w-52 h-60 relative"
+        ></Image>
         <div className="flex-col justify-start items-end flex">
           <div className="flex-col justify-start items-start gap-6 flex">
             <div className="flex-col justify-start items-center gap-14 flex">
@@ -372,7 +901,11 @@ function Login({ setSidebar }) {
   const [authtoken, setAuthToken] = useState("");
   const [flow, setFlow] = useState("");
 
-  const openModal = () => setIsModalOpen(true);
+  const openModal = () => {
+    console.log("Opening modal");
+    setIsModalOpen(true);
+    setSidebar(false);
+  };
   const closeModal = () => setIsModalOpen(false);
 
   const sendOtp = async () => {
@@ -429,10 +962,8 @@ function Login({ setSidebar }) {
       saveToken(response.data.data.loginToken);
       console.log("OTP verified successfully:", response.data);
       if (response.data.success) {
-        if (flow == "SIGNUP")
-          setModalState(
-            "createProfile"
-          ); // Move to the Create Profile modal state
+        if (flow == "SIGNUP") setModalState("createProfile");
+        // Move to the Create Profile modal state
         else if (flow == "SIGNIN") setModalState("success"); // Move to the Create Profile modal state
       }
     } catch (error) {
@@ -464,11 +995,51 @@ function Login({ setSidebar }) {
 
       const response = await axios.request(config);
       console.log("Profile created successfully:", response.data);
-      if (response.data.success) setModalState("success");
-      alert("Profile created successfully!");
+      if (response.data.success) setModalState("consultation");
+      // alert("Profile created successfully!");
     } catch (error) {
       console.error("Error creating profile:", error);
       alert("Failed to create profile. Please try again.");
+    }
+  };
+
+  const handleComplete = async (seldata) => {
+    const data = JSON.stringify({
+      city: seldata.city,
+      age: seldata.age,
+      experience: seldata.experience,
+      familyBuilding: seldata.familyBuilding,
+      fertilityPaths: seldata.fertilityPaths,
+      haveDoctor: seldata.haveDoctor,
+      supportIntrest: seldata.supportInterest,
+      topicIntrest: seldata.topicInterest,
+      otherTopics: seldata.otherTopics,
+      preferredDate: seldata.preferredDate,
+      preferredTime: seldata.preferredTime,
+      phoneNumber: seldata.phoneNumber,
+    });
+    try {
+      console.log("Consultation form data:", data);
+      let config = {
+        method: "post",
+        maxBodyLength: Infinity,
+        url: "https://maia.projectx38.cloud/web-apis/maia/web/consultation/submit",
+        headers: {
+          "device-id": "97c2fe5e-0f68-4d72-b277-d5d2d4e628a8",
+          "login-token": loginToken,
+          "city-id": "NA",
+          "Content-Type": "application/json",
+        },
+        data: data,
+      };
+
+      const response = await axios.request(config);
+      console.log("Consultation form submitted successfully:", response.data);
+      if (response.data.success) setModalState("success");
+      // alert("Consultation form submitted successfully!");
+    } catch (error) {
+      console.error("Error submitting consultation form:", error);
+      alert("Failed to submit consultation form. Please try again.");
     }
   };
   // In AuthContext.js
@@ -522,7 +1093,9 @@ function Login({ setSidebar }) {
             onCreateProfile={createProfile}
           />
         )}
-        {modalState === 4 && <ConsultationForm onComplete={handleComplete} />}
+        {modalState === "consultation" && (
+          <ConsultationForm onComplete={handleComplete} />
+        )}
         {modalState === "success" && <SuccessModal closeModal={closeModal} />}
       </Modal>
     </div>

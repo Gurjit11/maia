@@ -9,7 +9,7 @@ import { IoMale } from "react-icons/io5";
 import { FaDirections } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 
-const ClinicProfile = ({ params }) => {
+const DoctorProfile = ({ params }) => {
   const [doctor, setDoctor] = useState();
   const { id } = params;
   const getDoctor = () => {
@@ -49,10 +49,10 @@ const ClinicProfile = ({ params }) => {
   return (
     <div className="bg-gray-100 min-h-screen">
       <div className="p-6 bg-white">
-        <h1 className="text-[#1E293B] text-2xl font-bold">Medical Clinic</h1>
+        <h1 className="text-[#1E293B] text-2xl font-bold">Dr. Jake Wilson</h1>
         <span className="text-black">
           Users &gt; Doctors &gt;{" "}
-          <span className="text-muted-foreground">Medical Clinic</span>
+          <span className="text-muted-foreground">Dr. Jake Wilson</span>
         </span>
       </div>
 
@@ -73,7 +73,7 @@ const ClinicProfile = ({ params }) => {
                 </div>
                 <div>
                   <p className="text-2xl font-bold text-[#131D2A]">
-                    Medical Clinic
+                    Dr. Jake Wilson
                   </p>
                   <Badge
                     variant="outline"
@@ -139,15 +139,15 @@ const ClinicProfile = ({ params }) => {
             <div className="space-y-5">
               <div className="flex justify-between items-center">
                 <span className="text-base font-medium text-gray-600">
-                  Beds:
+                  Years of Experience:
                 </span>
-                <span className="text-sm text-gray-800">123</span>
+                <span className="text-sm text-gray-800">12 Yrs</span>
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-base font-medium text-gray-600">
-                  Doctors:
+                  Qualification:
                 </span>
-                <span className="text-sm text-gray-800">12</span>
+                <span className="text-sm text-gray-800">MBBS, MD, DO</span>
               </div>
               <div>
                 <span className="text-base font-medium text-gray-600 mb-2 block">
@@ -170,42 +170,27 @@ const ClinicProfile = ({ params }) => {
                   ))}
                 </div>
               </div>
-              <div className="flex justify-between items-start">
-                <span className="text-base font-medium text-gray-600">
-                  Timings:
+              <div>
+                <span className="text-base font-medium text-gray-600 mb-2 block">
+                  About:
                 </span>
-                <div className="flex flex-col items-end gap-1">
-                  <span className="text-sm text-gray-800">Mon 11:00AM - 01:00PM</span>
-                  <span className="text-sm text-gray-800">Wed, Fri 05:00AM - 07:00PM</span>
-                </div>
+                <p className="text-sm text-gray-700 leading-relaxed">
+                  Jake Wilson is a senior consultant, obstetrician and
+                  gynecology at the Hospital in Andheri, Mumbai. He also
+                  consults at hospital in Malad east & Maternity & Nursing Home
+                  at primarily about the hormone injections - and worked with me
+                  to create a schedule that I was comfortable with, but that
+                  also got great results. One of the finest at this profession
+                  still choose to continue the...
+                  <Button
+                    variant="link"
+                    className="p-0 h-auto text-sm font-semibold text-blue-600"
+                  >
+                    Read More
+                  </Button>
+                </p>
               </div>
             </div>
-          </div>
-        </div>
-
-        <div>
-          <p className="font-bold my-6 text-xl">Photos</p>
-          <div className="grid grid-cols-9 gap-2">
-            {[
-              "https://via.placeholder.com/150",
-              "https://via.placeholder.com/150",
-              "https://via.placeholder.com/150",
-              "https://via.placeholder.com/150",
-              "https://via.placeholder.com/150",
-              "https://via.placeholder.com/150",
-              "https://via.placeholder.com/150",
-              "https://via.placeholder.com/150",
-            ].map((src, index) => (
-              <div key={index} className="relative w-32 h-32">
-                <img                       src="https://in.bmscdn.com/iedb/artist/images/website/poster/large/salman-khan-1991-12-09-2017-01-53-43.jpg"
- alt={`Photo ${index + 1}`} className="w-full h-full object-cover rounded-lg" />
-                {index === 7 && (
-                  <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded-lg">
-                    <span className="text-white text-2xl font-bold">+7</span>
-                  </div>
-                )}
-              </div>
-            ))}
           </div>
         </div>
 
@@ -223,12 +208,15 @@ const ClinicProfile = ({ params }) => {
               </div>
               <div className="ml-3">
                 <p className="text-lg font-semibold text-[#2B4360]">
-                  Dr. Jake Wilson
+                  LifeWave Hospital
                 </p>
                 <p className="inline-flex items-center text-sm mt-2 text-[#2B4360]">
-                Gynecologist/Obstetrician
+                  <MapPin className="w-4 h-4" /> Andheri (W), Mumbai
                 </p>
-             
+                <p className="text-sm text-gray-500">Mon 11:00 AM - 01:00PM</p>
+                <p className="text-sm text-gray-500">
+                  Wed, Fri 05:00 AM - 07:00PM
+                </p>
                 <Button className="mt-4 bg-white text-[#2B4360] border border-[#2B4360]">
                   View Profile
                 </Button>
@@ -244,12 +232,15 @@ const ClinicProfile = ({ params }) => {
               </div>
               <div className="ml-3">
                 <p className="text-lg font-semibold text-[#2B4360]">
-                  Dr. Jake Wilson
+                  LifeWave Hospital
                 </p>
                 <p className="inline-flex items-center text-sm mt-2 text-[#2B4360]">
-                Gynecologist/Obstetrician
+                  <MapPin className="w-4 h-4" /> Andheri (W), Mumbai
                 </p>
-             
+                <p className="text-sm text-gray-500">Mon 11:00 AM - 01:00PM</p>
+                <p className="text-sm text-gray-500">
+                  Wed, Fri 05:00 AM - 07:00PM
+                </p>
                 <Button className="mt-4 bg-white text-[#2B4360] border border-[#2B4360]">
                   View Profile
                 </Button>
@@ -304,4 +295,4 @@ const ClinicProfile = ({ params }) => {
   );
 };
 
-export default ClinicProfile;
+export default DoctorProfile;
