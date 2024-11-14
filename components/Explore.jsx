@@ -13,6 +13,7 @@ import arrow from "../public/arrow.png";
 import ellipse from "../public/Ellipse.png";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 const Explore = () => {
   const [homeData, setHomeData] = useState({});
   const [topDoctors, setTopDoctors] = useState([]);
@@ -77,11 +78,13 @@ const Explore = () => {
                   </div>
                 </div>
               </div>
+              <Link href="/finddoctors" >
               <div className=" px-6 py-4 rounded-lg border border-slate-700 justify-center items-center gap-2 inline-flex">
                 <div className=" text-center text-slate-700 text-base font-medium  leading-tight">
                   Find top Doctors
                 </div>
               </div>
+              </Link>
             </div>
           </div>
         </div>
