@@ -172,7 +172,7 @@ const Hero = () => {
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.8, delay: 0.6 }}
               >
-                <div className="w-[90%]">
+                <motion.div className="w-[90%]">
                   <div className="bg-white text-black rounded border border-neutral-200 justify-start items-center flex">
                   <div className="bg-white text-black rounded border border-neutral-200 justify-start items-center flex">
                     <input
@@ -190,6 +190,8 @@ const Hero = () => {
                     Search
                   </div>
                 </div>
+                </div>
+                </div>
               </motion.div>
               <motion.div
                 className="justify-start text-xs sm:text-sm items-start gap-1 flex"
@@ -200,13 +202,15 @@ const Hero = () => {
                 <div className="text-slate-700 text-xs sm:text-sm font-light font-poppins">
                   Eg.
                 </div>
-                <div className="text-slate-700 text-xs sm:text-sm font-light font-poppins">
+                <motion.div className="text-slate-700 text-xs sm:text-sm font-light font-poppins">
                 <div className="text-slate-700 text-xs sm:text-sm font-light font-poppins">
                   Is IVF safe?, What is Egg Freezing?
                 </div>
               </motion.div>
             </motion.div>
-          </div>
+          </motion.div>
+        </motion.div>
+        </div>
           <div className="hidden col-span-1 w-full overflow-clip pb-1.5 justify-center items-center sm:flex">
             <Slider {...settings} className="w-full">
               {cardData.map((card, index) => (

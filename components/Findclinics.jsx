@@ -18,6 +18,7 @@ import {
   IoIosArrowDroprightCircle,
 } from "react-icons/io";
 import useWindowSize from "@/hooks/useWindowSize";
+import Link from "next/link";
 
 // const topClinic = [
 //   {
@@ -143,11 +144,13 @@ const Findclinics = () => {
                       </div>
                     </div>
                   </div>
+                  <Link href={`/findclinics/${clinic.clinicId}`}>
                   <div className=" bg-slate-700 mt-3 rounded-lg  p-3 justify-center items-center gap-2 flex">
                     <div className=" text-center text-white text-base font-medium font-['Poppins'] leading-tight">
                       View Clinic
                     </div>
                   </div>
+                  </Link>
                 </div>
               </div>
             ))}
