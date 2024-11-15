@@ -8,7 +8,12 @@ import Image from "next/image";
 import Login from "./Login";
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
-import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
+import {
+  AiOutlineCaretDown,
+  AiOutlineClose,
+  AiOutlineDown,
+  AiOutlineMenu,
+} from "react-icons/ai";
 import location from "../public/location.png";
 import { useAuth } from "@/contexts/AuthContext";
 
@@ -81,14 +86,15 @@ const Navbar = () => {
         >
           <Image src={newicon} alt="logo" className="scale-125 " height={60} />
         </Link>
-        <div className="p-2 rounded border border-red-400 justify-start items-start gap-1 flex">
+        <div className="p-3 px-5 rounded-md border border-red-200 justify-start items-start gap-1 flex">
           <div
-            className="text-red-400 text-base font-semibold "
+            className="text-blue-900 cursor-pointer flex justify-center items-center text-base font-semibold "
             onClick={handleOpenModal}
           >
             Select City
+            {/* <Image src={location} width={20} alt="icon" /> */}
+            <AiOutlineCaretDown className="ml-2" />
           </div>
-          <Image src={location} width={20} alt="icon" />
         </div>
 
         {showModal && (
@@ -155,7 +161,7 @@ const Navbar = () => {
               className="justify-start cursor-pointer items-start gap-14 inline-flex"
             >
               <div className="justify-start items-center gap-2 flex">
-                <Image src={doctor} />
+                {/* <Image src={doctor} /> */}
 
                 <div className="text-stone-950 text-base font-normal font-['Poppins'] leading-tight">
                   Find Doctor{" "}
@@ -166,7 +172,7 @@ const Navbar = () => {
               href={"/findclinics"}
               className="justify-start items-center gap-2 inline-flex"
             >
-              <Image src={clinic} />
+              {/* <Image src={clinic} /> */}
 
               <div className="text-stone-950 text-base font-normal font-['Poppins'] leading-tight">
                 Find Clinics{" "}
@@ -239,7 +245,7 @@ const Navbar = () => {
       {/* sidebar end */}
       <div className="hidden sm:block w-full z-10 p-2 bg-white top-0 sm:sticky shadow">
         <div className=" justify-between px-6 items-center flex">
-          <div className=" justify-start items-center gap-8 flex">
+          <div className=" justify-start items-center gap-4 flex">
             <Link
               href={"/"}
               className="justify-start overflow-y-clip items-center gap-1 flex"
@@ -251,14 +257,15 @@ const Navbar = () => {
                 height={60}
               />
             </Link>
-            <div className="p-2 rounded border border-red-400 justify-start items-start gap-1 flex">
+            <div className="p-3 px-5 rounded-md border border-red-200 justify-start items-start gap-1 flex">
               <div
-                className="text-red-400 text-base font-semibold "
+                className="text-blue-900 cursor-pointer flex justify-center items-center text-base font-semibold "
                 onClick={handleOpenModal}
               >
                 Select City
+                {/* <Image src={location} width={20} alt="icon" /> */}
+                <AiOutlineCaretDown className="ml-2" />
               </div>
-              <Image src={location} width={20} alt="icon" />
             </div>
 
             {showModal && (
@@ -315,7 +322,7 @@ const Navbar = () => {
                 href={"/finddoctors"}
                 className="justify-start items-center gap-2 flex"
               >
-                <Image src={doctor} />
+                {/* <Image src={doctor} /> */}
                 <div className="text-stone-950 text-base font-normal font-['Poppins'] leading-tight">
                   Find Doctor{" "}
                 </div>
@@ -324,12 +331,23 @@ const Navbar = () => {
                 href={"/findclinics"}
                 className="justify-start items-center gap-2 flex"
               >
-                <Image src={clinic} />
+                {/* <Image src={clinic} /> */}
 
                 <div className="text-stone-950 text-base font-normal font-['Poppins'] leading-tight">
                   Find Clinics{" "}
                 </div>
               </Link>
+              <div className="justify-start items-center gap-2 flex">
+                <div className="text-stone-950 text-base font-normal font-['Poppins'] leading-tight">
+                  Consultation
+                </div>
+                <div className="w-9 h-6 relative">
+                  <div className="w-9 h-6 left-0 top-0 absolute bg-green-100 rounded" />
+                  <div className="left-[4px] top-[4px] absolute text-green-600 text-sm font-medium font-['Poppins'] leading-none">
+                    Free
+                  </div>
+                </div>
+              </div>
               <Link
                 href={"https://alphabetasolution.co.in/"}
                 className="justify-start items-center gap-2 flex"

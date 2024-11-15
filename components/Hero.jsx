@@ -12,6 +12,7 @@ import useWindowSize from "@/hooks/useWindowSize";
 import { motion } from "framer-motion";
 import { useRef } from "react";
 import { useInView } from "framer-motion";
+import { AiOutlineSearch } from "react-icons/ai";
 
 const Hero = () => {
   const ref = useRef(null);
@@ -179,19 +180,18 @@ const Hero = () => {
                       type="text"
                       placeholder="Search your queries"
                       required
-                      className="search_input w-full peer p-3"
+                      className="search_input rounded-sm w-full peer p-3"
                     />
+                    <AiOutlineSearch className="text-[#E29578] text-3xl mr-3" />
                   </div>
                 </div>
-                <div className="px-6 py-4 bg-red-400 rounded-lg justify-center items-center gap-2 flex">
-                  <div className="text-center text-white text-base font-medium font-['Poppins']">
-                <div className="px-6 py-4 bg-red-400 rounded-lg justify-center items-center gap-2 flex">
+                <div className="px-6 py-3 bg-[#E29578] rounded-lg justify-center items-center gap-2 flex">
                   <div className="text-center text-white text-base font-medium font-['Poppins']">
                     Search
                   </div>
                 </div>
-                </div>
-                </div>
+                </motion.div>
+                </motion.div>
               </motion.div>
               <motion.div
                 className="justify-start text-xs sm:text-sm items-start gap-1 flex"
@@ -208,8 +208,6 @@ const Hero = () => {
                 </div>
               </motion.div>
             </motion.div>
-          </motion.div>
-        </motion.div>
         </div>
           <div className="hidden col-span-1 w-full overflow-clip pb-1.5 justify-center items-center sm:flex">
             <Slider {...settings} className="w-full">
@@ -224,19 +222,19 @@ const Hero = () => {
                       className="w-[60%] mx-auto"
                       alt={card.alt}
                     />
-                    <div className="mx-3 p-2 bg-slate-200 rounded-xl border border-gray-200 backdrop-blur-lg flex-col justify-end items-end gap-2 flex mt-4">
+                    <div className="mx-3 p-2 bg-[#E6F3F2] rounded-xl border border-gray-200 backdrop-blur-lg flex-col justify-end items-end gap-2 flex mt-4">
                       <div className="justify-start items-start gap-4 flex">
                         <Image src={quotation} className="w-10" alt="Quote" />
-                        <div className="text-slate-700 text-xs sm:text-sm font-light leading-normal">
+                        <div className="text-[#2B4360] text-xs sm:text-sm font-light leading-normal">
                           {card.quote}
                         </div>
                       </div>
                       <div className="flex-col text-xs sm:text-sm font-semibold justify-start items-start gap-2 flex">
                         <div className="text-center flex">
-                          <span className="text-slate-700 leading-tight">
+                          <span className="text-[#2B4360] leading-tight">
                             -
                           </span>
-                          <span className="text-slate-700 underline leading-tight font-poppins">
+                          <span className="text-[#2B4360] underline leading-tight font-['Poppins']">
                             {card.name}
                           </span>
                         </div>
