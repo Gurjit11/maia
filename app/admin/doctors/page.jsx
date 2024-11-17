@@ -129,7 +129,7 @@ const DoctorsList = () => {
                     className="w-8 h-8 rounded-full object-cover flex-shrink-0"
                   />
                   <Link
-                    href={`/admin/doctors/edf64510-d59c-4a55-b61f-6bf9dabce2c1`}
+                    href={`/admin/doctors/${doctor.doctorId}`}
                   >
                     <span className="inline-block">
                       {doctor?.doctorDetails?.doctorName}
