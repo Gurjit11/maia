@@ -143,6 +143,7 @@ const Hero = () => {
           </div>
           <div className="col-span-1 flex-col justify-center gap-6 flex">
             <motion.div
+
               className="flex-col sm:p-20 p-5 gap-2 flex"
               ref={ref}
               initial={{ opacity: 0, y: 50 }}
@@ -192,8 +193,7 @@ const Hero = () => {
                 </div>
                 </motion.div>
                 </motion.div>
-              </motion.div>
-              <motion.div
+                <motion.div
                 className="justify-start text-xs sm:text-sm items-start gap-1 flex"
                 initial={{ opacity: 0, y: 50 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -208,7 +208,9 @@ const Hero = () => {
                 </div>
               </motion.div>
             </motion.div>
-        </div>
+
+              </motion.div>
+                    </div>
           <div className="hidden col-span-1 w-full overflow-clip pb-1.5 justify-center items-center sm:flex">
             <Slider {...settings} className="w-full">
               {cardData.map((card, index) => (

@@ -303,7 +303,7 @@ function BookAppointment({ doctor }) {
 
   console.log(doctor);
   return (
-    <div className="text-black bg-white">
+    <div className="text-black ">
       <button onClick={openModal}>
         <div className="bg-slate-700 rounded-lg justify-center items-center gap-2 flex">
           <div className="p-3 px-6 text-center text-white text-base font-medium font-['Poppins'] leading-tight">
