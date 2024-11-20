@@ -121,13 +121,14 @@ const Explore = () => {
 
         <div className="col-span-1 sm:flex-col flex overflow-x-auto overflow-y-clip sm:gap-0 gap-10">
           {topDoctors.slice(1, 4).map((doctor, index) => (
+            <Link href={`/finddoctors/${doctor.doctorId}`}>
             <motion.div
               className="sm:w-[70%] my-5 px-6 py-4 bg-stone-100 rounded-lg shadow justify-start items-start gap-24 flex"
               key={doctor.doctorId}
               initial={{ opacity: 0, y: 50 }} // Start with 0 opacity and move from below
               animate={{ opacity: 1, y: 0 }} // Fade in and move to natural position
               transition={{ duration: 0.6, delay: index * 0.2 }} // Delayed based on the index for cascading effect
-            >
+              >
               <div className="justify-start items-center gap-4 w-full md:flex flex-co">
                 <Image src={ellipse} alt={"icon"} />
 
@@ -199,6 +200,7 @@ const Explore = () => {
                 </div>
               </div>
             </motion.div>
+          </Link>
           ))}
         </div>
       </div>
