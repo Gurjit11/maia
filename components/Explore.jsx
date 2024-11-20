@@ -16,8 +16,11 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useRef } from "react";
 import { useInView } from "framer-motion";
+import { useRouter } from 'next/router'
 
 const Explore = () => {
+  const router = useRouter();
+
   const leftTextRef = useRef(null);
   const isLeftTextInView = useInView(leftTextRef, {
     once: true,
@@ -50,6 +53,7 @@ const Explore = () => {
         setTopDoctors(response.data.data.topDoctors);
         // setTopClinics(response.data.data.topClinics);
         console.log(topDoctors);
+
       })
       .catch((error) => {
         console.log(error);
@@ -59,7 +63,7 @@ const Explore = () => {
   useEffect(() => {
     getHomeData();
   }, []);
-
+ 
   return (
     <div>
       <div className="sm:grid grid-cols-2 p-3 md:p-20">
@@ -106,7 +110,7 @@ const Explore = () => {
                 </div>
               </div>
               <div className="px-6 py-4 rounded-lg border border-slate-700 justify-center items-center gap-2 inline-flex">
-                <div className="text-center text-slate-700 text-base font-medium leading-tight">
+                <div className="text-center text-slate-700 text-base font-medium leading-tight" >
                   Find top Doctors
                 </div>
               </div>
@@ -115,7 +119,7 @@ const Explore = () => {
         </motion.div>
 
         <div className="col-span-1 sm:flex-col flex overflow-x-auto overflow-y-clip sm:gap-0 gap-10">
-          {topDoctors.slice(1, 4).map((doctor, index) => (
+          {topDoctors.slice(0, 4).map((doctor, index) => (
             <motion.div
               className="sm:w-[70%] my-5 px-6 py-4 bg-stone-100 rounded-lg shadow justify-start items-start gap-24 flex"
               key={doctor.doctorId}
@@ -131,6 +135,7 @@ const Explore = () => {
                     <div>{doctor.doctorName}</div>
                     <div>
                       <Image src={arrow} alt={"icon"} />
+
                     </div>
                   </div>
                   <div className="h-28 flex-col justify-start items-start gap-1 flex">
