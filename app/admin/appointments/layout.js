@@ -9,7 +9,7 @@ export default function RootLayout({ children }) {
   return (
     <div lang="en" className="flex">
       <AdminSidebar />
-      <div>{children}</div>
+      <div className="w-full">{children}</div>
     </div>
   );
 }
