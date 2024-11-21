@@ -46,13 +46,13 @@ const DoctorProfile = ({ params }) => {
   useEffect(() => {
     getDoctor();
   }, []);
+ 
   return (
     <div className="bg-gray-100 min-h-screen">
       <div className="p-6 bg-white">
-        <h1 className="text-[#1E293B] text-2xl font-bold">Dr. Jake Wilson</h1>
+        <h1 className="text-[#1E293B] text-2xl font-bold">{doctor?.doctorDetails?.doctorName}</h1>
         <span className="text-black">
-          Users &gt; Doctors &gt;{" "}
-          <span className="text-muted-foreground">Dr. Jake Wilson</span>
+          Users &gt; Doctors &gt; <span className="text-muted-foreground">{doctor?.doctorDetails?.doctorName}</span>
         </span>
       </div>
 
@@ -64,26 +64,24 @@ const DoctorProfile = ({ params }) => {
                 <div className="w-24 h-24 relative">
                   <img
                     className="rounded-full"
-                    src="https://in.bmscdn.com/iedb/artist/images/website/poster/large/salman-khan-1991-12-09-2017-01-53-43.jpg"
-                    alt=""
+                    src={doctor?.doctorDetails?.profileImage}
+                    alt={doctor?.doctorDetails?.doctorName}
                   />
                   <div className="absolute right-0 bottom-0 bg-green-500 rounded-full p-1">
                     <Check className="text-white w-4 h-4" />
                   </div>
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-[#131D2A]">
-                    Dr. Jake Wilson
-                  </p>
+                  <p className="text-2xl font-bold text-[#131D2A]">{doctor?.doctorDetails?.doctorName}</p>
                   <Badge
                     variant="outline"
-                    className="bg-gray-50 text-green-600 rouded-full font-semibold mt-2"
+                    className="bg-gray-50 text-green-600 rounded-full font-semibold mt-2"
                   >
-                    Active
+                    {doctor?.status}
                   </Badge>
                   <div className="mt-2 flex items-center gap-3">
                     <StarFilledIcon className="text-yellow-300 w-5 h-5" />
-                    4.5
+                    {doctor?.reviewsStat?.avgRating}
                   </div>
                 </div>
               </div>
@@ -95,100 +93,64 @@ const DoctorProfile = ({ params }) => {
             <div className="mt-6 grid gap-3">
               <div className="flex items-center gap-12">
                 <div className="flex items-center gap-2">
-                  <Cake className="w-5 h-5" /> 24 June 1985 (23 Yrs)
+                  <Cake className="w-5 h-5" /> Birthdate
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <IoMale /> Male
+                  <IoMale /> {doctor?.doctorDetails?.gender}
                 </div>
               </div>
 
               <div className="flex items-center gap-16">
                 <div className="flex items-center gap-2">
-                  <Phone className="w-5 h-5" /> +91 8987656874
+                  <Phone className="w-5 h-5" /> {doctor?.doctorDetails?.contactNumber}
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <Mail /> Jakewilson@gmail.com
+                  <Mail /> {doctor?.doctorDetails?.contactEmail}
                 </div>
               </div>
 
               <div className="flex">
                 <MapPin className="w-5 h-5 items-start mr-2" />
                 <div>
-                  <p>
-                    123, Anna Salai,Teynampet,123, Anna Salai,Teynampet Anna
-                    Salai, Teynampet,123, Anna
-                  </p>
-
-                  <p>Andheri- Mumbai, Maharastra </p>
-                  <p>400619</p>
+                  <p>{doctor?.clinics[0]?.addressName}</p>
+                  <p>{doctor?.clinics[0]?.clinicName}</p>
                 </div>
               </div>
 
               <div className="flex gap-2 items-center">
                 <FaDirections />
-
-                <p className="text-[#2B4360] underline cursor-pointer">
-                  Locate on Map
-                </p>
+                <p className="text-[#2B4360] underline cursor-pointer">Locate on Map</p>
               </div>
             </div>
           </div>
           <div className="w-full p-6 bg-white rounded-lg shadow-sm">
             <div className="space-y-5">
               <div className="flex justify-between items-center">
-                <span className="text-base font-medium text-gray-600">
-                  Years of Experience:
-                </span>
-                <span className="text-sm text-gray-800">12 Yrs</span>
+                <span className="text-base font-medium text-gray-600">Years of Experience:</span>
+                <span className="text-sm text-gray-800">{doctor?.doctorDetails?.experiance} Yrs</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-base font-medium text-gray-600">
-                  Qualification:
-                </span>
-                <span className="text-sm text-gray-800">MBBS, MD, DO</span>
+                <span className="text-base font-medium text-gray-600">Qualification:</span>
+                <span className="text-sm text-gray-800">{doctor?.doctorDetails?.education}</span>
               </div>
               <div>
-                <span className="text-base font-medium text-gray-600 mb-2 block">
-                  Services:
-                </span>
+                <span className="text-base font-medium text-gray-600 mb-2 block">Services:</span>
                 <div className="flex flex-wrap gap-2">
-                  {[
-                    "Fertility Support",
-                    "Egg Freezing",
-                    "IVF Treatment",
-                    "IUI Treatment",
-                    "Sperm Freezing",
-                  ].map((service) => (
+                  {doctor?.doctorDetails?.services.map((service) => (
                     <span
-                      key={service}
+                      key={service.serviceId}
                       className="px-3 py-1 text-xs bg-gray-100 text-gray-800 rounded-full"
                     >
-                      {service}
+                      {service.serviceName}
                     </span>
                   ))}
                 </div>
               </div>
               <div>
-                <span className="text-base font-medium text-gray-600 mb-2 block">
-                  About:
-                </span>
-                <p className="text-sm text-gray-700 leading-relaxed">
-                  Jake Wilson is a senior consultant, obstetrician and
-                  gynecology at the Hospital in Andheri, Mumbai. He also
-                  consults at hospital in Malad east & Maternity & Nursing Home
-                  at primarily about the hormone injections - and worked with me
-                  to create a schedule that I was comfortable with, but that
-                  also got great results. One of the finest at this profession
-                  still choose to continue the...
-                  <Button
-                    variant="link"
-                    className="p-0 h-auto text-sm font-semibold text-blue-600"
-                  >
-                    Read More
-                  </Button>
-                </p>
+                <span className="text-base font-medium text-gray-600 mb-2 block">About:</span>
+                <p className="text-sm text-gray-700 leading-relaxed">{doctor?.doctorDetails?.about}</p>
               </div>
             </div>
           </div>
@@ -196,103 +158,41 @@ const DoctorProfile = ({ params }) => {
 
         <div>
           <p className="font-bold my-6 text-xl">Consult At</p>
-
           <div className="grid grid-cols-4 gap-10">
-            <div className="flex bg-white p-3 rounded-lg">
-              <div className="w-28 h-28 rounded-full">
-                <img
-                  src="https://in.bmscdn.com/iedb/artist/images/website/poster/large/salman-khan-1991-12-09-2017-01-53-43.jpg"
-                  alt=""
-                  className="rounded-full"
-                />
+            {doctor?.clinics.map((clinic) => (
+              <div key={clinic?.clinicId} className="flex bg-white p-3 rounded-lg">
+                <div className="w-28 h-28 rounded-full">
+                  <img
+                    src="https://in.bmscdn.com/iedb/artist/images/website/poster/large/salman-khan-1991-12-09-2017-01-53-43.jpg"
+                    alt={clinic.clinicName}
+                    className="rounded-full"
+                  />
+                </div>
+                <div className="ml-3">
+                  <p className="text-lg font-semibold text-[#2B4360]">{clinic.clinicName}</p>
+                  <p className="inline-flex items-center text-sm mt-2 text-[#2B4360]">
+                    <MapPin className="w-4 h-4" /> {clinic.addressName}
+                  </p>
+                  {/* Add clinic timings */}
+                  <Button className="mt-4 bg-white text-[#2B4360] border border-[#2B4360]">
+                    View Profile
+                  </Button>
+                </div>
               </div>
-              <div className="ml-3">
-                <p className="text-lg font-semibold text-[#2B4360]">
-                  LifeWave Hospital
-                </p>
-                <p className="inline-flex items-center text-sm mt-2 text-[#2B4360]">
-                  <MapPin className="w-4 h-4" /> Andheri (W), Mumbai
-                </p>
-                <p className="text-sm text-gray-500">Mon 11:00 AM - 01:00PM</p>
-                <p className="text-sm text-gray-500">
-                  Wed, Fri 05:00 AM - 07:00PM
-                </p>
-                <Button className="mt-4 bg-white text-[#2B4360] border border-[#2B4360]">
-                  View Profile
-                </Button>
-              </div>
-            </div>
-            <div className="flex bg-white p-3 rounded-lg">
-              <div className="w-28 h-28 rounded-full">
-                <img
-                  src="https://in.bmscdn.com/iedb/artist/images/website/poster/large/salman-khan-1991-12-09-2017-01-53-43.jpg"
-                  alt=""
-                  className="rounded-full"
-                />
-              </div>
-              <div className="ml-3">
-                <p className="text-lg font-semibold text-[#2B4360]">
-                  LifeWave Hospital
-                </p>
-                <p className="inline-flex items-center text-sm mt-2 text-[#2B4360]">
-                  <MapPin className="w-4 h-4" /> Andheri (W), Mumbai
-                </p>
-                <p className="text-sm text-gray-500">Mon 11:00 AM - 01:00PM</p>
-                <p className="text-sm text-gray-500">
-                  Wed, Fri 05:00 AM - 07:00PM
-                </p>
-                <Button className="mt-4 bg-white text-[#2B4360] border border-[#2B4360]">
-                  View Profile
-                </Button>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
 
         <div>
-          <p className="font-bold my-6 text-xl">Reviews (2)</p>
+          <p className="font-bold my-6 text-xl">Reviews ({doctor?.reviewsStat?.totalReviews})</p>
           <div className="flex flex-col divide-y bg-white rounded-lg divide-[#2B4360]">
-            <div className="p-5">
-              <div className="flex justify-between items-center">
-                <div className="flex items-center gap-5">
-                  <div className="w-10 h-10 rounded-full">
-                    <img
-                      src="https://in.bmscdn.com/iedb/artist/images/website/poster/large/salman-khan-1991-12-09-2017-01-53-43.jpg"
-                      alt=""
-                      className="rounded-full"
-                    />
-                  </div>
-                  <p className="text-2xl font-semibold text-[#2B4360]">
-                    Samriddhi Singh
-                  </p>
-                </div>
-                <p className="text-[#2B4360] font-light">9 months ago</p>
-              </div>
-              <p className="text-sm mt-5">Dr. Kort practices the exact opposite of a "one size fits all" approach to medicine. He took my fears seriously - primarily about the hormone injections - and worked with me to create a schedule that I was comfortable with, but that also got great results. He's one of the kindest and most knowledgeable doctors I've ever had.</p>
-            </div>
-               <div className="p-5">
-              <div className="flex justify-between items-center">
-                <div className="flex items-center gap-5">
-                  <div className="w-10 h-10 rounded-full">
-                    <img
-                      src="https://in.bmscdn.com/iedb/artist/images/website/poster/large/salman-khan-1991-12-09-2017-01-53-43.jpg"
-                      alt=""
-                      className="rounded-full"
-                    />
-                  </div>
-                  <p className="text-2xl font-semibold text-[#2B4360]">
-                    Samriddhi Singh
-                  </p>
-                </div>
-                <p className="text-[#2B4360] font-light">9 months ago</p>
-              </div>
-              <p className="text-sm mt-5">Dr. Kort practices the exact opposite of a "one size fits all" approach to medicine. He took my fears seriously - primarily about the hormone injections - and worked with me to create a schedule that I was comfortable with, but that also got great results. He's one of the kindest and most knowledgeable doctors I've ever had.</p>
-            </div>
+            {/* Add review content here */}
           </div>
         </div>
       </div>
     </div>
   );
+
 };
 
 export default DoctorProfile;

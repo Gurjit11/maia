@@ -13,6 +13,7 @@ import arrow from "../public/arrow.png";
 import ellipse from "../public/Ellipse.png";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { useRef } from "react";
 import { useInView } from "framer-motion";
@@ -71,7 +72,7 @@ const Explore = () => {
           animate={isLeftTextInView ? { opacity: 1, x: 0 } : {}} // Animate only when in view
           transition={{ duration: 0.8 }}
         >
-          <div className="flex-col justify-start items-start sm:gap-6 inline-flex">
+          <motion.div className="flex-col justify-start items-start sm:gap-6 inline-flex">
             <motion.div
               className="justify-start items-center gap-4 inline-flex"
               initial={{ opacity: 0, x: -50 }}
@@ -89,7 +90,7 @@ const Explore = () => {
               </div>
             </motion.div>
 
-            <motion.div
+            <div
               className="flex-col justify-start items-start sm:gap-10 flex"
               initial={{ opacity: 0, x: -50 }}
               animate={isLeftTextInView ? { opacity: 1, x: 0 } : {}}
@@ -105,24 +106,29 @@ const Explore = () => {
                   </div>
                 </div>
               </div>
-              <div className="px-6 py-4 rounded-lg border border-slate-700 justify-center items-center gap-2 inline-flex">
-                <div className="text-center text-slate-700 text-base font-medium leading-tight">
-                  Find top Doctors
-                </div>
-              </div>
-            </motion.div>
-          </div>
+              <Link href="/finddoctors">
+                <motion.div className=" px-6 py-4 rounded-lg border border-slate-700 justify-center items-center gap-2 inline-flex">
+                  <div className=" text-center text-slate-700 text-base font-medium  leading-tight">
+                      <div className="text-center text-slate-700 text-base font-medium leading-tight">
+                        Find top Doctors
+                    </div>
+                  </div>
+                </motion.div>
+              </Link>
+            </div>
+          </motion.div>
         </motion.div>
 
         <div className="col-span-1 sm:flex-col flex overflow-x-auto overflow-y-clip sm:gap-0 gap-10">
           {topDoctors.slice(1, 4).map((doctor, index) => (
+            <Link href={`/finddoctors/${doctor.doctorId}`}>
             <motion.div
               className="sm:w-[70%] my-5 px-6 py-4 bg-stone-100 rounded-lg shadow justify-start items-start gap-24 flex"
               key={doctor.doctorId}
               initial={{ opacity: 0, y: 50 }} // Start with 0 opacity and move from below
               animate={{ opacity: 1, y: 0 }} // Fade in and move to natural position
               transition={{ duration: 0.6, delay: index * 0.2 }} // Delayed based on the index for cascading effect
-            >
+              >
               <div className="justify-start items-center gap-4 w-full md:flex flex-co">
                 <Image src={ellipse} alt={"icon"} />
 
@@ -194,6 +200,7 @@ const Explore = () => {
                 </div>
               </div>
             </motion.div>
+          </Link>
           ))}
         </div>
       </div>

@@ -267,7 +267,7 @@ const FindClinics = () => {
               <div className=" mt-2 sm:flex-col  justify-start items-start gap-4 inline-flex">
                 <button className=" sm:w-full h-14 px-6 py-4 bg-[#2b4360] rounded-lg justify-center items-center gap-2 inline-flex">
                   <div className="grow shrink basis-0 text-center text-white text-base font-medium font-['Poppins'] leading-tight">
-                    Call Clinic
+                    Book Appointment
                   </div>
                 </button>
                 <Link

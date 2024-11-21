@@ -14,13 +14,13 @@ const ClinicProfile = ({ params }) => {
   const { id } = params;
   const getDoctor = () => {
     let data = JSON.stringify({
-      doctorId: id,
+      clinicId: id,
     });
 
     let config = {
       method: "post",
       maxBodyLength: Infinity,
-      url: "https://maia.projectx38.cloud/web-apis/maia/web/doctors/details",
+      url: "https://maia.projectx38.cloud/web-apis/maia/web/clinics/details",
       headers: {
         "Content-Type": "application/json",
         "device-id": "97c2fe5e-0f68-4d72-b277-d5d2d4e628a8",
@@ -49,10 +49,14 @@ const ClinicProfile = ({ params }) => {
   return (
     <div className="bg-gray-100 min-h-screen">
       <div className="p-6 bg-white">
-        <h1 className="text-[#1E293B] text-2xl font-bold">Medical Clinic</h1>
+        <h1 className="text-[#1E293B] text-2xl font-bold">
+          {doctor?.clinicDetails?.clinicName}
+        </h1>
         <span className="text-black">
           Users &gt; Doctors &gt;{" "}
-          <span className="text-muted-foreground">Medical Clinic</span>
+          <span className="text-muted-foreground">
+            {doctor?.clinicDetails?.clinicName}
+          </span>
         </span>
       </div>
 
@@ -73,7 +77,7 @@ const ClinicProfile = ({ params }) => {
                 </div>
                 <div>
                   <p className="text-2xl font-bold text-[#131D2A]">
-                    Medical Clinic
+                    {doctor?.clinicDetails?.clinicName}
                   </p>
                   <Badge
                     variant="outline"
@@ -83,7 +87,7 @@ const ClinicProfile = ({ params }) => {
                   </Badge>
                   <div className="mt-2 flex items-center gap-3">
                     <StarFilledIcon className="text-yellow-300 w-5 h-5" />
-                    4.5
+                    {doctor?.reviewsStat?.avgRating}
                   </div>
                 </div>
               </div>
@@ -97,19 +101,16 @@ const ClinicProfile = ({ params }) => {
                 <div className="flex items-center gap-2">
                   <Cake className="w-5 h-5" /> 24 June 1985 (23 Yrs)
                 </div>
-
-                <div className="flex items-center gap-2">
-                  <IoMale /> Male
-                </div>
               </div>
 
               <div className="flex items-center gap-16">
                 <div className="flex items-center gap-2">
-                  <Phone className="w-5 h-5" /> +91 8987656874
+                  <Phone className="w-5 h-5" />{" "}
+                  {doctor?.clinicDetails?.contactNumber}
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <Mail /> Jakewilson@gmail.com
+                  <Mail /> {doctor?.clinicDetails?.contactEmail}
                 </div>
               </div>
 
@@ -117,12 +118,14 @@ const ClinicProfile = ({ params }) => {
                 <MapPin className="w-5 h-5 items-start mr-2" />
                 <div>
                   <p>
-                    123, Anna Salai,Teynampet,123, Anna Salai,Teynampet Anna
-                    Salai, Teynampet,123, Anna
+                    {doctor?.address?.address}, {doctor?.address?.area},{" "}
+                    {doctor?.address?.landmark}
                   </p>
 
-                  <p>Andheri- Mumbai, Maharastra </p>
-                  <p>400619</p>
+                  <p>
+                    {doctor?.address?.addressName}, {doctor?.address?.state}
+                  </p>
+                  <p>{doctor?.address?.pincode}</p>
                 </div>
               </div>
 
@@ -141,31 +144,29 @@ const ClinicProfile = ({ params }) => {
                 <span className="text-base font-medium text-gray-600">
                   Beds:
                 </span>
-                <span className="text-sm text-gray-800">123</span>
+                <span className="text-sm text-gray-800">
+                  {doctor?.clinitStats?.totalBeds}
+                </span>
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-base font-medium text-gray-600">
                   Doctors:
                 </span>
-                <span className="text-sm text-gray-800">12</span>
+                <span className="text-sm text-gray-800">
+                  {doctor?.clinitStats?.totalDoctors}
+                </span>
               </div>
               <div>
                 <span className="text-base font-medium text-gray-600 mb-2 block">
                   Services:
                 </span>
                 <div className="flex flex-wrap gap-2">
-                  {[
-                    "Fertility Support",
-                    "Egg Freezing",
-                    "IVF Treatment",
-                    "IUI Treatment",
-                    "Sperm Freezing",
-                  ].map((service) => (
+                  {doctor?.services?.map((service) => (
                     <span
-                      key={service}
+                      key={service.serviceId}
                       className="px-3 py-1 text-xs bg-gray-100 text-gray-800 rounded-full"
                     >
-                      {service}
+                      {service.serviceName}
                     </span>
                   ))}
                 </div>
@@ -175,8 +176,11 @@ const ClinicProfile = ({ params }) => {
                   Timings:
                 </span>
                 <div className="flex flex-col items-end gap-1">
-                  <span className="text-sm text-gray-800">Mon 11:00AM - 01:00PM</span>
-                  <span className="text-sm text-gray-800">Wed, Fri 05:00AM - 07:00PM</span>
+                  {doctor?.workingHours?.map((time, index) => (
+                    <span key={index} className="text-sm text-gray-800">
+                      {time.dayOfWeek} {time.startTime} - {time.endTime}
+                    </span>
+                  ))}
                 </div>
               </div>
             </div>
@@ -197,8 +201,11 @@ const ClinicProfile = ({ params }) => {
               "https://via.placeholder.com/150",
             ].map((src, index) => (
               <div key={index} className="relative w-32 h-32">
-                <img                       src="https://in.bmscdn.com/iedb/artist/images/website/poster/large/salman-khan-1991-12-09-2017-01-53-43.jpg"
- alt={`Photo ${index + 1}`} className="w-full h-full object-cover rounded-lg" />
+                <img
+                  src="https://in.bmscdn.com/iedb/artist/images/website/poster/large/salman-khan-1991-12-09-2017-01-53-43.jpg"
+                  alt={`Photo ${index + 1}`}
+                  className="w-full h-full object-cover rounded-lg"
+                />
                 {index === 7 && (
                   <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded-lg">
                     <span className="text-white text-2xl font-bold">+7</span>
@@ -226,9 +233,9 @@ const ClinicProfile = ({ params }) => {
                   Dr. Jake Wilson
                 </p>
                 <p className="inline-flex items-center text-sm mt-2 text-[#2B4360]">
-                Gynecologist/Obstetrician
+                  Gynecologist/Obstetrician
                 </p>
-             
+
                 <Button className="mt-4 bg-white text-[#2B4360] border border-[#2B4360]">
                   View Profile
                 </Button>
@@ -247,9 +254,9 @@ const ClinicProfile = ({ params }) => {
                   Dr. Jake Wilson
                 </p>
                 <p className="inline-flex items-center text-sm mt-2 text-[#2B4360]">
-                Gynecologist/Obstetrician
+                  Gynecologist/Obstetrician
                 </p>
-             
+
                 <Button className="mt-4 bg-white text-[#2B4360] border border-[#2B4360]">
                   View Profile
                 </Button>
@@ -259,7 +266,7 @@ const ClinicProfile = ({ params }) => {
         </div>
 
         <div>
-          <p className="font-bold my-6 text-xl">Reviews (2)</p>
+          <p className="font-bold my-6 text-xl">Reviews ({doctor?.reviewsStat.totalReviews})</p>
           <div className="flex flex-col divide-y bg-white rounded-lg divide-[#2B4360]">
             <div className="p-5">
               <div className="flex justify-between items-center">
@@ -277,9 +284,16 @@ const ClinicProfile = ({ params }) => {
                 </div>
                 <p className="text-[#2B4360] font-light">9 months ago</p>
               </div>
-              <p className="text-sm mt-5">Dr. Kort practices the exact opposite of a "one size fits all" approach to medicine. He took my fears seriously - primarily about the hormone injections - and worked with me to create a schedule that I was comfortable with, but that also got great results. He's one of the kindest and most knowledgeable doctors I've ever had.</p>
+              <p className="text-sm mt-5">
+                Dr. Kort practices the exact opposite of a "one size fits all"
+                approach to medicine. He took my fears seriously - primarily
+                about the hormone injections - and worked with me to create a
+                schedule that I was comfortable with, but that also got great
+                results. He's one of the kindest and most knowledgeable doctors
+                I've ever had.
+              </p>
             </div>
-               <div className="p-5">
+            <div className="p-5">
               <div className="flex justify-between items-center">
                 <div className="flex items-center gap-5">
                   <div className="w-10 h-10 rounded-full">
@@ -295,7 +309,14 @@ const ClinicProfile = ({ params }) => {
                 </div>
                 <p className="text-[#2B4360] font-light">9 months ago</p>
               </div>
-              <p className="text-sm mt-5">Dr. Kort practices the exact opposite of a "one size fits all" approach to medicine. He took my fears seriously - primarily about the hormone injections - and worked with me to create a schedule that I was comfortable with, but that also got great results. He's one of the kindest and most knowledgeable doctors I've ever had.</p>
+              <p className="text-sm mt-5">
+                Dr. Kort practices the exact opposite of a "one size fits all"
+                approach to medicine. He took my fears seriously - primarily
+                about the hormone injections - and worked with me to create a
+                schedule that I was comfortable with, but that also got great
+                results. He's one of the kindest and most knowledgeable doctors
+                I've ever had.
+              </p>
             </div>
           </div>
         </div>
