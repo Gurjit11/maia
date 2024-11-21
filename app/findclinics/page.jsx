@@ -22,6 +22,7 @@ import iuitreatment from "../../public/iuitreatment.png";
 import eggfreezing from "../../public/eggfreezing.png";
 import axios from "axios";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 const FindClinics = () => {
   const [clinics, setClinics] = useState([]);
@@ -31,9 +32,9 @@ const FindClinics = () => {
 
   const getClinics = () => {
     let data = JSON.stringify({
-      "filters":{},
-      "pageNo":0
-  });
+      filters: {},
+      pageNo: 0,
+    });
 
     let config = {
       method: "post",
@@ -42,8 +43,9 @@ const FindClinics = () => {
       headers: {
         "Content-Type": "application/json",
         "device-id": "97c2fe5e-0f68-4d72-b277-d5d2d4e628a8",
-        "login-token": "f48668d4ea1989d14a5692c5c4b7b2964c1cd4333f27869b149f8f5b7db9c37a0731331d8bfdddaee2b39aa2da420282524c49da2bffa8bf95d5b6d4c956d1aea10ebcc18bb59d9fb0b68e8a0701262037f59784c56f5141e9446618ce41e97864da9a3c4729b6469712045d9d379f7e8996734fcfe58bf4029f8bb2c34d3b8831f3f79b575a4fe0b810e569ba76099e6b6e80a08bc2488350d7dc632a9d0feca6588711354f54e52adfebd6828012b69aaa1e903bfa9ac57a8c676e89d2853f30297fbab03b8b45c49af79cd819bd289ba7b7d3e50d799c01e27dcc02b1580a5ac3b6a6cc94dff860916be3340c958c75952faafd90bff74c677b74767d4d5dba21cd8ab57d8c0991e537ddaffb5f3cefea2c7f31e4d2dad2e1af34c8525d6295c8af0a9aefe466e3c4218ecac52d4265860495f0ece6361f315af2c82c97af5bc9e6aa356f19fcab74af5ecd4ba4c55fedeab1876372e9ff6cc8b1ebc0799988be785907c04772a8b96b2706b95151bdcb63ed2752734a64c6ea9691e0c335",
-        "city-id": "NA"
+        "login-token":
+          "f48668d4ea1989d14a5692c5c4b7b2964c1cd4333f27869b149f8f5b7db9c37a0731331d8bfdddaee2b39aa2da420282524c49da2bffa8bf95d5b6d4c956d1aea10ebcc18bb59d9fb0b68e8a0701262037f59784c56f5141e9446618ce41e97864da9a3c4729b6469712045d9d379f7e8996734fcfe58bf4029f8bb2c34d3b8831f3f79b575a4fe0b810e569ba76099e6b6e80a08bc2488350d7dc632a9d0feca6588711354f54e52adfebd6828012b69aaa1e903bfa9ac57a8c676e89d2853f30297fbab03b8b45c49af79cd819bd289ba7b7d3e50d799c01e27dcc02b1580a5ac3b6a6cc94dff860916be3340c958c75952faafd90bff74c677b74767d4d5dba21cd8ab57d8c0991e537ddaffb5f3cefea2c7f31e4d2dad2e1af34c8525d6295c8af0a9aefe466e3c4218ecac52d4265860495f0ece6361f315af2c82c97af5bc9e6aa356f19fcab74af5ecd4ba4c55fedeab1876372e9ff6cc8b1ebc0799988be785907c04772a8b96b2706b95151bdcb63ed2752734a64c6ea9691e0c335",
+        "city-id": "NA",
       },
       data: data,
     };
@@ -80,7 +82,7 @@ const FindClinics = () => {
     setFilteredClinics(filtered);
   };
   console.log(clinics);
-  
+
   return (
     <div className="bg-[#F7F7F7] sm:p-20 p-3 pt-10">
       <div className=" md:flex flex-co justify-between mb-6">
@@ -123,9 +125,16 @@ const FindClinics = () => {
       )}
       <div className="flex-col min-h-[600px] justify-start items-start gap-7 ">
         {filteredClinics.map((clinic, index) => (
-          <div
+          <motion.div
             key={index}
             className="sm:p-8 p-3 my-3 bg-white w-full h-full rounded-2xl shadow justify-start items-start gap-3 sm:gap-10 flex"
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0, transition: { delay: index * 0.1 } },
+            }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
           >
             <div className="sm:w-32 w-20  flex justify-start items-start">
               <Image
@@ -144,8 +153,7 @@ const FindClinics = () => {
                 <div className="flex-col justify-start items-start gap-2 flex">
                   <div className="flex-col justify-start items-start gap-2 flex">
                     <div className="justify-start items-center gap-2 inline-flex">
-                      <Image src={loc} width="auto"
-                height="auto" alt="icon" />
+                      <Image src={loc} width="auto" height="auto" alt="icon" />
                       <div className="text-[#2b4360] text-base font-normal font-['Poppins'] leading-tight">
                         {/* {clinic.specialization.join(", ")} */}
                         {clinic.address}
@@ -153,17 +161,25 @@ const FindClinics = () => {
                     </div>
                     <div className="justify-start items-start gap-4 inline-flex">
                       <div className="justify-start items-center gap-2 flex">
-                        <Image src={review}  width="auto"
-                height="auto"alt="icon" />
+                        <Image
+                          src={review}
+                          width="auto"
+                          height="auto"
+                          alt="icon"
+                        />
                         <div className="text-[#2b4360] text-base font-normal font-['Poppins'] leading-tight">
                           512 Reviews
                         </div>
                       </div>
                       <div className="justify-start items-center gap-2 flex">
-                        <Image src={star} width="auto"
-                height="auto" alt="icon" />
+                        <Image
+                          src={star}
+                          width="auto"
+                          height="auto"
+                          alt="icon"
+                        />
                         <div className="text-[#2b4360] text-base font-normal font-['Poppins'] leading-tight">
-                         {clinic.rating}
+                          {clinic.rating}
                         </div>
                       </div>
                     </div>
@@ -224,19 +240,21 @@ const FindClinics = () => {
                 </div>
                 <div className="justify-start items-center gap-2 inline-flex">
                   <div className="w-20 h-8 relative">
-                    <Image  width={100}
-                height={100}
+                    <Image
+                      width={100}
+                      height={100}
                       className="w-8 h-8 left-0 top-0 absolute rounded-full border border-[#2b4360]"
                       src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8k0hViJWVJVa92YPHh41fxa-_1oq4k6eNmA&s"
-                    
                     />
-                    <Image  width={100}
-                height={100}
+                    <Image
+                      width={100}
+                      height={100}
                       className="w-8 h-8 left-[22.67px] top-0 absolute rounded-full border border-[#2b4360]"
                       src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8k0hViJWVJVa92YPHh41fxa-_1oq4k6eNmA&s"
                     />
-                    <Image  width={100}
-                height={100}
+                    <Image
+                      width={100}
+                      height={100}
                       className="w-8 h-8 left-[45.33px] top-0 absolute rounded-full border border-[#2b4360]"
                       src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8k0hViJWVJVa92YPHh41fxa-_1oq4k6eNmA&s"
                     />
@@ -262,7 +280,7 @@ const FindClinics = () => {
                 </Link>
               </div>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </div>
