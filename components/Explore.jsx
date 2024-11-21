@@ -109,8 +109,8 @@ const Explore = () => {
               <Link href="/finddoctors">
                 <motion.div className=" px-6 py-4 rounded-lg border border-slate-700 justify-center items-center gap-2 inline-flex">
                   <div className=" text-center text-slate-700 text-base font-medium  leading-tight">
-                      <div className="text-center text-slate-700 text-base font-medium leading-tight">
-                        Find top Doctors
+                    <div className="text-center text-slate-700 text-base font-medium leading-tight">
+                      Find top Doctors
                     </div>
                   </div>
                 </motion.div>
@@ -121,86 +121,86 @@ const Explore = () => {
 
         <div className="col-span-1 sm:flex-col flex overflow-x-auto overflow-y-clip sm:gap-0 gap-10">
           {topDoctors.slice(1, 4).map((doctor, index) => (
-            <Link href={`/finddoctors/${doctor.doctorId}`}>
-            <motion.div
-              className="sm:w-[70%] my-5 px-6 py-4 bg-stone-100 rounded-lg shadow justify-start items-start gap-24 flex"
-              key={doctor.doctorId}
-              initial={{ opacity: 0, y: 50 }} // Start with 0 opacity and move from below
-              animate={{ opacity: 1, y: 0 }} // Fade in and move to natural position
-              transition={{ duration: 0.6, delay: index * 0.2 }} // Delayed based on the index for cascading effect
+            <Link key={index} href={`/finddoctors/${doctor.doctorId}`}>
+              <motion.div
+                className="sm:w-[70%] my-5 px-6 py-4 bg-stone-100 rounded-lg shadow justify-start items-start gap-24 flex"
+                key={doctor.doctorId}
+                initial={{ opacity: 0, y: 50 }} // Start with 0 opacity and move from below
+                animate={{ opacity: 1, y: 0 }} // Fade in and move to natural position
+                transition={{ duration: 0.6, delay: index * 0.2 }} // Delayed based on the index for cascading effect
               >
-              <div className="justify-start items-center gap-4 w-full md:flex flex-co">
-                <Image src={ellipse} alt={"icon"} />
+                <div className="justify-start items-center gap-4 w-full md:flex flex-co">
+                  <Image src={ellipse} alt={"icon"} />
 
-                <div className="w-full flex-col justify-start items-start gap-2 flex">
-                  <div className="flex justify-between items-center w-full text-slate-700 text-xl font-bold font-['FONTSPRING DEMO - Argent CF'] leading-normal">
-                    <div>{doctor.doctorName}</div>
-                    <div>
-                      <Image src={arrow} alt={"icon"} />
-                    </div>
-                  </div>
-                  <div className="h-28 flex-col justify-start items-start gap-1 flex">
-                    <div className="justify-start items-center gap-2 inline-flex">
-                      <Image src={loc} alt={"icon"} />
-                      <div className="text-slate-700 text-sm font-normal font-['Poppins'] leading-none">
-                        {doctor.address}
+                  <div className="w-full flex-col justify-start items-start gap-2 flex">
+                    <div className="flex justify-between items-center w-full text-slate-700 text-xl font-bold font-['FONTSPRING DEMO - Argent CF'] leading-normal">
+                      <div>{doctor.doctorName}</div>
+                      <div>
+                        <Image src={arrow} alt={"icon"} />
                       </div>
                     </div>
-                    <div className="justify-center items-center gap-2 inline-flex">
-                      <Image src={bag} alt={"icon"} />
+                    <div className="h-28 flex-col justify-start items-start gap-1 flex">
+                      <div className="justify-start items-center gap-2 inline-flex">
+                        <Image src={loc} alt={"icon"} />
+                        <div className="text-slate-700 text-sm font-normal font-['Poppins'] leading-none">
+                          {doctor.address}
+                        </div>
+                      </div>
+                      <div className="justify-center items-center gap-2 inline-flex">
+                        <Image src={bag} alt={"icon"} />
 
-                      <div className="text-slate-700 text-sm font-normal font-['Poppins'] leading-none">
-                        Experience: {doctor.experience || "N/A"} Years
+                        <div className="text-slate-700 text-sm font-normal font-['Poppins'] leading-none">
+                          Experience: {doctor.experience || "N/A"} Years
+                        </div>
                       </div>
-                    </div>
-                    <div className="justify-center items-center gap-2 inline-flex">
-                      {[...Array(Math.round(doctor.rating))].map((_, idx) => (
-                        <Image key={idx} src={star} alt="star icon" />
-                      ))}
-                    </div>
+                      <div className="justify-center items-center gap-2 inline-flex">
+                        {[...Array(Math.round(doctor.rating))].map((_, idx) => (
+                          <Image key={idx} src={star} alt="star icon" />
+                        ))}
+                      </div>
 
-                    <div className="w-64 justify-start items-start gap-2 inline-flex">
-                      <div className="rounded-lg justify-center items-center gap-1 flex">
-                        <div className="w-8 h-8 relative">
-                          <div className="w-8 h-8 bg-slate-200 rounded-full">
-                            <Image src={fertilitysupport} alt={"icon"} />
+                      <div className="w-64 justify-start items-start gap-2 inline-flex">
+                        <div className="rounded-lg justify-center items-center gap-1 flex">
+                          <div className="w-8 h-8 relative">
+                            <div className="w-8 h-8 bg-slate-200 rounded-full">
+                              <Image src={fertilitysupport} alt={"icon"} />
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      <div className="rounded-lg justify-center items-center gap-1 flex">
-                        <div className="w-8 h-8 relative">
-                          <div className="w-8 h-8 bg-amber-100 rounded-full">
-                            <Image src={eggfreezing} alt={"icon"} />
+                        <div className="rounded-lg justify-center items-center gap-1 flex">
+                          <div className="w-8 h-8 relative">
+                            <div className="w-8 h-8 bg-amber-100 rounded-full">
+                              <Image src={eggfreezing} alt={"icon"} />
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      <div className="rounded-lg justify-center items-center gap-1 flex">
-                        <div className="w-8 h-8 relative">
-                          <div className="w-8 h-8 bg-red-100 rounded-full">
-                            <Image src={ivf} alt={"icon"} />
+                        <div className="rounded-lg justify-center items-center gap-1 flex">
+                          <div className="w-8 h-8 relative">
+                            <div className="w-8 h-8 bg-red-100 rounded-full">
+                              <Image src={ivf} alt={"icon"} />
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      <div className="rounded-lg justify-center items-center gap-1 flex">
-                        <div className="w-8 h-8 relative">
-                          <div className="w-8 h-8 bg-green-100 rounded-full">
-                            <Image src={iuitreatment} alt={"icon"} />
+                        <div className="rounded-lg justify-center items-center gap-1 flex">
+                          <div className="w-8 h-8 relative">
+                            <div className="w-8 h-8 bg-green-100 rounded-full">
+                              <Image src={iuitreatment} alt={"icon"} />
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      <div className="rounded-lg justify-center items-center gap-1 flex">
-                        <div className="w-8 h-8 relative">
-                          <div className="w-8 h-8 bg-orange-100 rounded-full">
-                            <Image src={eggsperm} alt={"icon"} />
+                        <div className="rounded-lg justify-center items-center gap-1 flex">
+                          <div className="w-8 h-8 relative">
+                            <div className="w-8 h-8 bg-orange-100 rounded-full">
+                              <Image src={eggsperm} alt={"icon"} />
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </motion.div>
-          </Link>
+              </motion.div>
+            </Link>
           ))}
         </div>
       </div>
