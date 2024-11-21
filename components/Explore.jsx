@@ -13,14 +13,12 @@ import arrow from "../public/arrow.png";
 import ellipse from "../public/Ellipse.png";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { useRef } from "react";
 import { useInView } from "framer-motion";
-import { useRouter } from 'next/router'
 
 const Explore = () => {
-  const router = useRouter();
-
   const leftTextRef = useRef(null);
   const isLeftTextInView = useInView(leftTextRef, {
     once: true,
@@ -53,7 +51,6 @@ const Explore = () => {
         setTopDoctors(response.data.data.topDoctors);
         // setTopClinics(response.data.data.topClinics);
         console.log(topDoctors);
-
       })
       .catch((error) => {
         console.log(error);
@@ -63,7 +60,7 @@ const Explore = () => {
   useEffect(() => {
     getHomeData();
   }, []);
- 
+
   return (
     <div>
       <div className="sm:grid grid-cols-2 p-3 md:p-20">
@@ -75,7 +72,7 @@ const Explore = () => {
           animate={isLeftTextInView ? { opacity: 1, x: 0 } : {}} // Animate only when in view
           transition={{ duration: 0.8 }}
         >
-          <div className="flex-col justify-start items-start sm:gap-6 inline-flex">
+          <motion.div className="flex-col justify-start items-start sm:gap-6 inline-flex">
             <motion.div
               className="justify-start items-center gap-4 inline-flex"
               initial={{ opacity: 0, x: -50 }}
@@ -93,7 +90,7 @@ const Explore = () => {
               </div>
             </motion.div>
 
-            <motion.div
+            <div
               className="flex-col justify-start items-start sm:gap-10 flex"
               initial={{ opacity: 0, x: -50 }}
               animate={isLeftTextInView ? { opacity: 1, x: 0 } : {}}
@@ -109,17 +106,21 @@ const Explore = () => {
                   </div>
                 </div>
               </div>
-              <div className="px-6 py-4 rounded-lg border border-slate-700 justify-center items-center gap-2 inline-flex">
-                <div className="text-center text-slate-700 text-base font-medium leading-tight" >
-                  Find top Doctors
-                </div>
-              </div>
-            </motion.div>
-          </div>
+              <Link href="/finddoctors">
+                <motion.div className=" px-6 py-4 rounded-lg border border-slate-700 justify-center items-center gap-2 inline-flex">
+                  <div className=" text-center text-slate-700 text-base font-medium  leading-tight">
+                      <div className="text-center text-slate-700 text-base font-medium leading-tight">
+                        Find top Doctors
+                    </div>
+                  </div>
+                </motion.div>
+              </Link>
+            </div>
+          </motion.div>
         </motion.div>
 
         <div className="col-span-1 sm:flex-col flex overflow-x-auto overflow-y-clip sm:gap-0 gap-10">
-          {topDoctors.slice(0, 4).map((doctor, index) => (
+          {topDoctors.slice(1, 4).map((doctor, index) => (
             <motion.div
               className="sm:w-[70%] my-5 px-6 py-4 bg-stone-100 rounded-lg shadow justify-start items-start gap-24 flex"
               key={doctor.doctorId}
@@ -135,7 +136,6 @@ const Explore = () => {
                     <div>{doctor.doctorName}</div>
                     <div>
                       <Image src={arrow} alt={"icon"} />
-
                     </div>
                   </div>
                   <div className="h-28 flex-col justify-start items-start gap-1 flex">

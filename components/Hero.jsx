@@ -131,6 +131,7 @@ const Hero = () => {
           </div>
           <div className="col-span-1 flex-col justify-center gap-6 flex">
             <motion.div
+
               className="flex-col sm:p-20 p-5 gap-2 flex"
               ref={ref}
               initial={{ opacity: 0, y: 50 }}
@@ -161,7 +162,8 @@ const Hero = () => {
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.8, delay: 0.6 }}
               >
-                <div className="w-[90%]">
+                <motion.div className="w-[90%]">
+                  <div className="bg-white text-black rounded border border-neutral-200 justify-start items-center flex">
                   <div className="bg-white text-black rounded border border-neutral-200 justify-start items-center flex">
                     <input
                       type="text"
@@ -177,8 +179,9 @@ const Hero = () => {
                     Search
                   </div>
                 </div>
-              </motion.div>
-              <motion.div
+                </motion.div>
+                </motion.div>
+                <motion.div
                 className="justify-start text-xs sm:text-sm items-start gap-1 flex"
                 initial={{ opacity: 0, y: 50 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -187,12 +190,15 @@ const Hero = () => {
                 <div className="text-slate-700 text-xs sm:text-sm font-light font-poppins">
                   Eg.
                 </div>
+                <motion.div className="text-slate-700 text-xs sm:text-sm font-light font-poppins">
                 <div className="text-slate-700 text-xs sm:text-sm font-light font-poppins">
                   Is IVF safe?, What is Egg Freezing?
                 </div>
               </motion.div>
             </motion.div>
-          </div>
+
+              </motion.div>
+                    </div>
           <div className="hidden col-span-1 w-full overflow-clip pb-1.5 justify-center items-center sm:flex">
             <Slider {...settings} className="w-full">
               {cardData.map((card, index) => (

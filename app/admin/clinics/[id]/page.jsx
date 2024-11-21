@@ -14,7 +14,7 @@ const ClinicProfile = ({ params }) => {
   const { id } = params;
   const getDoctor = () => {
     let data = JSON.stringify({
-      clinicId: "4d85ffd2-ff50-4982-a16f-682f43bfceff",
+      clinicId: id,
     });
 
     let config = {
