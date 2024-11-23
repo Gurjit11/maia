@@ -64,10 +64,9 @@ const DoctorPage = ({ params }) => {
       });
   };
 
-
   const getTopDoctors = () => {
     const axios = require("axios");
-  
+
     let config = {
       method: "post",
       maxBodyLength: Infinity,
@@ -78,22 +77,19 @@ const DoctorPage = ({ params }) => {
           "f48668d4ea1989d14a5692c5c4b7b2964c1cd4333f27869b149f8f5b7db9c37a0731331d8bfdddaee2b39aa2da420282524c49da2bffa8bf95d5b6d4c956d1aea10ebcc18bb59d9fb0b68e8a0701262037f59784c56f5141e9446618ce41e97864da9a3c4729b6469712045d9d379f7e8996734fcfe58bf4029f8bb2c34d3b8831f3f79b575a4fe0b810e569ba76099e6b6e80a08bc2488350d7dc632a9d0feca6588711354f54e52adfebd6828012b69aaa1e903bfa9ac57a8c676e89d2853f30297fbab03b8b45c49af79cd819bd289ba7b7d3e50d799c01e27dcc02b1580a5ac3b6a6cc94dff860916be3340c958c75952faafd90bff74c677b74767d4d5dba21cd8ab57d8c0991e537ddaffb5f3cefea2c7f31e4d2dad2e1af34c8525d6295c8af0a9aefe466e3c4218ecac52d4265860495f0ece6361f315af2c82c97af5bc9e6aa356f19fcab74af5ecd4ba4c55fedeab1876372e9ff6cc8b1ebc0799988be785907c04772a8b96b2706b95151bdcb63ed2752734a64c6ea9691e0c335",
         "city-id": "NA",
         "Content-Type": "application/json",
-       
       },
     };
 
     axios
       .request(config)
       .then((response) => {
-        console.log((response.data));
+        console.log(response.data);
         setTopDoctors(response.data.data.topDoctors);
       })
       .catch((error) => {
         console.log(error);
       });
   };
-
-
 
   useEffect(() => {
     getDoctor();
@@ -106,19 +102,40 @@ const DoctorPage = ({ params }) => {
     const totalStars = 5;
     const filledStars = Math.floor(rating);
     const hasHalfStar = rating % 1 !== 0;
-  
+
     return (
       <div className="justify-center items-center gap-1 inline-flex">
         {[...Array(totalStars)].map((_, index) => {
           if (index < filledStars) {
             // Full star
-            return <Image key={index} src={star} alt="Filled star" className="w-4 h-4" />;
+            return (
+              <Image
+                key={index}
+                src={star}
+                alt="Filled star"
+                className="w-4 h-4"
+              />
+            );
           } else if (hasHalfStar && index === filledStars) {
             // Half star (using full star as placeholder)
-            return <Image key={index} src={star} alt="Half star" className="w-4 h-4 opacity-50" />;
+            return (
+              <Image
+                key={index}
+                src={star}
+                alt="Half star"
+                className="w-4 h-4 opacity-50"
+              />
+            );
           } else {
             // Empty star (using full star as placeholder)
-            return <Image key={index} src={star} alt="Empty star" className="w-4 h-4 opacity-20" />;
+            return (
+              <Image
+                key={index}
+                src={star}
+                alt="Empty star"
+                className="w-4 h-4 opacity-20"
+              />
+            );
           }
         })}
       </div>
@@ -145,7 +162,7 @@ const DoctorPage = ({ params }) => {
               <div className="flex-col justify-start items-start gap-2 inline-flex w-full">
                 <div className="text-[#2b4360] w-full flex items-center justify-between  text-3xl font-bold font-['FONTSPRING DEMO - Argent CF'] leading-loose">
                   {doctor?.doctorDetails?.doctorName}
-              <BookAppointment doctor={doctor} />
+                  <BookAppointment doctor={doctor} />
                 </div>
                 <div className="flex-col justify-start items-start gap-1 flex">
                   <div className="justify-start items-center gap-2 inline-flex">
@@ -190,7 +207,6 @@ const DoctorPage = ({ params }) => {
                 </div>
               </div>
             </div>
-          
           </div>
           <div className="hidden  w-full gap-4 sm:flex">
             <div className="p-2 bg-white rounded-lg justify-center items-center gap-1 flex">
@@ -294,54 +310,51 @@ const DoctorPage = ({ params }) => {
                       height={30}
                     />
                     <div className="flex w-full justify-between">
-
-                    <div className=" flex-col justify-start items-start gap-2 inline-flex">
-                      <div className="flex-col justify-start items-start gap-4 flex">
-                        <div className="sm:w-96 flex-col justify-start items-start gap-2 flex">
-                          <div className="text-[#2b4360] text-base font-medium font-['Poppins'] leading-tight">
-                            {clinic.clinicName}
-                          </div>
-                          <div className=" flex-col justify-start items-start gap-1 flex">
-                            <div className="text-[#5f5f5f] text-xs font-normal font-['Poppins'] leading-none">
-                              {clinic.addressName}
+                      <div className=" flex-col justify-start items-start gap-2 inline-flex">
+                        <div className="flex-col justify-start items-start gap-4 flex">
+                          <div className="sm:w-96 flex-col justify-start items-start gap-2 flex">
+                            <div className="text-[#2b4360] text-base font-medium font-['Poppins'] leading-tight">
+                              {clinic.clinicName}
                             </div>
-                            <div className=" text-[#5f5f5f] text-xs font-normal font-['Poppins'] leading-none">
-                              Siddhachal Arcade, Link Road, Landmark: Near
-                              Sathya Sai General Hospital, Mumbai
+                            <div className=" flex-col justify-start items-start gap-1 flex">
+                              <div className="text-[#5f5f5f] text-xs font-normal font-['Poppins'] leading-none">
+                                {clinic.addressName}
+                              </div>
+                              <div className=" text-[#5f5f5f] text-xs font-normal font-['Poppins'] leading-none">
+                                Siddhachal Arcade, Link Road, Landmark: Near
+                                Sathya Sai General Hospital, Mumbai
+                              </div>
                             </div>
                           </div>
                         </div>
+                        <div className="justify-start items-center gap-1 inline-flex">
+                          <FaDirections className="text-[#2b4360] text-xl" />
+                          <div className="text-[#2b4360] text-sm font-medium font-['Poppins'] underline leading-none">
+                            Get Directions
+                          </div>
+                        </div>
                       </div>
-                      <div className="justify-start items-center gap-1 inline-flex">
-                        <FaDirections className="text-[#2b4360] text-xl" />
-                        <div className="text-[#2b4360] text-sm font-medium font-['Poppins'] underline leading-none">
-                          Get Directions
+
+                      <div className="flex-col justify-start items-center gap-2 inline-flex">
+                        <div className="justify-start items-center gap-2 inline-flex">
+                          <div>
+                            <span className="text-[#2b4360] text-base font-normal font-['Poppins'] leading-tight">
+                              ConsultationFees:{" "}
+                            </span>
+                            <span className="text-[#00b15c] text-base font-semibold font-['Poppins'] leading-tight">
+                              ₹₹₹
+                            </span>
+                            <span className="text-[#ababab] text-base font-semibold font-['Poppins'] leading-tight">
+                              ₹₹
+                            </span>
+                          </div>
+                        </div>
+                        <div className="flex-col justify-start items-start gap-4 flex">
+                          <BookAppointment />
                         </div>
                       </div>
                     </div>
-
-                    <div className="flex-col justify-start items-center gap-2 inline-flex">
-                    <div className="justify-start items-center gap-2 inline-flex">
-                      <div>
-                        <span className="text-[#2b4360] text-base font-normal font-['Poppins'] leading-tight">
-                          ConsultationFees:{" "}
-                        </span>
-                        <span className="text-[#00b15c] text-base font-semibold font-['Poppins'] leading-tight">
-                          ₹₹₹
-                        </span>
-                        <span className="text-[#ababab] text-base font-semibold font-['Poppins'] leading-tight">
-                          ₹₹
-                        </span>
-                      </div>
-                    </div>
-                    <div className="flex-col justify-start items-start gap-4 flex">
-                        <BookAppointment />
-                    </div>
                   </div>
-                    </div>
-
-                  </div>
-                
                 </div>
                 <div className=" flex-col justify-center items-center gap-2 ">
                   <div className="text-[#2b4360] mb-1 text-base font-medium font-['Poppins'] leading-tight">
@@ -497,70 +510,72 @@ const DoctorPage = ({ params }) => {
           Top Verified Doctors
         </div>
         <div className=" sm:flex-col flex overflow-x-auto sm:gap-0 gap-6">
-            {topDoctors.map((doctor) => (
-              
-          <div className=" my-2  px-6 py-4 bg-stone-100 rounded-lg shadow justify-start items-start gap-24 flex">
-            <div className="justify-start items-center gap-4 w-full md:flex flex-co">
-              <Image src={ellipse} alt={"icon"} />
+          {topDoctors.map((doctor, index) => (
+            <div
+              key={index}
+              className=" my-2  px-6 py-4 bg-stone-100 rounded-lg shadow justify-start items-start gap-24 flex"
+            >
+              <div className="justify-start items-center gap-4 w-full md:flex flex-co">
+                <Image src={ellipse} alt={"icon"} />
 
-              <div className="w-full flex-col justify-start items-start gap-2 flex">
-                <div className="flex justify-between items-center w-full  text-slate-700 text-xl font-bold font-['FONTSPRING DEMO - Argent CF'] leading-normal">
-                  <div>{doctor?.doctorName}</div>
-                  <div>
-                    <Image src={arrow} alt={"icon"} />
-                  </div>
-                </div>
-                <div className="h-28 flex-col justify-start items-start gap-1 flex">
-                  <div className=" justify-start items-center gap-2 inline-flex">
-                    <Image src={loc} alt={"icon"} />
-                    <div className="text-slate-700 text-sm font-normal font-['Poppins'] leading-none">
-                      {doctor?.address}
+                <div className="w-full flex-col justify-start items-start gap-2 flex">
+                  <div className="flex justify-between items-center w-full  text-slate-700 text-xl font-bold font-['FONTSPRING DEMO - Argent CF'] leading-normal">
+                    <div>{doctor?.doctorName}</div>
+                    <div>
+                      <Image src={arrow} alt={"icon"} />
                     </div>
                   </div>
-                  <div className="justify-center items-center gap-2 inline-flex">
-                    <Image src={bag} alt={"icon"} />
+                  <div className="h-28 flex-col justify-start items-start gap-1 flex">
+                    <div className=" justify-start items-center gap-2 inline-flex">
+                      <Image src={loc} alt={"icon"} />
+                      <div className="text-slate-700 text-sm font-normal font-['Poppins'] leading-none">
+                        {doctor?.address}
+                      </div>
+                    </div>
+                    <div className="justify-center items-center gap-2 inline-flex">
+                      <Image src={bag} alt={"icon"} />
 
-                    <div className="text-slate-700 text-sm font-normal font-['Poppins'] leading-none">
-                      Experience: {doctor?.experiance} Years
-                    </div>
-                  </div>
-                  <div className="justify-center items-center gap-2 inline-flex">
-                  {renderStars(doctor?.rating || 0)}
-
-                  </div>
-                  <div className="w-64 justify-start items-start gap-2 inline-flex">
-                    <div className="rounded-lg justify-center items-center gap-1 flex">
-                      <div className="w-8 h-8 relative">
-                        <div className="w-8 h-8  bg-slate-200 rounded-full">
-                          <Image src={fertilitysupport} alt={"icon"} />
-                        </div>
+                      <div className="text-slate-700 text-sm font-normal font-['Poppins'] leading-none">
+                        Experience: {doctor?.experiance} Years
                       </div>
                     </div>
-                    <div className="rounded-lg justify-center items-center gap-1 flex">
-                      <div className="w-8 h-8 relative">
-                        <div className="w-8 h-8  bg-amber-100 rounded-full">
-                          <Image src={eggfreezing} alt={"icon"} />
+                    <div className="justify-center items-center gap-2 inline-flex">
+                      {renderStars(doctor?.rating || 0)}
+                    </div>
+                    <div className="w-64 justify-start items-start gap-2 inline-flex">
+                      <div className="rounded-lg justify-center items-center gap-1 flex">
+                        <div className="w-8 h-8 relative">
+                          <div className="w-8 h-8  bg-slate-200 rounded-full">
+                            <Image src={fertilitysupport} alt={"icon"} />
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <div className="rounded-lg justify-center items-center gap-1 flex">
-                      <div className="w-8 h-8 relative">
-                        <div className="w-8 h-8  bg-red-100 rounded-full">
-                          <Image src={ivf} alt={"icon"} />
+                      <div className="rounded-lg justify-center items-center gap-1 flex">
+                        <div className="w-8 h-8 relative">
+                          <div className="w-8 h-8  bg-amber-100 rounded-full">
+                            <Image src={eggfreezing} alt={"icon"} />
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <div className="rounded-lg justify-center items-center gap-1 flex">
-                      <div className="w-8 h-8 relative">
-                        <div className="w-8 h-8  bg-green-100 rounded-full">
-                          <Image src={iuitreatment} alt={"icon"} />
+                      <div className="rounded-lg justify-center items-center gap-1 flex">
+                        <div className="w-8 h-8 relative">
+                          <div className="w-8 h-8  bg-red-100 rounded-full">
+                            <Image src={ivf} alt={"icon"} />
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <div className="rounded-lg justify-center items-center gap-1 flex">
-                      <div className="w-8 h-8 relative">
-                        <div className="w-8 h-8  bg-orange-100 rounded-full">
-                          <Image src={eggsperm} alt={"icon"} />
+                      <div className="rounded-lg justify-center items-center gap-1 flex">
+                        <div className="w-8 h-8 relative">
+                          <div className="w-8 h-8  bg-green-100 rounded-full">
+                            <Image src={iuitreatment} alt={"icon"} />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="rounded-lg justify-center items-center gap-1 flex">
+                        <div className="w-8 h-8 relative">
+                          <div className="w-8 h-8  bg-orange-100 rounded-full">
+                            <Image src={eggsperm} alt={"icon"} />
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -568,9 +583,7 @@ const DoctorPage = ({ params }) => {
                 </div>
               </div>
             </div>
-          </div>
-                    ))}
-
+          ))}
         </div>
         <div className="text-[#2b4360] mt-3 ml-3 font-semibold text-xl">
           Learn from Popular Topics
