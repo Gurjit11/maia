@@ -7,9 +7,9 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <div lang="en" className="flex">
+    <div lang="en" className="flex w-full">
       <AdminSidebar />
-      <div>{children}</div>
+      <div className="w-full">{children}</div>
     </div>
   );
 }

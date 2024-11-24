@@ -489,7 +489,7 @@ function ConsultationForm({ onComplete, closeModal }) {
                   onClick={() => handleOptionSelect("city", city)}
                   className={`${
                     selectedOptions.city === city
-                      ? "bg-blue-600 text-white"
+                      ? "bg-slate-700 text-white"
                       : "bg-gray-200 text-gray-600"
                   } px-2 py-1 rounded-md`}
                 >
@@ -528,7 +528,7 @@ function ConsultationForm({ onComplete, closeModal }) {
                   onClick={() => handleOptionSelect("age", age)}
                   className={`${
                     selectedOptions.age === age
-                      ? "bg-blue-600 text-white"
+                      ? "bg-slate-700 text-white"
                       : "bg-gray-200 text-gray-600"
                   } px-2 py-1 rounded-md`}
                 >
@@ -566,7 +566,7 @@ function ConsultationForm({ onComplete, closeModal }) {
                   onClick={() => handleOptionSelect("experience", exp)}
                   className={`${
                     selectedOptions.experience === exp
-                      ? "bg-blue-600 text-white"
+                      ? "bg-slate-700 text-white"
                       : "bg-gray-200 text-gray-600"
                   } px-2 py-1 rounded-md`}
                 >
@@ -605,7 +605,7 @@ function ConsultationForm({ onComplete, closeModal }) {
                     onClick={() => handleOptionSelect("familyBuilding", option)}
                     className={`${
                       selectedOptions.familyBuilding === option
-                        ? "bg-blue-600 text-white"
+                        ? "bg-slate-700 text-white"
                         : "bg-gray-200 text-gray-600"
                     } px-2 py-1 rounded-md`}
                   >
@@ -644,7 +644,7 @@ function ConsultationForm({ onComplete, closeModal }) {
                   onClick={() => handleOptionSelect("fertilityPaths", path)}
                   className={`${
                     selectedOptions.fertilityPaths === path
-                      ? "bg-blue-600 text-white"
+                      ? "bg-slate-700 text-white"
                       : "bg-gray-200 text-gray-600"
                   } px-2 py-1 rounded-md`}
                 >
@@ -682,7 +682,7 @@ function ConsultationForm({ onComplete, closeModal }) {
                   onClick={() => handleOptionSelect("haveDoctor", option)}
                   className={`${
                     selectedOptions.haveDoctor === option
-                      ? "bg-blue-600 text-white"
+                      ? "bg-slate-700 text-white"
                       : "bg-gray-200 text-gray-600"
                   } px-2 py-1 rounded-md`}
                 >
@@ -720,7 +720,7 @@ function ConsultationForm({ onComplete, closeModal }) {
                   onClick={() => handleOptionSelect("supportInterest", support)}
                   className={`${
                     selectedOptions.supportInterest === support
-                      ? "bg-blue-600 text-white"
+                      ? "bg-slate-700 text-white"
                       : "bg-gray-200 text-gray-600"
                   } px-2 py-1 rounded-md`}
                 >
@@ -758,7 +758,7 @@ function ConsultationForm({ onComplete, closeModal }) {
                   onClick={() => handleOptionSelect("topicInterest", topic)}
                   className={`${
                     selectedOptions.topicInterest === topic
-                      ? "bg-blue-600 text-white"
+                      ? "bg-slate-700 text-white"
                       : "bg-gray-200 text-gray-600"
                   } px-2 py-1 rounded-md`}
                 >
