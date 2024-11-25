@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import adminlogin from "../../../public/adminlogin.png";
 import icon from "../../../public/icon.png";
@@ -8,8 +9,14 @@ import {
 } from "react-icons/ai";
 import { FaDoorOpen } from "react-icons/fa";
 import Link from "next/link";
+import { useState } from "react";
 
 const AdminLogin = () => {
+  const [formData, setFormData] = useState({
+    userName: "anikethandorel2@gmail.com",
+    password: "test1234",
+  });
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 min-h-screen">
       <div className="col-span-1 flex justify-center items-center px-4">
@@ -41,6 +48,10 @@ const AdminLogin = () => {
                 id="email"
                 className="w-full p-3 bg-white rounded-lg border border-slate-300 text-base font-medium font-['Poppins'] leading-snug"
                 placeholder="Admin@maiacare.com"
+                value={formData.userName}
+                onChange={(e) =>
+                  setFormData({ ...formData, userName: e.target.value })
+                }
               />
             </div>
 
@@ -57,7 +68,32 @@ const AdminLogin = () => {
                 id="password"
                 className="w-full p-3 bg-white rounded-lg border border-slate-300 text-base font-medium font-['Poppins'] leading-snug"
                 placeholder="*****************"
+                value={formData.password}
+                onChange={(e) =>
+                  setFormData({ ...formData, password: e.target.value })
+                }
               />
+              <div className="flex items-center mt-2">
+                <input
+                  type="checkbox"
+                  id="showPassword"
+                  className="mr-2"
+                  onChange={(e) => {
+                    const passwordInput = document.getElementById("password");
+                    if (e.target.checked) {
+                      passwordInput.type = "text";
+                    } else {
+                      passwordInput.type = "password";
+                    }
+                  }}
+                />
+                <label
+                  htmlFor="showPassword"
+                  className="text-slate-800 text-sm font-semibold font-['Poppins']"
+                >
+                  Show Password
+                </label>
+              </div>
             </div>
 
             {/* Forgot Password */}

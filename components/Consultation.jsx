@@ -4,10 +4,12 @@ import Modal from "react-modal";
 import Learnslider from "./loginmodals/Learnslider";
 import Image from "next/image";
 import contactusthanks from "../public/contactusthanks.png";
-import { AiOutlineClose, AiOutlineUser } from "react-icons/ai";
+import consultationbook from "../public/consultationbook.png";
+import { AiOutlineClose } from "react-icons/ai";
 import axios from "axios";
 import { useAuth } from "@/contexts/AuthContext";
-import { FaUser, FaUserCircle } from "react-icons/fa";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 
 const customStyles = {
   content: {
@@ -382,7 +384,8 @@ const options = {
   ],
 };
 
-function ConsultationForm({ onComplete }) {
+function ConsultationForm({ onComplete, closeModal }) {
+  const [error, setError] = useState("");
   const [step, setStep] = useState(1);
   const [selectedOptions, setSelectedOptions] = useState({
     city: "",
@@ -398,6 +401,20 @@ function ConsultationForm({ onComplete }) {
     preferredTime: "",
     phoneNumber: "",
   });
+
+  const validatePhoneNumber = () => {
+    const phoneNumberPattern = /^[1-9]\d{9,14}$/; // International E.164 format (e.g., +1234567890)
+    const phoneNumber = selectedOptions.phoneNumber;
+
+    if (!phoneNumberPattern.test(phoneNumber)) {
+      setError(
+        "Please enter a valid phone number including the country code (e.g., +1234567890)."
+      );
+      return false;
+    }
+    setError("");
+    return true;
+  };
 
   const handleOptionSelect = (field, option) => {
     setSelectedOptions((prevState) => ({
@@ -415,29 +432,46 @@ function ConsultationForm({ onComplete }) {
   //   }));
   // };
 
-  const nextStep = () => setStep((prevStep) => prevStep + 1);
+  const nextStep = () => {
+    if (step === 10) {
+      if (!validatePhoneNumber()) return;
+    }
+    setStep((prevStep) => prevStep + 1);
+  };
   const previousStep = () => setStep((prevStep) => prevStep - 1);
 
   return (
     <div className="text-black sm:w-[50%] w-[80%] sm:flex rounded-3xl p-5 sm:p-10 bg-white">
-      <div className="bg-white sm:p-4 w-full">
-        {/* Progress bar */}
-        <div className="my-4">
-          <div className="text-gray-600 text-sm">
-            {(step - 1) * 10}% Completed
+      <div className="bg-white relative sm:p-4 w-full">
+        <div className="sm:flex items-center">
+          <h2 className="text-xl font-semibold mr-3">
+            Schedule Your Consultation
+          </h2>
+          <div className=" w-max text-green-600 text-sm justify-center items-center bg-green-200 p-1 mt-1 pt-2 rounded-md font-medium font-['Poppins'] leading-none">
+            Get your first consultation free
           </div>
-          <div className="w-full bg-gray-200 h-1 mb-4">
+        </div>
+        <AiOutlineClose
+          onClick={closeModal}
+          className="absolute top-2 right-2 text-2xl cursor-pointer"
+        />
+        {/* Progress bar */}
+        <div className="my-4 flex">
+          <div className="w-full bg-gray-200 h-2 rounded-full mb-4">
             <div
-              className="bg-blue-600 h-1"
+              className="bg-[#6FAAA4] h-2 rounded-full"
               style={{ width: `${(step - 1) * 10}%` }}
             ></div>
+          </div>
+          <div className="text-black text-nowrap ml-2 -mt-2 text-sm">
+            {(step - 1) * 10}% Completed
           </div>
         </div>
 
         {/* Step 1: City */}
         {step === 1 && (
           <div className="mb-4">
-            <label className="block text-lg mb-2">
+            <label className="block text-[#E29578] font-serif text-2xl  mb-2">
               Which city are you currently living in?
             </label>
             <input
@@ -447,6 +481,7 @@ function ConsultationForm({ onComplete }) {
               value={selectedOptions.city}
               onChange={(e) => handleOptionSelect("city", e.target.value)}
             />
+            <div className="text-gray-600 text-sm  mb-2">Popular Cities</div>
             <div className="flex flex-wrap gap-2">
               {options.cities.map((city) => (
                 <button
@@ -454,7 +489,7 @@ function ConsultationForm({ onComplete }) {
                   onClick={() => handleOptionSelect("city", city)}
                   className={`${
                     selectedOptions.city === city
-                      ? "bg-blue-600 text-white"
+                      ? "bg-slate-700 text-white"
                       : "bg-gray-200 text-gray-600"
                   } px-2 py-1 rounded-md`}
                 >
@@ -463,15 +498,16 @@ function ConsultationForm({ onComplete }) {
               ))}
             </div>
             <div className="flex justify-between mt-4">
-              <button
+              {/* <button
                 disabled
                 className="text-gray-400 border border-gray-400 px-5 py-2 rounded-lg"
               >
                 Previous
-              </button>
+              </button> */}
+              <button></button>
               <button
                 onClick={nextStep}
-                className="bg-blue-600 text-white px-5 py-2 rounded-lg"
+                className="bg-slate-700 text-white px-5 py-2 rounded-lg"
               >
                 Next
               </button>
@@ -482,7 +518,7 @@ function ConsultationForm({ onComplete }) {
         {/* Step 2: Age */}
         {step === 2 && (
           <div className="mb-4 w-full">
-            <label className="block text-lg mb-2">
+            <label className="block text-[#E29578] font-serif text-2xl mb-2">
               What is your current age?
             </label>
             <div className="flex gap-2">
@@ -492,7 +528,7 @@ function ConsultationForm({ onComplete }) {
                   onClick={() => handleOptionSelect("age", age)}
                   className={`${
                     selectedOptions.age === age
-                      ? "bg-blue-600 text-white"
+                      ? "bg-slate-700 text-white"
                       : "bg-gray-200 text-gray-600"
                   } px-2 py-1 rounded-md`}
                 >
@@ -503,13 +539,13 @@ function ConsultationForm({ onComplete }) {
             <div className="flex justify-between mt-4">
               <button
                 onClick={previousStep}
-                className="text-blue-600 border border-blue-600 px-5 py-2 rounded-lg"
+                className="text-slate-700 border border-slate-700 px-5 py-2 rounded-lg"
               >
                 Previous
               </button>
               <button
                 onClick={nextStep}
-                className="bg-blue-600 text-white px-5 py-2 rounded-lg"
+                className="bg-slate-700 text-white px-5 py-2 rounded-lg"
               >
                 Next
               </button>
@@ -520,8 +556,8 @@ function ConsultationForm({ onComplete }) {
         {/* Step 3: Experience */}
         {step === 3 && (
           <div className="mb-4">
-            <label className="block text-lg mb-2">
-              Are you just starting with fertility or more experienced?
+            <label className="block text-[#E29578] font-serif text-2xl mb-2">
+              Are you just starting with fertility or are you more experienced?
             </label>
             <div className="flex gap-2">
               {["Just Starting", "Experienced"].map((exp) => (
@@ -530,7 +566,7 @@ function ConsultationForm({ onComplete }) {
                   onClick={() => handleOptionSelect("experience", exp)}
                   className={`${
                     selectedOptions.experience === exp
-                      ? "bg-blue-600 text-white"
+                      ? "bg-slate-700 text-white"
                       : "bg-gray-200 text-gray-600"
                   } px-2 py-1 rounded-md`}
                 >
@@ -541,13 +577,13 @@ function ConsultationForm({ onComplete }) {
             <div className="flex justify-between mt-4">
               <button
                 onClick={previousStep}
-                className="text-blue-600 border border-blue-600 px-5 py-2 rounded-lg"
+                className="text-slate-700 border border-slate-700 px-5 py-2 rounded-lg"
               >
                 Previous
               </button>
               <button
                 onClick={nextStep}
-                className="bg-blue-600 text-white px-5 py-2 rounded-lg"
+                className="bg-slate-700 text-white px-5 py-2 rounded-lg"
               >
                 Next
               </button>
@@ -558,8 +594,8 @@ function ConsultationForm({ onComplete }) {
         {/* Step 4: Family Building */}
         {step === 4 && (
           <div className="mb-4">
-            <label className="block text-lg mb-2">
-              Are you interested in building a family now or later?
+            <label className="block text-[#E29578] font-serif text-2xl mb-2">
+              Are you interested in building a family now or in the future?
             </label>
             <div className="flex gap-2">
               {["Family building now", "Family building later"].map(
@@ -569,7 +605,7 @@ function ConsultationForm({ onComplete }) {
                     onClick={() => handleOptionSelect("familyBuilding", option)}
                     className={`${
                       selectedOptions.familyBuilding === option
-                        ? "bg-blue-600 text-white"
+                        ? "bg-slate-700 text-white"
                         : "bg-gray-200 text-gray-600"
                     } px-2 py-1 rounded-md`}
                   >
@@ -581,13 +617,13 @@ function ConsultationForm({ onComplete }) {
             <div className="flex justify-between mt-4">
               <button
                 onClick={previousStep}
-                className="text-blue-600 border border-blue-600 px-5 py-2 rounded-lg"
+                className="text-slate-700 border border-slate-700 px-5 py-2 rounded-lg"
               >
                 Previous
               </button>
               <button
                 onClick={nextStep}
-                className="bg-blue-600 text-white px-5 py-2 rounded-lg"
+                className="bg-slate-700 text-white px-5 py-2 rounded-lg"
               >
                 Next
               </button>
@@ -598,7 +634,7 @@ function ConsultationForm({ onComplete }) {
         {/* Step 5: Fertility Paths */}
         {step === 5 && (
           <div className="mb-4">
-            <label className="block text-lg mb-2">
+            <label className="block text-[#E29578] font-serif text-2xl mb-2">
               Which fertility paths are you interested in?
             </label>
             <div className="flex flex-wrap gap-2">
@@ -608,7 +644,7 @@ function ConsultationForm({ onComplete }) {
                   onClick={() => handleOptionSelect("fertilityPaths", path)}
                   className={`${
                     selectedOptions.fertilityPaths === path
-                      ? "bg-blue-600 text-white"
+                      ? "bg-slate-700 text-white"
                       : "bg-gray-200 text-gray-600"
                   } px-2 py-1 rounded-md`}
                 >
@@ -619,13 +655,13 @@ function ConsultationForm({ onComplete }) {
             <div className="flex justify-between mt-4">
               <button
                 onClick={previousStep}
-                className="text-blue-600 border border-blue-600 px-5 py-2 rounded-lg"
+                className="text-slate-700 border border-slate-700 px-5 py-2 rounded-lg"
               >
                 Previous
               </button>
               <button
                 onClick={nextStep}
-                className="bg-blue-600 text-white px-5 py-2 rounded-lg"
+                className="bg-slate-700 text-white px-5 py-2 rounded-lg"
               >
                 Next
               </button>
@@ -636,7 +672,7 @@ function ConsultationForm({ onComplete }) {
         {/* Step 6: Doctor */}
         {step === 6 && (
           <div className="mb-4">
-            <label className="block text-lg mb-2">
+            <label className="block text-[#E29578] font-serif text-2xl mb-2">
               Do you currently have a doctor for the same?
             </label>
             <div className="flex gap-2">
@@ -646,7 +682,7 @@ function ConsultationForm({ onComplete }) {
                   onClick={() => handleOptionSelect("haveDoctor", option)}
                   className={`${
                     selectedOptions.haveDoctor === option
-                      ? "bg-blue-600 text-white"
+                      ? "bg-slate-700 text-white"
                       : "bg-gray-200 text-gray-600"
                   } px-2 py-1 rounded-md`}
                 >
@@ -657,13 +693,13 @@ function ConsultationForm({ onComplete }) {
             <div className="flex justify-between mt-4">
               <button
                 onClick={previousStep}
-                className="text-blue-600 border border-blue-600 px-5 py-2 rounded-lg"
+                className="text-slate-700 border border-slate-700 px-5 py-2 rounded-lg"
               >
                 Previous
               </button>
               <button
                 onClick={nextStep}
-                className="bg-blue-600 text-white px-5 py-2 rounded-lg"
+                className="bg-slate-700 text-white px-5 py-2 rounded-lg"
               >
                 Next
               </button>
@@ -674,7 +710,7 @@ function ConsultationForm({ onComplete }) {
         {/* Step 7: Support Interest */}
         {step === 7 && (
           <div className="mb-4">
-            <label className="block text-lg mb-2">
+            <label className="block text-[#E29578] font-serif text-2xl mb-2">
               What support is of most interest to you?
             </label>
             <div className="flex flex-wrap gap-2">
@@ -684,7 +720,7 @@ function ConsultationForm({ onComplete }) {
                   onClick={() => handleOptionSelect("supportInterest", support)}
                   className={`${
                     selectedOptions.supportInterest === support
-                      ? "bg-blue-600 text-white"
+                      ? "bg-slate-700 text-white"
                       : "bg-gray-200 text-gray-600"
                   } px-2 py-1 rounded-md`}
                 >
@@ -695,13 +731,13 @@ function ConsultationForm({ onComplete }) {
             <div className="flex justify-between mt-4">
               <button
                 onClick={previousStep}
-                className="text-blue-600 border border-blue-600 px-5 py-2 rounded-lg"
+                className="text-slate-700 border border-slate-700 px-5 py-2 rounded-lg"
               >
                 Previous
               </button>
               <button
                 onClick={nextStep}
-                className="bg-blue-600 text-white px-5 py-2 rounded-lg"
+                className="bg-slate-700 text-white px-5 py-2 rounded-lg"
               >
                 Next
               </button>
@@ -712,7 +748,7 @@ function ConsultationForm({ onComplete }) {
         {/* Step 8: Topic Interest */}
         {step === 8 && (
           <div className="mb-4">
-            <label className="block text-lg mb-2">
+            <label className="block text-[#E29578] font-serif text-2xl mb-2">
               Which of the following topics are you interested in?
             </label>
             <div className="flex flex-wrap gap-2">
@@ -722,7 +758,7 @@ function ConsultationForm({ onComplete }) {
                   onClick={() => handleOptionSelect("topicInterest", topic)}
                   className={`${
                     selectedOptions.topicInterest === topic
-                      ? "bg-blue-600 text-white"
+                      ? "bg-slate-700 text-white"
                       : "bg-gray-200 text-gray-600"
                   } px-2 py-1 rounded-md`}
                 >
@@ -733,13 +769,13 @@ function ConsultationForm({ onComplete }) {
             <div className="flex justify-between mt-4">
               <button
                 onClick={previousStep}
-                className="text-blue-600 border border-blue-600 px-5 py-2 rounded-lg"
+                className="text-slate-700 border border-slate-700 px-5 py-2 rounded-lg"
               >
                 Previous
               </button>
               <button
                 onClick={nextStep}
-                className="bg-blue-600 text-white px-5 py-2 rounded-lg"
+                className="bg-slate-700 text-white px-5 py-2 rounded-lg"
               >
                 Next
               </button>
@@ -750,7 +786,7 @@ function ConsultationForm({ onComplete }) {
         {/* Step 9: Other Topics (New Step) */}
         {step === 9 && (
           <div className="mb-4 w-full">
-            <label className="block text-lg mb-2">
+            <label className="block text-[#E29578] font-serif text-2xl mb-2">
               Any other topics you want to talk about?
             </label>
             <input
@@ -765,13 +801,13 @@ function ConsultationForm({ onComplete }) {
             <div className="flex justify-between mt-4">
               <button
                 onClick={previousStep}
-                className="text-blue-600 border border-blue-600 px-5 py-2 rounded-lg w-full sm:w-auto"
+                className="text-slate-700 border border-slate-700 px-5 py-2 rounded-lg"
               >
                 Previous
               </button>
               <button
                 onClick={nextStep}
-                className="bg-blue-600 text-white px-5 py-2 rounded-lg w-full sm:w-auto"
+                className="bg-slate-700 text-white px-5 py-2 rounded-lg"
               >
                 Next
               </button>
@@ -780,8 +816,8 @@ function ConsultationForm({ onComplete }) {
         )}
         {step === 10 && (
           <div className="mb-4">
-            <label className="block text-lg mb-2">
-              Please enter your mobile number
+            <label className="block text-[#E29578] font-serif text-2xl mb-2">
+              What is your phone number?
             </label>
             <input
               type="tel"
@@ -793,16 +829,24 @@ function ConsultationForm({ onComplete }) {
               }
               required
             />
+            {/* <PhoneInput
+              country={"us"} // Default country
+              value={selectedOptions.phoneNumber || ""}
+              onChange={(e) => handleOptionSelect("phoneNumber", e)}
+              containerClass="w-full border rounded-lg " // Tailwind classes for styling
+              inputClass="w-full  rounded-lg p-2" // Tailwind classes for styling
+            /> */}
+            {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
             <div className="flex justify-between mt-4">
               <button
                 onClick={previousStep}
-                className="text-blue-600 border border-blue-600 px-5 py-2 rounded-lg"
+                className="text-slate-700 border border-slate-700 px-5 py-2 rounded-lg"
               >
                 Previous
               </button>
               <button
                 onClick={nextStep}
-                className="bg-blue-600 text-white px-5 py-2 rounded-lg"
+                className="bg-slate-700 text-white px-5 py-2 rounded-lg"
               >
                 Next
               </button>
@@ -813,12 +857,12 @@ function ConsultationForm({ onComplete }) {
         {step === 11 && (
           <div>
             <div className="mb-4">
-              <label className="block text-lg mb-2">
+              <label className="block text-[#E29578] font-serif text-xl mb-2">
                 What is your preferred date for the consultation?
               </label>
               <input
                 type="date"
-                className="border p-2 w-full"
+                className="border  p-2 w-full"
                 value={selectedOptions.preferredDate}
                 onChange={(e) =>
                   handleOptionSelect("preferredDate", e.target.value)
@@ -826,7 +870,7 @@ function ConsultationForm({ onComplete }) {
               />
             </div>
             <div className="mb-4">
-              <label className="block text-lg mb-2">
+              <label className="block text-[#E29578] font-serif text-xl mb-2">
                 What is your preferred time for the consultation?
               </label>
               <input
@@ -841,15 +885,15 @@ function ConsultationForm({ onComplete }) {
             <div className="flex justify-between mt-4">
               <button
                 onClick={previousStep}
-                className="text-blue-600 border border-blue-600 px-5 py-2 rounded-lg"
+                className="text-slate-700 border border-slate-700 px-5 py-2 rounded-lg"
               >
                 Previous
               </button>
               <button
                 onClick={() => onComplete(selectedOptions)}
-                className="bg-blue-600 text-white px-5 py-2 rounded-lg"
+                className="bg-slate-700 text-white px-5 py-2 rounded-lg"
               >
-                Submit
+                Next
               </button>
             </div>
           </div>
@@ -858,6 +902,52 @@ function ConsultationForm({ onComplete }) {
     </div>
   );
 }
+
+const ConsultSuccessModal = ({ closeModal }) => {
+  return (
+    <div className="bg-white p-10 m-5 rounded-xl relative flex-col justify-start items-center gap-8 inline-flex">
+      <AiOutlineClose
+        className="absolute top-5 right-5 cursor-pointer text-xl text-[#e29578] "
+        onClick={closeModal}
+      />
+      <div className="flex-col justify-start w-full items-center gap-4 flex">
+        <Image
+          alt="aa"
+          src={consultationbook}
+          className=" h-60 relative"
+        ></Image>
+        <div className="flex-col justify-start items-end flex">
+          <div className="flex-col justify-start items-start gap-6 flex">
+            <div className="flex-col justify-start items-center gap-14 flex">
+              <div className="flex-col justify-start items-center gap-2 flex">
+                <div className="text-[#e29578] md:text-xl text-center font-bold font-['FONTSPRING DEMO - Argent CF'] leading-7">
+                  Your Consultation is booked
+                </div>
+                <div className="text-[#5f5f5f] text-center text-xs sm:text-sm font-normal font-['Poppins'] leading-tight">
+                  We will get back to you soon.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="flex w-[70%] justify-between mt-4">
+          <button
+            // onClick={previousStep}
+            className="text-slate-700 border border-slate-700 px-5 py-2 rounded-lg"
+          >
+            View Details
+          </button>
+          <button
+            onClick={closeModal}
+            className="bg-slate-700 text-white px-5 py-2 rounded-lg"
+          >
+            Okay
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const SuccessModal = ({ closeModal }) => {
   return (
@@ -924,30 +1014,27 @@ const SuccessLoginModal = ({ closeModal }) => {
   );
 };
 
-function Login({ setSidebar }) {
-  const {
-    loginToken,
-    saveToken,
-    removeToken,
-    userState,
-    saveUser,
-    removeUser,
-  } = useAuth();
+function Consultation() {
+  const { loginToken, saveToken, saveUser, removeUser } = useAuth();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalState, setModalState] = useState("login"); // States: "login", "otp", "createProfile"
+  const [modalState, setModalState] = useState("consultation"); // States: "login", "otp", "createProfile"
   const [mobileNumber, setMobileNumber] = useState("");
   const [otp, setOtp] = useState("");
   const [user, setUser] = useState({ name: "", email: "", gender: "" });
   const [authtoken, setAuthToken] = useState("");
   const [flow, setFlow] = useState("");
-  const [showProfile, setShowProfile] = useState(false);
-  console.log("User state:", userState);
+
+  console.log("logintoken", loginToken);
+
   const openModal = () => {
+    if (loginToken === null) setModalState("login");
     console.log("Opening modal");
     setIsModalOpen(true);
-    setSidebar(false);
   };
-  const closeModal = () => setIsModalOpen(false);
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setModalState("consultation");
+  };
 
   const sendOtp = async () => {
     try {
@@ -1051,14 +1138,13 @@ function Login({ setSidebar }) {
           name: user.name,
           mobileNo: mobileNumber,
         });
-      if (response.data.success) setModalState("success");
+      if (response.data.success) setModalState("consultation");
       // alert("Profile created successfully!");
     } catch (error) {
       console.error("Error creating profile:", error);
       alert("Failed to create profile. Please try again.");
     }
   };
-
   const handleComplete = async (seldata) => {
     const data = JSON.stringify({
       city: seldata.city,
@@ -1091,7 +1177,7 @@ function Login({ setSidebar }) {
 
       const response = await axios.request(config);
       console.log("Consultation form submitted successfully:", response.data);
-      if (response.data.success) setModalState("success");
+      if (response.data.success) setModalState("consultsuccess");
       // alert("Consultation form submitted successfully!");
     } catch (error) {
       console.error("Error submitting consultation form:", error);
@@ -1100,38 +1186,19 @@ function Login({ setSidebar }) {
   };
   // In AuthContext.js
   const logout = () => {
-    removeToken();
-    removeUser();
+    localStorage.removeItem("loginToken");
+    saveToken(null);
   };
   return (
     <div className="text-black bg-white">
-      {loginToken ? (
-        <div className="relative">
-          <button
-            onClick={() => setShowProfile(!showProfile)}
-            className=" text-white rounded-lg px-2 py-1 mb-2 flex items-center gap-2 hover:bg-slate-200 transition"
-          >
-            <FaUserCircle className="text-slate-700" />
-            <span className="font-medium text-slate-700">
-              {userState?.name || "User"}
-            </span>
-          </button>
-
-          {showProfile && (
-            <div className="absolute right-0 mt-2 w-48 border bg-white rounded-lg shadow-lg overflow-hidden">
-              <div className="px-4 py-3 border-b">
-                <p className="text-gray-900 font-medium">{userState?.name}</p>
-                <p className="text-gray-500 text-sm">{userState?.email}</p>
-              </div>
-              <button
-                onClick={logout}
-                className="w-full text-left font-semibold px-4 py-2 text-red-700 hover:bg-red-100  transition"
-              >
-                Logout
-              </button>
+      {/* {loginToken ? (
+        <button onClick={logout}>
+          <div className="bg-slate-700 rounded-lg justify-center items-center gap-2 flex">
+            <div className="p-3 px-6 text-center text-white text-base font-medium font-['Poppins'] leading-tight">
+              Sign Out
             </div>
-          )}
-        </div>
+          </div>
+        </button>
       ) : (
         <button onClick={openModal}>
           <div className="bg-slate-700 rounded-lg justify-center items-center gap-2 flex">
@@ -1140,13 +1207,28 @@ function Login({ setSidebar }) {
             </div>
           </div>
         </button>
-      )}
+      )} */}
+      <button
+        onClick={openModal}
+        className="justify-start items-start gap-2 inline-flex"
+      >
+        <div className="text-stone-950 text-base text-start font-normal font-['Poppins'] leading-tight">
+          Consultation
+        </div>
+        <div className="w-9 h-5 relative">
+          <div className="w-9 h-5 left-0 top-0 absolute bg-green-100 rounded" />
+          <div className="left-[4px] top-[4px] absolute text-green-600 text-sm font-medium font-['Poppins'] leading-none">
+            Free
+          </div>
+        </div>
+      </button>
       <Modal
         isOpen={isModalOpen}
         onRequestClose={closeModal}
         // style={customStyles}
         className="justify-center items-center flex bg-opacity-5 bg-black/70 w-full h-full z-20 text-black"
         contentLabel="Example Modal"
+        ariaHideApp={false}
       >
         <button className="absolute top-2 right-2" onClick={closeModal}>
           <AiOutlineClose className="text-white" />
@@ -1169,15 +1251,21 @@ function Login({ setSidebar }) {
           />
         )}
         {modalState === "consultation" && (
-          <ConsultationForm onComplete={handleComplete} />
+          <ConsultationForm
+            onComplete={handleComplete}
+            closeModal={closeModal}
+          />
         )}
         {modalState === "success" && <SuccessModal closeModal={closeModal} />}
         {modalState === "successLogin" && (
           <SuccessLoginModal closeModal={closeModal} />
+        )}
+        {modalState === "consultsuccess" && (
+          <ConsultSuccessModal closeModal={closeModal} />
         )}
       </Modal>
     </div>
   );
 }
 
-export default Login;
+export default Consultation;

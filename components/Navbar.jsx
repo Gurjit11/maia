@@ -16,6 +16,7 @@ import {
 } from "react-icons/ai";
 import location from "../public/location.png";
 import { useAuth } from "@/contexts/AuthContext";
+import Consultation from "./Consultation";
 
 const Navbar = () => {
   const { city, saveCity } = useAuth();
@@ -99,7 +100,7 @@ const Navbar = () => {
 
         {showModal && (
           <div>
-            <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center">
+            <div className="fixed z-20 inset-0 bg-black bg-opacity-70 flex justify-center items-center">
               {/* Modal container */}
               <div
                 ref={modalRef}
@@ -214,16 +215,8 @@ const Navbar = () => {
                   Egg & Sperm Freezing
                 </div>
               </div>
-              <div className="justify-start items-start gap-2 inline-flex">
-                <div className="text-stone-950 text-base font-normal font-['Poppins'] leading-tight">
-                  Consultation
-                </div>
-                <div className="w-9 h-6 relative">
-                  <div className="w-9 h-6 left-0 top-0 absolute bg-green-100 rounded" />
-                  <div className="left-[4px] top-[4px] absolute text-green-600 text-sm font-medium font-['Poppins'] leading-none">
-                    Free
-                  </div>
-                </div>
+              <div className="justify-center -mt-1 items-center gap-4 inline-flex">
+                <Consultation />
               </div>
             </div>
           </div>
@@ -270,7 +263,7 @@ const Navbar = () => {
 
             {showModal && (
               <div>
-                <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center">
+                <div className="fixed inset-0 z-20 bg-black bg-opacity-70 flex justify-center items-center">
                   {/* Modal container */}
                   <div
                     ref={modalRef}
@@ -337,16 +330,8 @@ const Navbar = () => {
                   Find Clinics{" "}
                 </div>
               </Link>
-              <div className="justify-start items-center gap-2 flex">
-                <div className="text-stone-950 text-base font-normal font-['Poppins'] leading-tight">
-                  Consultation
-                </div>
-                <div className="w-9 h-6 relative">
-                  <div className="w-9 h-6 left-0 top-0 absolute bg-green-100 rounded" />
-                  <div className="left-[4px] top-[4px] absolute text-green-600 text-sm font-medium font-['Poppins'] leading-none">
-                    Free
-                  </div>
-                </div>
+              <div className="justify-center -mt-1 items-center gap-4 inline-flex">
+                <Consultation />
               </div>
               <Link
                 href={"https://alphabetasolution.co.in/"}

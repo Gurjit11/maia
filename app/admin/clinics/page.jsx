@@ -59,6 +59,34 @@ const ClinicsList = () => {
     }
   };
 
+  const updateClinicStatus = async (clinicId, newStatus) => {
+    let data = JSON.stringify({
+      clinicId: clinicId,
+      newStatus: newStatus,
+    });
+
+    let config = {
+      method: "post",
+      maxBodyLength: Infinity,
+      url: "https://maia.projectx38.cloud/dashboard-apis/maia-dashboard/clinics/updateStatus",
+      headers: {
+        "login-token":
+          "f48668d4ea1989d14a5692c5c4b7b296a2d651c4947526876dee65a7e191bacecdaff5bb1b21293df00fef97b96f1beb97ce695eb8ddb062ee48e912e5fddf83e7dc7008fcef956f29c78dae1f6486b433304398b040aa7f3312867c6d090ecbc5c5df4eaf8e21c8a0ecd3ac73b4469b59c892d51bf61fa9713f0cded76ded8a",
+        "Content-Type": "application/json",
+      },
+      data: data,
+    };
+
+    try {
+      const response = await axios.request(config);
+      console.log("Status updated successfully:", response.data);
+      // Refresh the clinics list after updating
+      getClinics();
+    } catch (error) {
+      console.error("Error updating clinic status:", error);
+    }
+  };
+
   useEffect(() => {
     getClinics();
   }, []);
@@ -128,9 +156,7 @@ const ClinicsList = () => {
                     alt={clinic?.clinicDetails?.doctorName}
                     className="w-8 h-8 rounded-full object-cover flex-shrink-0"
                   />
-                  <Link
-                    href={`/admin/clinics/${clinic.clinicId}`}
-                  >
+                  <Link href={`/admin/clinics/${clinic.clinicId}`}>
                     <span className="inline-block">
                       {clinic?.clinicDetails?.clinicName}
                     </span>
