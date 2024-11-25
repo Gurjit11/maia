@@ -33,14 +33,14 @@ const Hero = () => {
       img: priyanka,
       alt: "Priyanka Chopra",
       quote:
-        " It's the best thing you'll give yourself because you're taking the power from your biological clock, and you can work until however long you want. Your eggs will still be the same age as when you froze them.",
+        "It's the best thing you'll give yourself because you're taking the power from your biological clock, and you can work until however long you want. Your eggs will still be the same age as when you froze them.",
       name: "Priyanka Chopra, Dax Shephard Armchair Expert Podcast",
     },
     {
       img: shahrukh,
       alt: "Shahrukh Khan",
       quote:
-        " Shahrukh and Gauri Khan choose IVF to add a blessing into their family. Amidst all the noise that has going around, the sweetest is theone made our newborn baby, AbRam.",
+        "Shahrukh and Gauri Khan choose IVF to add a blessing into their family. “Amidst all the noise that has going around, the sweetest is the one made our newborn baby, AbRam.”",
       name: "Shahrukh Khan's press statement at Jul 10,2013",
     },
     {
@@ -48,7 +48,7 @@ const Hero = () => {
       alt: "Jennifer Aniston",
       quote:
         "Freeze your eggs. Do yourself a favor",
-      name: "-Jennifer Aniston, Danielle Pergamengt's Allure Article",
+      name: "Jennifer Aniston, Danielle Pergamengt's Allure Article",
     },
   ];
 
@@ -97,37 +97,37 @@ const Hero = () => {
                 </div>
               </div>
             </div> */}
-            <Slider {...settings} className="w-full">
-              {cardData.map((card, index) => (
-                <div key={index} className=" flex justify-center  items-center">
-                  <div className="p-4 rounded-lg">
-                    <Image
-                      src={card.img}
-                      className="w-[60%] mx-auto"
-                      alt={card.alt}
-                    />
-                    <div className="mx-3 p-2 bg-slate-200 rounded-xl border border-gray-200 backdrop-blur-lg flex-col justify-end items-end gap-2 flex mt-4">
-                      <div className="justify-start items-start gap-4 flex">
-                        <Image src={quotation} className="w-10" alt="Quote" />
-                        <div className="text-slate-700 text-xs sm:text-sm font-light leading-normal">
-                          {card.quote}
-                        </div>
-                      </div>
-                      <div className="flex-col text-xs sm:text-sm font-semibold justify-start items-start gap-2 flex">
-                        <div className="text-center flex">
-                          <span className="text-slate-700 leading-tight">
-                            -
-                          </span>
-                          <span className="text-slate-700 underline leading-tight font-poppins">
-                            {card.name}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </Slider>
+                   <Slider {...settings} className="w-full">
+  {cardData.map((card, index) => (
+    <div key={index} className="flex justify-center items-center">
+      <div className="p-4 rounded-lg">
+        <Image
+          src={card.img}
+          className="w-[60%] mx-auto"
+          alt={card.alt}
+        />
+        <div className="mx-3 p-2 bg-slate-200 rounded-xl border border-gray-200 backdrop-blur-lg flex-col justify-start items-start gap-2 flex mt-4">
+          <div className="justify-start items-start gap-4 flex w-full">
+            <Image src={quotation} className="w-10" alt="Quote" />
+            <div className="text-slate-700 text-xs sm:text-sm font-light leading-normal">
+              {card.quote}
+            </div>
+          </div>
+          <div className="flex-col text-xs sm:text-sm font-semibold justify-end items-end gap-2 flex w-full">
+            <div className="text-right flex w-full justify-end">
+              <span className="text-slate-700 leading-tight">
+                -
+              </span>
+              <span className="text-slate-700 underline leading-tight font-poppins">
+                {card.name}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  ))}
+</Slider>
           </div>
           <div className="col-span-1 flex-col justify-center gap-6 flex">
             <motion.div

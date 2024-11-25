@@ -91,7 +91,7 @@ const ContactForm = () => {
 
   return (
     <div className="sm:p-20 py-10 p-5 ">
-      <div className=" justify-between items-center flex">
+      <div className="overflow-clip  justify-between items-center flex">
         <motion.div
           className="hidden sm:block overflow-clip rounded-xl w-[50%]"
           initial={{ opacity: 0, x: -100 }}
