@@ -5,6 +5,9 @@ import { useEffect, useState } from "react";
 
 const DoctorsList = () => {
   const [doctors, setDoctors] = useState([]);
+  const [sort, setSort] = useState("all")
+  const [originalDoctors, setOriginalDoctors] = useState([]);
+  const [search, setSearch] = useState("");
   const getDoctors = async () => {
     let data = JSON.stringify({
       filters: {},
@@ -54,6 +57,7 @@ const DoctorsList = () => {
       console.log(detailedDoctors);
 
       setDoctors(detailedDoctors);
+      setOriginalDoctors(detailedDoctors);
     } catch (error) {
       console.log(error);
     }
@@ -63,6 +67,32 @@ const DoctorsList = () => {
     getDoctors();
   }, []);
   console.log(doctors);
+  useEffect(() => {
+    if (sort === "all") {
+      setDoctors(originalDoctors);
+    } else {
+      const sortedDoctors = [...doctors].sort((a, b) => {
+        if (sort === "recent") {
+          return new Date(b.createdAt.timestamp) - new Date(a.createdAt.timestamp);
+        }
+        return 0;
+      });
+      setDoctors(sortedDoctors);
+    }
+  }, [sort, originalDoctors]);
+
+
+
+  useEffect(() => { 
+    if (search === "") {
+      setDoctors(originalDoctors);
+    } else {
+      const filteredDoctors = doctors.filter((doctor) =>
+        doctor.doctorDetails.doctorName.toLowerCase().includes(search.toLowerCase())
+      );
+      setDoctors(filteredDoctors);  
+    }
+  }, [search]);
 
   return (
     <div className="p-6">
@@ -89,13 +119,17 @@ const DoctorsList = () => {
             type="text"
             className="px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
             placeholder="Search Doctors"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
           />
         </div>
 
         <div className="flex space-x-3 items-center">
           <div className="flex items-center space-x-1">
             <label className="text-gray-500">Sort by:</label>
-            <select className="border px-2 py-1 rounded-md">
+            <select className="border px-2 py-1 rounded-md" value={sort} 
+              onChange={(e) => setSort(e.target.value)}>
+            
               <option value="all">All Time</option>
               <option value="recent">Recently Added</option>
             </select>

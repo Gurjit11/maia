@@ -5,6 +5,9 @@ import { useEffect, useState } from "react";
 
 const ClinicsList = () => {
   const [clinics, setClinics] = useState([]);
+  const [sort, setSort] = useState("all")
+  const [originalClinics, setOriginalClinics] = useState([]);
+  const [search, setSearch] = useState("");
   const getClinics = async () => {
     let data = JSON.stringify({
       filters: {},
@@ -54,6 +57,8 @@ const ClinicsList = () => {
       console.log(detailedClinics);
 
       setClinics(detailedClinics);
+      setOriginalClinics(detailedClinics);
+
     } catch (error) {
       console.log(error);
     }
@@ -89,7 +94,35 @@ const ClinicsList = () => {
 
   useEffect(() => {
     getClinics();
+
   }, []);
+  useEffect(() => {
+    if (sort === "all") {
+      setClinics(originalClinics);
+    } else {
+      const sortedClinics = [...clinics].sort((a, b) => {
+        if (sort === "recent") {
+          return new Date(b.createdAt.timestamp) - new Date(a.createdAt.timestamp);
+        }
+        return 0;
+      });
+      setClinics(sortedClinics);
+    }
+  }, [sort, originalClinics]);
+
+
+
+  useEffect(() => { 
+    if (search === "") {
+      setClinics(originalClinics);
+    } else {
+      const filteredClinics = clinics.filter((clinic) =>
+        clinic.clinicDetails.clinicName.toLowerCase().includes(search.toLowerCase())
+      );
+      setClinics(filteredClinics);
+    }
+  }, [search]);
+
   console.log(clinics);
 
   return (
@@ -117,13 +150,15 @@ const ClinicsList = () => {
             type="text"
             className="px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
             placeholder="Search Clinics"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
           />
         </div>
 
         <div className="flex space-x-3 items-center">
           <div className="flex items-center space-x-1">
             <label className="text-gray-500">Sort by:</label>
-            <select className="border px-2 py-1 rounded-md">
+            <select className="border px-2 py-1 rounded-md" value={sort} onChange={(e) => setSort(e.target.value)}>
               <option value="all">All Time</option>
               <option value="recent">Recently Added</option>
             </select>
