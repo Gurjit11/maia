@@ -49,7 +49,7 @@ const Findclinics = () => {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: width > 400 ? 3 : 1,
+    slidesToShow: width < 640 ? 1 : width <1280 ? 2 : 3,
     slidesToScroll: 1,
     autoplay: true,
     nextArrow: <NextArrow />,
