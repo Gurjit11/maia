@@ -5,6 +5,10 @@ import { useEffect, useState } from "react";
 
 const AppointmentList = () => {
   const [appointments, setAppointments] = useState([]);
+
+  const [sort, setSort] = useState("all")
+  const [ originalAppointments,setOriginalAppointments] = useState([]);
+  const [search, setSearch] = useState("");
   const getAppointments = async () => {
     let data = JSON.stringify({
       name: "Samriddhi Singh",
@@ -66,6 +70,7 @@ const AppointmentList = () => {
       );
 
       setAppointments(appointmentsWithUserDetails);
+      setOriginalAppointments(appointmentsWithUserDetails);
     } catch (error) {
       console.log(error);
     }
@@ -75,6 +80,34 @@ const AppointmentList = () => {
     getAppointments();
   }, []);
   console.log(appointments);
+
+  useEffect(() => {
+    if (sort === "all") {
+      setAppointments(originalAppointments);
+    } else {
+      const sortedAppointments = [...appointments].sort((a, b) => {
+        if (sort === "recent") {
+          return new Date(b.createdAt.timestamp) - new Date(a.createdAt.timestamp);
+        }
+        return 0;
+      });
+      setAppointments(sortedAppointments);
+    }
+  }, [sort, originalAppointments]);
+
+
+
+  useEffect(() => { 
+    if (search === "") {
+      setAppointments(originalAppointments);
+    } else {
+      const filteredAppointments = appointments.filter((appointment) =>
+        appointment?.userDetails?.name?.toLowerCase().includes(search?.toLowerCase() || "")
+      );
+      setAppointments(filteredAppointments);  
+    }
+  }, [search]);
+
 
   return (
     <div className="p-6">
@@ -96,13 +129,18 @@ const AppointmentList = () => {
             type="text"
             className="px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
             placeholder="Search Appointments"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
           />
         </div>
 
         <div className="flex space-x-3 items-center">
           <div className="flex items-center space-x-1">
             <label className="text-gray-500">Sort by:</label>
-            <select className="border px-2 py-1 rounded-md">
+            <select className="border px-2 py-1 rounded-md"
+              value={sort}
+              onChange={(e) => setSort(e.target.value)}
+            >
               <option value="all">All Time</option>
               <option value="recent">Recently Added</option>
             </select>
@@ -128,7 +166,7 @@ const AppointmentList = () => {
         </thead>
         <tbody>
           {appointments?.map((appointment, index) => (
-            <tr key={appointment?.clinicId} className="text-center">
+            <tr key={appointment?.appointmentId} className="text-center">
               <td className="py-2 px-4 border-b">{index + 1}</td>
               <td className="py-2 px-4 border-b">
                 <div className="flex items-center  justify-center gap-2">

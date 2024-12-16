@@ -1,0 +1,43 @@
+{
+  "clinicDetails": {
+    "clinicName": "Womens Hospital",
+    "contactNumber": "+9102048553263",
+    "secondoryNumber": "+9102048553263",
+    "contactEmail": "test@example.com",
+    "logoImage": "https://images1-fabric.practo.com/practices/693787/womens-hospital-mumbai-594d5aacdda98.png",
+    "clinicMedia": [
+      "https://images1-fabric.practo.com/womens-hospital-by-dr-rakesh-sinha-mumbai-1455709491-56c45d333eb96.JPG/36x36",
+      "https://images1-fabric.practo.com/womens-hospital-by-dr-rakesh-sinha-mumbai-1455709497-56c45d394a42a.JPG/36x36",
+      "https://images1-fabric.practo.com/womens-hospital-by-dr-rakesh-sinha-mumbai-1455709503-56c45d3f1b46d.JPG/36x36"
+    ]
+  },
+  "noOfBeds": 100,
+  "address": {
+    "addressName": "674,",
+    "address": " 16th Cross Road,",
+    "area": "Khar West",
+    "landmark": "Landmark: Behind Khar Gymkhana",
+    "city": "Mumbai",
+    "state": "Maharashtra",
+    "pincode": "400001",
+    "location": {
+      "lat": 19.076,
+      "lng": 72.8777
+    }
+  },
+  "workingHours": [],
+  "faqs": [
+    {
+      "question": "What are the Visiting hours for IPD Patients?",
+      "answer": "10am- 7pm Daily"
+    },
+    {
+      "question": "Does the Hospital have a Cafeteria?",
+      "answer": "Yes"
+    },
+    {
+      "question": "Visiting Guidelines for ICU?",
+      "answer": "One person can go to see the patient in ICU during the Visiting Hours and need to wear mask and use santizier availabe at the hospital."
+    }
+  ]
+}

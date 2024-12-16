@@ -1,0 +1,88 @@
+{
+    "_id": {
+      "$oid": "66e2df49c9e411f414755973"
+    },
+    "clinicId": "45fcbc07-29ad-4615-8c4d-c97ef8fa455f",
+    "createdAt": {
+      "timestamp": 1861169368,
+      "ISODate": "Fri Aug 02 2024 12:24:04 GMT+0530 (India Standard Time)"
+    },
+    "status": "INACTIVE",
+    "clinicDetails": {
+      "clinicName": "ABC Medical Clinic",
+      "contactNumber": "+919678464491",
+      "contactEmail": "clinic@health.com",
+      "logoImage": "someUrl",
+      "clinicMedia": [
+        "url1",
+        "url2"
+      ]
+    },
+    "address": {
+      "addressName": "Bandra(W), Mumbai",
+      "address": "456 LM Towers, Another area",
+      "area": "XY Market",
+      "landmark": "Opposite Park",
+      "city": "Mumbai",
+      "state": "Maharashtra",
+      "pincode": "400051",
+      "location": {
+        "lat": 18.981526613696794,
+        "lng": 72.56548498795422
+      }
+    },
+    "specialties": [
+      {
+        "specialityId": "167f7894-fee0-4d8f-a184-4021696603a8",
+        "speciality": "Cardiologist",
+        "status": "ACTIVE"
+      }
+    ],
+    "services": [
+      {
+        "serviceId": "c9955ef0-fe73-47e7-910b-5948815d9b7b",
+        "serviceName": "Lab Test"
+      }
+    ],
+    "tags": [
+      {
+        "tagId": "11dd3498-86cb-45ac-9e57-a1dcdb11e3aa",
+        "name": "tag11",
+        "icon": "https://c8.alamy.com/comp/2A07XGP/health-icon-vector-female-doctor-person-profile-avatar-with-stethoscope-and-heart-symbol-for-cardiologist-medical-consultation-in-glyph-pictogram-illu-2A07XGP.jpg"
+      }
+    ],
+    "workingHours": [
+      {
+        "dayOfWeek": "Monday",
+        "startTime": "9:00 AM",
+        "endTime": "5:00 PM"
+      },
+      {
+        "dayOfWeek": "Tuesday",
+        "startTime": "9:00 AM",
+        "endTime": "5:00 PM"
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What are the clinic's operating hours?",
+        "answer": "Our clinic operates from Monday to Friday, 9:00 AM to 5:00 PM."
+      }
+    ],
+    "clinitStats": {
+      "lastUpdated": {
+        "timestamp": 1939945622,
+        "ISODate": "Fri Aug 02 2024 12:24:04 GMT+0530 (India Standard Time)"
+      },
+      "totalDoctors": 7,
+      "totalBeds": 40
+    },
+    "reviewsStat": {
+      "totalReviews": 280,
+      "avgRating": 3.2,
+      "lastUpdated": {
+        "timestamp": 1741047953,
+        "ISODate": "Fri Aug 02 2024 12:24:04 GMT+0530 (India Standard Time)"
+      }
+    }
+  }
