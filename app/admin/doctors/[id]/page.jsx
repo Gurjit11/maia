@@ -140,10 +140,10 @@ const DoctorProfile = ({ params }) => {
                 <div className="flex flex-wrap gap-2">
                   {doctor?.doctorDetails?.services.map((service) => (
                     <span
-                      key={service.serviceId}
+                      // key={service.serviceId}
                       className="px-3 py-1 text-xs bg-gray-100 text-gray-800 rounded-full"
                     >
-                      {service.serviceName}
+                      {service}
                     </span>
                   ))}
                 </div>

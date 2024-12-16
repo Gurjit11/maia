@@ -164,7 +164,7 @@ const Hero = () => {
               >
                 <motion.div className="w-[90%]">
                   <div className="bg-white text-black rounded border border-neutral-200 justify-start items-center flex">
-                  <div className="bg-white text-black rounded border border-neutral-200 justify-start items-center flex">
+                  <div className="bg-white text-black rounded border border-neutral-200 justify-start items-center flex w-full">
                     <input
                       type="text"
                       placeholder="Search your queries"
