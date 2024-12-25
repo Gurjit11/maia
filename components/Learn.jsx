@@ -27,7 +27,7 @@ const carddata = [
   {
     title: "Advanced Fertility Techniques: Beyond IVF & IUI",
     description:
-      " Two of the most commonly known methods are in vitro fertilization (IVF) and intrauterine insemination (IUI).  ",
+      "Two of the most commonly known methods are in vitro fertilization (IVF) and intrauterine insemination (IUI).  ",
     image:
       "https://alphabetasolution.co.in/wp-content/uploads/2024/10/blog-banner.png",
     tags: ["IUI", "IVF"],
@@ -41,6 +41,24 @@ const carddata = [
       "https://alphabetasolution.co.in/wp-content/uploads/2024/10/blog-banner_05.jpg",
     tags: ["IUI", "IVF"],
     link: "https://alphabetasolution.co.in/ivf-vs-iui-which-fertility-treatment-is-right-for-you/",
+  },
+  {
+    title: "The Ultimate Guide to IVF: Process, Benefits, and Success Rates",
+    description:
+      "In vitro fertilization (IVF) is a fertility treatment that involves fertilizing an egg with sperm outside the body. ",
+    image:
+      "https://alphabetasolution.co.in/wp-content/uploads/2024/10/blog-banner_02.jpg",
+    tags: ["IVF"],
+    link: "https://alphabetasolution.co.in/the-ultimate-guide-to-ivf-process-benefits-and-success-rates/",
+  },
+  {
+    title: "Top Ten Tips to Boost Female Egg Quality",
+    description:
+      "The quality of the eggs is one of the most important factors in determining the success of fertility treatments. ",
+    image:
+      "https://alphabetasolution.co.in/wp-content/uploads/2024/10/blog-banner_03.jpg",
+    tags: ["Egg & Sperm Freezing"],
+    link: "https://alphabetasolution.co.in/top-ten-tips-to-boost-female-egg-quality/",
   },
 ];
 

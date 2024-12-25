@@ -1,19 +1,45 @@
+"use client";
 import AppointmentCard from "@/components/AppointmentCard";
 import ConsultationCard from "@/components/ConsultationCard";
 import { Edit, Mail, Phone } from "lucide-react";
 import { BsGenderFemale } from "react-icons/bs";
 import EditProfileModal from "@/components/EditProfileModal";
 import Image from "next/image";
+import axios from "axios";
 
 const Profile = () => {
   const profileData = {
     name: "Archana Mehta",
-    photo:
-      "https://i.pinImage.com/736x/13/e5/85/13e585664a1df5f548812b47a11f0889.jpg",
+    photo: "",
     gender: "Female",
     mobile: "987234234",
     email: "archana123@gmail.com",
   };
+
+  let data = JSON.stringify({});
+
+  let config = {
+    method: "post",
+    maxBodyLength: Infinity,
+    url: "https://maia.projectx38.cloud/dashboard-apis/maia-dashboard/reviews/list",
+    headers: {
+      "login-token":
+        "f48668d4ea1989d14a5692c5c4b7b296a2d651c4947526876dee65a7e191bacecdaff5bb1b21293df00fef97b96f1beb97ce695eb8ddb062ee48e912e5fddf83e7dc7008fcef956f29c78dae1f6486b433304398b040aa7f3312867c6d090ecbc5c5df4eaf8e21c8a0ecd3ac73b4469b59c892d51bf61fa9713f0cded76ded8a",
+      "Content-Type": "application/json",
+      Cookie:
+        "x38_gadighoda_admin_login_unique=f48668d4ea1989d14a5692c5c4b7b29629e8b2f6a9e870fbf0451038467110d0967eb7e0d9aec0714d2890d5e279f980412b02e37441a232867cbbed5478a25b6db22230c03d7b1d567a32edcd6355d48fe270e204b3aaa0113f3c6c3284696b649fd126ad6ce51dff09a20a2280ef49eaf875c81c8ebcc77337259757f19cc9; x38_gadighoda_admin_user_details=j%3A%7B%22_id%22%3A%226698d1db58e489d6943d9e30%22%2C%22userId%22%3A%22df2af83e-b7ff-4d70-b417-29f14701f3c9%22%2C%22userName%22%3A%22anikethandore12%40gmail.com%22%2C%22password%22%3A%22test1234%22%2C%22status%22%3A%22ACTIVE%22%2C%22name%22%3A%22Aniket%20Handore%22%7D",
+    },
+    data: data,
+  };
+
+  axios
+    .request(config)
+    .then((response) => {
+      console.log(JSON.stringify(response.data));
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 
   return (
     <div className="md:px-12 lg:px-20 gap-6 px-4 flex flex-col-reverse lg:grid md:grid-cols-5 bg-[#F7F7F7] md:gap-8 lg:gap-12 md:py-8 lg:py-10 py-6">
@@ -29,6 +55,8 @@ const Profile = () => {
                   src={profileData.photo}
                   alt=""
                   className="rounded-full"
+                  width={80}
+                  height={80}
                 />
               </div>
               <div className="flex-1">
@@ -106,7 +134,13 @@ const Profile = () => {
           <div className="flex items-start mb-3 md:mb-4">
             <div className="flex flex-col items-center">
               <div className="w-10 h-10 md:w-12 md:h-12 lg:w-16 lg:h-16">
-                <Image src="/Journey1.png" alt="" className="rounded-full" />
+                <Image
+                  src="/Journey1.png"
+                  alt=""
+                  className="rounded-full"
+                  width={40}
+                  height={40}
+                />
               </div>
               <div className="flex flex-col justify-center items-center mt-2 md:mt-3 gap-2">
                 <div className="bg-[#2B4360] w-1 h-1 rounded-full" />
@@ -123,7 +157,13 @@ const Profile = () => {
           <div className="flex items-start mb-3 md:mb-4">
             <div className="flex flex-col items-center">
               <div className="w-10 h-10 md:w-12 md:h-12 lg:w-16 lg:h-16">
-                <Image src="/Journey2.png" alt="" className="rounded-full" />
+                <Image
+                  src="/Journey2.png"
+                  alt=""
+                  className="rounded-full"
+                  width={40}
+                  height={40}
+                />
               </div>
               <div className="flex flex-col justify-center items-center mt-2 md:mt-3 gap-2">
                 <div className="bg-[#2B4360] w-1 h-1 rounded-full" />
@@ -140,7 +180,13 @@ const Profile = () => {
           <div className="flex items-start mb-3 md:mb-4">
             <div className="flex flex-col items-center">
               <div className="w-10 h-10 md:w-12 md:h-12 lg:w-16 lg:h-16">
-                <Image src="/Journey3.png" alt="" className="rounded-full" />
+                <Image
+                  src="/Journey3.png"
+                  alt=""
+                  className="rounded-full"
+                  width={40}
+                  height={40}
+                />
               </div>
               <div className="flex flex-col justify-center items-center mt-2 md:mt-3 gap-2">
                 <div className="bg-[#2B4360] w-1 h-1 rounded-full" />
@@ -157,7 +203,13 @@ const Profile = () => {
           <div className="flex items-start">
             <div className="flex flex-col items-center">
               <div className="w-10 h-10 md:w-12 md:h-12 lg:w-16 lg:h-16">
-                <Image src="/Journey4.png" alt="" className="rounded-full" />
+                <Image
+                  src="/Journey4.png"
+                  alt=""
+                  className="rounded-full"
+                  width={40}
+                  height={40}
+                />
               </div>
             </div>
             <p className="text-[#2B4360] font-semibold text-sm md:text-md lg:text-lg ml-3 md:ml-4 lg:ml-6 mt-2 md:mt-4">
