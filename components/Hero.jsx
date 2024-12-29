@@ -16,21 +16,9 @@ import { AiOutlineSearch } from "react-icons/ai";
 
 const Hero = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
+  const isInView = useInView(ref, { once: false });
 
-  let data = JSON.stringify({
-    id: "6689527988d8fd65f1a3934b",
-  });
 
-  let config = {
-    method: "post",
-    maxBodyLength: Infinity,
-    url: "https://maia-2.onrender.com/doctor/getDoctor/",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    data: data,
-  };
 
   // axios
   //   .request(config)
@@ -93,8 +81,8 @@ const Hero = () => {
                     alt="Priyanka Chopra"
                   />
                   <div className="text-slate-700 text-xs sm:text-sm font-normal leading-normal font-halant">
-                    It&apos;s the best thing you&apos;ll give yourself because
-                    you&apos;re taking the power from your biological clock, and
+                    It's the best thing you'll give yourself because
+                    you're taking the power from your biological clock, and
                     you can work until however long you want. Your eggs will
                     still be the same age as when you froze them.
                   </div>
@@ -176,7 +164,7 @@ const Hero = () => {
               >
                 <motion.div className="w-[90%]">
                   <div className="bg-white text-black rounded border border-neutral-200 justify-start items-center flex">
-                  <div className="bg-white text-black rounded border border-neutral-200 justify-start items-center flex">
+                  <div className="bg-white text-black rounded border border-neutral-200 justify-start items-center flex w-full">
                     <input
                       type="text"
                       placeholder="Search your queries"

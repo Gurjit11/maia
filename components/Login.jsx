@@ -8,6 +8,7 @@ import { AiOutlineClose, AiOutlineUser } from "react-icons/ai";
 import axios from "axios";
 import { useAuth } from "@/contexts/AuthContext";
 import { FaUser, FaUserCircle } from "react-icons/fa";
+import Link from "next/link";
 
 const customStyles = {
   content: {
@@ -1123,6 +1124,11 @@ function Login({ setSidebar }) {
                 <p className="text-gray-900 font-medium">{userState?.name}</p>
                 <p className="text-gray-500 text-sm">{userState?.email}</p>
               </div>
+              <Link href="/profile">
+                <div className="block px-4 py-2 text-gray-900 hover:bg-gray-100 transition">
+                  Profile
+                </div>
+              </Link>
               <button
                 onClick={logout}
                 className="w-full text-left font-semibold px-4 py-2 text-red-700 hover:bg-red-100  transition"

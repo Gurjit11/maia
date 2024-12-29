@@ -46,13 +46,18 @@ const DoctorProfile = ({ params }) => {
   useEffect(() => {
     getDoctor();
   }, []);
- 
+
   return (
     <div className="bg-gray-100 min-h-screen">
       <div className="p-6 bg-white">
-        <h1 className="text-[#1E293B] text-2xl font-bold">{doctor?.doctorDetails?.doctorName}</h1>
+        <h1 className="text-[#1E293B] text-2xl font-bold">
+          {doctor?.doctorDetails?.doctorName}
+        </h1>
         <span className="text-black">
-          Users &gt; Doctors &gt; <span className="text-muted-foreground">{doctor?.doctorDetails?.doctorName}</span>
+          Users &gt; Doctors &gt;{" "}
+          <span className="text-muted-foreground">
+            {doctor?.doctorDetails?.doctorName}
+          </span>
         </span>
       </div>
 
@@ -72,7 +77,9 @@ const DoctorProfile = ({ params }) => {
                   </div>
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-[#131D2A]">{doctor?.doctorDetails?.doctorName}</p>
+                  <p className="text-2xl font-bold text-[#131D2A]">
+                    {doctor?.doctorDetails?.doctorName}
+                  </p>
                   <Badge
                     variant="outline"
                     className="bg-gray-50 text-green-600 rounded-full font-semibold mt-2"
@@ -103,7 +110,8 @@ const DoctorProfile = ({ params }) => {
 
               <div className="flex items-center gap-16">
                 <div className="flex items-center gap-2">
-                  <Phone className="w-5 h-5" /> {doctor?.doctorDetails?.contactNumber}
+                  <Phone className="w-5 h-5" />{" "}
+                  {doctor?.doctorDetails?.contactNumber}
                 </div>
 
                 <div className="flex items-center gap-2">
@@ -121,36 +129,52 @@ const DoctorProfile = ({ params }) => {
 
               <div className="flex gap-2 items-center">
                 <FaDirections />
-                <p className="text-[#2B4360] underline cursor-pointer">Locate on Map</p>
+                <p className="text-[#2B4360] underline cursor-pointer">
+                  Locate on Map
+                </p>
               </div>
             </div>
           </div>
           <div className="w-full p-6 bg-white rounded-lg shadow-sm">
             <div className="space-y-5">
               <div className="flex justify-between items-center">
-                <span className="text-base font-medium text-gray-600">Years of Experience:</span>
-                <span className="text-sm text-gray-800">{doctor?.doctorDetails?.experiance} Yrs</span>
+                <span className="text-base font-medium text-gray-600">
+                  Years of Experience:
+                </span>
+                <span className="text-sm text-gray-800">
+                  {doctor?.doctorDetails?.experiance} Yrs
+                </span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-base font-medium text-gray-600">Qualification:</span>
-                <span className="text-sm text-gray-800">{doctor?.doctorDetails?.education}</span>
+                <span className="text-base font-medium text-gray-600">
+                  Qualification:
+                </span>
+                <span className="text-sm text-gray-800">
+                  {doctor?.doctorDetails?.education}
+                </span>
               </div>
               <div>
-                <span className="text-base font-medium text-gray-600 mb-2 block">Services:</span>
+                <span className="text-base font-medium text-gray-600 mb-2 block">
+                  Services:
+                </span>
                 <div className="flex flex-wrap gap-2">
-                  {doctor?.doctorDetails?.services.map((service) => (
+                  {doctor?.doctorDetails?.services.map((service, index) => (
                     <span
-                      key={service.serviceId}
+                      key={index}
                       className="px-3 py-1 text-xs bg-gray-100 text-gray-800 rounded-full"
                     >
-                      {service.serviceName}
+                      {service}
                     </span>
                   ))}
                 </div>
               </div>
               <div>
-                <span className="text-base font-medium text-gray-600 mb-2 block">About:</span>
-                <p className="text-sm text-gray-700 leading-relaxed">{doctor?.doctorDetails?.about}</p>
+                <span className="text-base font-medium text-gray-600 mb-2 block">
+                  About:
+                </span>
+                <p className="text-sm text-gray-700 leading-relaxed">
+                  {doctor?.doctorDetails?.about}
+                </p>
               </div>
             </div>
           </div>
@@ -160,7 +184,10 @@ const DoctorProfile = ({ params }) => {
           <p className="font-bold my-6 text-xl">Consult At</p>
           <div className="grid grid-cols-4 gap-10">
             {doctor?.clinics.map((clinic) => (
-              <div key={clinic?.clinicId} className="flex bg-white p-3 rounded-lg">
+              <div
+                key={clinic?.clinicId}
+                className="flex bg-white p-3 rounded-lg"
+              >
                 <div className="w-28 h-28 rounded-full">
                   <img
                     src="https://in.bmscdn.com/iedb/artist/images/website/poster/large/salman-khan-1991-12-09-2017-01-53-43.jpg"
@@ -169,7 +196,9 @@ const DoctorProfile = ({ params }) => {
                   />
                 </div>
                 <div className="ml-3">
-                  <p className="text-lg font-semibold text-[#2B4360]">{clinic.clinicName}</p>
+                  <p className="text-lg font-semibold text-[#2B4360]">
+                    {clinic.clinicName}
+                  </p>
                   <p className="inline-flex items-center text-sm mt-2 text-[#2B4360]">
                     <MapPin className="w-4 h-4" /> {clinic.addressName}
                   </p>
@@ -184,7 +213,9 @@ const DoctorProfile = ({ params }) => {
         </div>
 
         <div>
-          <p className="font-bold my-6 text-xl">Reviews ({doctor?.reviewsStat?.totalReviews})</p>
+          <p className="font-bold my-6 text-xl">
+            Reviews ({doctor?.reviewsStat?.totalReviews})
+          </p>
           <div className="flex flex-col divide-y bg-white rounded-lg divide-[#2B4360]">
             {/* Add review content here */}
           </div>
@@ -192,7 +223,6 @@ const DoctorProfile = ({ params }) => {
       </div>
     </div>
   );
-
 };
 
 export default DoctorProfile;

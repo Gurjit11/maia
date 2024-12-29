@@ -8,10 +8,13 @@ const DoctorsList = () => {
   const [sort, setSort] = useState("all")
   const [originalDoctors, setOriginalDoctors] = useState([]);
   const [search, setSearch] = useState("");
-  const getDoctors = async () => {
+  const [currentPage, setCurrentPage] = useState(0); // Track the current page
+  const [totalPages, setTotalPages] = useState(2); // Track the total number of pages
+
+  const getDoctors = async (page = 0) => {
     let data = JSON.stringify({
       filters: {},
-      pageNo: 0,
+      pageNo: page, // Use the page parameter
     });
 
     let config = {
@@ -64,8 +67,21 @@ const DoctorsList = () => {
   };
 
   useEffect(() => {
-    getDoctors();
-  }, []);
+    getDoctors(currentPage); // Fetch doctors for the current page
+  }, [currentPage]);
+
+  const handleNextPage = () => {
+    console.log("in next page");
+    if (currentPage < totalPages - 1) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 0) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
   console.log(doctors);
   useEffect(() => {
     if (sort === "all") {
@@ -200,13 +216,26 @@ const DoctorsList = () => {
         </tbody>
       </table>
 
-      {/* Pagination */}
-      <div className="flex justify-between items-center mt-4">
-        <span>Showing 1 of 3 Entries</span>
+       {/* Pagination */}
+       <div className="flex justify-between items-center mt-4">
+        <span>
+          Page {currentPage + 1} of {totalPages}
+        </span>
         <div className="flex items-center space-x-3">
-          <button className="px-3 py-1 border rounded-md">Previous</button>
-          <span className="px-3 py-1">1</span>
-          <button className="px-3 py-1 border rounded-md">Next</button>
+          <button
+            className="px-3 py-1 border rounded-md"
+            onClick={handlePreviousPage}
+            disabled={currentPage === 0}
+          >
+            Previous
+          </button>
+          <button
+            className="px-3 py-1 border rounded-md"
+            onClick={handleNextPage}
+            disabled={currentPage >= totalPages - 1}
+          >
+            Next
+          </button>
         </div>
       </div>
     </div>
