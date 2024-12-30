@@ -1,7 +1,7 @@
 "use client";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { AiOutlineClose } from "react-icons/ai";
+import { AiOutlineClose, AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 
 const AppointmentsPage = () => {
   const [appointments, setAppointments] = useState([]);
@@ -188,6 +188,7 @@ const AppointmentsPage = () => {
             onClick={handlePreviousPage}
             disabled={currentPage === 1}
           >
+            <AiOutlineLeft />
             Previous
           </button>
           <div className="px-3 py-2 border bg-slate-700 text-white rounded-md">
@@ -201,6 +202,7 @@ const AppointmentsPage = () => {
             }
           >
             Next
+            <AiOutlineRight />
           </button>
         </div>
       </div>
