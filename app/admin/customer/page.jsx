@@ -254,15 +254,15 @@ const CustomersPage = () => {
             {/* Modal Footer */}
             <div className="flex justify-end mt-6 gap-3">
               <button
-                className="bg-gray-100 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-200 transition"
+                className="bg-red-200 text-red-700 px-4 py-2 rounded-md hover:bg-red-300 transition"
                 onClick={() => setModalOpen(false)}
               >
                 Cancel
               </button>
               <button
-                className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition"
+                className="bg-slate-700 text-white px-4 py-2 rounded-md hover:bg-slate-800 transition"
                 onClick={() =>
-                  updateStatus(selectedCustomer.userId, selectedCustomer.status)
+                  updateStatus(selectedQuery.queryId, selectedQuery.status)
                 }
               >
                 Update
