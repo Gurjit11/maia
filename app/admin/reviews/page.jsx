@@ -2,7 +2,7 @@
 import axios from "axios";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { AiFillStar } from "react-icons/ai";
+import { AiFillStar, AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 
 const ReviewList = () => {
   const [reviews, setReviews] = useState([]);
@@ -267,23 +267,29 @@ const ReviewList = () => {
 
       {/* Pagination */}
       <div className="flex justify-between items-center mt-4">
-        <span>
-          Page {currentPage} of {Math.ceil(reviews.length / itemsPerPage)}
+        <span className="text-gray-700">
+          Showing {currentPage} of {Math.ceil(reviews.length / itemsPerPage)}{" "}
+          Entries
         </span>
-        <div className="flex items-center space-x-3">
+        <div className="flex items-center space-x-1">
           <button
-            className="px-3 py-1 border rounded-md"
+            className="px-3 py-2 border border-slate-400 flex text-base justify-center text-slate-800 items-center gap-2 rounded-md"
             onClick={handlePreviousPage}
             disabled={currentPage === 1}
           >
+            <AiOutlineLeft />
             Previous
           </button>
+          <div className="px-3 py-2 border bg-slate-700 text-white rounded-md">
+            {currentPage}
+          </div>
           <button
-            className="px-3 py-1 border rounded-md"
+            className="px-3 py-2 border border-slate-400 flex text-base justify-center text-slate-800 items-center gap-2 rounded-md"
             onClick={handleNextPage}
             disabled={currentPage === Math.ceil(reviews.length / itemsPerPage)}
           >
             Next
+            <AiOutlineRight />
           </button>
         </div>
       </div>
