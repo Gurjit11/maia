@@ -17,6 +17,7 @@ import {
 } from "./ui/dropdown-menu";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import axios from "axios";
+import Image from "next/image";
 
 const Step1 = ({ doctor, onNext, setData }) => {
   const [selectedClinic, setSelectedClinic] = useState(
@@ -136,7 +137,7 @@ const Step1 = ({ doctor, onNext, setData }) => {
             </div>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-full p-5">
-            {doctor.clinics.map((clinic) => (
+            {doctor?.clinics?.map((clinic) => (
               <DropdownMenuItem
                 key={clinic.clinicId}
                 className="w-full"
