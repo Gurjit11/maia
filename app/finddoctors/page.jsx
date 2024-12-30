@@ -22,6 +22,7 @@ import Link from "next/link";
 
 import DoctorFilters from "@/components/DoctorFilters";
 import { motion } from "framer-motion";
+import BookAppointment from "@/components/BookAppointment";
 
 const FindDoctors = () => {
   const [doctors, setDoctors] = useState([]);
@@ -246,14 +247,10 @@ const FindDoctors = () => {
                 </div>
               </div>
               <div className=" mt-2 sm:flex-col  justify-start items-start gap-4 inline-flex">
-                <button className="h-14 px-6 py-4 bg-[#2b4360] rounded-lg justify-center items-center gap-2 inline-flex">
-                  <div className="grow shrink basis-0 text-center text-white text-base font-medium font-['Poppins'] leading-tight">
-                    Book Appointment
-                  </div>
-                </button>
+                <BookAppointment doctor={doctor} />
                 <Link
                   href={`/finddoctors/${doctor.doctorId}`}
-                  className="sm:w-full h-14 px-6 py-4 rounded-lg border border-[#2b4360] justify-center items-center gap-2 inline-flex"
+                  className="sm:w-full h-12 px-6 py-4 rounded-lg border border-[#2b4360] justify-center items-center gap-2 inline-flex"
                 >
                   <div className="grow shrink basis-0 text-center text-[#2b4360] text-base font-medium font-['Poppins'] leading-tight">
                     View Profile

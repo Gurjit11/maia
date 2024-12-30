@@ -2,12 +2,15 @@
 import axios from "axios";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { AiFillStar } from "react-icons/ai";
 
 const ReviewList = () => {
   const [reviews, setReviews] = useState([]);
   const [sort, setSort] = useState("all");
   const [originalReviews, setOriginalReviews] = useState([]);
   const [search, setSearch] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+
   const getReviews = async () => {
     let config = {
       method: "post",
@@ -64,6 +67,24 @@ const ReviewList = () => {
   useEffect(() => {
     getReviews();
   }, []);
+
+  const handleNextPage = () => {
+    if (currentPage < Math.ceil(reviews.length / itemsPerPage)) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const itemsPerPage = 10;
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = reviews.slice(indexOfFirstItem, indexOfLastItem);
+
   console.log(reviews);
   const toggleStatus = (reviewId, status) => {
     let data = JSON.stringify({
@@ -74,7 +95,7 @@ const ReviewList = () => {
     let config = {
       method: "post",
       maxBodyLength: Infinity,
-      url: "https://maia.projectx38.cloud/maia-dashboard/reviews/updateStatus",
+      url: "https://maia.projectx38.cloud/dashboard-apis/maia-dashboard/reviews/updateStatus",
       headers: {
         "login-token":
           "f48668d4ea1989d14a5692c5c4b7b296a2d651c4947526876dee65a7e191bacecdaff5bb1b21293df00fef97b96f1beb97ce695eb8ddb062ee48e912e5fddf83e7dc7008fcef956f29c78dae1f6486b433304398b040aa7f3312867c6d090ecbc5c5df4eaf8e21c8a0ecd3ac73b4469b59c892d51bf61fa9713f0cded76ded8a",
@@ -134,11 +155,6 @@ const ReviewList = () => {
       setReviews(filteredReviews);
     }
   }, [search]);
-  const handleEditClick = (customer) => {
-    setSelectedCustomer(customer);
-    setNewStatus(customer.status); // Pre-fill with current status
-    setIsEditModalOpen(true);
-  };
 
   return (
     <div className="p-6">
@@ -182,28 +198,31 @@ const ReviewList = () => {
       <table className="min-w-full bg-white border border-gray-200">
         <thead className="bg-gray-100 text-gray-600">
           <tr>
-            <th className="py-2 px-4 border-b">#</th>
-            <th className="py-2 px-4 border-b">Review By</th>
-            <th className="py-2 px-4 border-b">Reviewed</th>
-            <th className="py-2 px-4 border-b">Rating</th>
-            <th className="py-2 px-4 border-b">Date</th>
-            <th className="py-2 px-4 border-b">Comment</th>
-            <th className="py-2 px-4 border-b">Action</th>
+            <th className="py-2 px-4 text-start border-b">#</th>
+            <th className="py-2 px-4 text-start border-b">Review By</th>
+            <th className="py-2 px-4 text-start border-b">Reviewed</th>
+            <th className="py-2 px-4 text-start border-b">Rating</th>
+            <th className="py-2 px-4 text-start border-b">Date</th>
+            <th className="py-2 px-4 text-start border-b">Comment</th>
+            <th className="py-2 px-4 text-start border-b">Action</th>
           </tr>
         </thead>
         <tbody>
-          {reviews?.map((review, index) => (
-            <tr key={review?.reviewId} className="text-center">
+          {currentItems?.map((review, index) => (
+            <tr key={review?.reviewId} className="text-start">
               <td className="py-2 px-4 border-b">{index + 1}</td>
               <td className="py-2 px-4 border-b">
-                <div className="flex items-center justify-center gap-2">
+                <div className="flex items-start justify-start gap-2">
                   {review?.reviewedBy?.name}
                 </div>
               </td>
               <td className="py-2 px-4 border-b">
                 {review?.doctorDetails?.doctorDetails?.doctorName}
               </td>
-              <td className="py-2 px-4 border-b">5</td>
+              <td className="py-2 flex justify-start items-center gap-2 px-4 border-b">
+                <AiFillStar className="text-xl text-yellow-500" />{" "}
+                {review?.reviewRating}
+              </td>
               <td className="py-2 px-4 border-b">
                 {new Date(review?.createdAt?.ISODate).toLocaleDateString(
                   "en-US",
@@ -220,7 +239,7 @@ const ReviewList = () => {
                 </div>
               </td>
               <td className="py-2 px-4 border-b">
-                <div className="flex items-center justify-center gap-2">
+                <div className="flex items-center justify-start gap-2">
                   <label className="relative inline-flex items-center cursor-pointer">
                     <input
                       type="checkbox"
@@ -248,11 +267,24 @@ const ReviewList = () => {
 
       {/* Pagination */}
       <div className="flex justify-between items-center mt-4">
-        <span>Showing 1 of 3 Entries</span>
+        <span>
+          Page {currentPage} of {Math.ceil(reviews.length / itemsPerPage)}
+        </span>
         <div className="flex items-center space-x-3">
-          <button className="px-3 py-1 border rounded-md">Previous</button>
-          <span className="px-3 py-1">1</span>
-          <button className="px-3 py-1 border rounded-md">Next</button>
+          <button
+            className="px-3 py-1 border rounded-md"
+            onClick={handlePreviousPage}
+            disabled={currentPage === 1}
+          >
+            Previous
+          </button>
+          <button
+            className="px-3 py-1 border rounded-md"
+            onClick={handleNextPage}
+            disabled={currentPage === Math.ceil(reviews.length / itemsPerPage)}
+          >
+            Next
+          </button>
         </div>
       </div>
     </div>

@@ -19,12 +19,18 @@ const Step1 = ({ doctor, onNext }) => {
     <div>
       <div className="flex mt-5 gap-5">
         <div className="w-28 h-28">
-          <Image src={doctor?.photo} className="rounded-full" alt="doctor" />
+          <Image
+            width={112}
+            height={112}
+            src={doctor?.profileImage}
+            className="rounded-full"
+            alt="doctor"
+          />
         </div>
 
         <div className="flex-1 ">
           <div className="text-lg font-semibold text-[#2B4360]">
-            {doctor?.name}
+            {doctor?.doctorName}
           </div>
           <div className="flex">
             <div className="flex gap-2 items-center text-[#2B4360]">
@@ -40,15 +46,20 @@ const Step1 = ({ doctor, onNext }) => {
 
           <div className="flex items-center gap-2">
             <PiBriefcase className="w-5 h-5" />
-            <p className="text-[#2B4360]">{doctor?.experience_years} years</p>
+            <p className="text-[#2B4360]">{doctor?.experiance} years</p>
           </div>
 
           <div className="flex gap-4">
             <div className="flex items-center">
-              <FaStar className="w-5 h-5 text-yellow-400" />
-              <FaStar className="w-5 h-5 text-yellow-400" />
-              <FaStar className="w-5 h-5 text-yellow-400" />
-              <FaStar className="w-5 h-5 text-yellow-400" />
+              {doctor?.rating}
+              {[...Array(5)].map((_, index) => (
+                <FaStar
+                  key={index}
+                  className={`w-5 h-5 ${
+                    index < doctor?.rating ? "text-yellow-400" : "text-gray-300"
+                  }`}
+                />
+              ))}
             </div>
 
             <p className="text-[#2B4360] underline">20+reviews</p>
@@ -298,69 +309,81 @@ function BookAppointment({ doctor }) {
   }
 
   function closeModal() {
+    setStep(1);
     setIsOpen(false);
   }
 
   console.log(doctor);
   return (
-    <div className="text-black ">
+    <div className="text-black">
       <button onClick={openModal}>
-        <div className="bg-slate-700 rounded-lg justify-center items-center gap-2 flex">
-          <div className="p-3 px-6 text-center text-white text-base font-medium font-['Poppins'] leading-tight">
+        <div className="bg-slate-700 rounded-lg flex justify-center items-center gap-2">
+          <div className="p-4 px-6 text-center text-white text-base font-medium font-['Poppins'] leading-tight">
             Book Appointment
           </div>
         </div>
       </button>
+
       <Modal
         isOpen={modalIsOpen}
         preventScroll={true}
         onRequestClose={closeModal}
-        // style={customStyles}
-        className="justify-center  sm:p-0 items-center flex my-12 flex-col bg-opacity-5 bg-black/70 w-full h-full z-20 text-black"
         contentLabel="Appointment Modal"
+        // 1) OVERLAY classes: the dark background and centering
+        overlayClassName={`
+        fixed inset-0 bg-black/70 z-50 
+        flex items-center justify-center
+      `}
+        // 2) CONTENT classes: the actual modal "box"
+        className={`
+        relative rounded-3xl bg-white p-6 text-black focus:outline-none 
+        w-full max-w-[90%] sm:max-w-[70%] md:max-w-[50%] lg:max-w-[40%] xl:max-w-[30%]
+        max-h-[90vh] overflow-y-auto
+      `}
       >
-        <div className="text-black sm:w-[70%] md:w-[50%] lg:w-[40%] xl:w-[30%] z-20 w-[100%] sm:flex-col rounded-3xl bg-white p-6">
-          {completed ? (
-            <Completed
-              setIsOpen={setIsOpen}
-              onNext={() => {
-                setIsOpen(false);
-                setStep(1);
-                setCompleted(false);
-              }}
-            />
-          ) : (
-            <>
-              <div className="flex items-center justify-between w-full">
-                <p className="text-[#E29578] font-semibold text-2xl">
-                  Book Appointment
-                </p>
-                <IoClose
-                  className="w-5 h-5 cursor-pointer"
-                  onClick={() => {
-                    setIsOpen(false);
-                  }}
+        {completed ? (
+          <Completed
+            setIsOpen={setIsOpen}
+            onNext={() => {
+              setIsOpen(false);
+              setStep(1);
+              setCompleted(false);
+            }}
+          />
+        ) : (
+          <>
+            <div className="flex items-center justify-between w-full">
+              <p className="text-[#E29578] font-semibold text-2xl">
+                Book Appointment
+              </p>
+              <IoClose
+                className="w-5 h-5 cursor-pointer"
+                onClick={closeModal}
+              />
+            </div>
+            <p className="text-sm text-gray-600 mt-2">
+              Please enter the details below
+            </p>
+
+            <div className="flex items-center mt-5">
+              <div className="flex-1 bg-gray-300 rounded overflow-hidden mr-2">
+                {/* Progress bar simulation */}
+                <div
+                  className={`bg-[#70AAA4] h-[0.4rem]`}
+                  style={{ width: `${(step / 2) * 100}%` }}
                 />
               </div>
-              <p className="text-sm text-gray-600 mt-2">
-                Please enter the details below
-              </p>
+              <p className="text-sm">{step} of 2</p>
+            </div>
 
-              <div className="flex items-center mt-5 ">
-                <div className="flex-1 bg-gray-300 rounded   overflow-hidden mr-2">
-                  <div className={`w-${step}/2 h-[0.4rem] bg-[#70AAA4]`}></div>
-                </div>
-                <p className="text-sm">{step} of 2</p>
-              </div>
-              {step === 1 && (
-                <Step1 doctor={doctor} onNext={() => setStep(step + 1)} />
-              )}
-              {step === 2 && (
-                <Step2 doctor={doctor} onNext={() => setCompleted(true)} />
-              )}
-            </>
-          )}
-        </div>
+            {step === 1 && (
+              <Step1 doctor={doctor} onNext={() => setStep(step + 1)} />
+            )}
+            {step === 2 && (
+              <Step2 doctor={doctor} onNext={() => setCompleted(true)} />
+            )}
+          </>
+        )}
       </Modal>
     </div>
   );

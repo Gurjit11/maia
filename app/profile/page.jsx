@@ -6,15 +6,10 @@ import { BsGenderFemale } from "react-icons/bs";
 import EditProfileModal from "@/components/EditProfileModal";
 import Image from "next/image";
 import axios from "axios";
+import { useEffect, useState } from "react";
 
 const Profile = () => {
-  const profileData = {
-    name: "Archana Mehta",
-    photo: "",
-    gender: "Female",
-    mobile: "987234234",
-    email: "archana123@gmail.com",
-  };
+  const [profileData, setProfileData] = useState({});
 
   let data = JSON.stringify({});
 
@@ -31,15 +26,17 @@ const Profile = () => {
     },
     data: data,
   };
-
-  axios
-    .request(config)
-    .then((response) => {
-      console.log(JSON.stringify(response.data));
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+  useEffect(() => {
+    axios
+      .request(config)
+      .then((response) => {
+        setProfileData(response.data.data);
+        console.log(JSON.stringify(response.data), 'status = "ACTIVE"');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   return (
     <div className="md:px-12 lg:px-20 gap-6 px-4 flex flex-col-reverse lg:grid md:grid-cols-5 bg-[#F7F7F7] md:gap-8 lg:gap-12 md:py-8 lg:py-10 py-6">

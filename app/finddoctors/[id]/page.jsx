@@ -162,7 +162,7 @@ const DoctorPage = ({ params }) => {
               <div className="flex-col justify-start items-start gap-2 inline-flex w-full">
                 <div className="text-[#2b4360] w-full flex items-center justify-between  text-3xl font-bold font-['FONTSPRING DEMO - Argent CF'] leading-loose">
                   {doctor?.doctorDetails?.doctorName}
-                  <BookAppointment doctor={doctor} />
+                  <BookAppointment doctor={doctor?.doctorDetails} />
                 </div>
                 <div className="flex-col justify-start items-start gap-1 flex">
                   <div className="justify-start items-center gap-2 inline-flex">
