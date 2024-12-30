@@ -26,7 +26,7 @@ export default function AdminSidebar() {
 
   return (
     <div
-      className={`h-screen p-3 border-r-2 transition-width duration-300 ${
+      className={`h-screen p-3 border-r-2 sticky top-0 transition-width duration-300 ${
         isCollapsed ? "w-16" : "w-64"
       }`}
     >
