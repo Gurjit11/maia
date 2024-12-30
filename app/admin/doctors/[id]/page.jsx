@@ -157,7 +157,7 @@ const DoctorProfile = ({ params }) => {
                 <span className="text-base font-medium text-gray-600 mb-2 block">
                   Services:
                 </span>
-                <div className="flex flex-wrap gap-2">
+                {/* <div className="flex flex-wrap gap-2">
                   {doctor?.doctorDetails?.services.map((service, index) => (
                     <span
                       key={index}
@@ -166,7 +166,7 @@ const DoctorProfile = ({ params }) => {
                       {service}
                     </span>
                   ))}
-                </div>
+                </div> */}
               </div>
               <div>
                 <span className="text-base font-medium text-gray-600 mb-2 block">
