@@ -1,20 +1,40 @@
 "use client";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Calendar, Clock } from "lucide-react";
-import { useState } from "react";
+import { format } from "date-fns";
+import { Calendar as CalendarIcon } from "lucide-react";
+import { useEffect, useState } from "react";
 import { FaStar } from "react-icons/fa";
 import { IoChevronDown, IoClose } from "react-icons/io5";
 import { PiBriefcase, PiCertificateThin } from "react-icons/pi";
 import Modal from "react-modal";
+import { Calendar } from "./ui/calendar";
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuItem,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-import Image from "next/image";
+import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
+import axios from "axios";
 
-const Step1 = ({ doctor, onNext }) => {
+const Step1 = ({ doctor, onNext, setData }) => {
+  const [selectedClinic, setSelectedClinic] = useState(
+    "Select a preferred clinic"
+  );
+  const [additionalNotes, setAdditionalNotes] = useState();
+  const [date, setDate] = useState();
+  const [selectedReason, setSelectedReason] = useState(
+    "Select the reason for visiting"
+  );
+  const [time, setTime] = useState("08:00");
+  const handleSelect = (reason) => {
+    setSelectedReason(reason);
+  };
+  const handleClinicSelect = (clinicName) => {
+    setSelectedClinic(clinicName);
+  };
+
   return (
     <div>
       <div className="flex mt-5 gap-5">
@@ -35,11 +55,8 @@ const Step1 = ({ doctor, onNext }) => {
           <div className="flex">
             <div className="flex gap-2 items-center text-[#2B4360]">
               <PiCertificateThin className="w-5 h-5 text-black" />
-              {doctor?.title?.map((title, index) => (
-                <p key={title}>
-                  {title}
-                  {index < doctor.title.length - 1 && ","}
-                </p>
+              {doctor?.doctorDetails?.spectiality?.map((title, index) => (
+                <p key={title.specialityId}>{title?.specialityKey}</p>
               ))}
             </div>
           </div>
@@ -62,7 +79,9 @@ const Step1 = ({ doctor, onNext }) => {
               ))}
             </div>
 
-            <p className="text-[#2B4360] underline">20+reviews</p>
+            <p className="text-[#2B4360] underline">
+              {doctor?.reviewsStat?.totalReviews} reviews
+            </p>
           </div>
         </div>
       </div>
@@ -83,49 +102,86 @@ const Step1 = ({ doctor, onNext }) => {
 
       <div className="text-[#2B4360] mt-4 w-full">
         <p>Reason for visting</p>
-        <DropdownMenu defaultValue="yourself" className="w-full">
-          <DropdownMenuTrigger className=" w-full">
+        <DropdownMenu>
+          <DropdownMenuTrigger className="w-full">
             <div className="mt-1 flex items-center justify-between w-full py-3 px-2 border border-gray-200 rounded-md">
-              <p className="text-[#2B4360]">Select the reason for visiting</p>
+              <p className="text-[#2B4360]">{selectedReason}</p>
               <IoChevronDown className="w-5 h-5 text-[#E29578]" />
             </div>
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-[23.5rem] p-5">
-            <div className="w-full">hello</div>
+          <DropdownMenuContent className="w-full p-5">
+            <DropdownMenuItem
+              className="w-full"
+              onSelect={() => handleSelect("Followup")}
+            >
+              Followup
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              className="w-full"
+              onSelect={() => handleSelect("Some other reason")}
+            >
+              Some other reason
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
 
       <div className="text-[#2B4360] mt-4 w-full">
         <p>Select Clinic</p>
-        <DropdownMenu defaultValue="yourself" className="w-full">
-          <DropdownMenuTrigger className=" w-full">
+        <DropdownMenu>
+          <DropdownMenuTrigger className="w-full">
             <div className="mt-1 flex items-center justify-between w-full py-3 px-2 border border-gray-200 rounded-md">
-              <p className="text-[#2B4360]">Select a preferred clinic</p>
+              <p className="text-[#2B4360]">{selectedClinic}</p>
               <IoChevronDown className="w-5 h-5 text-[#E29578]" />
             </div>
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-[23.5rem] p-5">
-            <div className="w-full">hello</div>
+          <DropdownMenuContent className="w-full p-5">
+            {doctor.clinics.map((clinic) => (
+              <DropdownMenuItem
+                key={clinic.clinicId}
+                className="w-full"
+                onSelect={() => handleClinicSelect(clinic.clinicId)}
+              >
+                {clinic.clinicName}
+              </DropdownMenuItem>
+            ))}
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
 
       <div className="flex gap-5">
-        <div className="text-[#2B4360] mt-4 w-full">
-          <p>Appointment Date</p>
-          <div className="mt-1 flex items-center justify-between w-full py-3 px-2 border border-gray-200 rounded-md">
-            <p className="text-[#2B4360]">Pick a Date</p>
+        <Popover>
+          <PopoverTrigger asChild>
+            <div className="text-[#2B4360] mt-4 w-full">
+              <p>Appointment Date</p>
+              <div className="mt-1 flex items-center justify-between w-full py-3 px-2 border border-gray-200 rounded-md">
+                <p className="text-[#2B4360]">
+                  {date ? format(date, "PPP") : <span>Pick a date</span>}
+                </p>
 
-            <Calendar className="text-[#E29578] w-5 h-5" />
-          </div>
-        </div>
-        <div className="text-[#2B4360] mt-4 w-full">
-          <p>Appointment Date</p>
-          <div className="mt-1 flex items-center justify-between w-full py-3 px-2 border border-gray-200 rounded-md">
-            <p className="text-[#2B4360]">Pick a time</p>
+                <CalendarIcon className="text-[#E29578] w-5 h-5" />
+              </div>
+            </div>
+          </PopoverTrigger>
+          <PopoverContent className="w-auto p-0">
+            <Calendar
+              mode="single"
+              selected={date}
+              onSelect={setDate}
+              initialFocus
+            />
+          </PopoverContent>
+        </Popover>
 
-            <Clock className="text-[#E29578] w-5 h-5" />
+        <div className="text-[#2B4360] mt-4 w-full">
+          <p>Appointment Time</p>
+          <div className="mt-1 flex items-center justify-between w-full py-3 px-2 border border-gray-200 rounded-md">
+            <input
+              value={time}
+              onChange={(e) => setTime(e.target.value)}
+              type="time"
+              className="w-full bg-transparent border-none focus:outline-none  text-[#2B4360] text-sm"
+            />
           </div>
         </div>
       </div>
@@ -133,15 +189,25 @@ const Step1 = ({ doctor, onNext }) => {
       <div className="text-[#2B4360] mt-4 w-full">
         <p>Additional Notes</p>
         <textarea
-          name=""
-          id=""
+          value={additionalNotes}
+          onChange={(e) => setAdditionalNotes(e.target.value)}
           placeholder="Enter any additional details"
           className="mt-1 w-full p-2 border border-gray-200 resize-none focus:outline-0 rounded-md"
         ></textarea>
       </div>
 
       <button
-        onClick={onNext}
+        onClick={() => {
+          setData((prevData) => ({
+            ...prevData,
+            date: date,
+            time: time,
+            clinic: selectedClinic,
+            reason: selectedReason,
+            notes: additionalNotes,
+          }));
+          onNext();
+        }}
         className="font-semibold w-full bg-[#2B4360] text-white mt-5 py-3 px-2 rounded-md"
       >
         Next
@@ -149,10 +215,8 @@ const Step1 = ({ doctor, onNext }) => {
     </div>
   );
 };
-const Step2 = ({ doctor, onNext }) => {
-  const AgeSelector = () => {
-    const [selectedAge, setSelectedAge] = useState(null);
-
+const Step2 = ({ doctor, onNext, setData, data }) => {
+  const AgeSelector = ({ setSelectedAge }) => {
     const ageRanges = [
       { label: "0-18", value: "0-18" },
       { label: "19-25", value: "19-25" },
@@ -188,9 +252,8 @@ const Step2 = ({ doctor, onNext }) => {
       </div>
     );
   };
-  const GenderSelector = () => {
-    const [selectedGender, setSelectedGender] = useState(null);
 
+  const GenderSelector = ({ setSelectedGender }) => {
     const genders = [
       { label: "Male", value: "male" },
       { label: "Female", value: "female" },
@@ -203,7 +266,7 @@ const Step2 = ({ doctor, onNext }) => {
 
     return (
       <div>
-        <p className="text-[#2B4360]">Age</p>
+        <p className="text-[#2B4360]">Gender</p>
         <div className="flex space-x-4 mt-1">
           {genders.map((gender) => (
             <button
@@ -224,6 +287,68 @@ const Step2 = ({ doctor, onNext }) => {
       </div>
     );
   };
+
+  const [selectedGender, setSelectedGender] = useState(null);
+  const [selectedAge, setSelectedAge] = useState(null);
+  const [name, setName] = useState("");
+  const [mobile, setMobile] = useState("");
+
+  const handleSubmit = () => {
+    setData((prevData) => {
+      const updatedData = {
+        ...prevData,
+        name: name,
+        mobile: mobile,
+        selectedAge: selectedAge,
+        selectedGender: selectedGender,
+      };
+      console.log(updatedData);
+
+      const requestData = {
+        appointmentFor: updatedData.name,
+        appointmentReason: updatedData.reason,
+        additionalDetails: updatedData.notes,
+        doctorId: updatedData.doctor,
+        clinicId: updatedData.clinic,
+        appointmentDate: new Date(updatedData.date).toLocaleDateString(),
+        appointmentTime: updatedData.time,
+      };
+      console.log(requestData);
+      //    const requestData =  {
+      //       "appointmentFor":"Someone Else",
+      //      "appointmentReason":"Followup",
+      //      "additionalDetails":"Some Additional Details",
+      //      "doctorId":"testDoctoprId",
+      //      "clinicId":"testClinic",
+      //      "appointmentDate":"03/11/2024",
+      //      "appointmentTime":"13:15"
+      //  }
+      let config = {
+        method: "post",
+        maxBodyLength: Infinity,
+        url: "https://maia.projectx38.cloud/web-apis/maia/web/appointment/submit",
+        headers: {
+          "device-id": "97c2fe5e-0f68-4d72-b277-d5d2d4e628a8",
+          "login-token":
+            "f48668d4ea1989d14a5692c5c4b7b2964c1cd4333f27869b149f8f5b7db9c37a0731331d8bfdddaee2b39aa2da420282524c49da2bffa8bf95d5b6d4c956d1aea10ebcc18bb59d9fb0b68e8a0701262037f59784c56f5141e9446618ce41e97864da9a3c4729b6469712045d9d379f7e8996734fcfe58bf4029f8bb2c34d3b8831f3f79b575a4fe0b810e569ba76099e6b6e80a08bc2488350d7dc632a9d0feca6588711354f54e52adfebd6828012b69aaa1e903bfa9ac57a8c676e89d2853f30297fbab03b8b45c49af79cd819bd289ba7b7d3e50d799c01e27dcc02b1580a5ac3b6a6cc94dff860916be3340c958c75952faafd90bff74c677b74767d4d5dba21cd8ab57d8c0991e537ddaffb5f3cefea2c7f31e4d2dad2e1af34c8525d6295c8af0a9aefe466e3c4218ecac52d4265860495f0ece6361f315af2c82c97af5bc9e6aa356f19fcab74af5ecd4ba4c55fedeab1876372e9ff6cc8b1ebc0799988be785907c04772a8b96b2706b95151bdcb63ed2752734a64c6ea9691e0c335",
+          "city-id": "NA",
+          "Content-Type": "application/json",
+        },
+        data: JSON.stringify(requestData),
+      };
+      axios
+        .request(config)
+        .then((response) => {
+          console.log(response.data);
+          onNext();
+        })
+        .catch((error) => {
+          console.log(error.data);
+        });
+
+      return updatedData;
+    });
+  };
   return (
     <div>
       <p className="text-[#2B4360] text-lg font-semibold mt-5">
@@ -234,6 +359,8 @@ const Step2 = ({ doctor, onNext }) => {
           <p className="text-[#2B4360]">Name</p>
           <input
             type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             placeholder="Enter the patient's name"
             className="focus:outline-none mt-1 flex items-center justify-between w-full py-3 px-2 border border-gray-200 rounded-md"
           />
@@ -243,16 +370,20 @@ const Step2 = ({ doctor, onNext }) => {
           <p className="text-[#2B4360]">Mobile Number</p>
           <input
             type="text"
+            value={mobile}
+            onChange={(e) => setMobile(e.target.value)}
             placeholder="Enter your mobile number"
             className="focus:outline-none mt-1 flex items-center justify-between w-full py-3 px-2 border border-gray-200 rounded-md"
           />
         </div>
 
-        <AgeSelector />
-        <GenderSelector />
+        <AgeSelector setSelectedAge={setSelectedAge} />
+        <GenderSelector setSelectedGender={setSelectedGender} />
 
         <button
-          onClick={onNext}
+          onClick={() => {
+            handleSubmit();
+          }}
           className="font-semibold w-full bg-[#2B4360] text-white mt-5 py-3 px-2 rounded-md"
         >
           Book Appointment
@@ -261,7 +392,6 @@ const Step2 = ({ doctor, onNext }) => {
     </div>
   );
 };
-
 const Completed = ({ onNext, setIsOpen }) => {
   return (
     <div className="relative py-10 flex flex-col items-center justify-center">
@@ -275,7 +405,7 @@ const Completed = ({ onNext, setIsOpen }) => {
       </div>
 
       <div className="w-52 h-52 text-center ">
-        <Image src="/BookingCompleted.png" alt="Booking Completed" />
+        <img src="/BookingCompleted.png" alt="Booking Completed" />
       </div>
       <div className="w-full mt-12 text-center flex flex-col items-center">
         <p className="text-2xl font-bold break-words text-[#E29578]">
@@ -303,6 +433,16 @@ function BookAppointment({ doctor }) {
   const [step, setStep] = useState(1);
   const [completed, setCompleted] = useState(false);
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [data, setData] = useState({});
+
+  useEffect(() => {
+    if (doctor?.doctorId) {
+      setData((prevData) => ({
+        ...prevData,
+        doctor: doctor.doctorId,
+      }));
+    }
+  }, [doctor]);
 
   function openModal() {
     setIsOpen(true);
@@ -313,7 +453,6 @@ function BookAppointment({ doctor }) {
     setIsOpen(false);
   }
 
-  console.log(doctor);
   return (
     <div className="text-black">
       <button onClick={openModal}>
