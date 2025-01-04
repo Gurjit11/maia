@@ -28,6 +28,7 @@ const DoctorPage = ({ params }) => {
   console.log(id);
   const [doctor, setDoctor] = useState({});
   const [topDoctors, setTopDoctors] = useState([]);
+  const [showAllReviews, setShowAllReviews] = useState(false); // Track review toggle
   const getDoctor = () => {
     const axios = require("axios");
     let data = JSON.stringify({
@@ -386,123 +387,98 @@ const DoctorPage = ({ params }) => {
         </div>
         <div className="p-5 sm:p-8 bg-white rounded-2xl shadow flex-col justify-start items-start gap-4 inline-flex">
           <div className="justify-start items-center gap-2 inline-flex">
-            <Image src={review} alt="icon" />{" "}
-            <div className=" text-[#2b4360] text-lg font-medium font-['Poppins'] leading-snug">
-              Reviews
+            <Image src={review} alt="icon" />
+            <div className="text-[#2b4360] text-lg font-medium font-['Poppins'] leading-snug">
+              Reviews ({doctor?.reviewsStat?.totalReviews || 0})
             </div>
           </div>
 
-          <div className="flex-col justify-start items-start gap-4 flex">
-            <div className=" justify-between items-center inline-flex">
-              <div className="justify-start items-center gap-2 flex">
-                <div className="justify-start items-center gap-2 flex">
-                  <Image
-                    className="w-8 h-8 rounded-full"
-                    src="https://via.placeholder.com/32x32"
-                    width={10}
-                    height={10}
-                  />
-                  <div className="text-[#2b4360]  sm:text-lg font-semibold font-['Poppins'] leading-snug">
-                    Samriddhi Singh{" "}
-                  </div>
-                </div>
-                <div className="w-6 h-6 px-px py-0.5 justify-center items-center flex">
-                  <div className="w-5 h-5 relative"></div>
-                </div>
-              </div>
-              <div className="text-[#2b4360] text-xs sm:text-sm font-normal font-['Poppins'] leading-normal">
-                9 months ago
-              </div>
-            </div>
-            <div className="flex-col justify-start items-start gap-4 flex">
-              <div className="flex-col justify-start items-start gap-2 flex">
-                <div className="text-[#5f5f5f] text-sm font-normal font-['Poppins'] leading-none">
-                  Visited For High-Risk Pregnancy Care
-                </div>
-                <div className="justify-start items-center gap-2 inline-flex">
-                  <div className="text-[#5f5f5f] text-sm font-normal font-['Poppins'] leading-none">
-                    Happy with :
-                  </div>
-                  <div className="self-stretch px-2 py-1 bg-[#e6f3f2] rounded border border-[#70aaa4] justify-center items-center gap-2 flex">
-                    <div className="text-[#2b4360] text-sm font-normal font-['Poppins'] leading-none">
-                      IVF
+          {doctor?.reviewsStat?.reviews.length > 0 ? (
+            doctor.reviewsStat.reviews
+              .slice(0, showAllReviews ? doctor.reviewsStat.reviews.length : 2) // Show 2 reviews by default or all when toggled
+              .map((review, index) => (
+                <div
+                  key={index}
+                  className="flex-col justify-start items-start gap-4 flex w-full"
+                >
+                  <div className="justify-between items-center inline-flex w-full">
+                    <div className="justify-start items-center gap-2 flex">
+                      <Image
+                        className="w-10 h-10 rounded-full"
+                        src={
+                          review?.reviewedBy?.profileImage ===
+                          "URL_to_profile_path"
+                            ? "https://via.placeholder.com/40"
+                            : review?.reviewedBy?.profileImage
+                        }
+                        alt="Reviewer profile"
+                        width={40}
+                        height={40}
+                      />
+                      <div className="text-[#2b4360] sm:text-lg font-semibold font-['Poppins'] leading-snug">
+                        {review?.reviewedBy?.name}
+                      </div>
+                      {review?.reviewedBy?.verified && (
+                        <span className="text-[#00b15c] text-xs font-semibold ml-2">
+                          Verified
+                        </span>
+                      )}
+                    </div>
+                    <div className="text-[#2b4360] text-xs sm:text-sm font-normal font-['Poppins'] leading-normal">
+                      {new Date(review?.createdAt?.ISODate).toLocaleDateString(
+                        "en-GB",
+                        {
+                          day: "numeric",
+                          month: "short",
+                          year: "numeric",
+                        }
+                      )}
                     </div>
                   </div>
-                  <div className="self-stretch px-2 py-1 bg-[#e6f3f2] rounded border border-[#70aaa4] justify-center items-center gap-2 flex">
-                    <div className="text-[#2b4360] text-sm font-normal font-['Poppins'] leading-none">
-                      Egg Freezing
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className=" text-[#5f5f5f] text-xs font-normal font-['Poppins'] leading-none">
-                Dr. Kort practices the exact opposite of a &quot;one size fits
-                all&quot; approach to medicine. He took my fears seriously -
-                primarily about the hormone injections - and worked with me to
-                create a schedule that I was comfortable with, but that also got
-                great results. He&apos;s one of the kindest and most
-                knowledgeable doctors I&apos;ve ever had.
-              </div>
-            </div>
-          </div>
-          <div className="h-[0.1px] bg-gray-300 w-full"></div>
 
-          <div className="flex-col justify-start items-start gap-4 flex">
-            <div className=" justify-between items-center inline-flex">
-              <div className="justify-start items-center gap-2 flex">
-                <div className="justify-start items-center gap-2 flex">
-                  <Image
-                    className="w-8 h-8 rounded-full"
-                    src="https://via.placeholder.com/32x32"
-                    width={10}
-                    height={10}
-                  />
-                  <div className="text-[#2b4360]  sm:text-lg font-semibold font-['Poppins'] leading-snug">
-                    Samriddhi Singh{" "}
-                  </div>
-                </div>
-                <div className="w-6 h-6 px-px py-0.5 justify-center items-center flex">
-                  <div className="w-5 h-5 relative"></div>
-                </div>
-              </div>
-              <div className="text-[#2b4360] text-xs sm:text-sm font-normal font-['Poppins'] leading-normal">
-                9 months ago
-              </div>
-            </div>
-            <div className="flex-col justify-start items-start gap-4 flex">
-              <div className="flex-col justify-start items-start gap-2 flex">
-                <div className="text-[#5f5f5f] text-sm font-normal font-['Poppins'] leading-none">
-                  Visited For High-Risk Pregnancy Care
-                </div>
-                <div className="justify-start items-center gap-2 inline-flex">
-                  <div className="text-[#5f5f5f] text-sm font-normal font-['Poppins'] leading-none">
-                    Happy with :
-                  </div>
-                  <div className="self-stretch px-2 py-1 bg-[#e6f3f2] rounded border border-[#70aaa4] justify-center items-center gap-2 flex">
-                    <div className="text-[#2b4360] text-sm font-normal font-['Poppins'] leading-none">
-                      IVF
+                  <div className="flex-col justify-start items-start gap-2 flex">
+                    <div className="text-[#5f5f5f] text-sm font-normal font-['Poppins'] leading-none">
+                      {review?.visitInfo?.visitedFor}
+                    </div>
+                    <div className="justify-start items-center gap-2 inline-flex">
+                      <span className="text-[#5f5f5f] text-sm font-normal font-['Poppins'] leading-none">
+                        Happy with:
+                      </span>
+                      {review?.visitInfo?.happyWithTags?.map((tag, index) => (
+                        <div
+                          key={index}
+                          className="self-stretch px-2 py-1 bg-[#e6f3f2] rounded border border-[#70aaa4] justify-center items-center flex"
+                        >
+                          <div className="text-[#2b4360] text-sm font-normal font-['Poppins'] leading-none">
+                            {tag}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="text-[#5f5f5f] text-sm font-normal font-['Poppins'] leading-normal">
+                      {review?.reviewText}
                     </div>
                   </div>
-                  <div className="self-stretch px-2 py-1 bg-[#e6f3f2] rounded border border-[#70aaa4] justify-center items-center gap-2 flex">
-                    <div className="text-[#2b4360] text-sm font-normal font-['Poppins'] leading-none">
-                      Egg Freezing
-                    </div>
-                  </div>
+                  <div className="h-[0.1px] bg-gray-300 w-full"></div>
                 </div>
-              </div>
-              <div className=" text-[#5f5f5f] text-xs font-normal font-['Poppins'] leading-none">
-                Dr. Kort practices the exact opposite of a &quot;one size fits
-                all&quot; approach to medicine. He took my fears seriously -
-                primarily about the hormone injections - and worked with me to
-                create a schedule that I was comfortable with, but that also got
-                great results. He&apos;s one of the kindest and most
-                knowledgeable doctors I&apos;ve ever had.
-              </div>
+              ))
+          ) : (
+            <div className="text-[#5f5f5f] text-sm font-normal font-['Poppins'] leading-normal">
+              No reviews available.
             </div>
-          </div>
-          <div className="text-[#2b4360] text-sm font-semibold font-['Metropolis'] underline leading-none">
-            Show All Reviews (32)
-          </div>
+          )}
+
+          {/* Show All / Show Less Button */}
+          {doctor?.reviewsStat?.reviews.length > 2 && (
+            <div
+              onClick={() => setShowAllReviews(!showAllReviews)}
+              className="text-[#2b4360] text-sm font-semibold font-['Poppins'] underline cursor-pointer leading-none"
+            >
+              {showAllReviews
+                ? "Show Less"
+                : `Show All Reviews (${doctor?.reviewsStat?.totalReviews})`}
+            </div>
+          )}
         </div>
       </div>
       <div className="col-span-1 sm:pt-20 p-3 pb-10  sm:pr-10">
