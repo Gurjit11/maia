@@ -27,9 +27,13 @@ const customStyles = {
 // Modal.setAppElement("#main");
 
 // Login Modal Component
-const LoginModal = ({ mobileNumber, setMobileNumber, onNext }) => {
+const LoginModal = ({ mobileNumber, setMobileNumber, onNext, closeModal }) => {
   return (
-    <div className="text-black sm:w-[60%] z-20 w-[80%] sm:flex rounded-3xl bg-white">
+    <div className="text-black relative sm:w-[60%] z-20 w-[80%] sm:flex rounded-3xl bg-white">
+      <AiOutlineClose
+        className="absolute top-5 right-5 cursor-pointer text-xl text-[#e29578] "
+        onClick={closeModal}
+      />
       <div className="sm:w-[450px] h-[220px] sm:h-auto overflow-clip sm:p-10 p-5 bg-orange-100 sm:rounded-l-3xl rounded-3xl">
         <Learnslider />
       </div>
@@ -93,9 +97,13 @@ const LoginModal = ({ mobileNumber, setMobileNumber, onNext }) => {
 };
 
 // OTP Modal Component
-const OtpModal = ({ otp, setOtp, onVerify }) => {
+const OtpModal = ({ otp, setOtp, onVerify, closeModal }) => {
   return (
-    <div className="text-black sm:w-[60%] z-20 w-[80%] sm:flex rounded-3xl bg-white">
+    <div className="text-black relative sm:w-[60%] z-20 w-[80%] sm:flex rounded-3xl bg-white">
+      <AiOutlineClose
+        className="absolute top-5 right-5 cursor-pointer text-xl text-[#e29578] "
+        onClick={closeModal}
+      />
       <div className="sm:w-[450px] h-[220px] sm:h-auto overflow-clip sm:p-10 p-5 bg-orange-100 sm:rounded-l-3xl rounded-3xl">
         <Learnslider />
       </div>
@@ -948,7 +956,10 @@ function Login({ setSidebar }) {
     setIsModalOpen(true);
     setSidebar(false);
   };
-  const closeModal = () => setIsModalOpen(false);
+  const closeModal = () => {
+    setModalState("login");
+    setIsModalOpen(false);
+  };
 
   const sendOtp = async () => {
     try {
@@ -1162,10 +1173,16 @@ function Login({ setSidebar }) {
             mobileNumber={mobileNumber}
             setMobileNumber={setMobileNumber}
             onNext={sendOtp}
+            closeModal={closeModal}
           />
         )}
         {modalState === "otp" && (
-          <OtpModal otp={otp} setOtp={setOtp} onVerify={verifyOtp} />
+          <OtpModal
+            otp={otp}
+            setOtp={setOtp}
+            onVerify={verifyOtp}
+            closeModal={closeModal}
+          />
         )}
         {modalState === "createProfile" && (
           <CreateProfile

@@ -29,11 +29,14 @@ const FindDoctors = () => {
   const [searchText, setSearchText] = useState("");
   const [filteredDoctors, setFilteredDoctors] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(0); // Track the current page
+  const [totalPages, setTotalPages] = useState(2); // Track total pages
 
-  const getDoctors = () => {
+  const getDoctors = (pageNo = 0) => {
+    setLoading(true);
     let data = JSON.stringify({
       filters: {},
-      pageNo: 0,
+      pageNo: pageNo,
     });
 
     let config = {
@@ -53,8 +56,9 @@ const FindDoctors = () => {
     axios
       .request(config)
       .then((response) => {
-        // console.log(JSON.stringify(response.data.data));
+        console.log(response.data);
         setDoctors(response.data.data);
+        // setTotalPages(response.data.totalPages || 1); // Assume the API sends total pages
         setLoading(false);
       })
       .catch((error) => {
@@ -64,8 +68,8 @@ const FindDoctors = () => {
   };
 
   useEffect(() => {
-    getDoctors();
-  }, []);
+    getDoctors(currentPage);
+  }, [currentPage]);
   console.log(doctors);
 
   const handleSearchChange = (e) => {
@@ -84,6 +88,18 @@ const FindDoctors = () => {
   };
 
   console.log(filteredDoctors);
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages - 1) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 0) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
 
   return (
     <div className="bg-[#F7F7F7] sm:p-20 p-3 pt-10">
@@ -260,6 +276,28 @@ const FindDoctors = () => {
             </div>
           </motion.div>
         ))}
+        {/* Pagination Controls */}
+        {!loading && (
+          <div className="flex justify-center items-center gap-4 mt-8">
+            <button
+              className="px-4 py-2 bg-gray-200 text-[#2b4360] rounded-lg hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed"
+              onClick={handlePrevPage}
+              disabled={currentPage === 0}
+            >
+              Previous
+            </button>
+            <span className="text-[#2b4360] font-semibold">
+              Page {currentPage + 1} of {totalPages}
+            </span>
+            <button
+              className="px-4 py-2 bg-gray-200 text-[#2b4360] rounded-lg hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed"
+              onClick={handleNextPage}
+              disabled={currentPage >= totalPages - 1}
+            >
+              Next
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

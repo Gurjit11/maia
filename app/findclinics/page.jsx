@@ -29,11 +29,14 @@ const FindClinics = () => {
   const [searchText, setSearchText] = useState("");
   const [filteredClinics, setFilteredClinics] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(0); // Track the current page
+  const [totalPages, setTotalPages] = useState(1); // Track total pages
 
-  const getClinics = () => {
+  const getClinics = (pageNo = 0) => {
+    setLoading(true);
     let data = JSON.stringify({
       filters: {},
-      pageNo: 0,
+      pageNo: pageNo,
     });
 
     let config = {
@@ -64,8 +67,8 @@ const FindClinics = () => {
   };
 
   useEffect(() => {
-    getClinics();
-  }, []);
+    getClinics(currentPage);
+  }, [currentPage]);
 
   const handleSearchChange = (e) => {
     const query = e.target.value.toLowerCase();
@@ -82,6 +85,18 @@ const FindClinics = () => {
     setFilteredClinics(filtered);
   };
   console.log(clinics);
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages - 1) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 0) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
 
   return (
     <div className="bg-[#F7F7F7] sm:p-20 p-3 pt-10">
@@ -282,6 +297,27 @@ const FindClinics = () => {
             </div>
           </motion.div>
         ))}
+        {!loading && (
+          <div className="flex justify-center items-center gap-4 mt-8">
+            <button
+              className="px-4 py-2 bg-gray-200 text-[#2b4360] rounded-lg hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed"
+              onClick={handlePrevPage}
+              disabled={currentPage === 0}
+            >
+              Previous
+            </button>
+            <span className="text-[#2b4360] font-semibold">
+              Page {currentPage + 1} of {totalPages}
+            </span>
+            <button
+              className="px-4 py-2 bg-gray-200 text-[#2b4360] rounded-lg hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed"
+              onClick={handleNextPage}
+              disabled={currentPage >= totalPages - 1}
+            >
+              Next
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
