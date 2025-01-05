@@ -35,10 +35,10 @@ const Howmaia = () => {
   const isInView = useInView(ref, { once: true, threshold: 0.4 });
 
   return (
-    <div className="flex-col justify-center items-center p-5 sm:p-20 py-10">
+    <div className="flex-col justify-center items-center p-5 sm:p-15 sm:py-20 ">
       <div className="flex-col justify-center items-center ">
         <motion.div
-          className="text-[#2B4360] flex justify-center items-center font-bold text-2xl sm:text-3xl"
+          className="text-[#2B4360] flex font-serif justify-center items-center font-[500] text-2xl sm:text-5xl"
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
@@ -46,7 +46,7 @@ const Howmaia = () => {
           How Maia Care Works ?
         </motion.div>
         <motion.div
-          className="text-gray-500 flex justify-center items-center"
+          className="text-gray-500 flex justify-center sm:text-xl items-center"
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.2 }}
@@ -72,14 +72,14 @@ const Howmaia = () => {
               transition={{ duration: 0.8, delay: index * 0.2 + 0.3 }}
               whileHover={{
                 scale: 1.05,
-                boxShadow: "0px 8px 15px rgba(0, 0, 0, 0.1)",
+                boxShadow: "0px 8px 15px rgba(0, 0, 0, 0.05)",
                 transition: { duration: 0.2 },
               }}
             >
               <div className="flex justify-center items-center">
                 <Image src={card.image} alt="icon" />
               </div>
-              <div className="text-[#2B4360] flex mt-3 justify-center items-center font-bold text-xl">
+              <div className="text-[#2B4360] flex mt-3 justify-center items-center font-semibold text-xl">
                 {card.title}
               </div>
               <div className="text-gray-500 text-center flex mt-1 justify-center items-center">

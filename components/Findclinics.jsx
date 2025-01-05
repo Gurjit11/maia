@@ -49,9 +49,9 @@ const Findclinics = () => {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: width < 640 ? 1 : width <1280 ? 2 : 3,
+    slidesToShow: width < 640 ? 1 : width < 1280 ? 2 : 3,
     slidesToScroll: 1,
-    autoplay: true,
+    // autoplay: true,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
   };
@@ -88,52 +88,56 @@ const Findclinics = () => {
   }, []);
   return (
     <div className="flex-col justify-center items-center sm:p-20 py-10 p-5 ">
-      <div className="flex-col justify-center items-center ">
-        <div className="text-[#2B4360] flex justify-center items-center font-bold text-2xl sm:text-3xl">
+      <div className="flex-col justify-center mb-10 items-center ">
+        <div className="text-[#2B4360] flex font-[500] justify-center items-center font-serif text-2xl sm:text-5xl">
           Explore best clinics nearby
         </div>
-        <div className="text-gray-500 flex justify-center items-center">
+        <div className="text-gray-600 my-2 flex sm:text-xl justify-center items-center">
           FIND CLINICS
         </div>
       </div>
       <div className="flex justify-center w-full items-center gap-10">
-        <div className="w-[100%] sm:w-[80%] sm:overflow-x-visible overflow-x-clip gap-3">
+        <div className="w-[100%] sm:w-[90%] sm:overflow-x-visible overflow-x-clip gap-3">
           <Slider {...settings}>
             {topClinics.map((clinic) => (
               <div key={clinic.clinicId} className="sm:p-3 p-1">
-                <div className=" bg-stone-100 rounded-lg p-3  shadow">
+                <div className=" bg-[#F7F5F3] rounded-lg py-6 px-7 shadow">
                   <div className="flex">
-                    <Image
-                      className=" rounded-full w-10 h-10 sm:w-20 sm:h-20 object-cover"
-                      src={clinic.clinicImage} alt="clinic image" width={80} height={80}
-                    />
-                    <div className="flex-col sm:ml-3 ml-1">
-                      <div className=" text-slate-700 sm:text-xl font-bold font-['FONTSPRING DEMO - Argent CF'] leading-normal">
+                    <div className="flex justify-center items-center gap-2">
+                      <Image
+                        className=" rounded-full w-10 h-10 sm:w-20 sm:h-20 object-cover"
+                        src={clinic.clinicImage}
+                        alt="clinic image"
+                        width={80}
+                        height={80}
+                      />
+                    </div>
+                    <div className="flex-col sm:ml-3 font-poppins ml-1">
+                      <div className=" text-[#2B4360] sm:text-xl mb-2 font-bold font-serif leading-normal">
                         {clinic.clinicName}
                       </div>
-                      <div className=" justify-start items-center gap-2 flex">
+                      <div className="flex ml-1 justify-start items-center gap-2 ">
                         <Image src={loc} alt="icon" />
-                        <div className="text-slate-700 text-xs sm:text-sm font-normal font-['Metropolis'] leading-none">
+                        <div className="text-[#2B4360] text-xs sm:text-sm  leading-none">
                           {clinic.address}
                         </div>
                       </div>
-                      <div className=" justify-between items-start  mt-1 flex-col sm:flex">
+                      <div className=" justify-between items-start  mt-1 sm:flex flex-col sm:flex-row gap-4">
                         <div className="justify-center items-center gap-2 inline-flex">
                           <Image src={doctor} alt="icon" />
 
-                          <div className="text-slate-700 text-xs sm:text-sm font-normal font-['Metropolis'] leading-none">
-                            {clinic.doctors}
-                            {" Doctors"}
+                          <div className="text-[#2B4360] text-xs sm:text-sm  leading-none">
+                            {clinic.doctors} Doctors
                           </div>
                         </div>
                         <div className="ml-2 sm:ml-0 justify-center items-center gap-2 inline-flex">
                           <Image src={bed} alt="icon" />
-                          <div className="text-slate-700 text-xs sm:text-sm font-normal font-['Metropolis'] leading-none">
+                          <div className="text-[#2B4360] text-xs sm:text-sm  leading-none">
                             {clinic.beds} Beds
                           </div>
                         </div>
                       </div>
-                      <div className=" items-center gap-2 flex">
+                      <div className="my-1 items-center gap-2 flex">
                         <div className="justify-center items-center gap-2 inline-flex">
                           {[...Array(Math.round(clinic.rating))].map(
                             (_, index) => (
@@ -145,11 +149,11 @@ const Findclinics = () => {
                     </div>
                   </div>
                   <Link href={`/findclinics/${clinic.clinicId}`}>
-                  <div className=" bg-slate-700 mt-3 rounded-lg  p-3 justify-center items-center gap-2 flex">
-                    <div className=" text-center text-white text-base font-medium font-['Poppins'] leading-tight">
-                      View Clinic
+                    <div className=" bg-[#2B4360] mt-3 rounded-lg  p-4 justify-center items-center gap-2 flex">
+                      <div className=" text-center text-white text-base font-medium font-['Poppins'] leading-tight">
+                        View Clinic
+                      </div>
                     </div>
-                  </div>
                   </Link>
                 </div>
               </div>
@@ -164,16 +168,16 @@ const Findclinics = () => {
 const NextArrow = (props) => {
   const { className, style, onClick } = props;
   return (
-    <div className="absolute right-[-50px] top-[50%] " onClick={onClick}>
-      <IoIosArrowDroprightCircle className="text-slate-700 text-2xl cursor-pointer" />
+    <div className="absolute right-[-50px] top-[45%] " onClick={onClick}>
+      <IoIosArrowDroprightCircle className="text-[#2B4360] text-4xl cursor-pointer" />
     </div>
   );
 };
 const PrevArrow = (props) => {
   const { className, style, onClick } = props;
   return (
-    <div className="absolute left-[-50px] top-[50%] " onClick={onClick}>
-      <IoIosArrowDropleftCircle className="text-slate-700 text-2xl cursor-pointer" />
+    <div className="absolute left-[-50px] top-[45%] " onClick={onClick}>
+      <IoIosArrowDropleftCircle className="text-[#2B4360] text-4xl cursor-pointer" />
     </div>
   );
 };

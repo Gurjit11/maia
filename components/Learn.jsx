@@ -68,7 +68,7 @@ const Learn = () => {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: width < 768 ? 1 : width <1280 ? 2 : 3,
+    slidesToShow: width < 768 ? 1 : width < 1280 ? 2 : 3,
     slidesToScroll: 1,
     autoplay: true,
     nextArrow: <NextArrow />,
@@ -77,23 +77,23 @@ const Learn = () => {
   return (
     <div className="flex-col bg-[#FEF3EA] justify-center items-center sm:p-20 py-10 p-5">
       <div className="flex-col justify-center items-center ">
-        <div className="text-[#2B4360] abhaya-libre-semibold flex justify-center items-center font-bold text-2xl sm:text-4xl">
+        <div className="text-[#2B4360] font-serif flex justify-center items-center  text-2xl sm:text-5xl">
           Learn about Fertility
         </div>
-        <div className="text-gray-500 flex justify-center items-center">
+        <div className="text-gray-600 my-2 sm:text-xl flex justify-center items-center">
           STAY UPDATED
         </div>
       </div>
       <div className="flex justify-center w-full items-center gap-10">
-        <div className="w-[100%] sm:w-[80%] gap-10 sm:overflow-x-visible overflow-x-clip">
+        <div className="w-[100%] sm:w-[90%] gap-10 sm:overflow-x-visible overflow-x-clip">
           <Slider {...settings}>
             {carddata.map((card, index) => (
               <div key={index} className="sm:p-3 p-1  rounded-md overflow-clip">
                 <div className="col-span-1 shadow-md h-[500px] rounded-md bg-white mt-3 flex-col justify-between items-end relative">
-                  <div className="flex rounded-t-md overflow-clip justify-center items-center">
+                  <div className="flex h-[45%] rounded-t-md overflow-clip justify-center items-center">
                     <Image
                       width={550}
-                      height={250}
+                      height={200}
                       src={card.image}
                       className="hover:scale-105 transition-transform duration-500 ease-in-out"
                       alt="icon"
@@ -103,28 +103,28 @@ const Learn = () => {
                     {card.tags.map((tag, tagIndex) => (
                       <div
                         key={tagIndex}
-                        className="bg-white text-slate-700 text-xs font-medium px-2 py-1 rounded"
+                        className="bg-white font-poppins text-slate-700 text-xs font-medium px-2 py-1 rounded"
                       >
                         {tag}
                       </div>
                     ))}
                   </div>
-                  <div className="flex h-[250px] gap-4 px-5 justify-center items-center">
+                  <div className="flex h-[55%] gap-4 px-5 justify-center items-center">
                     <div className="flex-col justify-center items-center">
                       <div
-                        className="text-[#2B4360] abhaya-libre-semibold 
-                       flex justify-center items-center text-center font-semibold text-xl"
+                        className="text-[#2B4360] font-serif 
+                       flex justify-center items-center text-center  text-xl"
                       >
                         {card.title}
                       </div>
-                      <div className="text-gray-500 text-center text-sm px-3 my-2 flex mt-1 justify-center items-center">
+                      <div className="text-gray-500 font-poppins text-center  px-3 my-2 flex mt-1 justify-center items-center">
                         {card.description}
                       </div>
                       <Link
                         href={card.link}
                         className="h-14 mt-6 justify-center items-center gap-2 flex"
                       >
-                        <div className="text-center px-6 py-4 rounded-lg border border-slate-700 text-slate-700 text-base font-medium font-['Poppins']">
+                        <div className="text-center px-5 py-3.5 rounded-lg border border-slate-700 text-slate-700 text-base font-medium font-['Poppins']">
                           Learn More
                         </div>
                       </Link>
@@ -142,17 +142,18 @@ const Learn = () => {
 const NextArrow = (props) => {
   const { className, style, onClick } = props;
   return (
-    <div className="absolute right-[-50px] top-[50%] " onClick={onClick}>
-      <IoIosArrowDroprightCircle className="text-slate-700 text-3xl cursor-pointer" />
+    <div className="absolute right-[-50px] top-[45%] " onClick={onClick}>
+      <IoIosArrowDroprightCircle className="text-[#2B4360] text-4xl cursor-pointer" />
     </div>
   );
 };
 const PrevArrow = (props) => {
   const { className, style, onClick } = props;
   return (
-    <div className="absolute left-[-50px] top-[50%] " onClick={onClick}>
-      <IoIosArrowDropleftCircle className="text-slate-700 text-3xl cursor-pointer" />
+    <div className="absolute left-[-50px] top-[45%] " onClick={onClick}>
+      <IoIosArrowDropleftCircle className="text-[#2B4360] text-4xl cursor-pointer" />
     </div>
   );
 };
+
 export default Learn;

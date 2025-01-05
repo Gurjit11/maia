@@ -7,6 +7,7 @@ import Select from "react-select";
 import countryList from "react-select-country-list";
 import CountryFlag from "react-country-flag";
 import { AiOutlineDown } from "react-icons/ai";
+import { FaCaretDown, FaChevronDown } from "react-icons/fa";
 
 const CountryDropdown = () => {
   const [selectedCountry, setSelectedCountry] = useState({
@@ -49,7 +50,7 @@ const CountryDropdown = () => {
       {/* Conditionally render flag with selected country label */}
 
       <div
-        className="flex items-center border-r h-14 cursor-pointer"
+        className="flex items-center border-r px-1 h-14 cursor-pointer"
         onClick={() => setDropdownVisible(!isDropdownVisible)}
       >
         <CountryFlag
@@ -57,7 +58,7 @@ const CountryDropdown = () => {
           svg
           className="mx-2 text-2xl"
         />
-        <AiOutlineDown className="text-xl mr-2 text-[#E29578]" />
+        <FaChevronDown className="text-xl mr-2 text-[#E29578]" />
 
         {/* {selectedCountry.label} */}
       </div>
@@ -91,9 +92,9 @@ const ContactForm = () => {
 
   return (
     <div className="sm:p-20 py-10 p-5 ">
-      <div className="overflow-clip  justify-between items-center flex">
+      <div className="overflow-x-clip  justify-between items-center flex">
         <motion.div
-          className="hidden sm:block overflow-clip rounded-xl w-[50%]"
+          className="hidden sm:block overflow-clip  w-[60%]"
           initial={{ opacity: 0, x: -100 }}
           animate={isInView ? { opacity: 1, x: 0 } : {}} // Trigger animation when in view
           transition={{ duration: 0.8, delay: 0.2 }}
@@ -101,7 +102,7 @@ const ContactForm = () => {
         >
           <Image
             src={contact}
-            className="hover:scale-105 transition-all rounded-xl duration-300"
+            className="hover:scale-105 object-cover transition-all duration-300"
           />
         </motion.div>
 
@@ -115,7 +116,7 @@ const ContactForm = () => {
           <div className="flex-col justify-start items-start sm:gap-4 gap-4 flex">
             <div className="flex-col justify-start  items-start gap-2 flex">
               <motion.div
-                className="text-slate-700 sm:text-5xl abhaya-libre-semibold text-2xl mb-2 font-bold font-['FONTSPRING DEMO - Argent CF'] leading-10"
+                className="text-slate-700 sm:text-5xl  text-2xl mb-2  font-serif leading-10"
                 initial={{ opacity: 0, y: -20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6 }}
@@ -123,7 +124,7 @@ const ContactForm = () => {
                 Begin Your Fertility Journey with Maia Care
               </motion.div>
               <motion.div
-                className="text-zinc-600 sm:text-2xl font-normal font-['Poppins'] leading-7 tracking-widest"
+                className="text-zinc-600 sm:text-xl font-normal font-['Poppins'] leading-7 tracking-widest"
                 initial={{ opacity: 0, y: -20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.2 }}
@@ -183,7 +184,7 @@ const ContactForm = () => {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 1.2 }}
             >
-              <button className="text-center text-white text-base font-medium font-['Poppins'] leading-tight">
+              <button className="text-center text-white text-base font-poppins font-medium leading-tight">
                 Get Started
               </button>
             </motion.div>

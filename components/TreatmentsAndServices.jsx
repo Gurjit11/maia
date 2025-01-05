@@ -13,6 +13,7 @@ import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRef } from "react";
 import { useInView } from "framer-motion";
+import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 
 const treatments = {
   naturalFertilitySupport: {
@@ -197,7 +198,7 @@ const TreatmentsAndServices = () => {
 
   return (
     <div className="flex justify-center items-center">
-      <div className="flex-col justify-center w-full items-center max-w-5xl py-10 p-2 sm:p-5">
+      <div className="flex-col justify-center w-full items-center max-w-6xl py-10 p-2 sm:p-5">
         {/* Header */}
         <motion.div
           className="flex-col mb-10 justify-center items-center"
@@ -206,23 +207,23 @@ const TreatmentsAndServices = () => {
           transition={{ duration: 0.8 }}
           ref={ref}
         >
-          <div className="text-[#2B4360] text-center flex justify-center items-center font-bold text-2xl sm:text-3xl">
+          <div className="text-[#2B4360] text-center flex justify-center items-center font-serif text-2xl sm:text-5xl">
             Treatments and Services
           </div>
-          <div className="text-gray-500 flex justify-center items-center">
+          <div className="text-gray-500 my-2 sm:text-xl flex justify-center items-center">
             PROCESS
           </div>
         </motion.div>
 
         {/* Tabs */}
         <motion.div
-          className="flex sm:w-full text-nowrap overflow-x-auto justify-around space-x-8 border-b-2"
+          className="flex sm:w-full font-poppins text-nowrap overflow-x-auto justify-between space-x-8 border-b-2"
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
           <button
-            className={`pb-2 ml-4 text-lg font-semibold ${
+            className={`sm:pl-0 sm:text-2xl sm:p-5  ${
               activeTab === "naturalFertilitySupport"
                 ? "border-b-2 border-[#2B4360] text-[#2B4360]"
                 : "text-gray-400"
@@ -232,7 +233,7 @@ const TreatmentsAndServices = () => {
             Fertility Support
           </button>
           <button
-            className={`pb-2 text-lg font-semibold ${
+            className={` sm:text-2xl sm:p-5  ${
               activeTab === "ivf"
                 ? "border-b-2 border-[#2B4360] text-[#2B4360]"
                 : "text-gray-400"
@@ -242,7 +243,7 @@ const TreatmentsAndServices = () => {
             IVF Treatment
           </button>
           <button
-            className={`pb-2 text-lg font-semibold ${
+            className={` sm:text-2xl sm:p-5  ${
               activeTab === "iui"
                 ? "border-b-2 border-[#2B4360] text-[#2B4360]"
                 : "text-gray-400"
@@ -252,7 +253,7 @@ const TreatmentsAndServices = () => {
             IUI Treatment
           </button>
           <button
-            className={`pb-2 text-lg font-semibold ${
+            className={`sm:pr-0 sm:text-2xl sm:p-5  ${
               activeTab === "eggAndSpermFreezing"
                 ? "border-b-2 border-[#2B4360] text-[#2B4360]"
                 : "text-gray-400"
@@ -280,10 +281,10 @@ const TreatmentsAndServices = () => {
               />
             </div>
             <div className="mb-6">
-              <h2 className="text-base sm:text-2xl font-semibold text-[#2B4360]">
+              <h2 className="text-base sm:text-2xl  font-serif text-[#2B4360]">
                 {treatments[activeTab]?.title}
               </h2>
-              <p className="mt-2 text-sm sm:text-base text-gray-600">
+              <p className="mt-2 text-sm sm:text-base font-poppins text-gray-600">
                 {treatments[activeTab]?.description}
               </p>
             </div>
@@ -291,7 +292,7 @@ const TreatmentsAndServices = () => {
 
           <div className="sm:grid grid-cols-4 gap-10">
             {/* Cards */}
-            <div className="col-span-3 sm:grid h-min grid-cols-2 gap-4">
+            <div className="col-span-3 mr-10 sm:grid h-min grid-cols-2 gap-5">
               {treatments[activeTab]?.faq.map((treatment, index) => (
                 <motion.div
                   key={index}
@@ -304,17 +305,21 @@ const TreatmentsAndServices = () => {
                     className="flex justify-between items-center cursor-pointer"
                     onClick={() => handleExpand(index)}
                   >
-                    <div className="flex font-semibold text-[#2B4360]">
-                      <Image className="h-10" src={treatment.image} alt="" />
-                      <span className="p-2 text-sm sm:text-base">
-                        {treatment.title}
-                      </span>
+                    <div className="flex  text-[#2B4360]">
+                      <Image
+                        className="h-14 w-14"
+                        src={treatment.image}
+                        alt=""
+                      />
+                      <div className="p-2 text-sm flex items-center sm:text-lg ">
+                        <p>{treatment.title}</p>
+                      </div>
                     </div>
                     <button className="text-[#2B4360] p-2">
                       {expandedIndex === index ? (
-                        <AiOutlineUp />
+                        <FaChevronUp />
                       ) : (
-                        <AiOutlineDown />
+                        <FaChevronDown />
                       )}
                     </button>
                   </div>
@@ -327,7 +332,7 @@ const TreatmentsAndServices = () => {
                         exit={{ height: 0, opacity: 0 }}
                         transition={{ duration: 0.3 }}
                       >
-                        <p className="mt-2 p-2 text-sm sm:text-base text-gray-600">
+                        <p className=" p-2 pt-0 text-sm  text-gray-600">
                           {treatment.description}
                         </p>
                       </motion.div>
