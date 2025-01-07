@@ -3,6 +3,7 @@
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import learnabout from "../public/learnabout.png";
+import bg2 from "../public/BG2.svg";
 import Image from "next/image";
 import Slider from "react-slick";
 import { FaArrowCircleRight, FaArrowRight } from "react-icons/fa";
@@ -75,65 +76,78 @@ const Learn = () => {
     prevArrow: <PrevArrow />,
   };
   return (
-    <div className="flex-col bg-[#FEF3EA] justify-center items-center sm:p-20 py-10 p-5">
-      <div className="flex-col justify-center items-center ">
-        <div className="text-[#2B4360] font-serif flex justify-center items-center  text-2xl sm:text-5xl">
-          Learn about Fertility
-        </div>
-        <div className="text-gray-600 my-2 sm:text-xl flex justify-center items-center">
-          STAY UPDATED
-        </div>
+    <div className="relative w-full h-full">
+      <div className="absolute top-0 left-0  w-full h-full">
+        <Image
+          src={bg2}
+          alt="Background 1"
+          fill
+          style={{ objectFit: "cover" }}
+        />
       </div>
-      <div className="flex justify-center w-full items-center gap-10">
-        <div className="w-[100%] sm:w-[90%] gap-10 sm:overflow-x-visible overflow-x-clip">
-          <Slider {...settings}>
-            {carddata.map((card, index) => (
-              <div key={index} className="sm:p-3 p-1  rounded-md overflow-clip">
-                <div className="col-span-1 shadow-md h-[500px] rounded-md bg-white mt-3 flex-col justify-between items-end relative">
-                  <div className="flex h-[45%] rounded-t-md overflow-clip justify-center items-center">
-                    <Image
-                      width={550}
-                      height={200}
-                      src={card.image}
-                      className="hover:scale-105 transition-transform duration-500 ease-in-out"
-                      alt="icon"
-                    />
-                  </div>
-                  <div className="absolute top-2 left-2 flex gap-2">
-                    {card.tags.map((tag, tagIndex) => (
-                      <div
-                        key={tagIndex}
-                        className="bg-white font-poppins text-slate-700 text-xs font-medium px-2 py-1 rounded"
-                      >
-                        {tag}
-                      </div>
-                    ))}
-                  </div>
-                  <div className="flex h-[55%] gap-4 px-5 justify-center items-center">
-                    <div className="flex-col justify-center items-center">
-                      <div
-                        className="text-[#2B4360] font-serif 
-                       flex justify-center items-center text-center  text-xl"
-                      >
-                        {card.title}
-                      </div>
-                      <div className="text-gray-500 font-poppins text-center  px-3 my-2 flex mt-1 justify-center items-center">
-                        {card.description}
-                      </div>
-                      <Link
-                        href={card.link}
-                        className="h-14 mt-6 justify-center items-center gap-2 flex"
-                      >
-                        <div className="text-center px-5 py-3.5 rounded-lg border border-slate-700 text-slate-700 text-base font-medium font-['Poppins']">
-                          Learn More
+      <div className="flex-col relative  justify-center items-center sm:p-20 py-10 p-5">
+        <div className="flex-col  justify-center items-center ">
+          <div className="text-[#2B4360] font-serif flex justify-center items-center  text-2xl sm:text-5xl">
+            Learn about Fertility
+          </div>
+          <div className="text-gray-600 my-2 sm:text-xl flex justify-center items-center">
+            STAY UPDATED
+          </div>
+        </div>
+        <div className="flex justify-center w-full items-center gap-10">
+          <div className="w-[100%] sm:w-[90%] gap-10 sm:overflow-x-visible overflow-x-clip">
+            <Slider {...settings}>
+              {carddata.map((card, index) => (
+                <div
+                  key={index}
+                  className="sm:p-3 p-1  rounded-md overflow-clip"
+                >
+                  <div className="col-span-1 shadow-md h-[500px] rounded-md bg-white mt-3 flex-col justify-between items-end relative">
+                    <div className="flex h-[45%] rounded-t-md overflow-clip justify-center items-center">
+                      <Image
+                        width={550}
+                        height={200}
+                        src={card.image}
+                        className="hover:scale-105 transition-transform duration-500 ease-in-out"
+                        alt="icon"
+                      />
+                    </div>
+                    <div className="absolute top-2 left-2 flex gap-2">
+                      {card.tags.map((tag, tagIndex) => (
+                        <div
+                          key={tagIndex}
+                          className="bg-white font-poppins text-slate-700 text-xs font-medium px-2 py-1 rounded"
+                        >
+                          {tag}
                         </div>
-                      </Link>
+                      ))}
+                    </div>
+                    <div className="flex h-[55%] gap-4 px-5 justify-center items-center">
+                      <div className="flex-col justify-center items-center">
+                        <div
+                          className="text-[#2B4360] font-serif 
+                       flex justify-center items-center text-center  text-xl"
+                        >
+                          {card.title}
+                        </div>
+                        <div className="text-gray-500 font-poppins text-center  px-3 my-2 flex mt-1 justify-center items-center">
+                          {card.description}
+                        </div>
+                        <Link
+                          href={card.link}
+                          className="h-14 mt-6 justify-center items-center gap-2 flex"
+                        >
+                          <div className="text-center px-5 py-3.5 rounded-lg border border-slate-700 text-slate-700 text-base font-medium font-['Poppins']">
+                            Learn More
+                          </div>
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </Slider>
+              ))}
+            </Slider>
+          </div>
         </div>
       </div>
     </div>

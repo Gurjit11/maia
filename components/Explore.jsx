@@ -11,6 +11,7 @@ import star from "../public/star.png";
 import eggfreezing from "../public/eggfreezing.png";
 import arrow from "../public/arrow.png";
 import ellipse from "../public/Ellipse.png";
+import bg1 from "../public/BG1.svg";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Link from "next/link";
@@ -62,8 +63,16 @@ const Explore = () => {
   }, []);
 
   return (
-    <div>
-      <div className="sm:grid grid-cols-2 p-3 md:p-20">
+    <div className="relative w-full h-full">
+      <div className="absolute top-0 left-0  w-full h-full">
+        <Image
+          src={bg1}
+          alt="Background 1"
+          fill
+          style={{ objectFit: "cover" }}
+        />
+      </div>
+      <div className="sm:grid relative grid-cols-2 p-3 md:p-20">
         {/* Left Side Text */}
         <motion.div
           ref={leftTextRef}
