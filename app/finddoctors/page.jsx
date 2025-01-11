@@ -23,6 +23,8 @@ import Link from "next/link";
 import DoctorFilters from "@/components/DoctorFilters";
 import { motion } from "framer-motion";
 import BookAppointment from "@/components/BookAppointment";
+import { VerifiedIcon } from "lucide-react";
+import { MdVerified } from "react-icons/md";
 
 const FindDoctors = () => {
   const [doctors, setDoctors] = useState([]);
@@ -58,6 +60,7 @@ const FindDoctors = () => {
       .then((response) => {
         console.log(response.data);
         setDoctors(response.data.data);
+        setFilteredDoctors(response.data.data);
         // setTotalPages(response.data.totalPages || 1); // Assume the API sends total pages
         setLoading(false);
       })
@@ -77,11 +80,10 @@ const FindDoctors = () => {
     setSearchText(query);
     const filtered = doctors.filter((doctor) => {
       return (
-        doctor.name.toLowerCase().includes(query) ||
-        doctor.specialization.some((spec) =>
-          spec.toLowerCase().includes(query)
-        ) ||
-        doctor.services.some((service) => service.toLowerCase().includes(query))
+        doctor.doctorName.toLowerCase().includes(query) ||
+        doctor.tags.some((tag) =>
+          tag?.serviceName?.toLowerCase().includes(query)
+        )
       );
     });
     setFilteredDoctors(filtered);
@@ -137,7 +139,7 @@ const FindDoctors = () => {
         </div>
       )}
       <div className="flex-col min-h-[600px] justify-start items-start gap-7 ">
-        {doctors?.map((doctor, index) => (
+        {filteredDoctors.map((doctor, index) => (
           <motion.div
             key={index}
             className="sm:p-8 p-3 my-3 bg-white w-full h-full rounded-2xl shadow justify-start items-start gap-3 sm:gap-10 flex"
@@ -149,7 +151,7 @@ const FindDoctors = () => {
             whileInView="visible"
             viewport={{ once: true }}
           >
-            <div className="sm:w-32 w-20  flex justify-start items-start">
+            <div className="sm:w-32 w-20 relative flex justify-start items-start">
               <Image
                 className="sm:w-24 sm:h-24 w-16 h-16 rounded-full object-fill overflow-clip"
                 src={doctor.profileImage}
@@ -157,112 +159,74 @@ const FindDoctors = () => {
                 height={80}
                 alt={`${doctor.doctorName} photo`}
               />
+              <MdVerified className=" text-[#00b15c] text-2xl absolute bottom-0 right-4" />
             </div>
             <div className=" justify-between w-full flex-co sm:flex">
-              <div className=" flex-col justify-start items-start sm:gap-4 inline-flex">
-                <div className="text-[#2b4360] text-2xl font-bold font-['FONTSPRING DEMO - Argent CF'] leading-7">
+              <div className="flex-col justify-start items-start sm:gap-4 inline-flex">
+                <div className="text-[#2b4360] text-2xl font-serif leading-7">
                   {doctor.doctorName}
                 </div>
                 <div className="flex-col justify-start items-start gap-2 flex">
-                  <div className="flex-col justify-start items-start gap-2 flex">
-                    <div className="justify-start items-center gap-2 inline-flex">
-                      <Image src={about} alt="icon" />
-
-                      {doctor.tags.map((tag, index) => (
-                        <div
-                          key={index}
-                          className="text-[#2b4360] text-base font-normal font-['Poppins'] leading-tight"
-                        >
-                          {tag.serviceName}
-                        </div>
-                      ))}
-                    </div>
-                    <div className="justify-start items-start gap-4 inline-flex">
-                      <div className="justify-start items-center gap-2 flex">
-                        <Image src={review} alt="icon" />
-                        <div className="text-[#2b4360] text-base font-normal font-['Poppins'] leading-tight">
-                          512 Reviews
-                        </div>
+                  <div className="justify-start items-center gap-2 inline-flex">
+                    <Image src={about} alt="icon" />
+                  </div>
+                  <div className="justify-start items-start gap-4 inline-flex">
+                    <div className="justify-start items-center gap-2 flex">
+                      <Image src={review} alt="icon" />
+                      <div className="text-[#2b4360] text-base font-normal font-['Poppins'] leading-tight">
+                        512 Reviews
                       </div>
-                      <div className="justify-start items-center gap-2 flex">
-                        <Image src={star} alt="icon" />
-                        <div className="text-[#2b4360] text-base font-normal font-['Poppins'] leading-tight">
-                          4.5
-                        </div>
+                    </div>
+                    <div className="justify-start items-center gap-2 flex">
+                      <Image src={star} alt="icon" />
+                      <div className="text-[#2b4360] text-base font-normal font-['Poppins'] leading-tight">
+                        {doctor.rating}
                       </div>
                     </div>
                   </div>
-                  <div className="w-64 justify-start items-start gap-2 inline-flex">
-                    <div className="rounded-lg justify-center items-center gap-1 flex">
-                      <div className="w-8 h-8 relative">
-                        <div className="w-8 h-8  bg-slate-200 rounded-full">
-                          <Image src={fertilitysupport} alt={"icon"} />
-                        </div>
+                  <div className="flex text-orange-500 gap-2">
+                    {doctor?.tags?.slice(0, 2).map((tag, index) => (
+                      <div
+                        key={index}
+                        className=" border-orange-500 border p-1 rounded-md bg-orange-50  "
+                      >
+                        {tag}
                       </div>
-                    </div>
-                    <div className="rounded-lg justify-center items-center gap-1 flex">
-                      <div className="w-8 h-8 relative">
-                        <div className="w-8 h-8  bg-amber-100 rounded-full">
-                          <Image src={eggfreezing} alt={"icon"} />
-                        </div>
+                    ))}
+                    {doctor?.tags?.length > 2 && (
+                      <div className="py-1 underline ">
+                        +{doctor.tags.length - 2}
                       </div>
-                    </div>
-                    <div className="rounded-lg justify-center items-center gap-1 flex">
-                      <div className="w-8 h-8 relative">
-                        <div className="w-8 h-8  bg-red-100 rounded-full">
-                          <Image src={ivf} alt="icon" />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="rounded-lg justify-center items-center gap-1 flex">
-                      <div className="w-8 h-8 relative">
-                        <div className="w-8 h-8  bg-green-100 rounded-full">
-                          <Image src={iuitreatment} alt={"icon"} />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="rounded-lg justify-center items-center gap-1 flex">
-                      <div className="w-8 h-8 relative">
-                        <div className="w-8 h-8  bg-orange-100 rounded-full">
-                          <Image src={eggsperm} alt={"icon"} />
-                        </div>
-                      </div>
-                    </div>
+                    )}
                   </div>
                 </div>
               </div>
-              <div className="w-64 sm:mt-10 flex-col justify-start items-start gap-2 inline-flex">
-                <div className="justify-start items-center gap-2 inline-flex">
+              <div className="w-64 sm:mt-10 flex-col justify-start items-start gap-2 flex">
+                <div className="justify-start items-center gap-2 flex">
                   <Image src={money} alt="icon" />
                   <div className="w-56">
                     <span className="text-[#2b4360] text-base font-normal font-['Poppins'] leading-tight">
                       Fees:{" "}
                     </span>
                     <span className="text-[#00b15c] text-base font-semibold font-['Poppins'] leading-tight">
-                      ₹₹₹
-                    </span>
-                    <span className="text-[#ababab] text-base font-semibold font-['Poppins'] leading-tight">
-                      ₹₹
+                      ₹{doctor.feesStructure}
                     </span>
                   </div>
                 </div>
-                <div className="justify-start items-center gap-2 inline-flex">
+                <div className="justify-start items-center gap-2 flex">
                   <Image src={clinic} alt="icon" />
                   <div className="text-[#2b4360] text-base font-normal font-['Poppins'] leading-tight">
-                    Starline Hospital
-                  </div>
-                  <div className="text-[#e29578] text-base font-semibold font-['Poppins'] underline leading-tight">
-                    +2 More
+                    {doctor.address}
                   </div>
                 </div>
-                <div className="justify-start items-center gap-2 inline-flex">
+                <div className="justify-center items-center gap-2 flex">
                   <Image src={bag} alt="icon" />
-                  <div className="text-[#2b4360] text-base font-normal font-['Poppins'] leading-tight">
+                  <div className="text-[#2b4360] text-base mt-1 font-normal font-['Poppins'] leading-tight">
                     {doctor.experiance} Years
                   </div>
                 </div>
               </div>
-              <div className=" mt-2 sm:flex-col  justify-start items-start gap-4 inline-flex">
+              <div className="mt-2 sm:flex-col justify-start items-start gap-4 flex">
                 <BookAppointment doctor={doctor} />
                 <Link
                   href={`/finddoctors/${doctor.doctorId}`}

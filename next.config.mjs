@@ -13,6 +13,7 @@ const nextConfig = {
       "encrypted-tbn0.gstatic.com",
       "alphabetasolution.co.in",
       "imagesx.practo.com",
+      "images1-fabric.practo.com",
     ], // Add the domains you need here
   },
 };

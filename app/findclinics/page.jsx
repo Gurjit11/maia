@@ -99,7 +99,7 @@ const FindClinics = () => {
   };
 
   return (
-    <div className="bg-[#F7F7F7] sm:p-20 p-3 pt-10">
+    <div className="bg-[#F7F7F7] sm:p-20 sm:px-32 p-3 pt-10">
       <div className=" md:flex flex-co justify-between mb-6">
         <div className=" w-full">
           <div className="sm:w-[70%] w-full h-14 px-4 py-3 bg-white text-black rounded-lg border border-[#dedede] justify-start items-center inline-flex">
@@ -141,159 +141,103 @@ const FindClinics = () => {
       <div className="flex-col min-h-[600px] justify-start items-start gap-7 ">
         {filteredClinics.map((clinic, index) => (
           <motion.div
-            key={index}
-            className="sm:p-8 p-3 my-3 bg-white w-full h-full rounded-2xl shadow justify-start items-start gap-3 sm:gap-10 flex"
-            variants={{
-              hidden: { opacity: 0, y: 20 },
-              visible: { opacity: 1, y: 0, transition: { delay: index * 0.1 } },
-            }}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
+            key={clinic.clinicId}
+            className="p-6 my-3 bg-white w-full rounded-lg shadow flex items-center justify-between gap-10"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: index * 0.1 }}
           >
-            <div className="sm:w-32 w-20  flex justify-start items-start">
-              <Image
-                className="sm:w-24 sm:h-24 w-16 h-16 rounded-full object-fill overflow-clip"
-                src={clinic.clinicImage}
-                width={80}
-                height={80}
-                alt={`${clinic.clinicName} photo`}
-              />
-            </div>
-            <div className=" justify-between w-full flex-co sm:flex">
-              <div className=" flex-col justify-start items-start sm:gap-4 inline-flex">
-                <div className="text-[#2b4360] text-2xl font-bold font-['FONTSPRING DEMO - Argent CF'] leading-7">
+            {/* Clinic Logo */}
+            <div className="flex items-center gap-6">
+              <div className="sm:w-24 sm:h-24 w-16 h-16 rounded-full object-fill overflow-clip">
+                <Image
+                  className="w-full h-full object-cover"
+                  src={clinic.clinicImage}
+                  width={80}
+                  height={80}
+                  alt={clinic.clinicName}
+                />
+              </div>
+
+              {/* Clinic Info */}
+              <div>
+                <div className="text-xl font-semibold text-[#2B4360]">
                   {clinic.clinicName}
                 </div>
-                <div className="flex-col justify-start items-start gap-2 flex">
-                  <div className="flex-col justify-start items-start gap-2 flex">
-                    <div className="justify-start items-center gap-2 inline-flex">
-                      <Image src={loc} width="auto" height="auto" alt="icon" />
-                      <div className="text-[#2b4360] text-base font-normal font-['Poppins'] leading-tight">
-                        {/* {clinic.specialization.join(", ")} */}
-                        {clinic.address}
-                      </div>
-                    </div>
-                    <div className="justify-start items-start gap-4 inline-flex">
-                      <div className="justify-start items-center gap-2 flex">
-                        <Image
-                          src={review}
-                          width="auto"
-                          height="auto"
-                          alt="icon"
-                        />
-                        <div className="text-[#2b4360] text-base font-normal font-['Poppins'] leading-tight">
-                          512 Reviews
-                        </div>
-                      </div>
-                      <div className="justify-start items-center gap-2 flex">
-                        <Image
-                          src={star}
-                          width="auto"
-                          height="auto"
-                          alt="icon"
-                        />
-                        <div className="text-[#2b4360] text-base font-normal font-['Poppins'] leading-tight">
-                          {clinic.rating}
-                        </div>
-                      </div>
-                    </div>
+                <div className="flex-col items-center text-gray-600 text-sm mt-2 gap-3">
+                  <div className="flex items-center gap-1">
+                    <Image src={loc} className="mx-0.5" alt="location icon" />
+                    <span>{clinic.address}</span>
                   </div>
-                  <div className="w-64 justify-start items-start gap-2 inline-flex">
-                    <div className="rounded-lg justify-center items-center gap-1 flex">
-                      <div className="w-8 h-8 relative">
-                        <div className="w-8 h-8  bg-slate-200 rounded-full">
-                          <Image src={fertilitysupport} alt={"icon"} />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="rounded-lg justify-center items-center gap-1 flex">
-                      <div className="w-8 h-8 relative">
-                        <div className="w-8 h-8  bg-amber-100 rounded-full">
-                          <Image src={eggfreezing} alt={"icon"} />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="rounded-lg justify-center items-center gap-1 flex">
-                      <div className="w-8 h-8 relative">
-                        <div className="w-8 h-8  bg-red-100 rounded-full">
-                          <Image src={ivf} alt={"icon"} />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="rounded-lg justify-center items-center gap-1 flex">
-                      <div className="w-8 h-8 relative">
-                        <div className="w-8 h-8  bg-green-100 rounded-full">
-                          <Image src={iuitreatment} alt={"icon"} />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="rounded-lg justify-center items-center gap-1 flex">
-                      <div className="w-8 h-8 relative">
-                        <div className="w-8 h-8  bg-orange-100 rounded-full">
-                          <Image src={eggsperm} alt={"icon"} />
-                        </div>
-                      </div>
-                    </div>
+                  <div className="flex items-center mt-1 gap-1">
+                    <Image src={time} alt="time icon" />
+                    <span>Open 24 x 7</span>
                   </div>
+                </div>
+
+                {/* Specializations */}
+                <div className="flex gap-2 mt-3">
+                  {clinic.specialties.map((spec, idx) => (
+                    <div
+                      key={idx}
+                      className="w-8 h-8 bg-[#f8f8f8] rounded-full flex items-center justify-center shadow"
+                    >
+                      <Image
+                        src={spec.icon}
+                        width={24}
+                        height={24}
+                        alt={spec.name}
+                      />
+                    </div>
+                  ))}
                 </div>
               </div>
-              <div className="w-64 sm:mt-10 flex-col justify-start items-start gap-2 inline-flex">
-                <div className="justify-start items-center gap-2 inline-flex">
-                  <Image src={bed} alt="icon" />
-                  <div className="w-56">
-                    <span className="text-[#2b4360] text-base font-normal font-['Poppins'] leading-tight">
-                      {clinic.beds} Beds
-                    </span>
-                  </div>
+            </div>
+
+            {/* Clinic Stats */}
+            <div className="flex flex-col gap-1 text-sm text-gray-700">
+              <div className="flex items-center gap-2">
+                <Image src={bed} alt="beds icon" />
+                <span>{clinic.beds} Beds</span>
+              </div>
+              <div className="flex items-center gap-4">
+                <div className="flex items-center gap-1">
+                  <Image src={star} alt="star icon" />
+                  <span>{clinic.rating}</span>
                 </div>
-                <div className="justify-start items-center gap-2 inline-flex">
-                  <Image src={time} alt="icon" />
-                  <div className="text-[#2b4360] text-base font-normal font-['Poppins'] leading-tight">
-                    Open 24 X 7
-                  </div>
-                </div>
-                <div className="justify-start items-center gap-2 inline-flex">
-                  <div className="w-20 h-8 relative">
-                    <Image
-                      width={100}
-                      height={100}
-                      className="w-8 h-8 left-0 top-0 absolute rounded-full border border-[#2b4360]"
-                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8k0hViJWVJVa92YPHh41fxa-_1oq4k6eNmA&s"
-                    />
-                    <Image
-                      width={100}
-                      height={100}
-                      className="w-8 h-8 left-[22.67px] top-0 absolute rounded-full border border-[#2b4360]"
-                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8k0hViJWVJVa92YPHh41fxa-_1oq4k6eNmA&s"
-                    />
-                    <Image
-                      width={100}
-                      height={100}
-                      className="w-8 h-8 left-[45.33px] top-0 absolute rounded-full border border-[#2b4360]"
-                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8k0hViJWVJVa92YPHh41fxa-_1oq4k6eNmA&s"
-                    />
-                  </div>
-                  <div className="text-[#2b4360] text-base font-normal font-['Poppins'] leading-tight">
-                    {clinic.doctors} Doctors
-                  </div>
+                <div className="flex items-center gap-1">
+                  <Image src={review} alt="review icon" />
+                  <span>{clinic?.reviews} Reviews</span>
                 </div>
               </div>
-              <div className=" mt-2 sm:flex-col  justify-start items-start gap-4 inline-flex">
-                <button className=" sm:w-full h-14 px-6 py-4 bg-[#2b4360] rounded-lg justify-center items-center gap-2 inline-flex">
-                  <div className="grow shrink basis-0 text-center text-white text-base font-medium font-['Poppins'] leading-tight">
-                    Book Appointment
-                  </div>
-                </button>
-                <Link
-                  href={`/findclinics/${clinic.clinicId}`}
-                  className="sm:w-full h-14 px-6 py-4 rounded-lg border border-[#2b4360] justify-center items-center gap-2 inline-flex"
-                >
-                  <div className="grow shrink basis-0 text-center text-[#2b4360] text-base font-medium font-['Poppins'] leading-tight">
-                    View Clinic
-                  </div>
-                </Link>
+              <div className="flex items-center gap-2">
+                {/* <div className="flex items-center -space-x-2">
+                  {clinic?.doctors?.slice(0, 3).map((doctor, idx) => (
+                    <Image
+                      key={idx}
+                      className="w-8 h-8 rounded-full border border-white"
+                      src={doctor.profileImage}
+                      width={32}
+                      height={32}
+                      alt={doctor.name}
+                    />
+                  ))}
+                </div> */}
+                <span>{clinic?.doctors}+ Doctors</span>
               </div>
+            </div>
+
+            {/* Buttons */}
+            <div className="flex sm:w-[15%] flex-col gap-2">
+              <button className="sm:w-full h-12 px-6 py-4 rounded-lg  bg-[#2b4360] justify-center text-white items-center gap-2 inline-flex">
+                Call Clinic
+              </button>
+              <Link
+                href={`/findclinics/${clinic.clinicId}`}
+                className="sm:w-full h-12 px-6 py-4 rounded-lg border border-[#2b4360] justify-center items-center gap-2 inline-flex"
+              >
+                View Clinic
+              </Link>
             </div>
           </motion.div>
         ))}

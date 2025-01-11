@@ -4,7 +4,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { format } from "date-fns";
 import { Calendar as CalendarIcon } from "lucide-react";
 import { useEffect, useState } from "react";
-import { FaStar } from "react-icons/fa";
+import { FaRegCalendarCheck, FaStar } from "react-icons/fa";
 import { IoChevronDown, IoClose } from "react-icons/io5";
 import { PiBriefcase, PiCertificateThin } from "react-icons/pi";
 import Modal from "react-modal";
@@ -458,7 +458,8 @@ function BookAppointment({ doctor }) {
     <div className="text-black">
       <button onClick={openModal}>
         <div className="bg-slate-700 rounded-lg flex justify-center items-center gap-2">
-          <div className="p-4 px-6 text-center text-white text-base font-medium font-['Poppins'] leading-tight">
+          <div className="p-4 px-6 text-center flex gap-2 text-white text-base items-end font-medium font-['poppins'] leading-tight">
+            {/* <FaRegCalendarCheck className="text-xl mb-0.5" /> */}
             Book Appointment
           </div>
         </div>

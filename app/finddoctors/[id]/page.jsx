@@ -17,11 +17,19 @@ import clinic from "../../../public/clinic.png";
 import ellipse from "../../../public/Ellipse.png";
 import arrow from "../../../public/arrow.png";
 import loc from "../../../public/loc.png";
-import { AiOutlineCalendar, AiOutlineWhatsApp } from "react-icons/ai";
+import {
+  AiOutlineCalendar,
+  AiOutlineLeft,
+  AiOutlineRight,
+  AiOutlineWhatsApp,
+} from "react-icons/ai";
 import { FaDirections } from "react-icons/fa";
 import Learn from "@/components/Learn";
 import Learnslider from "@/components/loginmodals/Learnslider";
 import BookAppointment from "@/components/BookAppointment";
+import { IoLocationOutline } from "react-icons/io5";
+import { PiBriefcase } from "react-icons/pi";
+import Link from "next/link";
 
 const DoctorPage = ({ params }) => {
   const { id } = params;
@@ -57,7 +65,7 @@ const DoctorPage = ({ params }) => {
     axios
       .request(config)
       .then((response) => {
-        console.log(JSON.stringify(response.data));
+        console.log(response.data);
         setDoctor(response.data.data);
       })
       .catch((error) => {
@@ -114,7 +122,7 @@ const DoctorPage = ({ params }) => {
                 key={index}
                 src={star}
                 alt="Filled star"
-                className="w-4 h-4"
+                className="w-8 h-8"
               />
             );
           } else if (hasHalfStar && index === filledStars) {
@@ -124,7 +132,7 @@ const DoctorPage = ({ params }) => {
                 key={index}
                 src={star}
                 alt="Half star"
-                className="w-4 h-4 opacity-50"
+                className="w-8 h-8 opacity-50"
               />
             );
           } else {
@@ -134,7 +142,7 @@ const DoctorPage = ({ params }) => {
                 key={index}
                 src={star}
                 alt="Empty star"
-                className="w-4 h-4 opacity-20"
+                className="w-8 h-8 opacity-20"
               />
             );
           }
@@ -143,9 +151,9 @@ const DoctorPage = ({ params }) => {
     );
   };
   return (
-    <div className=" sm:grid grid-cols-3 bg-gray-50">
+    <div className=" sm:grid grid-cols-3 bg-[#F7F7F7]">
       <div className="col-span-2 flex-col p-3 sm:py-20 sm:pl-20">
-        <div className=" flex-col bg-gray-100 p-5 rounded-2xl justify-start items-start gap-8 flex">
+        <div className=" flex-col bg-[#F2EFED] p-5 rounded-2xl justify-start items-start gap-8 flex">
           <div className="justify-between items-center gap-6 flex sm:flex-row flex-col w-full">
             <div className="flex justify-start items-start gap-3 sm:gap-6 w-full">
               <div className="sm:w-28 mt-3 sm:h-28 w-16 h-16 relative">
@@ -161,7 +169,7 @@ const DoctorPage = ({ params }) => {
                 </div>
               </div>
               <div className="flex-col justify-start items-start gap-2 inline-flex w-full">
-                <div className="text-[#2b4360] w-full flex items-center justify-between  text-3xl font-bold font-['FONTSPRING DEMO - Argent CF'] leading-loose">
+                <div className="text-[#2b4360] w-full flex items-center justify-between  text-3xl font-bold font-serif leading-loose">
                   {doctor?.doctorDetails?.doctorName}
                   <BookAppointment doctor={doctor?.doctorDetails} />
                 </div>
@@ -173,7 +181,7 @@ const DoctorPage = ({ params }) => {
                     </div>
                   </div>
                   <div className="justify-start items-center gap-2 inline-flex">
-                    <Image src={location} alt="icon" />{" "}
+                    <IoLocationOutline className="text-2xl" />
                     {doctor?.clinics?.map((clinic, index) => (
                       <div
                         key={index}
@@ -184,7 +192,7 @@ const DoctorPage = ({ params }) => {
                     ))}
                   </div>
                   <div className="justify-start items-center gap-2 inline-flex">
-                    <Image src={bag} alt="icon" />{" "}
+                    <PiBriefcase className="text-2xl" />
                     <div className="text-[#2b4360] text-base font-normal font-['Poppins'] leading-tight">
                       {doctor?.doctorDetails?.experiance} Years
                     </div>
@@ -209,67 +217,42 @@ const DoctorPage = ({ params }) => {
               </div>
             </div>
           </div>
-          <div className="hidden  w-full gap-4 sm:flex">
-            <div className="p-2 bg-white rounded-lg justify-center items-center gap-1 flex">
-              <div className="rounded-lg justify-center items-center gap-1 flex">
-                <div className="w-8 h-8 relative mr-1">
-                  <div className="w-8 h-8  bg-slate-200 rounded-full">
-                    <Image src={fertilitysupport} alt={"icon"} />
-                  </div>
+          <div className="relative w-full">
+            <div className="flex px-8 text-orange-500  w-full overflow-x-auto gap-2 scrollbar-hide">
+              {doctor?.doctorDetails?.services?.map((tag, index) => (
+                <div
+                  key={index}
+                  className="border-orange-500 text-nowrap border p-1 rounded-md bg-orange-50"
+                >
+                  {tag}
                 </div>
-              </div>
-              <div className="text-[#2b4360] text-xs font-normal font-['Poppins'] leading-none">
-                Fertility Support
-              </div>
+              ))}
             </div>
-            <div className="p-2 bg-white rounded-lg justify-center items-center gap-1 flex">
-              <div className="rounded-lg justify-center items-center gap-1 flex">
-                <div className="w-8 h-8 relative mr-1">
-                  <div className="w-8 h-8  bg-amber-100 rounded-full">
-                    <Image src={eggfreezing} alt={"icon"} />
-                  </div>
-                </div>
-              </div>
-              <div className="text-center text-[#2b4360] text-xs font-normal font-['Poppins'] leading-none">
-                Egg Freezing
-              </div>
-            </div>
-            <div className="p-2 bg-white rounded-lg justify-center items-center gap-1 flex">
-              <div className="rounded-lg justify-center items-center gap-1 flex">
-                <div className="w-8 h-8 relative mr-1">
-                  <div className="w-8 h-8  bg-red-100 rounded-full">
-                    <Image src={ivf} alt={"icon"} />
-                  </div>
-                </div>
-              </div>
-              <div className="text-center text-[#2b4360] text-xs font-normal font-['Poppins'] leading-none">
-                IVF Treatment
-              </div>
-            </div>
-            <div className="p-2 bg-white rounded-lg justify-center items-center gap-1 flex">
-              <div className="rounded-lg justify-center items-center gap-1 flex">
-                <div className="w-8 h-8 relative mr-1">
-                  <div className="w-8 h-8  bg-green-100 rounded-full">
-                    <Image src={iuitreatment} alt={"icon"} />
-                  </div>
-                </div>
-              </div>
-              <div className="text-center text-[#2b4360] text-xs font-normal font-['Poppins'] leading-none">
-                IUI Treatment
-              </div>
-            </div>
-            <div className="p-2 bg-white rounded-lg justify-center items-center gap-1 flex">
-              <div className="rounded-lg justify-center items-center gap-1 flex">
-                <div className="w-8 h-8 relative mr-1">
-                  <div className="w-8 h-8  bg-orange-100 rounded-full">
-                    <Image src={eggsperm} alt={"icon"} />
-                  </div>
-                </div>
-              </div>
-              <div className="text-center text-[#2b4360] text-xs font-normal font-['Poppins'] leading-none">
-                Sperm Freezing
-              </div>
-            </div>
+            {doctor?.doctorDetails?.services?.length > 3 && (
+              <button
+                className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-200 p-2 rounded-full"
+                onClick={() => {
+                  document
+                    .querySelector(".scrollbar-hide")
+                    .scrollBy({ left: -200, behavior: "smooth" });
+                }}
+              >
+                <AiOutlineLeft />
+              </button>
+            )}
+            {doctor?.doctorDetails?.services?.length > 3 && (
+              <button
+                className="absolute right-0 top-1/2 transform -translate-y-1/2
+                bg-gray-200 p-2 rounded-full"
+                onClick={() => {
+                  document
+                    .querySelector(".scrollbar-hide")
+                    .scrollBy({ left: 200, behavior: "smooth" });
+                }}
+              >
+                <AiOutlineRight />
+              </button>
+            )}
           </div>
         </div>
         <div className="my-5 py-8 bg-white rounded-2xl shadow flex-col justify-center items-start gap-8 flex">
@@ -282,12 +265,12 @@ const DoctorPage = ({ params }) => {
             </div>
             <div className="">
               <span className="text-[#2b4360] text-sm font-normal font-['Poppins'] leading-none">
-                {doctor?.doctorDetails?.about?.slice(0, 300) + "..."}
+                {doctor?.doctorDetails?.about}
               </span>
-              <span className="text-[#2b4360] text-sm font-bold font-['Poppins'] underline leading-none">
+              {/* <span className="text-[#2b4360] text-sm font-bold font-['Poppins'] underline leading-none">
                 Read More
                 <br />
-              </span>
+              </span> */}
             </div>
           </div>
           <div className=" px-8 flex-col justify-start items-start gap-4 flex w-full">
@@ -306,7 +289,7 @@ const DoctorPage = ({ params }) => {
                   <div className=" justify-start items-start gap-6 flex w-full">
                     <Image
                       className="w-14 sm:w-28 h-14 sm:h-28 rounded-full border border-[#dedede]"
-                      src="https://via.placeholder.com/120x120"
+                      src={clinic.logoImage}
                       width={30}
                       height={30}
                     />
@@ -385,7 +368,7 @@ const DoctorPage = ({ params }) => {
             <div className="h-[0.1px] bg-gray-300 w-full"></div>
           </div>
         </div>
-        <div className="p-5 sm:p-8 bg-white rounded-2xl shadow flex-col justify-start items-start gap-4 inline-flex">
+        <div className="p-5 sm:p-8 bg-white rounded-2xl w-full shadow flex-col justify-start items-start gap-4 inline-flex">
           <div className="justify-start items-center gap-2 inline-flex">
             <Image src={review} alt="icon" />
             <div className="text-[#2b4360] text-lg font-medium font-['Poppins'] leading-snug">
@@ -481,7 +464,7 @@ const DoctorPage = ({ params }) => {
           )}
         </div>
       </div>
-      <div className="col-span-1 sm:pt-20 p-3 pb-10  sm:pr-10">
+      <div className="col-span-1 sm:pt-20 p-3 pb-10  sm:pr-20">
         <div className="text-[#2b4360] ml-3 font-semibold text-xl">
           Top Verified Doctors
         </div>
@@ -489,19 +472,22 @@ const DoctorPage = ({ params }) => {
           {topDoctors.map((doctor, index) => (
             <div
               key={index}
-              className=" my-2  px-6 py-4 bg-stone-100 rounded-lg shadow justify-start items-start gap-24 flex"
+              className=" my-2 px-6 py-4 bg-white rounded-lg shadow justify-start items-start min-w-80 flex-col"
             >
               <div className="justify-start items-center gap-4 w-full md:flex flex-co">
-                <Image src={ellipse} alt={"icon"} />
+                <Image
+                  src={doctor?.profileImage}
+                  width={80}
+                  height={80}
+                  className="rounded-full"
+                  alt={"icon"}
+                />
 
                 <div className="w-full flex-col justify-start items-start gap-2 flex">
-                  <div className="flex justify-between items-center w-full  text-slate-700 text-xl font-bold font-['FONTSPRING DEMO - Argent CF'] leading-normal">
+                  <div className="flex justify-between items-center w-full  text-slate-700 text-xl font-serif leading-normal">
                     <div>{doctor?.doctorName}</div>
-                    <div>
-                      <Image src={arrow} alt={"icon"} />
-                    </div>
                   </div>
-                  <div className="h-28 flex-col justify-start items-start gap-1 flex">
+                  <div className=" flex-col justify-start items-start gap-1 flex">
                     <div className=" justify-start items-center gap-2 inline-flex">
                       <Image src={loc} alt={"icon"} />
                       <div className="text-slate-700 text-sm font-normal font-['Poppins'] leading-none">
@@ -518,46 +504,15 @@ const DoctorPage = ({ params }) => {
                     <div className="justify-center items-center gap-2 inline-flex">
                       {renderStars(doctor?.rating || 0)}
                     </div>
-                    <div className="w-64 justify-start items-start gap-2 inline-flex">
-                      <div className="rounded-lg justify-center items-center gap-1 flex">
-                        <div className="w-8 h-8 relative">
-                          <div className="w-8 h-8  bg-slate-200 rounded-full">
-                            <Image src={fertilitysupport} alt={"icon"} />
-                          </div>
-                        </div>
-                      </div>
-                      <div className="rounded-lg justify-center items-center gap-1 flex">
-                        <div className="w-8 h-8 relative">
-                          <div className="w-8 h-8  bg-amber-100 rounded-full">
-                            <Image src={eggfreezing} alt={"icon"} />
-                          </div>
-                        </div>
-                      </div>
-                      <div className="rounded-lg justify-center items-center gap-1 flex">
-                        <div className="w-8 h-8 relative">
-                          <div className="w-8 h-8  bg-red-100 rounded-full">
-                            <Image src={ivf} alt={"icon"} />
-                          </div>
-                        </div>
-                      </div>
-                      <div className="rounded-lg justify-center items-center gap-1 flex">
-                        <div className="w-8 h-8 relative">
-                          <div className="w-8 h-8  bg-green-100 rounded-full">
-                            <Image src={iuitreatment} alt={"icon"} />
-                          </div>
-                        </div>
-                      </div>
-                      <div className="rounded-lg justify-center items-center gap-1 flex">
-                        <div className="w-8 h-8 relative">
-                          <div className="w-8 h-8  bg-orange-100 rounded-full">
-                            <Image src={eggsperm} alt={"icon"} />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
                   </div>
                 </div>
               </div>
+              <Link
+                href={`/finddoctors/${doctor?.doctorId}`}
+                className=" mt-2 border-2 border-[#2b4360] font-medium rounded-md text-center w-full text-[#2b4360] justify-center items-center py-3 flex"
+              >
+                View Profile
+              </Link>
             </div>
           ))}
         </div>
